@@ -1150,6 +1150,8 @@ In Go, this happens implicitly. If your structure has a function name `Log` with
 
 It also tends to promote small and focused interfaces. The standard library is full of interfaces. The `io` package has a handful of popular ones, such as `io.Reader`, `io.Writer`, `io.Closer`. If you write a function that expects a parameter that you'll only be calling `Close()` on, you absolutely should accept an `io.Closer` rather than whatever concrete type you're using.
 
+Interfaces can also participate in composition. And, interfaces themselves can be composed of other interfaces. For example, `io.ReadCloser` is an interface composed of the `io.Reader` interface as well as the `io.Closer` interface.
+
 Finally, interfaces are commonly used to avoid cyclical imports. Since they don't have an implementations, they'll have limited dependencies.
 
 ## Before You Continue
