@@ -479,7 +479,7 @@ Structures don't have constructors. Instead, you create a function that returns 
       }
     }
 
-This pattern rubs a lot of developers the wrong way. On the one hand, it's a pretty slight syntactical change, on the other, it feels a little less compartmentalized. When we explore packages in a later chapter, we'll look at a slight variation of this.
+This pattern rubs a lot of developers the wrong way. On the one hand, it's a pretty slight syntactical change, on the other, it feels a little less compartmentalized.
 
 Our factory doesn't have to return pointer either, this is absolutely valid (though it will be marginally slower):
 
@@ -1015,7 +1015,7 @@ You can now run your code via by going into your `shopping` project and typing:
 
     go run main/main.go
 
-### Cyclical References
+### Cyclical Imports
 
 As you start writing more complex systems, you're bound to run into cyclical imports. This happens when package A imports package B but package B imports package A. This is something the compiler can't handle.
 
@@ -1069,6 +1069,14 @@ $GOPATH/src
 
 `pricecheck.go` will still import `shopping/db`, but `db.go` will now import `shopping/models` instead of `shopping`, thus breaking the cycle. You'll often need to share more than just `models`, so you might have other similar folder named `utilities` and such. The import rule as that the source code within these files is not allowed to import anything from the `shopping` package or any sub-packages.
 
+### Visibility
+
+Go uses a simple rule to define what types and functions are visible outside of a package. If the name of the type or function starts with an uppercase letter, it's visible. If it starts with a lowercase letter, it isn't.
+
+This also applies to structure fields. If a structure field name starts with a lowercase letter, only code within the same package will be able to access them.
+
+Go ahead and change the name of the various functions, types and fields fro the `shopping` code. For example, if you rename the `Item's` `Price` field to `price`, you should get an error.
+
 ### Third Party Libraries
 
 To `go` command we've been using to `run` and `build` has a `get` subcommand which is used to fetch third party libraries. `go get` supports various protocols, but for this example we'll be getting a library from Github, meaning you'll need `git` installed on your computer.
@@ -1095,5 +1103,60 @@ If you call `go get -u` it'll update the packages (or you can update a specific 
 
 Eventually, you might find `go get` inadequate. For one thing, there's no way to specify a revision, it always points to the master/head/trunk/default. This is an even larger problem if you have two projects needing different versions of the same library.
 
-To solve this, you can use a third party dependency management tool. They are still young, but the two most popular are [goop](https://github.com/nitrous-io/goop) and [godep](https://github.com/tools/godep).
+To solve this, you can use a third party dependency management tool. They are still young, but two promising ones are [goop](https://github.com/nitrous-io/goop) and [godep](https://github.com/tools/godep).
+
+## Interfaces
+
+Interfaces are types that define a contract but not an implementation. Here's an example:
+
+    type Logger interface {
+      Log(message string)
+    }
+
+You might be wondering what purpose this could possibly serve. Interfaces help decouple your code from specific implementations. For example, we might have various types of loggers:
+
+    type SqlLogger struct { ... }
+    type ConsoleLogger struct { ... }
+    type FileLogger struct { ... }
+
+Yet by programming against the interface, rather than these concrete implementations, we can easily change (and test) which we use without any impact to our code.
+
+How would you use one? Just like any other type, it could be a structure's field:
+
+    type Server struct {
+      logger Logger
+    }
+
+or a function parameter (or return value):
+
+    func process(logger Logger) {
+      logger.Log("hello!")
+    }
+
+In a language like C# and Java, we have to be explicit when a class implements an interface:
+
+    public class ConsoleLogger : Logger {
+      public void Logger(message string) {
+        Console.WriteLine(message)
+      }
+    }
+
+In Go, this happens implicitly. If your structure has a function name `Log` with a `single` string parameter and no return value, then it can be used as `Logger`. This cuts down on the verboseness of using interfaces:
+
+    type ConsoleLogger struct {}
+    func (l ConsoleLogger) Log(message string) {
+      fmt.Println(message)
+    }
+
+It also tends to promote small and focused interfaces. The standard library is full of interfaces. The `io` package has a handful of popular ones, such as `io.Reader`, `io.Writer`, `io.Closer`. If you write a function that expects a parameter that you'll only be calling `Close()` on, you absolutely should accept an `io.Closer` rather than whatever concrete type you're using.
+
+Finally, interfaces are commonly used to avoid cyclical imports. Since they don't have an implementations, they'll have limited dependencies.
+
+## Before You Continue
+
+Ultimately, how you structure your code around Go's workspace is something that you'll only feel comfortable with after you've written a couple non-trivial projects. What's most important for you to remember is the tight relationship between package names and your directory structure (not just within a project, but within the entire workspace).
+
+The way Go handles visibility of types is straightforward and effective. It's also consistent. There are a few things we haven't looked at, such as constants and global variables, but rest assured their visibility is determined by the same casing-rule.
+
+Finally, if you're new to interfaces, it might take some time before you get a feel for them. However, the first time you see a function that expects something like `io.Reader`, you'll find yourself thanking the author for not demanding than he or she needed.
 
