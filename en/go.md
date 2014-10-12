@@ -949,3 +949,151 @@ At this point, the same logic that we saw in Chapter 2 applies. So the decision 
 Arrays and maps in Go work much like they do in other languages. If you're used to dynamic arrays, there might be a small adjustment, but `append` should solve most of your discomfort. If we peak beyond the superficial syntax of arrays, we find slices. Slices are powerful and they have a surprisingly large impact on the clarity of your code.
 
 There are edge cases that we haven't covered, but you're not likely to run into them. And, if you do, hopefully the foundation we've built here will let you understand what's going on.
+
+# Chapter 4 - Code Organization and Interfaces
+
+It might not seem like it, but we've now explored the building blocks needed to build a system. In this chapter we'll discussion how to organize what we've learned.
+
+## Packages
+
+To keep more complicated libraries and systems organized, we need to learn about pakages. In Go, package names follow the directory structure of your Go workspace. If we were building a shopping system, we'd probably start with a package name "shopping" and put the source files in `$GOPATH/src/shopping/`.
+
+We don't want to put everything inside this folder though. For example, maybe we want to isolate some database logic inside its own folder. To achieve this, we create a subfolder at `$GOPATH/src/shopping/db`. In package name of the files within this subfolder is simply `db`, but to access it from another package, include the base `shopping` package, we'd need to import `shopping/db`.
+
+In other words, when you specify the name of the package atop a source file, via the `package` keyword, you provide a single value, not a complete hierarchy (e.g. "shopping" or "db"). When you import a package though, you specify the complete path.
+
+Let's try it. Inside your Go workspace (which we set up in Getting Started of the Introduction), create a new folder called `shopping` and a subfolder within it called `db`.
+
+Inside of `shopping/db` create a file called `db.go` and add the following code:
+
+    package db
+
+    type Item struct {
+      Price float64
+    }
+
+    func LoadItem(id int) *Item {
+      return &Item{
+        Price: 9.001,
+      }
+    }
+
+Notice that the name of the package is the same as the name of the folder this file is located in. Also, obviously, we aren't actually accessing the database. We're just using this as an example to show how to organize code!
+
+Now, create a file called `pricecheck.go` inside of the main `shopping` folder. It's content is:
+
+    package shopping
+
+    import (
+      "shopping/db"
+    )
+
+    func PriceCheck(itemId int) (float64, bool) {
+      item := db.LoadItem(itemId)
+      if item == nil {
+        return 0, false
+      }
+      return item.Price, true
+    }
+
+It's tempting to think that importing `shopping/db` is somehow special because we're inside the `shopping` package/folder. In reality, you're importing `$GOPATH/src/shopping/db` which means you could just as easily import `test/db` so long as you had a package named `db` inside of your workspace's `test` folder.
+
+If you're just building a library, you don't need anything more than what we've seen. To build an executable, you still need a `main`. The way I prefer to do this is to create a subfolder called `main` inside of `shopping` with a file called `main.go` and the following content:
+
+    package main
+
+    import (
+      "shopping"
+      "fmt"
+    )
+
+    func main() {
+      fmt.Println(shopping.PriceCheck(4343))
+    }
+
+You can now run your code via by going into your `shopping` project and typing:
+
+    go run main/main.go
+
+### Cyclical References
+
+As you start writing more complex systems, you're bound to run into cyclical imports. This happens when package A imports package B but package B imports package A. This is something the compiler can't handle.
+
+Let's change our shopping structure to cause the error.
+
+Move the `Item` definition from `shopping/db/db.go` into `shopping/pricecheck.go`. Your `pricecheck.go` file should now look like:
+
+    package shopping
+
+    import (
+      "shopping/db"
+    )
+
+    type Item struct {
+      Price float64
+    }
+
+    func PriceCheck(itemId int) (float64, bool) {
+      item := db.LoadItem(itemId)
+      if item == nil {
+        return 0, false
+      }
+      return item.Price, true
+    }
+
+If you try to run the code now, you'll get a couple errors from `db/db.go` about `Item` being undefined. This makes sense, `Item` no longer exists in the `db` package, it's been moved to the shopping package. We need to change `shopping/db/db.go` to:
+
+    package db
+
+    import (
+      "shopping"
+    )
+
+    func LoadItem(id int) *shopping.Item {
+      return &shopping.Item{
+        Price: 9.001,
+      }
+    }
+
+Now when you try to run the code, you'll get a dreaded *import cycle not allowed* error. We solve this by introduce another package which contain shared structures. Your directory structure should look like
+
+$GOPATH/src
+  - shopping
+    pricecheck.go
+    - db
+      db.go
+    - models
+      item.go
+    - main
+      main.go
+
+`pricecheck.go` will still import `shopping/db`, but `db.go` will now import `shopping/models` instead of `shopping`, thus breaking the cycle. You'll often need to share more than just `models`, so you might have other similar folder named `utilities` and such. The import rule as that the source code within these files is not allowed to import anything from the `shopping` package or any sub-packages.
+
+### Third Party Libraries
+
+To `go` command we've been using to `run` and `build` has a `get` subcommand which is used to fetch third party libraries. `go get` supports various protocols, but for this example we'll be getting a library from Github, meaning you'll need `git` installed on your computer.
+
+From a shell/command prompt, enter:
+
+    go get github.com/mattn/go-sqlite3
+
+`go get` fetches the remote files and stores them in your workspace. Go ahead and check your `$GOPATH/src`. In addition to the `shopping` project that we created, you'll now see a `github.com` folder. Within, you'll see a `mattn` folder which contains a `go-sqlite3` folder.
+
+We just talked about how to import packages that live in our workspace. To use this `go-sqlite3` package, we'd import it like so:
+
+    import (
+      "github.com/mattn/go-sqlite3"
+    )
+
+I know this looks like a URL, but in reality it'll simply import the `go-sqlite3` package which it expects to find in `$GOPATH/src/github.com/mattn/go-sqlite3`.
+
+### Dependency Management
+
+`go get` has a couple other tricks up its sleeve. If we `go get` within a project, it'll scan all the files, looking for `imports` to third party libraries, and download them. In a way, our own source code becomes a `Gemfile` or `package.json`.
+
+If you call `go get -u` it'll update the packages (or you can update a specific package via `go get -u FULL_PACKAGE_NAME`).
+
+Eventually, you might find `go get` inadequate. For one thing, there's no way to specify a revision, it always points to the master/head/trunk/default. This is an even larger problem if you have two projects needing different versions of the same library.
+
+To solve this, you can use a third party dependency management tool. They are still young, but the two most popular are [goop](https://github.com/nitrous-io/goop) and [godep](https://github.com/tools/godep).
+
