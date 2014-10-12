@@ -1160,3 +1160,64 @@ The way Go handles visibility of types is straightforward and effective. It's al
 
 Finally, if you're new to interfaces, it might take some time before you get a feel for them. However, the first time you see a function that expects something like `io.Reader`, you'll find yourself thanking the author for not demanding than he or she needed.
 
+#Chapter 5 - Tidbits
+
+In this chapter we'll talk about a miscellany of Go's feature which didn't quite fit anywhere else.
+
+## Error Handling
+
+Go's preferred way to deal with errors is through return values, not exceptions.Consider the `strconv.Atoi` function which takes a string and tries to convert it to an integer:
+
+    package main
+
+    import(
+      "fmt"
+      "os"
+      "strconv"
+    )
+
+    func main() {
+      if len(os.Args) != 2 {
+        os.Exit(1)
+      }
+
+      n, err := strconv.Atoi(os.Args[1])
+      if err != nil {
+        fmt.Println("not a valid number")
+      } else {
+        fmt.Println(n)
+      }
+    }
+
+You can create your own error type, the only requirement is that it fulfills the contract of the built-in `error` interface, which is:
+
+    type error interface {
+      Error() string
+    }
+
+Go does have a `panic` and `recover` functions, but they are rarely used.
+
+## Defer
+
+Even though Go has a garbage collector, some resources require that we explicitly release them. For example, we need to `Close()` files after we're done with them. This sort of code is always dangerous. For one thing, as we're writing a function, it's easy to forget to `Close` something that we declared 10 lines up. For another, a function might have multiple return points. Go's solution is the `defer` keyword:
+
+    package main
+
+    import(
+      "fmt"
+      "os"
+    )
+
+    func main() {
+      file, err := os.Open("a_file_to_read")
+      if err != nil {
+        fmt.Println(err)
+        return
+      }
+      defer file.Close()
+      // read the file
+    }
+
+The above code will probably print an error, but the point was to show how `defer` works. Whatever you `defer` will be executed when the method returns, even if it does so violently. This let's you release resources close to where they're initialized.
+
+

@@ -6,7 +6,7 @@ Much of Go's existing documentation, while excellent, is clearly aimed at develo
 
 I'm planning 3 more chapters:
 
-Chapter 4 is a bucket chapter to cover code organization (packages), interfaces, error handling and various other little tidbits.
+Chapter 5 is a bucket chapter to cover error handling, defer, and various other little tidbits.
 
 Chapter 5 will deal with concurrency.
 
