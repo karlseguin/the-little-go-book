@@ -363,7 +363,7 @@ If you're coming from another statically typed language you're probably feeling 
 
 Go isn't an object oriented (OO) language. It doesn't have objects and thus doesn't have the many concepts associated with OO, such as polymorphism, overloading, inheritance and so on.
 
-What Go does have are structures, which we can be associated with functions, as well as a simple but effective form of composition. Overall, it results in simpler code, but there'll be occasions where you'll miss some of what OO has to offer. (It's worth pointing out that *composition over inheritance* is an old battle cry and Go is the first language I've used that takes a firm stand on the issue.)
+What Go does have are structures, which can be associated with functions, as well as used a simple but effective form of composition. Overall, it results in simpler code, but there'll be occasions where you'll miss some of what OO has to offer. (It's worth pointing out that *composition over inheritance* is an old battle cry and Go is the first language I've used that takes a firm stand on the issue.)
 
 Although Go doesn't do OO, you'll notice a lot of similarities between the definition of a structure and that of a class. A simple example is the following `Saiyan` structure:
 
@@ -376,7 +376,7 @@ We'll soon see how to attach functions to this structure, much like you'd have m
 
 ## Declarations and Initializations
 
-When we first looked at variables and declaration, we looked at only at built-in types, like integers and strings. Now that we're talking about structures, we need to expand that conversation to include pointers.
+When we first looked at variables and declarations, we looked only at built-in types, like integers and strings. Now that we're talking about structures, we need to expand that conversation to include pointers.
 
 The simplest way to create an instance of our structure is:
 
@@ -384,6 +384,8 @@ The simplest way to create an instance of our structure is:
       Name: "Goku",
       Power: 9000,
     }
+
+*Note:* The trailing `,` in the above structure is required, otherwise you will get an error like: `syntax error: need trailing comma before newline in composite literal`.
 
 We don't have to set all or even any of the fields. Both of these are valid:
 
@@ -400,7 +402,7 @@ Fields that aren't set will have a default value. Furthermore, you can skip the 
 
 What all of the above examples do is declare a variable, `goku` and assign a value to it. This is no different than when we assign `0` to `x`.
 
-Many times though, we don't want a variable that has a value, but rather we want a variable that has a pointer to a value. A pointer is a memory address, it's the location of where to find the actual value. It's a level of indirection. And why do want a pointer to the value, rather than the actual value?
+Many times though, we don't want a variable that has a value, but rather we want a variable that has a pointer to a value. A pointer is a memory address, it's the location of where to find the actual value. It's a level of indirection. And why do we want a pointer to the value, rather than the actual value?
 
 It comes down to the way Go passes arguments to a function. Go passes a copy of a value to a function. Knowing this, what does the following print?
 
@@ -414,7 +416,7 @@ It comes down to the way Go passes arguments to a function. Go passes a copy of 
       s.Power += 10000
     }
 
-The answer is 9000, not 19000. Why? because `Super` made changes to a copy of our original `goku` value and thus those changes weren't reflected in `goku`. To make this work as you probably expect, we need to pass a pointer to our value:
+The answer is 9000, not 19000. Why? Because `Super` made changes to a copy of our original `goku` value and thus those changes weren't reflected in `goku`. To make this work as you probably expect, we need to pass a pointer to our value:
 
     func main() {
       goku := &Saiyan{"Goku", 9000}
@@ -426,7 +428,7 @@ The answer is 9000, not 19000. Why? because `Super` made changes to a copy of ou
       s.Power += 10000
     }
 
-We made two changes. The first is that we used the `&` operator to get the address of our value (it's called the *address of* operator). Next, we changed the type of parameter `Super` expects. It uses to expect a `Saiyan` but now expects a `*Saiyan`, which is a `*X` means *pointer to X*.
+We made two changes. The first is that we used the `&` operator to get the address of our value (it's called the *address of* operator). Next, we changed the type of parameter `Super` expects. It used to expect a `Saiyan` but now expects a `*Saiyan`, where `*X` means *pointer to X*.
 
 Note that we're still passing a copy of `goku's` value to `Super` it just so happens that `goku's` value is an address. That copy is the same address as the original, which is what that indirection buys us. To prove that it's a copy, the following will still print `9000`:
 
