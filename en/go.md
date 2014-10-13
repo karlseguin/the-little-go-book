@@ -1467,3 +1467,212 @@ Furthermore, part of concurrent programming isn't so much about serializing acce
 These are all things that are doable without `channels`. Certainly for simpler cases, I believe you **should** use primitives such as `sync.Mutex` and `sync.RWMutex`, but, as we'll see in the next section, `channels` aim at making this cleaner and less error prone.
 
 ## Channels
+
+The challenge with concurrent programming stems from sharing data. If your goroutines share no data, you needn't worry about synchronizing them. That isn't an option for all systems however. In fact, many systems are built with the exact opposite goal in mind: to share data across multiple requests. An in-memory cache, or a database, are good examples of this. This is becoming an increasingly common reality.
+
+Channels help make concurrent programming saner by taking shared data out of the picture. A channel is a communication pipe between goroutines which is used to pass data. In other words, a goroutine that has data can pass it to another goroutine via a channel. The result is that, at any point in time, only one goroutine has access to the data.
+
+A channel, like everything else, has a type. This is the type of data that we'll be passing through our channel. For example, to create a channel which can be used to pass an integer around, we'd do:
+
+    c := make(chan int)
+
+The type of this channel is `chan int`. Therefore, to pass this channel to a function, our signature looks like:
+
+    func worker(c chan int) { ... }
+
+Channels support two operations: reading and writing. We write to a channel by doing:
+
+    CHANNEL <- DATA
+
+and read from one by doing
+
+    VAR := <- CHANNEL
+
+The arrow points in the direction that data flows. When writing, the data flows into the channel. When reading, the data flows out of the channel.
+
+The final thing to know before we look at our first example is that reading and writing to and from a channel is blocking. That is, when we read from a channel, execution of the goroutine won't continue until data is available. Similarly, when we write to a channel, execution won't continue until someone on the other side is reading.
+
+Consider a system with incoming data that we want to handle in separate goroutines. This is a common requirement. If we did our data-intensive processing on the goroutine which accepts the incoming data, we'd risk timing out clients. First, we'll write our worker. (this could be a simple function, but I'll make it part of a structure since we haven't seen goroutines used like this before):
+
+    type Worker struct {
+      id int
+    }
+
+    func (w *Worker) process(c chan int) {
+      for {
+        data := <- c
+        fmt.Printf("worker %d got %d\n", w.id, data)
+      }
+    }
+
+Our worker is simple. It waits until data is available then "processes" it. Dutifully, it does this in a loop, forever waiting for more data to process.
+
+To use this, the first thing we'd do is start up some workers:
+
+    c := make(chan int)
+    for i := 0; i < 4; i++ {
+      worker := &Worker{id: i}
+      go worker.process(c)
+    }
+
+And then we can give them some work:
+
+    for {
+      c <- rand.Int()
+      time.Sleep(time.Millisecond * 50)
+    }
+
+Here's the complete code to make it run:
+
+    package main
+
+    import (
+      "fmt"
+      "math/rand"
+    )
+
+    func main() {
+      c := make(chan int)
+      for i := 0; i < 5; i++ {
+        worker := &Worker{id: i}
+        go worker.process(c)
+      }
+
+      for {
+        c <- rand.Int()
+        time.Sleep(time.Millisecond * 50)
+      }
+    }
+
+    type Worker struct {
+      id int
+    }
+
+    func (w *Worker) process(c chan int) {
+      for {
+        data := <- c
+        fmt.Printf("worker %d got %d\n", w.id, data)
+      }
+    }
+
+We don't know which worker is going to get what data. What we do know, what Go guarantees, is that only data will only be read by on reader.
+
+Notice that the only shared state is the channel, which we can safely read from and write to from multiple goroutines at the same time. Channels provide all of the synchronization code we need and also ensure that, at any given time, only one goroutine has access to a specific piece of data.
+
+### Buffered Channels
+
+Given the above code, what happens if we have more data coming in than we can handle? You can simulate this by changing the worker to sleep after it's received data:
+
+      for {
+        data := <- c
+        fmt.Printf("worker %d got %d\n", w.id, data)
+        time.Sleep(time.Millisecond * 500)
+      }
+
+What's happening is that our main code, the one that accepts the user's incoming data (which we just simulated with a random number generator) is blocking as it writes to the channel because no reader is available.
+
+There are a few popular strategies to handle this. Go makes these easy to build. The first is to buffer the data. We don't want to block the main receiver. If no worker is available, we want to temporarily store the data in a sort of queue. Channels have this buffering capability built-in. When we created our channel, with `make`, we can give our channel a length:
+
+    c := make(chan int, 100)
+
+You can make this change, but you'll notice that the processing is still choppy. Buffered channels don't add more capacity, they merely provide a queue for pending work and a good way to deal with a sudden spike. In our example, we're continuously pushing more data than our workers can handle.
+
+Nevertheless, we can get a sense that the buffered channel is, in fact, buffering by looking at the channel's `len`:
+
+      for {
+        c <- rand.Int()
+        fmt.Println(len(c))
+        time.Sleep(time.Millisecond * 50)
+      }
+
+You can see that it grows and grows until it fills up, at which point writes to our channel start to block again.
+
+### Select
+
+Even with buffering, there comes a point where we need to start dropping messages. We can't use up an infinite amount of memory hoping a worker frees up. For this, we use Go's `select`.
+
+Syntactically, `select` looks a bit like a switch. With it, we can provide code for when the channel isn't available to write to. First, let's remove our channel's buffering so that we can clearly see how select works:
+
+    c := make(chan int)
+
+Next we change our `for` loop:
+
+    for {
+      select {
+      case c <- rand.Int():
+        //optional code here
+      default:
+        //this can be left empty to silently drop the data
+        fmt.Println("dropped")
+      }
+      time.Sleep(time.Millisecond * 50)
+    }
+
+We're pushing out 20 messages per second, but are workers can only handle 10 per second, thus half the messages get dropped.
+
+This is only the start of what we can accomplish with `select`. First, everything we can do while writing to a channel we can also do while reading from a channel. So we could "timeout" a read.
+
+More interestingly, we can `select` against multiple channels. In this case, `select` will block until the first channel becomes available. If no channel is available, `default` is executed, and if there's no `default`, it'll wait until the first channel unblocks. If more than one channel is available, it randomly picks one.
+
+It's hard to come up with a simple example that demonstrates this behavior, as it's a fairly advanced feature. The next section might help illustrate this though.
+
+### Timeout
+
+We've looked at buffering messages as well as simply dropping them. Another popular option is to timeout. We're willing to block for some time, but not forever. This is also something easy to achieve in Go. Admittedly the syntax might be hard to follow, but it's such a neat and useful feature, I couldn't leave it out.
+
+To block for a maximum amount of time, we can use the `time.After` function. Let's look at it then try to peak beyond the magic. To use it, our write becomes:
+
+    for {
+      select {
+      case c <- rand.Int():
+      case time.After(time.Millisecond * 100):
+        fmt.Println("timed out", )
+      }
+      time.Sleep(time.Millisecond * 50)
+    }
+
+`time.After` returns a channel, so we can `select` from it. The channel is written to after the specified time expires. That's it, there's nothing more magical than that. If you're really curious, here's what an implementation of `after` could look like:
+
+    func after(d time.Duration) chan bool {
+      c := make(chan bool)
+      go func() {
+        time.Sleep(d)
+        c <- true
+      }()
+      return c
+    }
+
+Back to our `select`, there are a couple things to play with. First, what happens if you add the `default` case back? Can you guess? Try it. If you aren't sure what's going on, remember that `default` fires immediately if no channel is available.
+
+Also, `time.After` is a channel of type `chan time.Time`. In the above example, we simply discard the value that was written to the channel. If you want though, you can read it:
+
+      case t := time.After(time.Millisecond * 100):
+        fmt.Println("timed out at", t)
+      }
+
+Pay close attention to our `select`. Notice that we're writing to `c` but reading from `time.After`. Select works the same regardless of whether we're reading from, writing to, or any combination of channels:
+
+    * The first available channel is chose
+    * If multiple channels are available, one is randomly picked
+    * If none are available, the default case is executed
+    * If there's no default, select blocks.
+
+Finally, it's common to see a `select` inside a `for`. Consider:
+
+    for {
+      select {
+      case data := <-c:
+        fmt.Printf("worker %d got %d\n", w.id, data)
+      case <-time.After(time.Millisecond * 10):
+        fmt.Println("Break time")
+        time.Sleep(time.Second)
+      }
+    }
+
+## Before You Continue
+
+If you're new to the world of concurrent programming, it might all seem rather overwhelming. It categorically demands considerably more attention and care. Go aims to make it easier.
+
+Goroutines effectively abstract what's needed to run concurrent code. Channels help eliminate some serious bugs that can happen when data is shared, by eliminating the sharing of data. This doesn't just eliminate bugs, but it changes how one approaches concurrent programming. You start to think about concurrency with respect to message passing, rather than dangerous areas of code.
+
+Having said that, I still make extensive use of the various synchronization primitives found in the `sync` and `sync/atomic` packages. I think it's important to be comfortable with both. I encourage you to first focus on one, probably channels, but when you see a simple example that needs a short-lived lock, consider using a Mutex or Read-Write Mutex.
