@@ -1075,6 +1075,14 @@ Go uses a simple rule to define what types and functions are visible outside of 
 
 This also applies to structure fields. If a structure field name starts with a lowercase letter, only code within the same package will be able to access them.
 
+For example, if our `items.go` file had a function that looked like:
+
+    func NewItem() *Item {
+      // ...
+    }
+
+It can be called via `models.NewItem()`. But if the function was named `newItem`, we wouldn't be able to access it from a different package.
+
 Go ahead and change the name of the various functions, types and fields fro the `shopping` code. For example, if you rename the `Item's` `Price` field to `price`, you should get an error.
 
 ### Third Party Libraries
@@ -1222,4 +1230,101 @@ Even though Go has a garbage collector, some resources require that we explicitl
 
 The above code will probably print an error, but the point was to show how `defer` works. Whatever you `defer` will be executed when the method returns, even if it does so violently. This let's you release resources close to where they're initialized.
 
+## go fmt
 
+Most programs written in Go follow the same formatting rules. Namely, a tab is used to indent and braces go on the same line as their statement.
+
+I know, you have your own style and you want to stick to it. That's what I did for a long time, but I'm glad I eventually gave in. A big reason for this is the `go fmt` command. It's easy to use and authoritative (so no one argues over meaningless preferences).
+
+When you're inside a project, you can make it format it and all sub-packages via:
+
+    go fmt ./...
+
+Give it a try. It does more than indent your code, it also aligns field declarations and orders your imports alphabetically.
+
+## Initialized If
+
+Go supports a slightly modified if statement, one where a value can be initiated prior to the condition being evaluated:
+
+    if x := 10; count > x {
+      ...
+    }
+
+That's a pretty silly example. More realistically, you might do something like:
+
+    if err := process(); err != nil {
+      return err
+    }
+
+## Empty Interface and Casting
+
+In most object oriented languages, a built-in base class, often named `object`, is  the superclass for all other classes. In Go, all types implement an empty interface, `interface{}`. If we wanted to, we could write an `add` function with the following signature:
+
+    func add(a interface{}, b interface{}) interface{} {
+      ...
+    }
+
+To cast a variable to a specific type, you use `.(TYPE)`:
+
+    return a.(int) + b.(int)
+
+You also have access to a powerful type-switch:
+
+    switch a.(type) {
+      case int:
+        fmt.Printf("a is now an int and equals %d\n", a)
+      case bool, string:
+        // ...
+      default:
+        // ...
+    }
+
+You'll see and probably use the empty interface more than you might first expect. Admittedly, it rarely results in particularly clean code. Casting values back and forth is ugly and dangerous, but sometimes it's the only choice.
+
+## Strings and Byte arrays
+
+Strings and byte arrays are closely related things. We can easily convert one to the other:
+
+    stra := "the spice must flow"
+    byts := []byte(stra)
+    strb := string(byts)
+
+In fact, this way of converting is common across various integer types as well. Some functions explicit expect an `int32` or a `int64` or their unsigned counterparts. So you mind find yourself having to do things like:
+
+    int64(count)
+
+Still, when it comes to bytes and strings, it's probably something you'll end up doing often. Do note that when you use `[]byte(X)` or `string(X)`, you're creating a copy of the data. This is necessary because strings are immutable.
+
+Strings are made of `runes` which are unicode code points. If you take the length of a string, you might not get what you expect. The following prints 3:
+
+    fmt.Println(len("椒"))
+
+If you iterate over a string using `range`, you'll get runes, not bytes. Of course, when you turn a string into a `[]byte` you'll get the correct data.
+
+## Function Type
+
+Functions are first-class types:
+
+    type Add func(a int, b int) int
+
+Which can then be used anywhere - as a field type, as a parameter, as a return value:
+
+    package main
+
+    import (
+      "fmt"
+    )
+
+    type Add func(a int, b int) int
+
+    func main() {
+      fmt.Println(process(func(a int, b int) int{
+          return a + b
+      }))
+    }
+
+    func process(adder Add) int {
+      return adder(1, 2)
+    }
+
+Using functions like this can help us decouple our code from specific implementations much like when we use interfaces. In the next chapter, we'll see another common use for this.
