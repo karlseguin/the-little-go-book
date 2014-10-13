@@ -3,7 +3,7 @@ THIS BOOK IS A WORK IN PROGRESS
 # About This Book
 
 ## License
-
+depedencies
 The Little Golang Book is licensed under the Attribution-NonCommercial-ShareAlike 4.0 International license. You should not have paid for this book.
 
 You are free to copy, distribute, modify or display the book. However, I ask that you always attribute the book to me, Karl Seguin, and do not use it for commercial purposes.
@@ -98,7 +98,7 @@ Compilation is the process of translating the source code that you write into a 
 
 Compiled languages can be unpleasant to work with because compilation can be slow. It's hard to iterate quickly if you have to spend minutes or hours waiting for code to compile. Compilation speed is one of the major design goals of Go. This is good news for people working on large projects, as well as those of us used to a quick feedback cycle offered by interpreted languages.
 
-Compiled languages tend to run faster and the executable produced by compilation can be run without additional depedencies (at least, that's true for languages like C, C++ and Go which compile directly to assembly).
+Compiled languages tend to run faster and the executable produced by compilation can be run without additional dependencies (at least, that's true for languages like C, C++ and Go which compile directly to assembly).
 
 ## Static Typing
 
@@ -956,7 +956,7 @@ It might not seem like it, but we've now explored the building blocks needed to 
 
 ## Packages
 
-To keep more complicated libraries and systems organized, we need to learn about pakages. In Go, package names follow the directory structure of your Go workspace. If we were building a shopping system, we'd probably start with a package name "shopping" and put the source files in `$GOPATH/src/shopping/`.
+To keep more complicated libraries and systems organized, we need to learn about packages. In Go, package names follow the directory structure of your Go workspace. If we were building a shopping system, we'd probably start with a package name "shopping" and put the source files in `$GOPATH/src/shopping/`.
 
 We don't want to put everything inside this folder though. For example, maybe we want to isolate some database logic inside its own folder. To achieve this, we create a subfolder at `$GOPATH/src/shopping/db`. In package name of the files within this subfolder is simply `db`, but to access it from another package, include the base `shopping` package, we'd need to import `shopping/db`.
 
