@@ -49,7 +49,7 @@ Installing Go is straightforward. You can install it from source, but I'd sugges
 
 Except for simple examples, Go is designed to work when your code is inside of a workspace. The workspace is a folder composed of `bin`, `pkg` and `src` subfolders. You might be tempted to force Go to your own style. Don't.
 
-Normally, I put my projects inside of `~/code`. For example, `~/code/blog` contains my blog. For Go, my workspace is `~/code/go` and my Go-powered blog would be in `~/code/go/src/blog`. Since that's a lot to type, I use a symbolic link to make it accessible via `~/code/go`:
+Normally, I put my projects inside of `~/code`. For example, `~/code/blog` contains my blog. For Go, my workspace is `~/code/go` and my Go-powered blog would be in `~/code/go/src/blog`. Since that's a lot to type, I use a symbolic link to make it accessible via `~/code/blog`:
 
     ln -s ~/code/go/src/blog ~/code/blog
 
@@ -98,7 +98,7 @@ Compilation is the process of translating the source code that you write into a 
 
 Compiled languages can be unpleasant to work with because compilation can be slow. It's hard to iterate quickly if you have to spend minutes or hours waiting for code to compile. Compilation speed is one of the major design goals of Go. This is good news for people working on large projects, as well as those of us used to a quick feedback cycle offered by interpreted languages.
 
-Compiled languages tend to run faster and the executable produced by compilation can be run without additional depedencies (at least, that's true for languages like C, C++ and Go which compile directly to assembly).
+Compiled languages tend to run faster and the executable produced by compilation can be run without additional dependencies (at least, that's true for languages like C, C++ and Go which compile directly to assembly).
 
 ## Static Typing
 
@@ -126,7 +126,7 @@ Beyond this, Go's is much closer to C than C# or Java - not only in terms of syn
 
 ## Garbage Collected
 
-Some variables, when created, have an easy to define life. A variable local to a function, for example, disappears when the function exits. In other cases, it isn't so obvious -- at least to a compiler. For example, the variable returned by a function or referenced by other variables and objects. Without garbabe collection, it's up to developers to free the memory associated with such variables at a point where the developer knows the variable isn't needed. How? In C, you'd literally `free(str);` the variable.
+Some variables, when created, have an easy to define life. A variable local to a function, for example, disappears when the function exits. In other cases, it isn't so obvious -- at least to a compiler. For example, the variable returned by a function or referenced by other variables and objects. Without garbage collection, it's up to developers to free the memory associated with such variables at a point where the developer knows the variable isn't needed. How? In C, you'd literally `free(str);` the variable.
 
 Languages with garbage collectors (Ruby, Python, Java, JavaScript, C#, Go, ...) are able to keep track of these variables and free them when they're no longer used. Garbage collection adds overhead, but it also eliminates a number of really bad bugs.
 
@@ -220,7 +220,7 @@ and pointing your browser to `http://localhost:6060`
 
 ## Variables and Declarations
 
-It'd be nice to begin and end our look at variables by saying: *you declare and assign to a variable by doing x = 4.* Unfortunately, things are more complicated in Go. We'll begin our conversation by looking at simple examples then, in the next chapter, we'll expand this when we look at creating an using structures. Still, it'll probably take some time before you truly feel comfortable with it.
+It'd be nice to begin and end our look at variables by saying: *you declare and assign to a variable by doing x = 4.* Unfortunately, things are more complicated in Go. We'll begin our conversation by looking at simple examples then, in the next chapter, we'll expand this when we look at creating and using structures. Still, it'll probably take some time before you truly feel comfortable with it.
 
 You might be thinking *Woah! What can be so complicated about this?* Let's start looking at some examples.
 
@@ -256,7 +256,7 @@ This is handy, and it works just as well with function return values:
       return 9001
     }
 
-It's important that you remember that `:=` is used to declare the variable as well as assign a value to it. Why? Because a variable can't be declare twice (not in the same scope anyways). If you try to run the following, you'll get an error:
+It's important that you remember that `:=` is used to declare the variable as well as assign a value to it. Why? Because a variable can't be declared twice (not in the same scope anyways). If you try to run the following, you'll get an error:
 
 
     func main() {
@@ -320,7 +320,7 @@ We'd use the last one like so:
       // handle this error case
     }
 
-You can have more than two values, but that's rare. Beyond two, you're probably best to define a structure, which we'll talk about in chapter 2.
+You can have more than two values, but that's rare. Beyond two, you're probably best to define a structure, which we'll talk about in Chapter 2.
 
 Some times, you only care about one of the return values. In these cases you assign the other values to `_`:
 
@@ -329,9 +329,9 @@ Some times, you only care about one of the return values. In these cases you ass
       // handle this error case
     }
 
-This is more than a convention. `_` is special in that it actually isn't assigned or even declared. This lets you use `_` over and over again even though it might feel like you're assigning  different types of values to it.
+This is more than a convention. `_` is special in that it actually isn't assigned or even declared. This lets you use `_` over and over again even though it might feel like you're assigning different types of values to it.
 
-Functions return values can also be named. This is something you probably won't use too often, but sometimes a function is organized in a way that makes named return parameters handy:
+Functions returning values can also be named. This is something you probably won't use too often, but sometimes a function is organized in a way that makes named return parameters handy:
 
     func power(name) (value int, exists bool) {
       value, exists = cache[name]
@@ -341,7 +341,7 @@ Functions return values can also be named. This is something you probably won't 
       return db.GetSaiyanPower(name)
     }
 
-In the above, `value` and `exists` are declared as part of the function signature. Notice that when we assign them, we use `=` and not `:=` (because they're already declared). With named return values, using `return` with no values returns the names variables.
+In the above, `value` and `exists` are declared as part of the function signature. Notice that when we assign them, we use `=` and not `:=` (because they're already declared). With named return values, using `return` with no values returns the named variables.
 
 Finally, there's something else that you're likely to run into with function declarations. If parameters share the same type, we can use a shorter syntax:
 
