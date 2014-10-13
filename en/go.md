@@ -1327,4 +1327,143 @@ Which can then be used anywhere - as a field type, as a parameter, as a return v
       return adder(1, 2)
     }
 
-Using functions like this can help us decouple our code from specific implementations much like when we use interfaces. In the next chapter, we'll see another common use for this.
+Using functions like this can help decouple code from specific implementations much like interfaces.
+
+## Before You Continue
+
+We looked at various aspects of programming with Go. Most notably we saw how error handling behaves as well as how to release resources, such as connections and open files. Many people dislike Go's approach to error handling. It can feel like a step backwards. Sometimes I agree. Yet I also find that it results in code that's easier to follow. `defer` is an unusual but practical approach to resource manager. In reality, it isn't tied to resource management at all. You can use `defer` for any purpose, such as logging when a function exits.
+
+Certainly we haven't looked at all of the tidbits Go has to offer. But you should be feeling comfortable enough to tackle whatever you come across.
+
+# Chapter 6 - Concurrency
+
+Go is often described as a concurrent-friendly language. The reason for this is that it provides a simple syntax over two powerful mechanisms: goroutines and channels.
+
+## Goroutines
+
+A goroutine is similar to a thread, except managed by Go. Code that runs in a goroutine can run concurrently to other code. Let's look at an example:
+
+    package main
+
+    import (
+      "fmt"
+      "time"
+    )
+
+    func main() {
+      fmt.Println("start")
+      go process()
+      time.Sleep(time.Millisecond * 10)
+      fmt.Println("done")
+    }
+
+    func process() {
+      fmt.Println("processing")
+    }
+
+There are a few interesting things going on here, but the most important is how we start a goroutine. We simply use the `go` keyword followed by the function we want to execute in a separate goroutine. If we just want to run a bit of code, such as the above, the following is a good alternative:
+
+    go func() {
+      fmt.Println("processing")
+    }()
+
+Goroutines aren't useful only because of how easy they are to create, they're also cheap to create and keep around. Multiple goroutines will end up running on the same underlying OS thread (this is often called an M:N threading model, because we have M application threads (goroutines) running on N OS threads). The result is that a goroutine has a fraction of the overhead (a few KB) than OS threads. On modern hardware, it's possible to have millions of goroutines.
+
+Furthermore, the complexity of mapping and scheduling is hidden. We just say *this code should run concurrently* and let Go worry about making it happen.
+
+If we go back to our example, you'll notice that we had to `Sleep` for a few milliseconds. That's because the main process exits before the goroutine gets a chance to execute (by default, the process doesn't wait until all goroutines are finished before exiting). To solve this, we need to coordinate or code.
+
+## Synchronization
+
+Creating goroutines is trivial, and they are cheap enough that we can launch a lot, but concurrent code needs to be coordinated. To help with this problem, Go provides `channels`. However, before we look at `channels`, I think it's important to understand a little bit about the basics of concurrent programming.
+
+Writing concurrent code requires that you pay specific attention to where and how you read and write values. In some ways, it's like programming without a garbage collector -- it requires that you think about your data from a new angle, always watchful for possible danger. Consider:
+
+    package main
+
+    import (
+      "fmt"
+      "time"
+    )
+
+    var counter = 0
+
+    func main() {
+      for i := 0; i < 2; i++ {
+        go incr()
+      }
+      time.Sleep(time.Millisecond * 10)
+    }
+
+    func incr() {
+      counter++
+      fmt.Println(counter)
+    }
+
+Aside from the fact that we just showed how placing a `var` outside code create a global variable (which would be accessible from outside the package if we'd named it `Counter` instead of `counter`), what do you think the output will be?
+
+If you think the output is `1, 2` you're both right and wrong. It's true that if you run the above code, you'll very likely get that output. However, the reality is that the behavior is undefined. Why? Because we potentially have multiple (two in this case) goroutines writing to the same variable, `counter`, at the same time.
+
+Is that really a danger? Yes. Absolutely. `counter++` might seem like a simple line of code, but it actually gets broken down into multiple assembly statements, which are highly dependent on the platform that you're running. It's true that, in this example, the overwhelming most likely case is things will run just fine. However, another possible outcome would be that they both see `counter` when its equal to `0` and you get an output of `1, 1`. But there are worse possibilities, including system crashes or even accessing arbitrary pieces of data (and incrementing it!)
+
+The only thing you can safely do to a variable concurrently is read from it. You can have as many readers are you want, but as writes need to be synchronized. There are various ways to do this, including using some truly atomic operations that rely on special CPU instructions. However, the most common approach is to use a mutex:
+
+    package main
+
+    import (
+      "fmt"
+      "time"
+      "sync"
+    )
+
+    var (
+      counter = 0
+      lock sync.Mutex
+    )
+
+    func main() {
+      for i := 0; i < 2; i++ {
+        go incr()
+      }
+      time.Sleep(time.Millisecond * 10)
+    }
+
+    func incr() {
+      lock.Lock()
+      defer lock.Unlock()
+      counter++
+      fmt.Println(counter)
+    }
+
+A mutex serializes access to the code under lock. The reason we simply define our lock as `lock sync.Mutex` is because the default value of a `sync.Mutex` is to be unlocked.
+
+Seems simple enough? The example above is deceptive. There's a whole class of serious bugs that can arise when doing concurrent programming. First of all, it isn't always so obvious what code needs to be protected. While it might be tempting to use coarse locks (locks that cover large amount of code), that undermines the very reason we're doing concurrent programming in the first place. We generally want very fine locks, else we end up with a ten lane highway that suddenly turns into a one lane road.
+
+The other problem has to do with deadlocks. With a single lock, this isn't a problem, but if you're using two or more locks around the same code, it's dangerously easy to have situations where goroutineA holds lockA but needs access to lockB, while goroutineB holds lockB but needs access to lockA.
+
+It actually *is* possible to deadlock with a single lock, if we forget to release it. This isn't as dangerous as a multi-lock deadlock (because those are *really* tough to spot), but just so you can see what happens, try running:
+
+    package main
+
+    import (
+      "time"
+      "sync"
+    )
+
+    var (
+      lock sync.Mutex
+    )
+
+    func main() {
+      go func(){ lock.Lock() }()
+      time.Sleep(time.Millisecond * 10)
+      lock.Lock()
+    }
+
+There's more to concurrent programming that what we've seen so far. For one thing, since we can have multiple reads at the same time, there's another common mutex called a read-write mutex. This exposes two locking functions, one to lock readers and one to lock writers.
+
+Furthermore, part of concurrent programming isn't so much about serializing access across the narrowest possible piece of code, it's also about coordinating multiple goroutines. For example, sleeping for 10 milliseconds isn't a particularly elegant solution. What if a goroutine takes more than 10 milliseconds. What if it takes less and we're just wasting cycles? Also, what if instead of just waiting for goroutines to finish, we want to signal one *hey, I have new data for you to process!*
+
+These are all things that are doable without `channels`. Certainly for simpler cases, I believe you **should** use primitives such as `sync.Mutex` and `sync.RWMutex`, but, as we'll see in the next section, `channels` aim at making this cleaner and less error prone.
+
+## Channels
