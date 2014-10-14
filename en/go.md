@@ -385,7 +385,7 @@ The simplest way to create an instance of our structure is:
       Power: 9000,
     }
 
-*Note:* The trailing `,` in the above structure is required, otherwise you will get an error like: `syntax error: need trailing comma before newline in composite literal`.
+*Note:* The trailing `,` in the above structure is required. Without it, the compiler will give an error.
 
 We don't have to set all or even any of the fields. Both of these are valid:
 
