@@ -1,0 +1,139 @@
+\documentclass{book}
+
+
+% Fonts and typography
+
+%% Typography
+\usepackage[no-math]{fontspec}
+\defaultfontfeatures{Mapping = tex-text, Scale = MatchLowercase}
+
+%% Fonts
+\setmainfont{Verdana}
+\setsansfont{Verdana}
+\setmonofont[Mapping=tex-ansi]{Menlo}
+
+%% Set Sans font in headings
+\usepackage{sectsty}
+\allsectionsfont{\sffamily}
+
+%% Set polyglossia language
+\usepackage{polyglossia}
+\setdefaultlanguage{english}
+
+
+% Page
+
+%% Use full page in book style
+\usepackage{fullpage}
+
+%% Set line spacing
+\usepackage{setspace}
+\setstretch{1.2}
+
+%% Disable paragraph indentation
+\usepackage{parskip}
+
+%% Start sections from new page
+\let\stdsection\section
+\renewcommand\section{\newpage\stdsection}
+
+
+% Colors
+
+\usepackage{xcolor}
+
+%% Tango color scheme
+\definecolor{SkyBlue}{HTML}{3465A4}
+\definecolor{DarkSkyBlue}{HTML}{204A87}
+
+\definecolor{Plum}{HTML}{75507B}
+
+\definecolor{ScarletRed}{HTML}{CC0000}
+
+\definecolor{Aluminium1}{HTML}{EEEEEC}
+\definecolor{Aluminium6}{HTML}{2e3436}
+
+\definecolor{Black}{HTML}{000000}
+
+
+% Listings
+
+\usepackage{listings}
+
+\lstdefinelanguage{JavaScript}{
+  keywords = {typeof, new, true, false, catch, function, return, null, catch, switch, var, if, in, while, do, else, case, break},
+  keywordstyle = \color{SkyBlue}\bfseries,
+  ndkeywords = {class, export, boolean, throw, implements, import, this},
+  ndkeywordstyle = \color{Aluminium6}\bfseries,
+  identifierstyle = \color{Black},
+  sensitive = false,
+  comment = [l]{//},
+  morecomment = [s]{/*}{*/},
+  commentstyle = \color{Plum}\ttfamily,
+  stringstyle = \color{ScarletRed}\ttfamily,
+  morestring = [b]',
+  morestring = [b]"
+}
+
+\lstset{
+  language = JavaScript,
+  backgroundcolor = \color{Aluminium1},
+  extendedchars = true,
+  basicstyle = \normalsize\ttfamily,
+  showstringspaces = false,
+  showspaces = false,
+  tabsize = 1,
+  breaklines = true,
+  showtabs = false
+}
+
+
+% Links
+
+%% Hyperref
+\usepackage[colorlinks, breaklinks, bookmarks, xetex]{hyperref}
+
+\hypersetup {
+  linkcolor = DarkSkyBlue,
+  citecolor = DarkSkyBlue,
+  filecolor = DarkSkyBlue,
+  urlcolor = DarkSkyBlue
+}
+
+%% Don’t use Mono font for URLs
+\urlstyle{same}
+
+
+% Images
+
+\usepackage{graphicx}
+
+
+% Pandoc hacks
+
+%% Normal enumerates processing
+\usepackage{enumerate}
+
+%% Disable section numbers
+\setcounter{secnumdepth}{0}
+
+
+\begin{document}
+
+  % Title page
+
+  \thispagestyle{empty}
+
+  \vspace*{\fill}
+    \begin{center}
+      \includegraphics[width=0.7\textwidth]{title}
+    \end{center}
+  \vspace*{\fill}
+
+  \setcounter{page}{0}
+
+  % Book contents
+
+  $body$
+
+\end{document}
