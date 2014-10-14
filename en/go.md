@@ -15,7 +15,7 @@ You can see the full text of the license at:
 ## Latest Version
 
 The latest source of this book is available at:
-<http://github.com/karlseguin/the-little-golang-book>
+<http://github.com/karlseguin/the-little-go-book>
 
 # Introduction
 
