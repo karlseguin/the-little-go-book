@@ -23,11 +23,11 @@ I've always had a love-hate relationship when it comes to learning new languages
 
 That said, we *have* to move forward. We *have* to be willing to take incremental steps because, again, languages are the foundation of what we do. Though the changes are often incremental, they tend to have a wide scope, impacting: productivity, readability, performance, testability, dependency management, error handling, documentation, profiling, communities, standard libraries and so on. Is there a positive way to say *death by a thousand cuts*?
 
-That leaves us with an important question: **why Go?** For me, there are two compelling reasons to learn Go. The first, is that it's a relatively simple language with a relatively simple standard library. In a lot of ways, the incremental nature of Go is to simplify some of the complexity we've seen being added to languages over the last couple decades. The other reasons to learn Go is that, for a lot of developers, it can compliment your existing arsenal.
+That leaves us with an important question: **why Go?** For me, there are two compelling reasons to learn Go. The first, is that it's a relatively simple language with a relatively simple standard library. In a lot of ways, the incremental nature of Go is to simplify some of the complexity we've seen being added to languages over the last couple decades. The other reasons to learn Go is that, for many developers, it will compliment your existing arsenal.
 
-Go was built as a system language (e.g. operating systems, device drivers) and thus aimed at C and C++ developers. According to the Go team though, and which is certainly true of me, application developers, not system developers, have become the primary Go users. Why? I can't speak authoratively for system developers, but for those of us building websites, services, desktop applications and the likes, I think at least partially comes down to the emerging need for a class of systems that sit somewhere in between low-level system applications and higher-level applications.
+Go was built as a system language (e.g. operating systems, device drivers) and thus aimed at C and C++ developers. According to the Go team though, and which is certainly true of me, application developers, not system developers, have become the primary Go users. Why? I can't speak authoratively for system developers, but for those of us building websites, services, desktop applications and the likes, I think it at least partially comes down to the emerging need for a class of systems that sit somewhere in between low-level system applications and higher-level applications.
 
-Maybe it's a messaging, caching infrastructure, computational heavy data analysis, command line interfaces, logging or monitoring. I don't know what label to give it, but over the course of my career, as systems continue to grow in complexity and as concurrency frequently measure in tens of thousands, there's clearly been a growing need for custom infrastructure-type systems. You *can* build such systems with Ruby or Python or something else (and many people are), but these types of systems can benefit from a more rigid type system and greater performance. Similarly, you *can* use Go to build websites (and many people are), but for me, I still prefer, by a wide margin, the expressiveness of Node or Ruby for such systems.
+Maybe it's a messaging, caching, computational heavy data analysis, command line interfaces, logging or monitoring. I don't know what label to give it, but over the course of my career, as systems continue to grow in complexity and as concurrency frequently measure in tens of thousands, there's clearly been a growing need for custom infrastructure-type systems. You *can* build such systems with Ruby or Python or something else (and many people are), but these types of systems can benefit from a more rigid type system and greater performance. Similarly, you *can* use Go to build websites (and many people are), but for me, I still prefer, by a wide margin, the expressiveness of Node or Ruby for such systems.
 
 There are other areas where Go excels at. For example, there are no dependencies on running a compiled Go program. You don't have to worry if your users have Ruby or the JVM installed, and if so, what version. For this reason, Go is becoming increasingly popular as a language for command line interface programs and other types of utility programs you need to distribute (e.g. a log collector).
 
@@ -45,7 +45,7 @@ As I think about the paragraphs and chapters that lay ahead, I know that I won't
 
 If you're looking to play a little with Go, you should check out the [Go Playground](http://play.golang.org/) which lets you run code online without having to install anything. This is also the most common way to share Go code when seeking help in [Go's discussion forum](https://groups.google.com/forum/#!forum/golang-nuts) and places like StackOverflow.
 
-Installing Go is straightforward. You can install it from source, but I'd suggest you use one of the pre-compiled binaries. When you [go to the download page](https://golang.org/dl/), you'll see installers for various platforms. Let us avoid these and learn how to setup go ourselves. As you'll see, it isn't hard.
+Installing Go is straightforward. You can install it from source, but I'd suggest you use one of the pre-compiled binaries. When you [go to the download page](https://golang.org/dl/), you'll see installers for various platforms. Let's avoid these and learn how to setup go ourselves. As you'll see, it isn't hard.
 
 Except for simple examples, Go is designed to work when your code is inside of a workspace. The workspace is a folder composed of `bin`, `pkg` and `src` subfolders. You might be tempted to force Go to your own style. Don't.
 
@@ -63,7 +63,7 @@ Extract the file to `/usr/local` via `tar -C /usr/local -xzf go#.#.#.darwin-amd6
 Set up two environment variables:
 
   1. `GOPATH` points to your workspace, for me, that's `$HOME/code/go`
-  2. We need to append Go's binary to our PATH
+  2. We need to append Go's binary to our `PATH`
 
 You can set these up from a shell:
 
@@ -82,7 +82,7 @@ Unzip it at a location of your choosing. `c:\Go` is a good choice.
 Set up two environment variables:
 
   1. `GOPATH` points to your workspace. That might be something like `c:\users\goku\work\go`,
-  2. Add `c:\Go\bin` to your PATH environment variable
+  2. Add `c:\Go\bin` to your `PATH` environment variable
 
 Environment variables can be set through the `Environment Variables` button on the `Advanced` tab of the `System` control panel. Some versions of Windows provide this control panel through the `Advanced System Settings` option inside the `System` control panel.
 
@@ -108,7 +108,7 @@ There's a lot more that can be said about static typing, but I believe it's some
 
 ## C-Like Syntax
 
-Saying that a language has a C-like syntax means that if you're used to any other C-like languages, such as C, C++, Java, JavaScript and C# then you're going to find Go familiar - superficially, at least. For example, it means `&&` is used as a boolean AND, `==` is used to compare equality, `{` and `}` start and end a scope and array indexes start at 0.
+Saying that a language has a C-like syntax means that if you're used to any other C-like languages, such as C, C++, Java, JavaScript and C# then you're going to find Go familiar -- superficially, at least. For example, it means `&&` is used as a boolean AND, `==` is used to compare equality, `{` and `}` start and end a scope and array indexes start at 0.
 
 C-like syntax also tends to mean semi-colon terminated lines and parenthesis around conditions. Go does away with both of these, though parenthesis are still used to control precedence. For example, an `if` statement looks like this:
 
@@ -116,19 +116,19 @@ C-like syntax also tends to mean semi-colon terminated lines and parenthesis aro
       print("the spice must flow")
     }
 
-In more complicated cases, parenthesis are still useful:
+And in more complicated cases, parenthesis are still useful:
 
     if (name == "Goku" && power > 9000) || (name == "gohan" && power < 4000)  {
       print("super Saiyan")
     }
 
-Beyond this, Go's is much closer to C than C# or Java - not only in terms of syntax, but in terms of purpose. That's reflected in the terseness and simplicity of the language which will hopefully start to become obvious a few sections from now.
+Beyond this, Go is much closer to C than C# or Java - not only in terms of syntax, but in terms of purpose. That's reflected in the terseness and simplicity of the language which will hopefully start to become obvious as you learn it.
 
 ## Garbage Collected
 
-Some variables, when created, have an easy to define life. A variable local to a function, for example, disappears when the function exits. In other cases, it isn't so obvious -- at least to a compiler. For example, the variable returned by a function or referenced by other variables and objects. Without garbage collection, it's up to developers to free the memory associated with such variables at a point where the developer knows the variable isn't needed. How? In C, you'd literally `free(str);` the variable.
+Some variables, when created, have an easy to define life. A variable local to a function, for example, disappears when the function exits. In other cases, it isn't so obvious -- at least to a compiler. For example, the lifetime of a variable returned by a function or referenced by other variables and objects can be tricky to determine. Without garbage collection, it's up to developers to free the memory associated with such variables at a point where the developer knows the variable isn't needed. How? In C, you'd literally `free(str);` the variable.
 
-Languages with garbage collectors (Ruby, Python, Java, JavaScript, C#, Go, ...) are able to keep track of these variables and free them when they're no longer used. Garbage collection adds overhead, but it also eliminates a number of really bad bugs.
+Languages with garbage collectors (Ruby, Python, Java, JavaScript, C#, Go, ...) are able to keep track of these variables and free them when they're no longer used. Garbage collection adds overhead, but it also eliminates a number of devastating bugs.
 
 ## Running Go Code
 
@@ -142,7 +142,7 @@ Let's start our journey by creating a simple program and learning how to compile
 
 Save the file as `main.go`. For now, you can save it anywhere you want -- we don't need to live inside Go's workspace for trivial examples.
 
-Next, open a shell / command prompt and change the directory to where you saved the file. For me, that means typing `cd ~/code`. Finally, run the program by entering:
+Next, open a shell/command prompt and change the directory to where you saved the file. For me, that means typing `cd ~/code`. Finally, run the program by entering:
 
    go run main.go
 
@@ -152,7 +152,7 @@ But wait, what about the compilation step? `go run` is a handy command that comp
 
     go run --work main.go
 
-To explicitly compile our code, use `go build`:
+To explicitly compile code, use `go build`:
 
     go build main.go
 
@@ -162,7 +162,7 @@ When you're developing on your own machine, you'll use `go run` most of the time
 
 ### Main
 
-Hopefully the code that we just executed is understandable. We've created a function and printed out a string with the `println` function. Did `go run` know what to execute because there was only a single choice? No. In Go, the entry point to a program has to be a function called `main` within a package `main`.
+Hopefully the code that we just executed is understandable. We've created a function and printed out a string with the built-in `println` function. Did `go run` know what to execute because there was only a single choice? No. In Go, the entry point to a program has to be a function called `main` within a package `main`.
 
 We'll talk more about packages in a later chapter. For now, while we focus on understanding the basics of Go, we'll always write our code within the `main` package.
 
@@ -170,7 +170,7 @@ If you want, you can alter the code and change the package name. Run the code vi
 
 ## Imports
 
-Go has a number of built-in functions, such as `println`, which can be used without reference. We can't get very far though without making use of Go's standard library and eventually using third-party libraries. In Go, the `import` keyword is used to define the packages that are used by the code in the file.
+Go has a number of built-in functions, such as `println`, which can be used without reference. We can't get very far though, without making use of Go's standard library and eventually using third-party libraries. In Go, the `import` keyword is used to define the packages that are used by the code in the file.
 
 Let's change our program:
 
@@ -192,7 +192,7 @@ Which you can run via:
 
     go run main.go 9000
 
-We're now using two of Go's standard packages, `fmt` and `os`. We've also introduced another built-in function `len`. `len` returns the size of a string, or the number of values in a dictionary, or, as we see here, the number of elements in an array. If you're wondering why we expect 2 arguments, it's because the first argument -- at index 0 -- is always the path of the currently running executable (change the program to print it out and see for yourself!)
+We're now using two of Go's standard packages, `fmt` and `os`. We've also introduced another built-in function `len`. `len` returns the size of a string, or the number of values in a dictionary, or, as we see here, the number of elements in an array. If you're wondering why we expect 2 arguments, it's because the first argument -- at index 0 -- is always the path of the currently running executable (change the program to print it out and see for yourself).
 
 You've probably noticed we prefix the function name with the package, e.g. `fmt.Printf`. This is different than many other languages. We'll learn more about packages in later chapters, for now, knowing how to import package and use them is a good start.
 
@@ -208,11 +208,11 @@ There are a few other things about packages we need to know. The first is that G
     func main() {
     }
 
-You should get two errors about `fmt` and `os` being imported and not used. Can this get annoying? Absolutely. Over time you'll get used to it (it'll still be annoying though!) Go is strict about this because unused imports can slow compilation; admittedly a problem most of us don't have to that degree.
+You should get two errors about `fmt` and `os` being imported and not used. Can this get annoying? Absolutely. Over time you'll get used to it (it'll still be annoying though). Go is strict about this because unused imports can slow compilation; admittedly a problem most of us don't have to this degree.
 
 The other thing to note is that Go's standard library is well documented. You can head over to <http://golang.org/pkg/fmt/#Printf> to learn more about the `Printf` function that we used. You can also click on that section header and see the source code. Also, scroll to the top to learn more about Go's formatting capabilities.
 
-If you're ever stuck without internet access, you can get this locally by running:
+If you're ever stuck without internet access, you can get the documentation running locally via:
 
     godoc --http=:6060
 
@@ -238,7 +238,7 @@ The most explicit way to deal with variable declaration and assignment in Go is 
       fmt.Printf("It's over %d\n", power)
     }
 
-Here we declare a variable `power` of type `int` and then assign `9000` to it. We can merge the first two lines:
+Here we declare a variable `power` of type `int` and assign `9000` to it. We can merge the first two lines:
 
     var power int = 9000
 
@@ -246,7 +246,7 @@ Still, that's a lot of typing. Go has a handy operator, `:=`, which can infer th
 
     power := 9000
 
-This is handy, and it works just as well with function return values:
+This is handy, and it works just as well with functions:
 
     func main() {
       power := getPower()
@@ -267,7 +267,7 @@ It's important that you remember that `:=` is used to declare the variable as we
       fmt.Printf("It's also over %d\n", power)
     }
 
-The compiler will complain: *no new variables on left side of :=*. This means that when we first declare a variable, we use `:=` but on subsequent assignment, we use `=`.
+The compiler will complain: *no new variables on left side of :=*. This means that when we first declare a variable, we use `:=` but on subsequent assignment, we use `=`. This makes a lot of sense, but it can be tricky for your muscle memory to remember to switch between the two.
 
 If you read the error message closely, you'll notice that *variables* is plural. That's because Go lets you assign multiple variables with `:=` or `=`:
 
@@ -287,7 +287,7 @@ As long as one of the variables is new, `:=` can be used. Consider:
       fmt.Printf("%s's power is over %d\n", name, power)
     }
 
-Although `power` is being used twice with `:=`, the compiler won't complain -- the second time we use it, it'll see that the other variable, `name`, is a new variable and allow `:=`. However, you can't change the type of `power`. It was initially declared (implicitly) as an integer, and thus can only be assigned integers.
+Although `power` is being used twice with `:=`, the compiler won't complain -- the second time we use it, it'll see that the other variable, `name`, is a new variable and allow `:=`. However, you can't change the type of `power`. It was declared (implicitly) as an integer, and thus can only be assigned integers.
 
 For now, the last thing to know is that, like imports, Go won't let you have unused variables. For example:
 
@@ -357,13 +357,13 @@ We looked at a number of small individual pieces and it probably feels disjointe
 
 If you're coming from a dynamic language, the complexity around types and declarations might seem like a step backwards. I don't disagree with you. For some systems, dynamic languages are categorically more productive. But not all.
 
-If you're coming from another statically typed language you're probably feeling comfortable with Go. Inferred types and multiple return values are nice (though certainly not exclusive to Go). Hopefully as we learn more, you'll appreciate as much as I do, the clean and terse syntax.
+If you're coming from a statically typed language you're probably feeling comfortable with Go. Inferred types and multiple return values are nice (though certainly not exclusive to Go). Hopefully as we learn more, you'll appreciate the clean and terse syntax.
 
 # Chapter 2 - Structures
 
 Go isn't an object oriented (OO) language. It doesn't have objects and thus doesn't have the many concepts associated with OO, such as polymorphism, overloading, inheritance and so on.
 
-What Go does have, are structures, which can be associated with functions, as well as use a simple but effective form of composition. Overall, it results in simpler code, but there'll be occasions where you'll miss some of what OO has to offer. (It's worth pointing out that *composition over inheritance* is an old battle cry and Go is the first language I've used that takes a firm stand on the issue.)
+What Go does have, are structures, which can be associated with functions. Go also supports a simple but effective form of composition. Overall, it results in simpler code, but there'll be occasions where you'll miss some of what OO has to offer. (It's worth pointing out that *composition over inheritance* is an old battle cry and Go is the first language I've used that takes a firm stand on the issue.)
 
 Although Go doesn't do OO, you'll notice a lot of similarities between the definition of a structure and that of a class. A simple example is the following `Saiyan` structure:
 
@@ -396,15 +396,15 @@ We don't have to set all or even any of the fields. Both of these are valid:
     goku := Saiyan{Name: "Goku"}
     goku.Power = 9000
 
-Fields that aren't set will have a default value. Furthermore, you can skip the field name and rely on the order of the field declarations (though for the sake of clarity, you should only do this for structures with few fields):
+Fields that aren't set will have a default value (0 for integers, "" for strings, false for boolean, nil for pointers, ...). Furthermore, you can skip the field name and rely on the order of the field declarations (though for the sake of clarity, you should only do this for structures with few fields):
 
     goku := Saiyan{"Goku", 9000}
 
 What all of the above examples do is declare a variable, `goku` and assign a value to it. This is no different than when we assign `0` to `x`.
 
-Many times though, we don't want a variable that has a value, but rather we want a variable that has a pointer to a value. A pointer is a memory address, it's the location of where to find the actual value. It's a level of indirection. And why do we want a pointer to the value, rather than the actual value?
+Many times though, we don't want a variable that has a value, but rather we want a variable that has a pointer to a value. A pointer is a memory address, it's the location of where to find the actual value. It's a level of indirection, like directions.
 
-It comes down to the way Go passes arguments to a function. Go passes a copy of a value to a function. Knowing this, what does the following print?
+Why do we want a pointer to the value, rather than the actual value? It comes down to the way Go passes arguments to a function: as copies. Knowing this, what does the following print?
 
     func main() {
       goku := Saiyan{"Goku", 9000}
@@ -416,7 +416,7 @@ It comes down to the way Go passes arguments to a function. Go passes a copy of 
       s.Power += 10000
     }
 
-The answer is 9000, not 19000. Why? Because `Super` made changes to a copy of our original `goku` value and thus those changes weren't reflected in `goku`. To make this work as you probably expect, we need to pass a pointer to our value:
+The answer is 9000, not 19000. Why? Because `Super` made changes to a copy of our original `goku` value and thus changes made in `Super` weren't reflected in the caller. To make this work as you probably expect, we need to pass a pointer to our value:
 
     func main() {
       goku := &Saiyan{"Goku", 9000}
@@ -428,9 +428,9 @@ The answer is 9000, not 19000. Why? Because `Super` made changes to a copy of ou
       s.Power += 10000
     }
 
-We made two changes. The first is that we used the `&` operator to get the address of our value (it's called the *address of* operator). Next, we changed the type of parameter `Super` expects. It used to expect a `Saiyan` but now expects a `*Saiyan`, where `*X` means *pointer to X*.
+We made two changes. The first is that we used the `&` operator to get the address of our value (it's called the *address of* operator). Next, we changed the type of parameter `Super` expects. It used to expect a variable of type `Saiyan` but now expects one of type `*Saiyan`, where `*X` means *pointer to X*. Obviously the two types are related, but they are two distinct type.
 
-Note that we're still passing a copy of `goku's` value to `Super` it just so happens that `goku's` value is an address. That copy is the same address as the original, which is what that indirection buys us. To prove that it's a copy, the following will still print `9000`:
+Note that we're still passing a copy of `goku's` value to `Super` it just so happens that `goku's` value has become an address. That copy is the same address as the original, which is what that indirection buys us. Think of it as copying the directions to a restaurant. What you have is a copy, but it still points to the same restaurant as the original. We can prove that it's a copy by trying to change where it points to:
 
     func main() {
       goku := &Saiyan{"Goku", 9000}
@@ -442,9 +442,9 @@ Note that we're still passing a copy of `goku's` value to `Super` it just so hap
       s = &Saiyan{"Gohan", 1000}
     }
 
-This is how many languages behave, including Ruby, Python, Java and C#. Go, and to some degree C#, simply make the fact visible.
+The above once again prints 9000. This is how many languages behave, including Ruby, Python, Java and C#. Go, and to some degree C#, simply make the fact visible.
 
-It should also be obvious that copying a pointer is going to be cheaper than copying a complex object. On a 64-bit machine, a pointer is 64 bits large. If we have a structure with many fields, maybe even a large string or array, that can be quite expensive to copy.
+It should also be obvious that copying a pointer is going to be cheaper than copying a complex object. On a 64-bit machine, a pointer is 64 bits large. If we have a structure with many fields, maybe even a large string or array, creating copies can be expensive.
 
 All this isn't to say that you'll always want a pointer. At the end of this chapter, after we've seen a bit more of what we can do with structures, we'll re-examine the pointer vs value question.
 
@@ -481,9 +481,9 @@ Structures don't have constructors. Instead, you create a function that returns 
       }
     }
 
-This pattern rubs a lot of developers the wrong way. On the one hand, it's a pretty slight syntactical change, on the other, it feels a little less compartmentalized.
+This pattern rubs a lot of developers the wrong way. On the one hand, it's a pretty slight syntactical change, on the other, it does feel a little less compartmentalized.
 
-Our factory doesn't have to return pointer either, this is absolutely valid (though it will be marginally slower):
+Our factory doesn't have to return pointer, this is absolutely valid (though it will be marginally slower):
 
     func NewSaiyan(name string, power int) Saiyan {
       return Saiyan{
@@ -608,7 +608,7 @@ Even if you don't intend to change the data, consider the cost of creating a cop
 
 In such cases, the cost of copying the structure is probably offset by being able to access `X` and `Y` directly, without any indirection.
 
-Again, these are all pretty subtle cases. Unless you were iterating over thousands or possibly tens of thousands of such points, you wouldn't notice a difference.
+Again, these are all pretty subtle cases. Unless you're iterating over thousands or possibly tens of thousands of such points, you wouldn't notice a difference.
 
 ## Before You Continue
 
@@ -648,7 +648,7 @@ Maps grow dynamically. However, we can supply a second argument to `make` to set
 
     lookup := make(map[string]int, 100)
 
-If you have some idea of how many keys your map will have, defining an initial size can help with performance. (Also, if you're paying attention, you'll note that `make` and `len` *are* overloaded. Go is a language that, to the frustration of some, makes use of features which aren't exposed.)
+If you have some idea of how many keys your map will have, defining an initial size can help with performance. (Also, if you're paying attention, you'll note that `make` and `len` *are* overloaded. Go is a language that, to the frustration of some, makes use of features which aren't exposed for developers to use.)
 
 When you need a map as a field of a structure, you define it as such:
 
@@ -678,13 +678,11 @@ We can iterate over a map using a `for` loop combined with the `range` keyword:
       ...
     }
 
-Note that iteration over maps aren't ordered.
-
+Iteration over maps aren't ordered.
 
 ## Arrays
 
 Although arrays and slices are closely related, we'll talk about them separately. For now, we'll look at arrays as though slices didn't exist.
-
 
 Like maps, arrays are created with `make`:
 
@@ -696,7 +694,7 @@ Like maps, arrays are created with `make`:
 
 Unlike maps, the length isn't optional. Why? Because arrays are fixed-length structures. If you come from a C, C++, Java, or C# background (and many others) this will be normal. If you come from Python, Ruby, Perl, JavaScript or PHP (and also many others) this might be new -- these languages have what's called *dynamic arrays*. In this last group of languages, you can append as many values to an array as you want. In the first group, and in Go, the length is fixed. Our above `score` variable can hold 0 to 10 scores, no more (or less!).
 
-Sounds like a drag, right? Well, it turns out that dynamic arrays are just wrappers around fixed-length arrays. By default, they start at a specific length, say 20. When we try to insert a 21st element, the runtime creates a new larger array (often using 2x growth factor) and copies from the old array into the new. If this sounds inefficient, it is and it isn't. It depends on how many times the array needs to grow.
+Sounds like a drag, right? Well, it turns out that dynamic arrays are just wrappers around fixed-length arrays. By default, they start at a specific length, say 20. When we try to insert a 21st element, the runtime creates a new larger array (often using 2x growth factor) and copies values from the old array into the new. If this sounds inefficient, it is and it isn't. It depends on how many times the array needs to grow.
 
 Regardless, creating the logic for a dynamic array is simple. Even so, Go has a built-in `append` function that does it for us:
 
@@ -748,7 +746,7 @@ That last thing to know about arrays, is that, like maps, we can use an array as
 
 ## Slices
 
-In Go, you rarely, if ever, use arrays. Instead, you use slices. A slice is a lightweight structure that wraps and represents a portion of an actual array. `make` actually returns a slice, as does the initialization of the `Numbers` array from the previous example.
+In Go, you rarely, if ever, use arrays. Instead, you use slices. A slice is a lightweight structure that wraps and represents a portion of an actual array. All the examples that we saw above, using `make` or doing inline initialization, were actually slices.
 
 Many languages have some type of array slicing capability. Both JavaScript and Ruby arrays have a `slice` method. You can also get a slice in Ruby by using `[START..END]` or in Python via `[START:END]`. However, in these languages, a slice is actually a new array with the values of the original copied over. If we take Ruby, what's the output of the following?
 
@@ -856,8 +854,7 @@ The last version is most often used in conjunction with `append`. This mostly ha
       return powers
     }
 
-
-Slices as wrappers to arrays and strings, is a powerful concept. For one thing, creating a slice in Go is faster. That speed is also constant regardless of the size of the slice.
+Slices as wrappers to arrays and strings, is a powerful concept. For one thing, creating a slice in Go is fast. That speed is also constant regardless of the size of the slice.
 
 It also changes how you code. For example, a number of functions take a position parameter. In JavaScript, if we want to find the first space in a string after the first five characters, we'd write:
 
@@ -930,7 +927,7 @@ Take some time and play with the above code. Try variations. See what happens if
 
 ## Pointers vs Values
 
-We finished chapter 2 by looking at whether you should assign and pass pointers or values. We'll now have this same conversation with respect to array and map values. Which of these should you use:
+We finished Chapter 2 by looking at whether you should assign and pass pointers or values. We'll now have this same conversation with respect to array and map values. Which of these should you use:
 
     a := make([]Saiyan, 10)
     //or
@@ -954,17 +951,17 @@ There are edge cases that we haven't covered, but you're not likely to run into 
 
 # Chapter 4 - Code Organization and Interfaces
 
-It might not seem like it, but we've now explored the building blocks needed to build a system. In this chapter we'll discussion how to organize what we've learned.
+It's now time to look at how to organize our code.
 
 ## Packages
 
-To keep more complicated libraries and systems organized, we need to learn about packages. In Go, package names follow the directory structure of your Go workspace. If we were building a shopping system, we'd probably start with a package name "shopping" and put the source files in `$GOPATH/src/shopping/`.
+To keep more complicated libraries and systems organized, we need to learn about packages. In Go, package names follow the directory structure of your Go workspace. If we were building a shopping system, we'd probably start with a package name "shopping" and put our source files in `$GOPATH/src/shopping/`.
 
-We don't want to put everything inside this folder though. For example, maybe we want to isolate some database logic inside its own folder. To achieve this, we create a subfolder at `$GOPATH/src/shopping/db`. In package name of the files within this subfolder is simply `db`, but to access it from another package, include the base `shopping` package, we'd need to import `shopping/db`.
+We don't want to put everything inside this folder though. For example, maybe we want to isolate some database logic inside its own folder. To achieve this, we create a subfolder at `$GOPATH/src/shopping/db`. The package name of the files within this subfolder is simply `db`, but to access it from another package, including the  `shopping` package, we need to import `shopping/db`.
 
-In other words, when you specify the name of the package atop a source file, via the `package` keyword, you provide a single value, not a complete hierarchy (e.g. "shopping" or "db"). When you import a package though, you specify the complete path.
+In other words, when you name a package, via the `package` keyword, you provide a single value, not a complete hierarchy (e.g. "shopping" or "db"). When you import a package, you specify the complete path.
 
-Let's try it. Inside your Go workspace (which we set up in Getting Started of the Introduction), create a new folder called `shopping` and a subfolder within it called `db`.
+Let's try it. Inside your Go workspace's `src` folder (which we set up in Getting Started of the Introduction), create a new folder called `shopping` and a subfolder within it called `db`.
 
 Inside of `shopping/db` create a file called `db.go` and add the following code:
 
@@ -980,7 +977,7 @@ Inside of `shopping/db` create a file called `db.go` and add the following code:
       }
     }
 
-Notice that the name of the package is the same as the name of the folder this file is located in. Also, obviously, we aren't actually accessing the database. We're just using this as an example to show how to organize code!
+Notice that the name of the package is the same as the name of the folder. Also, obviously, we aren't actually accessing the database. We're just using this as an example to show how to organize code.
 
 Now, create a file called `pricecheck.go` inside of the main `shopping` folder. It's content is:
 
@@ -998,9 +995,9 @@ Now, create a file called `pricecheck.go` inside of the main `shopping` folder. 
       return item.Price, true
     }
 
-It's tempting to think that importing `shopping/db` is somehow special because we're inside the `shopping` package/folder. In reality, you're importing `$GOPATH/src/shopping/db` which means you could just as easily import `test/db` so long as you had a package named `db` inside of your workspace's `test` folder.
+It's tempting to think that importing `shopping/db` is somehow special because we're inside the `shopping` package/folder. In reality, you're importing `$GOPATH/src/shopping/db` which means you could just as easily import `test/db` so long as you had a package named `db` inside of your workspace's `src/test` folder.
 
-If you're just building a library, you don't need anything more than what we've seen. To build an executable, you still need a `main`. The way I prefer to do this is to create a subfolder called `main` inside of `shopping` with a file called `main.go` and the following content:
+If you're building a library, you don't need anything more than what we've seen. To build an executable, you still need a `main`. The way I prefer to do this is to create a subfolder called `main` inside of `shopping` with a file called `main.go` and the following content:
 
     package main
 
@@ -1019,7 +1016,7 @@ You can now run your code via by going into your `shopping` project and typing:
 
 ### Cyclical Imports
 
-As you start writing more complex systems, you're bound to run into cyclical imports. This happens when package A imports package B but package B imports package A. This is something the compiler can't handle.
+As you start writing more complex systems, you're bound to run into cyclical imports. This happens when package A imports package B but package B imports package A (either directly or indirectly through another package). This is something the compiler can't handle.
 
 Let's change our shopping structure to cause the error.
 
@@ -1043,7 +1040,7 @@ Move the `Item` definition from `shopping/db/db.go` into `shopping/pricecheck.go
       return item.Price, true
     }
 
-If you try to run the code now, you'll get a couple errors from `db/db.go` about `Item` being undefined. This makes sense, `Item` no longer exists in the `db` package, it's been moved to the shopping package. We need to change `shopping/db/db.go` to:
+If you try to run the code, you'll get a couple errors from `db/db.go` about `Item` being undefined. This makes sense, `Item` no longer exists in the `db` package, it's been moved to the shopping package. We need to change `shopping/db/db.go` to:
 
     package db
 
@@ -1069,7 +1066,7 @@ $GOPATH/src
     - main
       main.go
 
-`pricecheck.go` will still import `shopping/db`, but `db.go` will now import `shopping/models` instead of `shopping`, thus breaking the cycle. You'll often need to share more than just `models`, so you might have other similar folder named `utilities` and such. The import rule as that the source code within these files is not allowed to import anything from the `shopping` package or any sub-packages.
+`pricecheck.go` will still import `shopping/db`, but `db.go` will now import `shopping/models` instead of `shopping`, thus breaking the cycle. You'll often need to share more than just `models`, so you might have other similar folder named `utilities` and such. The important rule about these shared package is that they shouldn't import anything from the `shopping` package or any sub-packages. In a few sections we'll look at interfaces, which can help us untangle these types of dependencies.
 
 ### Visibility
 
@@ -1083,15 +1080,15 @@ For example, if our `items.go` file had a function that looked like:
       // ...
     }
 
-It can be called via `models.NewItem()`. But if the function was named `newItem`, we wouldn't be able to access it from a different package.
+It could be called via `models.NewItem()`. But if the function was named `newItem`, we wouldn't be able to access it from a different package.
 
-Go ahead and change the name of the various functions, types and fields fro the `shopping` code. For example, if you rename the `Item's` `Price` field to `price`, you should get an error.
+Go ahead and change the name of the various functions, types and fields from the `shopping` code. For example, if you rename the `Item's` `Price` field to `price`, you should get an error.
 
 ### Third Party Libraries
 
 To `go` command we've been using to `run` and `build` has a `get` subcommand which is used to fetch third party libraries. `go get` supports various protocols, but for this example we'll be getting a library from Github, meaning you'll need `git` installed on your computer.
 
-From a shell/command prompt, enter:
+Assuming you already have git installed, from a shell/command prompt, enter:
 
     go get github.com/mattn/go-sqlite3
 
@@ -1151,7 +1148,7 @@ In a language like C# and Java, we have to be explicit when a class implements a
       }
     }
 
-In Go, this happens implicitly. If your structure has a function name `Log` with a `single` string parameter and no return value, then it can be used as `Logger`. This cuts down on the verboseness of using interfaces:
+In Go, this happens implicitly. If your structure has a function name `Log` with a `string` parameter and no return value, then it can be used as a `Logger`. This cuts down on the verboseness of using interfaces:
 
     type ConsoleLogger struct {}
     func (l ConsoleLogger) Log(message string) {
@@ -1168,11 +1165,11 @@ Finally, interfaces are commonly used to avoid cyclical imports. Since they don'
 
 Ultimately, how you structure your code around Go's workspace is something that you'll only feel comfortable with after you've written a couple non-trivial projects. What's most important for you to remember is the tight relationship between package names and your directory structure (not just within a project, but within the entire workspace).
 
-The way Go handles visibility of types is straightforward and effective. It's also consistent. There are a few things we haven't looked at, such as constants and global variables, but rest assured their visibility is determined by the same casing-rule.
+The way Go handles visibility of types is straightforward and effective. It's also consistent. There are a few things we haven't looked at, such as constants and global variables, but rest assured their visibility is determined by the same naming rule.
 
-Finally, if you're new to interfaces, it might take some time before you get a feel for them. However, the first time you see a function that expects something like `io.Reader`, you'll find yourself thanking the author for not demanding than he or she needed.
+Finally, if you're new to interfaces, it might take some time before you get a feel for them. However, the first time you see a function that expects something like `io.Reader`, you'll find yourself thanking the author for not demanding more than he or she needed.
 
-#Chapter 5 - Tidbits
+# Chapter 5 - Tidbits
 
 In this chapter we'll talk about a miscellany of Go's feature which didn't quite fit anywhere else.
 
@@ -1207,7 +1204,43 @@ You can create your own error type, the only requirement is that it fulfills the
       Error() string
     }
 
-Go does have a `panic` and `recover` functions, but they are rarely used.
+More commonly, we can create our own errors by importing the `errors` package and using it `New` function:
+
+    import (
+      "errors"
+    )
+
+
+    func process(int count) error {
+      if count < 1 {
+        return errors.New("Invalid count")
+      }
+      ...
+      return nil
+    }
+
+There's a common pattern in Go's standard library of using singleton errors. For example, the `io` package has a `EOF` variable which is defined like so:
+
+    var EOF = errors.New("EOF")
+
+This is a package variable (it's defined outside of function) which is publicly accessible (upper-case first letter). Various functions can return this error, say when we're reading from a file, or STDIN. If it makes contextual sense, you should use this error too. As consumers, we can use this singleton:
+
+    package main
+
+    import (
+      "fmt"
+      "io"
+    )
+
+    func main() {
+      var input int
+      _, err := fmt.Scan(&input)
+      if err == io.EOF {
+        fmt.Println("no more input!")
+      }
+    }
+
+As a final note, Go does have `panic` and `recover` functions. `panic` is like throwing an exception and `recover` is like `catch`, but they are rarely used.
 
 ## Defer
 
@@ -1230,7 +1263,7 @@ Even though Go has a garbage collector, some resources require that we explicitl
       // read the file
     }
 
-The above code will probably print an error, but the point was to show how `defer` works. Whatever you `defer` will be executed when the method returns, even if it does so violently. This let's you release resources close to where they're initialized.
+If you try to run the above code, you'll probably get an error (the file doesn't exist). The point is to show how `defer` works. Whatever you `defer` will be executed when the method returns, even if it does so violently. This lets you release resources near where its initialized and takes care of multiple return points.
 
 ## go fmt
 
@@ -1238,11 +1271,11 @@ Most programs written in Go follow the same formatting rules. Namely, a tab is u
 
 I know, you have your own style and you want to stick to it. That's what I did for a long time, but I'm glad I eventually gave in. A big reason for this is the `go fmt` command. It's easy to use and authoritative (so no one argues over meaningless preferences).
 
-When you're inside a project, you can make it format it and all sub-packages via:
+When you're inside a project, you can apply the formatting rule to it and all sub-projects via:
 
     go fmt ./...
 
-Give it a try. It does more than indent your code, it also aligns field declarations and orders your imports alphabetically.
+Give it a try. It does more than indent your code, it also aligns field declarations and alphabetically orders imports .
 
 ## Initialized If
 
@@ -1257,6 +1290,8 @@ That's a pretty silly example. More realistically, you might do something like:
     if err := process(); err != nil {
       return err
     }
+
+Interestingly, while the values aren't available outside the if statement, they are available inside any `else if` or `else`.
 
 ## Empty Interface and Casting
 
@@ -1281,7 +1316,7 @@ You also have access to a powerful type-switch:
         // ...
     }
 
-You'll see and probably use the empty interface more than you might first expect. Admittedly, it rarely results in particularly clean code. Casting values back and forth is ugly and dangerous, but sometimes it's the only choice.
+You'll see and probably use the empty interface more than you might first expect. Admittedly, it won't result in clean code. Casting values back and forth is ugly and dangerous, but sometimes, in a static language, it's the only choice.
 
 ## Strings and Byte arrays
 
@@ -1291,7 +1326,7 @@ Strings and byte arrays are closely related things. We can easily convert one to
     byts := []byte(stra)
     strb := string(byts)
 
-In fact, this way of converting is common across various integer types as well. Some functions explicit expect an `int32` or a `int64` or their unsigned counterparts. So you mind find yourself having to do things like:
+In fact, this way of converting is common across various types as well. Some functions explicit expect an `int32` or a `int64` or their unsigned counterparts. So you mind find yourself having to do things like:
 
     int64(count)
 
@@ -1309,7 +1344,7 @@ Functions are first-class types:
 
     type Add func(a int, b int) int
 
-Which can then be used anywhere - as a field type, as a parameter, as a return value:
+Which can then be used anywhere -- as a field type, as a parameter, as a return value:
 
     package main
 
@@ -1329,11 +1364,11 @@ Which can then be used anywhere - as a field type, as a parameter, as a return v
       return adder(1, 2)
     }
 
-Using functions like this can help decouple code from specific implementations much like interfaces.
+Using functions like this can help decouple code from specific implementations much like we achieve with interfaces.
 
 ## Before You Continue
 
-We looked at various aspects of programming with Go. Most notably we saw how error handling behaves as well as how to release resources, such as connections and open files. Many people dislike Go's approach to error handling. It can feel like a step backwards. Sometimes I agree. Yet I also find that it results in code that's easier to follow. `defer` is an unusual but practical approach to resource manager. In reality, it isn't tied to resource management at all. You can use `defer` for any purpose, such as logging when a function exits.
+We looked at various aspects of programming with Go. Most notably we saw how error handling behaves as well as how to release resources, such as connections and open files. Many people dislike Go's approach to error handling. It can feel like a step backwards. Sometimes I agree. Yet I also find that it results in code that's easier to follow. `defer` is an unusual but practical approach to resource management. In fact, it isn't tied to resource management at all. You can use `defer` for any purpose, such as logging when a function exits.
 
 Certainly we haven't looked at all of the tidbits Go has to offer. But you should be feeling comfortable enough to tackle whatever you come across.
 
@@ -1363,21 +1398,21 @@ A goroutine is similar to a thread, except managed by Go. Code that runs in a go
       fmt.Println("processing")
     }
 
-There are a few interesting things going on here, but the most important is how we start a goroutine. We simply use the `go` keyword followed by the function we want to execute in a separate goroutine. If we just want to run a bit of code, such as the above, the following is a good alternative:
+There are a few interesting things going on here, but the most important is how we start a goroutine. We simply use the `go` keyword followed by the function we want to execute. If we just want to run a bit of code, such as the above, the following is a good alternative:
 
     go func() {
       fmt.Println("processing")
     }()
 
-Goroutines aren't useful only because of how easy they are to create, they're also cheap to create and keep around. Multiple goroutines will end up running on the same underlying OS thread (this is often called an M:N threading model, because we have M application threads (goroutines) running on N OS threads). The result is that a goroutine has a fraction of the overhead (a few KB) than OS threads. On modern hardware, it's possible to have millions of goroutines.
+Goroutines aren't useful only because of how easy they are to create, they're also cheap to create and keep around. Multiple goroutines will end up running on the same underlying OS thread (this is often called an M:N threading model, because we have M application threads (goroutines) running on N OS threads). The result is that a goroutine has a fraction of the overhead (a few KB) than OS threads. On modern hardware, it's possible to have millions of goroutines running.
 
 Furthermore, the complexity of mapping and scheduling is hidden. We just say *this code should run concurrently* and let Go worry about making it happen.
 
-If we go back to our example, you'll notice that we had to `Sleep` for a few milliseconds. That's because the main process exits before the goroutine gets a chance to execute (by default, the process doesn't wait until all goroutines are finished before exiting). To solve this, we need to coordinate or code.
+If we go back to our example, you'll notice that we had to `Sleep` for a few milliseconds. That's because the main process exits before the goroutine gets a chance to execute (the process doesn't wait until all goroutines are finished before exiting). To solve this, we need to coordinate or code.
 
 ## Synchronization
 
-Creating goroutines is trivial, and they are cheap enough that we can launch a lot, but concurrent code needs to be coordinated. To help with this problem, Go provides `channels`. However, before we look at `channels`, I think it's important to understand a little bit about the basics of concurrent programming.
+Creating goroutines is trivial, and they are so cheap that we can start many, but concurrent code needs to be coordinated. To help with this problem, Go provides `channels`. However, before we look at `channels`, I think it's important to understand a little bit about the basics of concurrent programming.
 
 Writing concurrent code requires that you pay specific attention to where and how you read and write values. In some ways, it's like programming without a garbage collector -- it requires that you think about your data from a new angle, always watchful for possible danger. Consider:
 
@@ -1402,13 +1437,13 @@ Writing concurrent code requires that you pay specific attention to where and ho
       fmt.Println(counter)
     }
 
-Aside from the fact that we just showed how placing a `var` outside code create a global variable (which would be accessible from outside the package if we'd named it `Counter` instead of `counter`), what do you think the output will be?
+What do you think the output will be?
 
-If you think the output is `1, 2` you're both right and wrong. It's true that if you run the above code, you'll very likely get that output. However, the reality is that the behavior is undefined. Why? Because we potentially have multiple (two in this case) goroutines writing to the same variable, `counter`, at the same time.
+If you think the output is `1, 2` you're both right and wrong. It's true that if you run the above code, you'll very likely get that output. However, the reality is that the behavior is undefined. Why? Because we potentially have multiple (two in this case) goroutines writing to the same variable, `counter`, at the same time. Or, just as bad, one goroutine would be reading `counter` while another one writes to it.
 
-Is that really a danger? Yes. Absolutely. `counter++` might seem like a simple line of code, but it actually gets broken down into multiple assembly statements, which are highly dependent on the platform that you're running. It's true that, in this example, the overwhelming most likely case is things will run just fine. However, another possible outcome would be that they both see `counter` when its equal to `0` and you get an output of `1, 1`. But there are worse possibilities, including system crashes or even accessing arbitrary pieces of data (and incrementing it!)
+Is that really a danger? Yes. Absolutely. `counter++` might seem like a simple line of code, but it actually gets broken down into multiple assembly statements -- the exact nature is dependent on the platform that you're running. It's true that, in this example, the overwhelming most likely case is things will run just fine. However, another possible outcome would be that they both see `counter` when its equal to `0` and you get an output of `1, 1`. But there are worse possibilities, including system crashes or even accessing arbitrary pieces of data (and incrementing it!)
 
-The only thing you can safely do to a variable concurrently is read from it. You can have as many readers are you want, but as writes need to be synchronized. There are various ways to do this, including using some truly atomic operations that rely on special CPU instructions. However, the most common approach is to use a mutex:
+The only thing you can safely do to a variable concurrently is read from it. You can have as many readers are you want, but writes need to be synchronized. There are various ways to do this, including using some truly atomic operations that rely on special CPU instructions. However, the most common approach is to use a mutex:
 
     package main
 
@@ -1437,9 +1472,9 @@ The only thing you can safely do to a variable concurrently is read from it. You
       fmt.Println(counter)
     }
 
-A mutex serializes access to the code under lock. The reason we simply define our lock as `lock sync.Mutex` is because the default value of a `sync.Mutex` is to be unlocked.
+A mutex serializes access to the code under lock. The reason we simply define our lock as `lock sync.Mutex` is because the default value of a `sync.Mutex` is unlocked.
 
-Seems simple enough? The example above is deceptive. There's a whole class of serious bugs that can arise when doing concurrent programming. First of all, it isn't always so obvious what code needs to be protected. While it might be tempting to use coarse locks (locks that cover large amount of code), that undermines the very reason we're doing concurrent programming in the first place. We generally want very fine locks, else we end up with a ten lane highway that suddenly turns into a one lane road.
+Seems simple enough? The example above is deceptive. There's a whole class of serious bugs that can arise when doing concurrent programming. First of all, it isn't always so obvious what code needs to be protected. While it might be tempting to use coarse locks (locks that cover large amount of code), that undermines the very reason we're doing concurrent programming in the first place. We generally want fine locks, else we end up with a ten lane highway that suddenly turns into a one lane road.
 
 The other problem has to do with deadlocks. With a single lock, this isn't a problem, but if you're using two or more locks around the same code, it's dangerously easy to have situations where goroutineA holds lockA but needs access to lockB, while goroutineB holds lockB but needs access to lockA.
 
@@ -1464,9 +1499,9 @@ It actually *is* possible to deadlock with a single lock, if we forget to releas
 
 There's more to concurrent programming that what we've seen so far. For one thing, since we can have multiple reads at the same time, there's another common mutex called a read-write mutex. This exposes two locking functions, one to lock readers and one to lock writers.
 
-Furthermore, part of concurrent programming isn't so much about serializing access across the narrowest possible piece of code, it's also about coordinating multiple goroutines. For example, sleeping for 10 milliseconds isn't a particularly elegant solution. What if a goroutine takes more than 10 milliseconds. What if it takes less and we're just wasting cycles? Also, what if instead of just waiting for goroutines to finish, we want to signal one *hey, I have new data for you to process!*
+Furthermore, part of concurrent programming isn't so much about serializing access across the narrowest possible piece of code, it's also about coordinating multiple goroutines. For example, sleeping for 10 milliseconds isn't a particularly elegant solution. What if a goroutine takes more than 10 milliseconds. What if it takes less and we're just wasting cycles? Also, what if instead of just waiting for goroutines to finish, we want to tell one *hey, I have new data for you to process!*
 
-These are all things that are doable without `channels`. Certainly for simpler cases, I believe you **should** use primitives such as `sync.Mutex` and `sync.RWMutex`, but, as we'll see in the next section, `channels` aim at making this cleaner and less error prone.
+These are all things that are doable without `channels`. Certainly for simpler cases, I believe you **should** use primitives such as `sync.Mutex` and `sync.RWMutex`, but, as we'll see in the next section, `channels` aim at making concurrent programming cleaner and less error prone.
 
 ## Channels
 
@@ -1509,7 +1544,7 @@ Consider a system with incoming data that we want to handle in separate goroutin
 
 Our worker is simple. It waits until data is available then "processes" it. Dutifully, it does this in a loop, forever waiting for more data to process.
 
-To use this, the first thing we'd do is start up some workers:
+To use this, the first thing we'd do is start some workers:
 
     c := make(chan int)
     for i := 0; i < 4; i++ {
@@ -1557,9 +1592,9 @@ Here's the complete code to make it run:
       }
     }
 
-We don't know which worker is going to get what data. What we do know, what Go guarantees, is that only data will only be read by on reader.
+We don't know which worker is going to get what data. What we do know, what Go guarantees, is that data we write to a channel will only be read by a single reader.
 
-Notice that the only shared state is the channel, which we can safely read from and write to from multiple goroutines at the same time. Channels provide all of the synchronization code we need and also ensure that, at any given time, only one goroutine has access to a specific piece of data.
+Notice that the only shared state is the channel, which we can safely read from and written to concurrently. Channels provide all of the synchronization code we need and also ensure that, at any given time, only one goroutine has access to a specific piece of data.
 
 ### Buffered Channels
 
@@ -1573,7 +1608,7 @@ Given the above code, what happens if we have more data coming in than we can ha
 
 What's happening is that our main code, the one that accepts the user's incoming data (which we just simulated with a random number generator) is blocking as it writes to the channel because no reader is available.
 
-There are a few popular strategies to handle this. Go makes these easy to build. The first is to buffer the data. We don't want to block the main receiver. If no worker is available, we want to temporarily store the data in a sort of queue. Channels have this buffering capability built-in. When we created our channel, with `make`, we can give our channel a length:
+There are a few popular strategies to handle this, which Go makes easy to implement. The first is to buffer the data. We don't want to block the main receiver. If no worker is available, we want to temporarily store the data in a sort of queue. Channels have this buffering capability built-in. When we created our channel, with `make`, we can give our channel a length:
 
     c := make(chan int, 100)
 
@@ -1593,7 +1628,7 @@ You can see that it grows and grows until it fills up, at which point writes to 
 
 Even with buffering, there comes a point where we need to start dropping messages. We can't use up an infinite amount of memory hoping a worker frees up. For this, we use Go's `select`.
 
-Syntactically, `select` looks a bit like a switch. With it, we can provide code for when the channel isn't available to write to. First, let's remove our channel's buffering so that we can clearly see how select works:
+Syntactically, `select` looks a bit like a switch. With it, we can provide code for when the channel isn't available to write to. First, let's remove our channel's buffering so that we can clearly see how `select` works:
 
     c := make(chan int)
 
@@ -1612,9 +1647,7 @@ Next we change our `for` loop:
 
 We're pushing out 20 messages per second, but are workers can only handle 10 per second, thus half the messages get dropped.
 
-This is only the start of what we can accomplish with `select`. First, everything we can do while writing to a channel we can also do while reading from a channel. So we could "timeout" a read.
-
-More interestingly, we can `select` against multiple channels. In this case, `select` will block until the first channel becomes available. If no channel is available, `default` is executed, and if there's no `default`, it'll wait until the first channel unblocks. If more than one channel is available, it randomly picks one.
+This is only the start of what we can accomplish with `select`. A main purpose of select is to manage multiple channels. Given multiple channels, `select` will block until the first one becomes available. If no channel is available, `default` is executed if one is provided. A channel is randomly picked when multiple are available.
 
 It's hard to come up with a simple example that demonstrates this behavior, as it's a fairly advanced feature. The next section might help illustrate this though.
 
@@ -1650,7 +1683,6 @@ Also, `time.After` is a channel of type `chan time.Time`. In the above example, 
 
       case t := time.After(time.Millisecond * 100):
         fmt.Println("timed out at", t)
-      }
 
 Pay close attention to our `select`. Notice that we're writing to `c` but reading from `time.After`. Select works the same regardless of whether we're reading from, writing to, or any combination of channels:
 
@@ -1677,4 +1709,4 @@ If you're new to the world of concurrent programming, it might all seem rather o
 
 Goroutines effectively abstract what's needed to run concurrent code. Channels help eliminate some serious bugs that can happen when data is shared, by eliminating the sharing of data. This doesn't just eliminate bugs, but it changes how one approaches concurrent programming. You start to think about concurrency with respect to message passing, rather than dangerous areas of code.
 
-Having said that, I still make extensive use of the various synchronization primitives found in the `sync` and `sync/atomic` packages. I think it's important to be comfortable with both. I encourage you to first focus on one, probably channels, but when you see a simple example that needs a short-lived lock, consider using a Mutex or Read-Write Mutex.
+Having said that, I still make extensive use of the various synchronization primitives found in the `sync` and `sync/atomic` packages. I think it's important to be comfortable with both. I encourage you to first focus on channels, but when you see a simple example that needs a short-lived lock, consider using a mutex or read-write mutex.
