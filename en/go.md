@@ -49,7 +49,7 @@ Installing Go is straightforward. You can install it from source, but I'd sugges
 
 Except for simple examples, Go is designed to work when your code is inside of a workspace. The workspace is a folder composed of `bin`, `pkg` and `src` subfolders. You might be tempted to force Go to your own style. Don't.
 
-Normally, I put my projects inside of `~/code`. For example, `~/code/blog` contains my blog. For Go, my workspace is `~/code/go` and my Go-powered blog would be in `~/code/go/src/blog`. Since that's a lot to type, I use a symbolic link to make it accessible via `~/code/go`:
+Normally, I put my projects inside of `~/code`. For example, `~/code/blog` contains my blog. For Go, my workspace is `~/code/go` and my Go-powered blog would be in `~/code/go/src/blog`. Since that's a lot to type, I use a symbolic link to make it accessible via `~/code/blog`:
 
     ln -s ~/code/go/src/blog ~/code/blog
 
@@ -98,7 +98,7 @@ Compilation is the process of translating the source code that you write into a 
 
 Compiled languages can be unpleasant to work with because compilation can be slow. It's hard to iterate quickly if you have to spend minutes or hours waiting for code to compile. Compilation speed is one of the major design goals of Go. This is good news for people working on large projects, as well as those of us used to a quick feedback cycle offered by interpreted languages.
 
-Compiled languages tend to run faster and the executable produced by compilation can be run without additional depedencies (at least, that's true for languages like C, C++ and Go which compile directly to assembly).
+Compiled languages tend to run faster and the executable produced by compilation can be run without additional dependencies (at least, that's true for languages like C, C++ and Go which compile directly to assembly).
 
 ## Static Typing
 
@@ -126,7 +126,7 @@ Beyond this, Go's is much closer to C than C# or Java - not only in terms of syn
 
 ## Garbage Collected
 
-Some variables, when created, have an easy to define life. A variable local to a function, for example, disappears when the function exits. In other cases, it isn't so obvious -- at least to a compiler. For example, the variable returned by a function or referenced by other variables and objects. Without garbabe collection, it's up to developers to free the memory associated with such variables at a point where the developer knows the variable isn't needed. How? In C, you'd literally `free(str);` the variable.
+Some variables, when created, have an easy to define life. A variable local to a function, for example, disappears when the function exits. In other cases, it isn't so obvious -- at least to a compiler. For example, the variable returned by a function or referenced by other variables and objects. Without garbage collection, it's up to developers to free the memory associated with such variables at a point where the developer knows the variable isn't needed. How? In C, you'd literally `free(str);` the variable.
 
 Languages with garbage collectors (Ruby, Python, Java, JavaScript, C#, Go, ...) are able to keep track of these variables and free them when they're no longer used. Garbage collection adds overhead, but it also eliminates a number of really bad bugs.
 
@@ -220,7 +220,7 @@ and pointing your browser to `http://localhost:6060`
 
 ## Variables and Declarations
 
-It'd be nice to begin and end our look at variables by saying: *you declare and assign to a variable by doing x = 4.* Unfortunately, things are more complicated in Go. We'll begin our conversation by looking at simple examples then, in the next chapter, we'll expand this when we look at creating an using structures. Still, it'll probably take some time before you truly feel comfortable with it.
+It'd be nice to begin and end our look at variables by saying: *you declare and assign to a variable by doing x = 4.* Unfortunately, things are more complicated in Go. We'll begin our conversation by looking at simple examples then, in the next chapter, we'll expand this when we look at creating and using structures. Still, it'll probably take some time before you truly feel comfortable with it.
 
 You might be thinking *Woah! What can be so complicated about this?* Let's start looking at some examples.
 
@@ -256,7 +256,7 @@ This is handy, and it works just as well with function return values:
       return 9001
     }
 
-It's important that you remember that `:=` is used to declare the variable as well as assign a value to it. Why? Because a variable can't be declare twice (not in the same scope anyways). If you try to run the following, you'll get an error:
+It's important that you remember that `:=` is used to declare the variable as well as assign a value to it. Why? Because a variable can't be declared twice (not in the same scope anyways). If you try to run the following, you'll get an error:
 
 
     func main() {
@@ -320,7 +320,7 @@ We'd use the last one like so:
       // handle this error case
     }
 
-You can have more than two values, but that's rare. Beyond two, you're probably best to define a structure, which we'll talk about in chapter 2.
+You can have more than two values, but that's rare. Beyond two, you're probably best to define a structure, which we'll talk about in Chapter 2.
 
 Some times, you only care about one of the return values. In these cases you assign the other values to `_`:
 
@@ -329,9 +329,9 @@ Some times, you only care about one of the return values. In these cases you ass
       // handle this error case
     }
 
-This is more than a convention. `_` is special in that it actually isn't assigned or even declared. This lets you use `_` over and over again even though it might feel like you're assigning  different types of values to it.
+This is more than a convention. `_` is special in that it actually isn't assigned or even declared. This lets you use `_` over and over again even though it might feel like you're assigning different types of values to it.
 
-Functions return values can also be named. This is something you probably won't use too often, but sometimes a function is organized in a way that makes named return parameters handy:
+Functions returning values can also be named. This is something you probably won't use too often, but sometimes a function is organized in a way that makes named return parameters handy:
 
     func power(name) (value int, exists bool) {
       value, exists = cache[name]
@@ -341,7 +341,7 @@ Functions return values can also be named. This is something you probably won't 
       return db.GetSaiyanPower(name)
     }
 
-In the above, `value` and `exists` are declared as part of the function signature. Notice that when we assign them, we use `=` and not `:=` (because they're already declared). With named return values, using `return` with no values returns the names variables.
+In the above, `value` and `exists` are declared as part of the function signature. Notice that when we assign them, we use `=` and not `:=` (because they're already declared). With named return values, using `return` with no values returns the named variables.
 
 Finally, there's something else that you're likely to run into with function declarations. If parameters share the same type, we can use a shorter syntax:
 
@@ -363,7 +363,7 @@ If you're coming from another statically typed language you're probably feeling 
 
 Go isn't an object oriented (OO) language. It doesn't have objects and thus doesn't have the many concepts associated with OO, such as polymorphism, overloading, inheritance and so on.
 
-What Go does have are structures, which we can be associated with functions, as well as a simple but effective form of composition. Overall, it results in simpler code, but there'll be occasions where you'll miss some of what OO has to offer. (It's worth pointing out that *composition over inheritance* is an old battle cry and Go is the first language I've used that takes a firm stand on the issue.)
+What Go does have are structures, which can be associated with functions, as well as used a simple but effective form of composition. Overall, it results in simpler code, but there'll be occasions where you'll miss some of what OO has to offer. (It's worth pointing out that *composition over inheritance* is an old battle cry and Go is the first language I've used that takes a firm stand on the issue.)
 
 Although Go doesn't do OO, you'll notice a lot of similarities between the definition of a structure and that of a class. A simple example is the following `Saiyan` structure:
 
@@ -376,7 +376,7 @@ We'll soon see how to attach functions to this structure, much like you'd have m
 
 ## Declarations and Initializations
 
-When we first looked at variables and declaration, we looked at only at built-in types, like integers and strings. Now that we're talking about structures, we need to expand that conversation to include pointers.
+When we first looked at variables and declarations, we looked only at built-in types, like integers and strings. Now that we're talking about structures, we need to expand that conversation to include pointers.
 
 The simplest way to create an instance of our structure is:
 
@@ -384,6 +384,8 @@ The simplest way to create an instance of our structure is:
       Name: "Goku",
       Power: 9000,
     }
+
+*Note:* The trailing `,` in the above structure is required, otherwise you will get an error like: `syntax error: need trailing comma before newline in composite literal`.
 
 We don't have to set all or even any of the fields. Both of these are valid:
 
@@ -400,7 +402,7 @@ Fields that aren't set will have a default value. Furthermore, you can skip the 
 
 What all of the above examples do is declare a variable, `goku` and assign a value to it. This is no different than when we assign `0` to `x`.
 
-Many times though, we don't want a variable that has a value, but rather we want a variable that has a pointer to a value. A pointer is a memory address, it's the location of where to find the actual value. It's a level of indirection. And why do want a pointer to the value, rather than the actual value?
+Many times though, we don't want a variable that has a value, but rather we want a variable that has a pointer to a value. A pointer is a memory address, it's the location of where to find the actual value. It's a level of indirection. And why do we want a pointer to the value, rather than the actual value?
 
 It comes down to the way Go passes arguments to a function. Go passes a copy of a value to a function. Knowing this, what does the following print?
 
@@ -414,7 +416,7 @@ It comes down to the way Go passes arguments to a function. Go passes a copy of 
       s.Power += 10000
     }
 
-The answer is 9000, not 19000. Why? because `Super` made changes to a copy of our original `goku` value and thus those changes weren't reflected in `goku`. To make this work as you probably expect, we need to pass a pointer to our value:
+The answer is 9000, not 19000. Why? Because `Super` made changes to a copy of our original `goku` value and thus those changes weren't reflected in `goku`. To make this work as you probably expect, we need to pass a pointer to our value:
 
     func main() {
       goku := &Saiyan{"Goku", 9000}
@@ -426,7 +428,7 @@ The answer is 9000, not 19000. Why? because `Super` made changes to a copy of ou
       s.Power += 10000
     }
 
-We made two changes. The first is that we used the `&` operator to get the address of our value (it's called the *address of* operator). Next, we changed the type of parameter `Super` expects. It uses to expect a `Saiyan` but now expects a `*Saiyan`, which is a `*X` means *pointer to X*.
+We made two changes. The first is that we used the `&` operator to get the address of our value (it's called the *address of* operator). Next, we changed the type of parameter `Super` expects. It used to expect a `Saiyan` but now expects a `*Saiyan`, where `*X` means *pointer to X*.
 
 Note that we're still passing a copy of `goku's` value to `Super` it just so happens that `goku's` value is an address. That copy is the same address as the original, which is what that indirection buys us. To prove that it's a copy, the following will still print `9000`:
 
