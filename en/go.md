@@ -939,7 +939,26 @@ Where you will see a difference is when you pass the individual elements to a fu
       Super(saiyan)
     }
 
-At this point, the same logic that we saw in Chapter 2 applies. So the decision on whether to define an array of pointers versus an array of values comes down to how you use the individual values, not how you use the array or map itself.
+At this point, the same logic that we saw in Chapter 2 applies. Furthermore, consider the following:
+
+    func main() {
+      saiyans := []Saiyan{
+        Saiyan{"Goku", 9000},
+        Saiyan{"Gohan", 100},
+      }
+      // Make Goku a super saiyan
+      saiyans[0].Power += 10000
+
+      // Make Gohan a super saiyan?
+      gohan := saiyans[1]
+      gohan.Power += 10000
+
+      fmt.Println(saiyans)
+    }
+
+The above will show that Goku's power is 19000 but Gohan's power remains at 100. Because these are values within our slice, as opposed to pointers to values, a copy is made when we assign them to a new variable, and changes to a copy aren't reflected in any other copy (you could get around this by re-assigning `gohan` to `saiyans[1]`, but that doesn't seem far from ideal.)
+
+The decision on whether to define an array of pointers versus an array of values comes down to how you use the individual values, not how you use the array or map itself.
 
 ## Before You Continue
 
