@@ -13,11 +13,10 @@ EPUB_BUILDER_FLAGS = \
 
 MOBI_BUILDER = kindlegen
 
-
 en/golang.pdf:
 	cd en && $(PDF_BUILDER) $(PDF_BUILDER_FLAGS) $(SOURCE_FILE_NAME) -o $(BOOK_FILE_NAME).pdf
 
-en/golang.epub: en/title.png en/title.txt en/go.md
+en/golang.epub: en/cover.jpg en/cover.txt en/go.md
 	$(EPUB_BUILDER) $(EPUB_BUILDER_FLAGS) $^ -o $@
 
 en/golang.mobi: en/golang.epub
