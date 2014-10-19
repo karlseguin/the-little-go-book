@@ -1,5 +1,5 @@
 SOURCE_FILE_NAME = go.md
-BOOK_FILE_NAME = golang
+BOOK_FILE_NAME = go
 
 PDF_BUILDER = pandoc
 PDF_BUILDER_FLAGS = \
@@ -14,14 +14,16 @@ EPUB_BUILDER_FLAGS = \
 MOBI_BUILDER = kindlegen
 
 
-en/golang.pdf:
+en/go.pdf:
 	cd en && $(PDF_BUILDER) $(PDF_BUILDER_FLAGS) $(SOURCE_FILE_NAME) -o $(BOOK_FILE_NAME).pdf
 
-en/golang.epub: en/title.png en/title.txt en/go.md
+en/go.epub: en/title.png en/title.txt en/go.md
 	$(EPUB_BUILDER) $(EPUB_BUILDER_FLAGS) $^ -o $@
 
-en/golang.mobi: en/golang.epub
+en/go.mobi: en/go.epub
 	$(MOBI_BUILDER) $^
+
+all: en/go.pdf en/go.mobi
 
 clean:
 	rm -f */$(BOOK_FILE_NAME).pdf
