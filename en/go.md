@@ -1248,7 +1248,7 @@ Go ahead and change the name of the various functions, types and fields from the
 
 ### Third-Party Libraries
 
-To `go` command we've been using to `run` and `build` has a `get` subcommand which is used to fetch third-party libraries. `go get` supports various protocols but for this example, we'll be getting a library from Github, meaning, you'll need `git` installed on your computer.
+The `go` command we've been using to `run` and `build` has a `get` subcommand which is used to fetch third-party libraries. `go get` supports various protocols but for this example, we'll be getting a library from Github, meaning, you'll need `git` installed on your computer.
 
 Assuming you already have git installed, from a shell/command prompt, enter:
 
