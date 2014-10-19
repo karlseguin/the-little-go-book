@@ -48,9 +48,9 @@
 
 \definecolor{Plum}{HTML}{75507B}
 
-\definecolor{ScarletRed}{HTML}{CC0000}
+\definecolor{Green}{HTML}{4F8124}
 
-\definecolor{Aluminium1}{HTML}{EEEEEC}
+\definecolor{Aluminium1}{HTML}{F8F8F8}
 \definecolor{Aluminium6}{HTML}{2e3436}
 
 \definecolor{Black}{HTML}{000000}
@@ -60,23 +60,24 @@
 
 \usepackage{listings}
 
-\lstdefinelanguage{JavaScript}{
-  keywords = {typeof, new, true, false, catch, function, return, null, catch, switch, var, if, in, while, do, else, case, break},
+\lstdefinelanguage{Go}{
+  keywords = {new, go, true, false, func, return, nil, switch, select, var, if, range, for, else, case, break, int, string, bool, make},
   keywordstyle = \color{SkyBlue}\bfseries,
-  ndkeywords = {class, export, boolean, throw, implements, import, this},
+  ndkeywords = {package, import, struct, interface, main},
   ndkeywordstyle = \color{Aluminium6}\bfseries,
   identifierstyle = \color{Black},
   sensitive = false,
   comment = [l]{//},
   morecomment = [s]{/*}{*/},
   commentstyle = \color{Plum}\ttfamily,
-  stringstyle = \color{ScarletRed}\ttfamily,
+  stringstyle = \color{Green}\ttfamily,
   morestring = [b]',
+  morestring = [b]`,
   morestring = [b]"
 }
 
 \lstset{
-  language = JavaScript,
+  language = Go,
   backgroundcolor = \color{Aluminium1},
   extendedchars = true,
   basicstyle = \normalsize\ttfamily,
