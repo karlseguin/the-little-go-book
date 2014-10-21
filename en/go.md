@@ -702,11 +702,11 @@ So far we've seen a number of simple types and structures. It's now time to look
 If you come from Python, Ruby, Perl, JavaScript or PHP (and more), you're probably used to programming with *dynamic arrays*. These are arrays that resize themselves as data is added to them. In Go, like many other languages, arrays are fixed. Declaring an array requires that we specify the size, and once the size is specified, it cannot grow:
 
 ```go
-scores := [10]int{}
+var scores [10]int
 scores[0] = 339
 ```
 
-The above array can old 0 to 10 scores. No more (no less!). We can intialize the array with values:
+The above array can hold 0 to 10 scores. No more (no less!). We can intialize the array with values:
 
 ```go
 scores := [4]int{9001, 9333, 212, 33}
