@@ -828,9 +828,9 @@ func extractPowers(saiyans []*Saiyans) []int {
 }
 ```
 
-The third version is a `nil` slice and is a more idiomatic way of declaring a slice with a length and capacity of 0 (`make([]string, 0)`). This is used in conjunction with `append`, when the number of elements is unknown.
+The third version is an empty slice and is a more idiomatic way of declaring a slice with a length and capacity of 0 (`make([]string, 0)`). This is used in conjunction with `append`, when the number of elements is unknown.
 
-The last version is similar to a nil slice, but lets us specify an initial capacity; useful if we have a general idea of how many elements we'll need.
+The last version lets us specify an initial capacity; useful if we have a general idea of how many elements we'll need.
 
 Even when you know the size, `append` can be used. It's largely a matter of preference:
 
@@ -1757,7 +1757,7 @@ func (w *Worker) process(c chan int) {
 
 We don't know which worker is going to get what data. What we do know, what Go guarantees, is that the data we send to a channel will only be received by a single receiver.
 
-Notice that the only shared state is the channel, which we can safely receive from and write to concurrently. Channels provide all of the synchronization code we need and also ensure that, at any given time, only one goroutine has access to a specific piece of data.
+Notice that the only shared state is the channel, which we can safely receive from and send to concurrently. Channels provide all of the synchronization code we need and also ensure that, at any given time, only one goroutine has access to a specific piece of data.
 
 ### Buffered Channels
 
