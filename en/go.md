@@ -304,7 +304,7 @@ func main() {
 
 The compiler will complain with *no new variables on left side of :=*. This means that when we first declare a variable, we use `:=` but on subsequent assignment, we use the assignment operator `=`. This makes a lot of sense, but it can be tricky for your muscle memory to remember when to switch between the two.
 
-If you read the error message closely, you'll notice that *variables* is plural. That's because Go lets you assign multiple variables (using either `=` or `=:`):
+If you read the error message closely, you'll notice that *variables* is plural. That's because Go lets you assign multiple variables (using either `=` or `:=`):
 
 
 ```go
@@ -699,7 +699,7 @@ var scores [10]int
 scores[0] = 339
 ```
 
-The above array can hold 0 to 9 scores. No more (no less!). We can intialize the array with values:
+The above array can hold up to 10 scores. No more (no less!). We can intialize the array with values:
 
 ```go
 scores := [4]int{9001, 9333, 212, 33}
