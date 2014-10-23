@@ -828,7 +828,7 @@ func extractPowers(saiyans []*Saiyans) []int {
 }
 ```
 
-The third version is an empty slice and is a more idiomatic way of declaring a slice with a length and capacity of 0 (`make([]string, 0)`). This is used in conjunction with `append`, when the number of elements is unknown.
+The third version is a nil slice and is used in conjunction with `append`, when the number of elements is unknown.
 
 The last version lets us specify an initial capacity; useful if we have a general idea of how many elements we'll need.
 
