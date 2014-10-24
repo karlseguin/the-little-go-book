@@ -951,7 +951,7 @@ To get the number of keys, we use `len`. To remove a value based on its key, we 
 // returns 1
 total := len(lookup)
 
-// has no return, can be called on an non-existing keys
+// has no return, can be called on a non-existing key
 delete(lookup, "goku")
 ```
 
