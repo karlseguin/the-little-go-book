@@ -684,7 +684,7 @@ Again, these are all pretty subtle cases. Unless you're iterating over thousands
 
 ## Before You Continue
 
-From a practical point of view, this chapter introduced structures, how to make an instance of a structure a receiver of a function, and added pointers to our existing knowledge of Go's type system. The following chapters will build on what we know about structure as well as the inner workings that we've explored.
+From a practical point of view, this chapter introduced structures, how to make an instance of a structure a receiver of a function, and added pointers to our existing knowledge of Go's type system. The following chapters will build on what we know about structures as well as the inner workings that we've explored.
 
 # Chapter 3 - Maps, Arrays and Slices
 
