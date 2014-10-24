@@ -699,7 +699,9 @@ var scores [10]int
 scores[0] = 339
 ```
 
-The above array can hold up to 10 scores. No more (no less!). We can intialize the array with values:
+The above array can hold up to 10 scores using indexes `scores[0]` through `scores[9]`. Attempts to access an out of range index in the array will result in a compiler or runtime error.
+
+We can initialize the array with values:
 
 ```go
 scores := [4]int{9001, 9333, 212, 33}
