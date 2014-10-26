@@ -1836,7 +1836,7 @@ To block for a maximum amount of time, we can use the `time.After` function. Let
 for {
   select {
   case c <- rand.Int():
-  case time.After(time.Millisecond * 100):
+  case <-time.After(time.Millisecond * 100):
     fmt.Println("timed out", )
   }
   time.Sleep(time.Millisecond * 50)
