@@ -1861,7 +1861,7 @@ Back to our `select`, there are a couple of things to play with. First, what hap
 Also, `time.After` is a channel of type `chan time.Time`. In the above example, we simply discard the value that was sent to the channel. If you want though, you can receive it:
 
 ```go
-case t := time.After(time.Millisecond * 100):
+case t := <- time.After(time.Millisecond * 100):
   fmt.Println("timed out at", t)
 ```
 
