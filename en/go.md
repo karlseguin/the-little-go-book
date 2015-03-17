@@ -139,12 +139,8 @@ Let's start our journey by creating a simple program and learning how to compile
 ```go
 package main
 
-import (
-  "fmt"
-)
-
 func main() {
-  fmt.Println("it's over 9000!")
+  println("it's over 9000!")
 }
 ```
 
@@ -178,7 +174,7 @@ While developing, you can use either `go run` or `go build`. When you deploy you
 
 ### Main
 
-Hopefully, the code that we just executed is understandable. We've created a function and printed out a string with the built-in `Println` function. Did `go run` know what to execute because there was only a single choice? No. In Go, the entry point to a program has to be a function called `main` within a package `main`.
+Hopefully, the code that we just executed is understandable. We've created a function and printed out a string with the built-in `println` function. Did `go run` know what to execute because there was only a single choice? No. In Go, the entry point to a program has to be a function called `main` within a package `main`.
 
 We'll talk more about packages in a later chapter. For now, while we focus on understanding the basics of Go, we'll always write our code within the `main` package.
 
@@ -186,7 +182,7 @@ If you want, you can alter the code and change the package name. Run the code vi
 
 ## Imports
 
-Go has a number of built-in functions, such as `Println`, which can be used without reference. We can't get very far though, without making use of Go's standard library and eventually using third-party libraries. In Go, the `import` keyword is used to declare the packages that are used by the code in the file.
+Go has a number of built-in functions, such as `println`, which can be used without reference. We can't get very far though, without making use of Go's standard library and eventually using third-party libraries. In Go, the `import` keyword is used to declare the packages that are used by the code in the file.
 
 Let's change our program:
 
