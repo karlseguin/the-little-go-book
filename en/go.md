@@ -139,12 +139,8 @@ Let's start our journey by creating a simple program and learning how to compile
 ```go
 package main
 
-import (
-  "fmt"
-)
-
 func main() {
-  fmt.Println("it's over 9000!")
+  println("it's over 9000!")
 }
 ```
 
@@ -214,7 +210,7 @@ go run main.go 9000
 
 We're now using two of Go's standard packages: `fmt` and `os`. We've also introduced another built-in function `len`. `len` returns the size of a string, or the number of values in a dictionary, or, as we see here, the number of elements in an array. If you're wondering why we expect 2 arguments, it's because the first argument -- at index 0 -- is always the path of the currently running executable. (Change the program to print it out and see for yourself.)
 
-You've probably noticed we prefix the function name with the package, e.g., `fmt.Printf`. This is different from many other languages. We'll learn more about packages in later chapters. For now, knowing how to import and use a package is a good start.
+You've probably noticed we prefix the function name with the package, e.g., `fmt.Println`. This is different from many other languages. We'll learn more about packages in later chapters. For now, knowing how to import and use a package is a good start.
 
 Go is strict about importing packages. It will not compile if you import a package but don't use it. Try to run the following:
 
@@ -232,7 +228,7 @@ func main() {
 
 You should get two errors about `fmt` and `os` being imported and not used. Can this get annoying? Absolutely. Over time, you'll get used to it (it'll still be annoying though). Go is strict about this because unused imports can slow compilation; admittedly a problem most of us don't have to this degree.
 
-Another thing to note is that Go's standard library is well documented. You can head over to <http://golang.org/pkg/fmt/#Printf> to learn more about the `Printf` function that we used. You can click on that section header and see the source code. Also, scroll to the top to learn more about Go's formatting capabilities.
+Another thing to note is that Go's standard library is well documented. You can head over to <http://golang.org/pkg/fmt/#Println> to learn more about the `Println` function that we used. You can click on that section header and see the source code. Also, scroll to the top to learn more about Go's formatting capabilities.
 
 If you're ever stuck without internet access, you can get the documentation running locally via:
 
