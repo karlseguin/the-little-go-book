@@ -806,7 +806,7 @@ Here, the output is going to be [0, 0, 0, 0, 0, 9332]. Maybe you thought it woul
 Ultimately, there are four common ways to initialize a slice:
 
 ```go
-names = []string{"leto", "jessica", "paul"}
+names := []string{"leto", "jessica", "paul"}
 checks := make([]bool, 10)
 var names []string
 scores := make([]int, 0, 20)
