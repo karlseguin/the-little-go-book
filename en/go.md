@@ -1316,7 +1316,7 @@ import (
 )
 
 
-func process(int count) error {
+func process(count int) error {
   if count < 1 {
     return errors.New("Invalid count")
   }
