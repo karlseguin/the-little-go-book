@@ -1833,7 +1833,7 @@ for {
   select {
   case c <- rand.Int():
   case <-time.After(time.Millisecond * 100):
-    fmt.Println("timed out", )
+    fmt.Println("timed out")
   }
   time.Sleep(time.Millisecond * 50)
 }
