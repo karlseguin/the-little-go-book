@@ -645,7 +645,7 @@ However, because implicit composition is really just a compiler trick, we can "o
 
 ```go
 func (s *Saiyan) Introduce() {
-  fmt.Printf("Hi, I'm %s. Ya!\n", p.Name)
+  fmt.Printf("Hi, I'm %s. Ya!\n", s.Name)
 }
 ```
 
