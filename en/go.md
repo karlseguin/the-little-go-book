@@ -801,7 +801,7 @@ func main() {
 }
 ```
 
-Here, the output is going to be [0, 0, 0, 0, 0, 9332]. Maybe you thought it would be [9332, 0, 0, 0,0]? To a human, that might seem logical. To a compiler, you're telling it to append a value to a slice that already holds 5 values.
+Here, the output is going to be `[0, 0, 0, 0, 0, 9332]`. Maybe you thought it would be `[9332, 0, 0, 0, 0]`? To a human, that might seem logical. To a compiler, you're telling it to append a value to a slice that already holds 5 values.
 
 Ultimately, there are four common ways to initialize a slice:
 
