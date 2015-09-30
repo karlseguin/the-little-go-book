@@ -1,5 +1,5 @@
 ## About ##
-The Little Go Book is a free book introducing Go.
+[The Little Go Book](http://openmymind.net/The-Little-Go-Book/) is a free book introducing Go.
 
 The book was written by [Karl Seguin](http://openmymind.net), author of:
 
