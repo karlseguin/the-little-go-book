@@ -233,7 +233,7 @@ Another thing to note is that Go's standard library is well documented. You can 
 If you're ever stuck without internet access, you can get the documentation running locally via:
 
 ```
-godoc --http=:6060
+godoc -http=:6060
 ```
 
 and pointing your browser to `http://localhost:6060`
@@ -669,8 +669,8 @@ Even if you don't intend to change the data, consider the cost of creating a cop
 
 ```go
 type Point struct {
-  X int,
-  Y int,
+  X int
+  Y int
 }
 ```
 
@@ -878,7 +878,7 @@ strings.Index(haystack[5:], " ")
 We can see from the above example, that `[X:]` is shorthand for *from X to the end* while `[:X]` is shorthand for *from the start to X*. Unlike other languages, Go doesn't support negative values. If we want all of the values of a slice except the last, we do:
 
 ```go
-scores := []int{1,2,3,4,5}
+scores := []int{1, 2, 3, 4, 5}
 scores = scores[:len(scores)-1]
 ```
 
@@ -886,7 +886,7 @@ The above is the start of an efficient way to remove a value from an unsorted sl
 
 ```go
 func main() {
-  scores := []int{1,2,3,4,5}
+  scores := []int{1, 2, 3, 4, 5}
   scores = removeAtIndex(scores, 2)
   fmt.Println(scores)
 }
@@ -1280,7 +1280,7 @@ Go's preferred way to deal with errors is through return values, not exceptions.
 ```go
 package main
 
-import(
+import (
   "fmt"
   "os"
   "strconv"
@@ -1359,7 +1359,7 @@ Even though Go has a garbage collector, some resources require that we explicitl
 ```go
 package main
 
-import(
+import (
   "fmt"
   "os"
 )
@@ -1635,7 +1635,7 @@ var (
 )
 
 func main() {
-  go func(){ lock.Lock() }()
+  go func() { lock.Lock() }()
   time.Sleep(time.Millisecond * 10)
   lock.Lock()
 }
@@ -1674,7 +1674,7 @@ CHANNEL <- DATA
 and receive from one by doing
 
 ```
-VAR := <- CHANNEL
+VAR := <-CHANNEL
 ```
 
 The arrow points in the direction that data flows. When sending, the data flows into the channel. When receiving, the data flows out of the channel.
@@ -1690,7 +1690,7 @@ type Worker struct {
 
 func (w Worker) process(c chan int) {
   for {
-    data := <- c
+    data := <-c
     fmt.Printf("worker %d got %d\n", w.id, data)
   }
 }
@@ -1747,7 +1747,7 @@ type Worker struct {
 
 func (w *Worker) process(c chan int) {
   for {
-    data := <- c
+    data := <-c
     fmt.Printf("worker %d got %d\n", w.id, data)
   }
 }
@@ -1763,7 +1763,7 @@ Given the above code, what happens if we have more data coming in than we can ha
 
 ```go
 for {
-  data := <- c
+  data := <-c
   fmt.Printf("worker %d got %d\n", w.id, data)
   time.Sleep(time.Millisecond * 500)
 }
@@ -1857,7 +1857,7 @@ Back to our `select`, there are a couple of things to play with. First, what hap
 Also, `time.After` is a channel of type `chan time.Time`. In the above example, we simply discard the value that was sent to the channel. If you want though, you can receive it:
 
 ```go
-case t := <- time.After(time.Millisecond * 100):
+case t := <-time.After(time.Millisecond * 100):
   fmt.Println("timed out at", t)
 ```
 
