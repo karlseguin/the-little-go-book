@@ -578,11 +578,11 @@ gohan := &Saiyan{
 
 Go supports composition, which is the act of including one structure into another. In some languages, this is called a trait or a mixin. Languages that don't have an explicit composition mechanism can always do it the long way. In Java:
 
-```go
+```java
 public class Person {
-  private string name;
+  private String name;
 
-  public string getName() {
+  public String getName() {
     return this.name;
   }
 }
@@ -592,7 +592,7 @@ public class Saiyan {
   private Person person;
 
   // we forward the call to person
-  public string getName() {
+  public String getName() {
     return this.person.getName();
   }
   ...
