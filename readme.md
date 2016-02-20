@@ -11,6 +11,9 @@ The book was written by [Karl Seguin](http://openmymind.net), author of:
 ## License ##
 The book is freely distributed under the  [Attribution-NonCommercial-ShareAlike 4.0 International](<http://creativecommons.org/licenses/by-nc-sa/4.0/>).
 
+## Translations ##
+
+* [Spanish](https://github.com/raulexposito/the-little-go-book/tree/master/es) by Raúl Expósito
 
 ## Formats ##
 The book is written in [Markdown](http://daringfireball.net/projects/markdown/) and converted to PDF using [Pandoc](http://johnmacfarlane.net/pandoc/).
