@@ -1466,11 +1466,13 @@ func add(a interface{}, b interface{}) interface{} {
 }
 ```
 
-To convert a variable to a specific type, you use `.(TYPE)`:
+To convert an interface variable to an explicit type, you use `.(TYPE)`:
 
 ```go
 return a.(int) + b.(int)
 ```
+
+Note that if the underlying type is not `int`, the above will result in an error.
 
 You also have access to a powerful type switch:
 
