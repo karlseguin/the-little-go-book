@@ -38,7 +38,7 @@ Tên gói:
 * `texlive-latex-extra`
 * `texlive-latex-recommended`
 
-Bạn nên có [một só font](https://github.com/karlseguin/the-little-redis-book/blob/master/common/pdf-template.tex#L11) trong hệ thống.
+Bạn nên có [một số font](https://github.com/karlseguin/the-little-redis-book/blob/master/common/pdf-template.tex#L11) trong hệ thống.
 Hoặc bạn cũng có thể thay đổi, tùy theo ý bạn. Một số nguyên nhân [lỗi](https://github.com/karlseguin/the-little-redis-book/issues/26) do fonts.
 
 #### Tạo sách

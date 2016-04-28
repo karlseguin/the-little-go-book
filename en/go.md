@@ -891,7 +891,7 @@ The output is `[1, 2, 999, 4, 5]`.
 
 This changes how you code. For example, a number of functions take a position parameter. In JavaScript, if we want to find the first space in a string (yes, slices work on strings too!) after the first five characters, we'd write:
 
-```go
+```javascript
 haystack = "the spice must flow";
 console.log(haystack.indexOf(" ", 5));
 ```

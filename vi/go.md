@@ -707,3 +707,337 @@ Một lần nữa, đây là tất cả các tình huống khá tinh tế. Bạn
 ## Trước khi đọc tiếp
 
 Tóm lại, chương này giới thiệu các cấu trúc, làm thế nào để tạo một receiver cho một hàm, và chúng ta biết thêm được kiểu dữ liệu con trỏ trong Go. Các chương sau sẽ xây dựng trên những gì chúng ta biết về cấu trúc cũng như các hoạt động bên trong mà chúng ta đã tìm hiểu.
+
+# Chương 3 - Maps, Arrays và Slices
+
+Chúng ta đã tìm hiểu những kiểu dữ liệu cơ bản và cấu trúc trong Go. Giờ là lúc để tìm hiểu arrays, slices và maps.
+
+## Arrays
+
+Nếu bạn đã quen với Python, Ruby, Perl, JavaScript hoặc PHP..., bạn sẽ quen với khái niệm lập trình *mảng động (dynamic arrays)*. Đó là các mảng dữ liệu có khả năng tự động thay đổi kích thước nếu có thêm dữ liệu được thêm vào mảng. Trong Go, giống nhiều ngôn ngữ khác, một mảng được xác định kích thước từ đầu. Khai báo một mảng yêu cầu phải chỉ rõ kích thước của mảng, một khi kích thước mảng được xác định, nó sẽ không thể tăng thêm:
+
+```go
+var scores [10]int
+scores[0] = 339
+```
+
+Mảng khai báo ở trên có thể lưu tối đa 10 phần tử từ `scores[0]` đến `scores[9]`. Cố gắng để truy cập vào chỉ số ngoài phạm vi của mảng sẽ dẫn đến một lỗi khi biên dịch hoặc khi thực thi chương trình.
+
+Chúng ta có thể khởi tạo mảng với các giá trị như sau:
+
+```go
+scores := [4]int{9001, 9333, 212, 33}
+```
+
+Chúng ta có thể dùng `len` để xác định độ lớn của mảng. `range` có thể dùng để duyệt các phần tử trong mảng:
+
+```go
+for index, value := range scores {
+
+}
+```
+
+Mảng là cách lưu dữ liệu hiệu quả nhưng không linh hoạt. Chúng ta thường không biết số lượng các phần tử cần phải khai báo trước. Để giải quyết vấn đề này, chúng ta dùng slices.
+
+## Slices
+
+Trong Go, bạn sẽ rất hiếm khi dùng mảng một cách trực tiếp. Thay vào đó, bạn sẽ sử dụng slices. Một slice là một cấu trúc nhỏ gọn mô tả một vị trí trong một mảng. Có một vài cách để tạo một slice. Cách đầu tiên là một biến thể của khai báo mảng:
+
+```go
+scores := []int{1,4,293,4,9}
+```
+
+Không giống như khai báo mảng, slice được mô tả nhưng không xác định kích thước trong ngoặc vuông. Để hiểu chúng khác nhau thế nào, hãy xem một cách khai báo slice khác, dùng `make`:
+
+```go
+scores := make([]int, 10)
+```
+
+Chúng ta dùng `make` thay vì `new` vì `new` chỉ đơn thuần là cấp phát bộ nhớ và không làm gì cả. Trong khi đó, `make` cấp phát bộ nhớ, và khởi tạo cho bộ nhớ. Trong ví dụ trên, chúng ta khởi tạo một slice có kích thước (length) 10 và có dung lượng (capacity) là 10. Kích thước của slice là số phần tử hiện đang có trong slice, dung lượng của slice là kích thước tối đa của một slice. Sử dụng `make` để khởi tạo 2 giá trị này riêng biệt:
+
+```go
+scores := make([]int, 0, 10)
+```
+
+Câu lệnh sẽ tạo một slice có kích thước là 0 nhưng có dung lượng là 10. (Nếu bạn để ý, bạn sẽ thấy rằng `make` và `len` *là* overloaded. Go là một ngôn ngữ có một số điểm đáng thất vọng, khi làm ra một số tính năng nhưng không cho phép lập trình viên dùng nó.)
+
+Để hiểu rõ hơn về kích thước và dung lượng, hãy xem các ví dụ sau:
+
+```go
+func main() {
+  scores := make([]int, 0, 10)
+  scores[5] = 9033
+  fmt.Println(scores)
+}
+```
+
+Ví dụ đầu tiên bị lỗi. Tại sao? Vì kích thước của slice đang là 0. Đúng thế, dung lương của slice là 10 phần tử, nhưng chúng ta cần mở rộng slice một cách tường minh, trước khi truy cập vào các phần tử của nó. Một cách để thêm phần tử vào slice là dugf hàm `append`:
+
+```go
+func main() {
+  scores := make([]int, 0, 10)
+  scores = append(scores, 5)
+  fmt.Println(scores) // prints [5]
+}
+```
+
+Nhưng thay đổi này đã không đúng với ý tưởng ban đầu của đoạn mã. `Append` một phần tử vào slice có kích thước bằng 0 tức là gán giá trị cho phần tử đầu tiên của slice. Thực tế, chúng ta cần truy cập phần tử có index là 5. để làm điều này, cần thực hiện re-slice:
+
+```go
+func main() {
+  scores := make([]int, 0, 10)
+  scores = scores[0:6]
+  scores[5] = 9033
+  fmt.Println(scores)
+}
+```
+
+Một slice có thể thay đổi kích thước tói mức nào? Kích thước tối đa là dung lượng của slice, trong trường hợp này là 10. Ban có thể đang nghĩ rằng *điều này chả giải quyết được vấn đề ban đầu. Vẫn là một mảng có kích thước cố định.* Tuy nhiên, hàm `append` khá đặc biệt. Nếu slice đã đầy, nó sẽ tạo một mảng mới, sao chép toàn bộ các giá trị ở mảng cũ sang (nó giống hệt như khái niệm mảng động của PHP, Python, Ruby, JavaScript, ...). Đó là lý do vì sao lại giới thiệu hàm `append`. Chúng ta có thể gán lại giá trị trả về của `append` to biến `scores`: `append` có thể trả về một mảng mới, nếu mảng cũ đã đầy.
+
+Nếu tôi nói rằng Go tăng kích thước mảng theo thuật toán nhân đôi, bạn có thể đoán được đầu ra của các lệnh sau không?
+```go
+func main() {
+  scores := make([]int, 0, 5)
+  c := cap(scores)
+  fmt.Println(c)
+
+  for i := 0; i < 25; i++ {
+    scores = append(scores, i)
+
+    // if our capacity has changed,
+    // Go had to grow our array to accommodate the new data
+    if cap(scores) != c {
+      c = cap(scores)
+      fmt.Println(c)
+    }
+  }
+}
+```
+
+Dung lượng ban đầu của `scores` là 5. Để lưu được 20 giá trị, nó phải được mở rộng 3 lần với dung lượng tăng lần lượt là 10, 20 và cuối cùng là 40.
+
+Ví dụ cuối cùng:
+
+```go
+func main() {
+  scores := make([]int, 5)
+  scores = append(scores, 9332)
+  fmt.Println(scores)
+}
+```
+
+Ở đây, giá trị hiển thị được sẽ là `[0, 0, 0, 0, 0, 9332]`. Có lẽ bạn sẽ nghĩ nó phải là `[9332, 0, 0, 0, 0]`? Với người, điều đó có vẻ rất logic. Với compiler, nó được yêu cầu thêm phần tử 9332 vào một slice đã có sẵn 5 phần tử.
+
+Cuối cùng, có bốn cách phổ biến để khởi tạo một slice:
+
+```go
+names := []string{"leto", "jessica", "paul"}
+checks := make([]bool, 10)
+var names []string
+scores := make([]int, 0, 20)
+```
+
+Khi nào bạn sử dụng loại nào? Loại đầu tiên không cần nhiều lời giải thích. Bạn sử dụng khi bạn biết những giá trị mà bạn muốn trong mảng.
+
+Loại thứ hai là hữu ích khi bạn có thể gi vào một vị trí cụ thể của một slice. Ví dụ:
+
+```go
+func extractPowers(saiyans []*Saiyans) []int {
+  powers := make([]int, len(saiyans))
+  for index, saiyan := range saiyans {
+    powers[index] = saiyan.Power
+  }
+  return powers
+}
+```
+
+Loại thứ ba là cách khai báo một slice rỗng, được dùng cùng với `append`, khi không biết trước số lượng phần tử.
+
+Loại cuối cùng cho phép chúng ta khởi tạo giá trị của dung lượng trong slice; nó có ích nếu chúng ta có được số lượng đối tượng chúng ta cần.
+
+Thậm chi khi đã biết được kích thước, `append` vẫn có thể dùng được.
+
+```go
+func extractPowers(saiyans []*Saiyans) []int {
+  powers := make([]int, 0, len(saiyans))
+  for _, saiyan := range saiyans {
+    powers = append(powers, saiyan.Power)
+  }
+  return powers
+}
+```
+
+Slices được coi là phần mở rộng của arrays. Nhiều ngôn ngữ có khái niệm slicing một mảng. Cả JavaScript và Ruby đều có khái niệm mảng và phương thức `slice` cho mảng. Bạn có thể dùng slice trong Ruby bằng cách `[START..END]` hoặc trong Python thông qua `[START:END]`. Tuy nhiên, trong những ngôn ngữ này, một slice là một mảng mới hoàn toàn với các giá trị được sao chép từ mảng cũ. Với Ruby, output của các lệnh sau là gì?
+
+```go
+scores = [1,2,3,4,5]
+slice = scores[2..4]
+slice[0] = 999
+puts scores
+```
+
+Câu trả lời là`[1, 2, 3, 4, 5]`. Bởi vì `slice` là một mảng mới hoàn toàn với dữ liệu được sao chép từ mảng cũ. Bây giờ, xem một ví dụ Go tương đương:
+
+```go
+scores := []int{1,2,3,4,5}
+slice := scores[2:4]
+slice[0] = 999
+fmt.Println(scores)
+```
+
+Kêt quả chạy chương trình là `[1, 2, 999, 4, 5]`.
+
+Thay đổi này sẽ thay đổi cách bạn viết mã. Ví dụ, một số lượng lớn các hàm nhận tham số đầu vào là vị trí. Trong JavaScript, nếu chúng ta muốn tìm kí tự khoảng trắng (space) đầu tiên trong xâu (đúng, slices cũng có thể hoạt động như một chuỗi!) đứng sau 5 kí tự đầu tiên, chúng ta viết:
+
+```javascript
+haystack = "the spice must flow";
+console.log(haystack.indexOf(" ", 5));
+```
+
+Trong Go, chúng ta dùng slice:
+
+```go
+strings.Index(haystack[5:], " ")
+```
+
+Chúng ta có thể thấy ở đoạn mã phía trên `[X:]` là viết tắt của *từ X tới cuối* trong khi `[:X]` là viết tắt cửa *từ đầu tới X*. Không giống các ngôn ngữ khác, Go không hỗ trợ giá trị âm cho chỉ số. Nếu bạn muốn một slice chứa tất cả các phần tử trừ phần tử cuối cùng, chúng ta viết:
+
+```go
+scores := []int{1, 2, 3, 4, 5}
+scores = scores[:len(scores)-1]
+```
+
+Đoạn code bên dưới là một cách hiệu quả để xóa một phần từ khởi một slice chưa sắp xếp:
+
+```go
+func main() {
+  scores := []int{1, 2, 3, 4, 5}
+  scores = removeAtIndex(scores, 2)
+  fmt.Println(scores)
+}
+
+func removeAtIndex(source []int, index int) []int {
+  lastIndex := len(source) - 1
+  //swap the last value and the value we want to remove
+  source[index], source[lastIndex] = source[lastIndex], source[index]
+  return source[:lastIndex]
+}
+```
+
+Cuối cùng, giờ chúng ta đã biết về slice, chúng ta có thể tìm hiểu một hàm dựng sẵn khác: `copy`. `copy` là một trong những hàm làm nổi bật cách mà slice thay đổi nội dung của nó. Bình thường, hàm sẽ sao chép các giá trị từ mảng này qua mảng khác với 5 tham số: `source`, `sourceStart`, `count`, `destination` and `destinationStart`. Với slice, chỉ cần 2 tham số:
+
+```go
+import (
+  "fmt"
+  "math/rand"
+  "sort"
+)
+
+func main() {
+  scores := make([]int, 100)
+  for i := 0; i < 100; i++ {
+    scores[i] = int(rand.Int31n(1000))
+  }
+  sort.Ints(scores)
+
+  worst := make([]int, 5)
+  copy(worst, scores[:5])
+  fmt.Println(worst)
+}
+```
+
+Hãy thử chạy đoạn mã trên. Thử một vài biến thể của nó. Hãy xem chuyện gì xảy ra nếu bạn đổi hàm `copy` thành `copy(worst[2:4], scores[:5])`, hoặc chuyện gì xảy ra khi cố sao chép nhiều hơn hoặc ít hơn `5` giá trị vào `worst`?
+
+## Maps
+
+Maps trong Go và các ngôn ngữ khác được gọi là hashtables hoặc dictionaries. Nó hoạt động như bạn đang nghĩ: bạn định nghĩa một cặp khóa (key) và giá trị (value), và bạn có thể lấy (get), thay đổi (set) và xóa (delete) giá trị thông qua khóa.
+
+Maps, cũng như slices, được tạo ra thông qua hàm `make`. Hãy xem ví dụ sau:
+
+```go
+func main() {
+  lookup := make(map[string]int)
+  lookup["goku"] = 9001
+  power, exists := lookup["vegeta"]
+
+  // prints 0, false
+  // 0 is the default value for an integer
+  fmt.Println(power, exists)
+}
+```
+
+Để biết số lượng các khóa đang có, chúng ta dùng `len`. Để xóa một giá trị dựa vào khóa, dùng `delete`:
+
+```go
+// returns 1
+total := len(lookup)
+
+// has no return, can be called on a non-existing key
+delete(lookup, "goku")
+```
+
+Maps tăng kích thước tự động. Tuy nhiên, chúng ta có thể cung cấp tham số thứ 2 cho hàm `make` để khởi tạo kích thước ban đầu cho maps:
+
+```go
+lookup := make(map[string]int, 100)
+```
+
+Nếu bạn có thể đoán được có bao nhiêu khóa sẽ có trong map, hãy xác định kích thước khởi tạo để tăng hiệu năng.
+
+Để định nghĩa một map là một trường của một cấu trúc, làm như sau:
+
+```go
+type Saiyan struct {
+  Name string
+  Friends map[string]*Saiyan
+}
+```
+
+One way to initialize the above is via:
+
+```go
+goku := &Saiyan{
+  Name: "Goku",
+  Friends: make(map[string]*Saiyan),
+}
+goku.Friends["krillin"] = ... //todo load or create Krillin
+```
+
+Đó là một cách khác để khai báo và khởi tạo giá trị trong Go. Giống như `make`, cách tiếp cận này chỉ dùng được cho maps và arrays. Chúng ta có thể khai báo như sau:
+
+```go
+lookup := map[string]int{
+  "goku": 9001,
+  "gohan": 2044,
+}
+```
+
+Chúng ta có thể duyệt qua một map bằng câu lệnh `for` kết hợp với từ khóa `range` :
+
+```go
+for key, value := range lookup {
+  ...
+}
+```
+
+Duyệt qua các phần tử của map là không theo thứ tự. Mỗi phần tử trong quá trình tìm kiếm được chọn theo thứ tự ngẫu nhiên.
+
+## Con trỏ vs giá trị
+
+Chúng ta kết thúc chương 2 bằng câu hỏi nên truyền con trỏ hay giá trị cho hàm. Giờ chúng ta có một câu hỏi tương tự, đối với array và map. Nên sử dụng loại nào?
+
+```go
+a := make([]Saiyan, 10)
+//or
+b := make([]*Saiyan, 10)
+```
+
+Nhiều lập trình viên nghĩ rằng truyền `b` cho hàm hoặc lấy `b` là giá trị trả về của hàm, sẽ hiệu quả hơn. Tuy nhiên, dù truyền hay nhận lại gì, thì đó cũng là một bản sao của một slice, bản thân nó đã là tham chiếu đến dữ liệu, do đó không có sự khác biệt nào.
+
+Khi bạn thấy sự khác nhau là khi bạn sửa giá trị của một slice hoặc map. Ở điểm này, logic cũng giống như ở chương 2. Vì vậy, quyết định về việc có nên xác định một mảng của các con trỏ so với một mảng các giá trị chính là cách bạn sử dụng các giá trị, không phải là cách bạn sử dụng array hoặc map.
+
+## Trước khi đọc tiếp
+
+Arrays và maps trong Go hoạt động giống như các ngôn ngữ khác. Nếu bạn quen với các mảng dữ liệu động, thì sẽ có một chút thay đổi nhỏ, nhưng `append` sẽ giải quyết các vấn đề khó chịu này. Nếu chúng ta xem xét tới slice, ta sẽ thấy đó là sự mở rộng của mảng.
+
+Có một số khía cạnh mà chúng ta đã không đề cập đến nó, nhưng bạn cũng gần như không động đến chúng bao giờ. Và nếu bạn tiếp cận chúng, hy vọng rằng chúng ta sẽ mô tả nó ở đây để cho bạn biết điều gì đang xảy ra.
