@@ -1,6 +1,6 @@
 # Thông tin sách
 
-## Bản quyền
+## Quyền tác giả
 
 The Little Go Book sử dụng bản quyền Attribution-NonCommercial-ShareAlike 4.0 International license. Bạn không cần trả tiền để mua quyển sách này.
 
@@ -18,7 +18,7 @@ Phên bản mới nhất của sách có thể đọc tại đây:
 # Giới thiệu
 Tôi luôn quan tâm tới thích - không thích khi nói đến việc học ngôn ngữ mới. Một mặt, ngôn ngữ rất gần với những gì chúng ta làm, ngay cả những thay đổi nhỏ có thể có tác động nhìn thấy được. Một thay đổi nhỏ sẽ ảnh hưởng tới cách bạn lập trình và cách bạn suy nghĩ trong các ngôn ngữ khác. Ngôn ngữ mới được cài tiến. Học từ khoá mới, hệ thống kiểu, phong cách viết mã cũng như các thư viện mới, các cộng đồng và mô hình được xem là một công việc không nhỏ. So với tất cả mọi thứ khác chúng ta phải học, học ngôn ngữ mới thường được xem là một đầu tư tốn kém về mặt thời gian.
 
-Do đó, chúng ta *phải* cố gắng. Chúng ta *phải* sẵn sàng để thực hiện các bước thay đổi vì, một lần nữa, ngôn ngữ là nền tảng của những gì chúng ta làm. Mặc dù những thay đổi này thường tăng thêm. Chúng có xu hướng tác động tới phạm vi rộng và chúng ảnh hưởng đến năng suất, khả năng đọc, hiệu suất, khả năng kiểm thử, quản lý phụ thuộc, xử lý lỗi, tài liệu, hồ sơ, cộng đồng phát triển, thư viện chuẩn, ... Nói theo cách tích cực *death by a thousand cuts*?( Người dịch: Đây là tên của một cuốn sách).
+Do đó, chúng ta *phải* cố gắng. Chúng ta *phải* sẵn sàng để thực hiện các bước thay đổi vì, một lần nữa, ngôn ngữ là nền tảng của những gì chúng ta làm. Mặc dù những thay đổi này thường tăng thêm. Chúng có xu hướng tác động tới phạm vi rộng và chúng ảnh hưởng đến năng suất, khả năng đọc, hiệu suất, khả năng kiểm thử, quản lý phụ thuộc, xử lý lỗi, tài liệu, hồ sơ, cộng đồng phát triển, thư viện chuẩn, ... Nói theo cách tích cực *death by a thousand cuts*? (Người dịch: Đây là tên của một cuốn sách).
 
 Chúng ta có một câu hỏi quan trọng: **Vì sao lại chọn Go?** Đối với tôi, có hai lý do hấp dẫn. Việc đầu tiên là nó là một ngôn ngữ khá đơn giản với một thư viện tiêu chuẩn. Cải tiến của Go là đơn giản hóa những thứ phức tạp được thêm vào ngôn ngữ lập trình trong vài thập kỷ gần đây. Lý do khác là đối với nhiều nhà phát triển, nó sẽ bổ sung cho kho công cụ hiện có.
 
@@ -44,7 +44,7 @@ Nếu bạn đang tìm cách để thử sử dụng Go, bạn nên xem qua [Go 
 
 Cài đặt Go khá đơn giản. Bạn có thể cài đặt nó từ mã nguồn, nhưng tôi khuyên nên sử dụng các bộ được biên dịch sẵn từ trang chủ của Go. Khi bạn tải [Go từ trang chủ](https://golang.org/dl/), bạn sẽ thấy các bộ cài đặt cho nhiều nền tảng khác nhau.
 
-Trừ các mã đơn giản, Go được thiết kế để làm việc khi mã của bạn được đặt trong một workspace. Workspace là một thư mục gồm các thư mục con là `bin`, `pkg` và `src` . Bạn cũng có thể thiết lập workspace theo cách riêng của mình, nhưng cách này không được khuyến khích.
+Trừ các mã đơn giản, Go được thiết kế để làm việc khi mã của bạn được đặt trong một workspace. Workspace là một thư mục gồm các thư mục con là `bin`, `pkg` và `src`. Bạn cũng có thể thiết lập workspace theo cách riêng của mình, nhưng cách này không được khuyến khích.
 
 Bình thường, tôi đặt các dự án của mình bên trọng thư mục `~/code`. Ví dụ, `~/code/blog` chứa blog của tôi. Với Go, workspace của tôi là `~/code/go` và blog viết bằng Go của tôi sẽ đặt tại `~/code/go/src/blog`. Vì phải gõ phím nhiều nên tôi sử dụng symbolic link để có thể truy xuất trực tiếp từ  `~/code/blog`:
 
@@ -182,7 +182,7 @@ Nếu bạn muốn, bạn có thể thay đổi mã và tên của gói. Khi ch�
 
 ## Imports
 
-Go có một lượng lớn các hàm có sẵn, giống như `println`, có thể dùng mà không cần tham chiếu. Chúng ta không thể làm gì nhiều hơn nếu không sử dụng các thư viện chuẩn của Go và các thư viện bên ngoài. Trong Go, từ khóa `import` được dùng để xác định một gói mà đoạn code bên trong file có tham chiếu tới.
+Go có một lượng lớn các hàm có sẵn, giống như `println`, có thể dùng mà không cần tham chiếu. Chúng ta không thể làm gì nhiều hơn nếu không sử dụng các thư viện chuẩn của Go và các thư viện bên ngoài. Trong Go, từ khóa `import` được dùng để xác định một gói mà đoạn mã bên trong file có tham chiếu tới.
 
 Hãy thay đổi chương trình thành:
 
@@ -324,7 +324,7 @@ func main() {
 
 Mặc dù `power` được sử dụng 2 lần với toán tử  `:=`, trình biên dịch sẽ không phát sinh lỗi ở lần thứ 2, nó phát hiện ra một biến khác, `name`, là một biến mới và sử dụng `:=` là hợp lệ. Tuy nhiên, bạn không thể đổi kiểu của biến `power`. Nó được khai báo (không tường minh) là một số nguyên (integer) và vì thế chỉ có thể được gán giá trị là số nguyên.
 
-Bây giờ, thứ cuối cùng cần xem xét, giống như import, Go không cho phép bạn khai báo biến mà không sử dụng. Ví dụ,
+Bây giờ, thứ cuối cùng cần xem xét, giống như `import`, Go không cho phép bạn khai báo biến mà không sử dụng. Ví dụ,
 
 ```go
 func main() {
@@ -333,7 +333,7 @@ func main() {
 }
 ```
 
-sẽ không biên dịch được do biến `name` được khai báo nhưng không được sử dụng. Giống như các khai báo import không được dùng, khai báo biến thừa sẽ  không làm chậm lại, nhưng tôi nghĩ rằng điều đó khiến cho code sáng sủa và dễ đọc hơn.
+Đoạn mã trên sẽ không biên dịch được do biến `name` được khai báo nhưng không được sử dụng. Giống như các khai báo import không được dùng, khai báo biến thừa sẽ không làm chậm lại, nhưng tôi nghĩ rằng điều đó khiến cho mã nguồn sáng sủa và dễ đọc hơn.
 
 Tóm lại, để khai báo và gán một biến, cần nhớ: bạn sẽ sử dụng khai báo `var NAME TYPE` khi khai báo một biến và gán giá trị 0 cho nó, `NAME := VALUE` khi khái báo một biến và gán giá trị, và `NAME = VALUE` khi gán giá trị cho một biến đã khai báo trước đó.
 
@@ -370,7 +370,7 @@ if exists == false {
 }
 ```
 
-Điều này không phải chỉ là một quy ước. `_`, ( blank identifier), đại diện cho giá trị trả về không được gán. Nó cho phép bạn sử dụng `_` mọi chố, bất kể kiểu dữ liệu trả về là gì.
+Điều này không phải chỉ là một quy ước. `_`, (blank identifier), đại diện cho giá trị trả về không được gán. Nó cho phép bạn sử dụng `_` mọi chố, bất kể kiểu dữ liệu trả về là gì.
 
 Cuối cùng, có một lưu ý trong khi khai báo hàm, nếu các tham số của hàm có cùng một kiểu dữ liệu, thì có thể dụng cú pháp dạng ngắn để viết:
 
@@ -492,7 +492,7 @@ func Super(s *Saiyan) {
 
 Đoạn mã trên, một lần nữa sẽ in ra 9000. Rất nhiều ngôn ngữ có cách hoạt động giống như thế này, bao gồm Ruby, Python, Java và C#. Go, và ở một số tình huống của C#, có thể nhận thấy điều này.
 
-Rõ ràng là sao chép một con trỏ thì tốn ít chi phí hơn sao chép toàn bộ cấu trúc. Trên các hệ thống 64-bit, một con trỏ có độ lớn 64 bits. Nếu chngs ta có một cấu trúc có nhiều trường, tạo một bản sao của nó sẽ rất tốn kém. Ưu điểm của con trỏ là cho phép bạn chia sẻ các giá trị. Bạn muốn hàm `Super` thay đổi một bản sao của `goku` hay thay đổi các giá trị của `goku`?
+Rõ ràng là sao chép một con trỏ thì tốn ít chi phí hơn sao chép toàn bộ cấu trúc. Trên các hệ thống 64-bit, một con trỏ có độ lớn 64 bits. Nếu chúng ta có một cấu trúc có nhiều trường, tạo một bản sao của nó sẽ rất tốn kém. Ưu điểm của con trỏ là cho phép bạn chia sẻ các giá trị. Bạn muốn hàm `Super` thay đổi một bản sao của `goku` hay thay đổi các giá trị của `goku`?
 
 Tuy nhiên, bạn sẽ không cần sử dụng con trỏ trong tất cả các trường hợp. Ở cuối chương, sau khi tìm hiểu thêm về cấu trúc, chúng ta sẽ quay lại các câu hỏi về con trỏ và giá trị của nó.
 
@@ -511,7 +511,7 @@ func (s *Saiyan) Super() {
 }
 ```
 
-Trong đoạn code trên, chúng ta nói rằng loại dữ liệu `*Saiyan` là **receiver** của phương thức `Super`. Chúng ta gọi `Super` như sau:
+Trong đoạn mã nguồn trên, chúng ta nói rằng loại dữ liệu `*Saiyan` là **receiver** của phương thức `Super`. Chúng ta gọi `Super` như sau:
 
 ```go
 goku := &Saiyan{"Goku", 9001}
@@ -826,7 +826,7 @@ func main() {
 }
 ```
 
-Ở đây, giá trị hiển thị được sẽ là `[0, 0, 0, 0, 0, 9332]`. Có lẽ bạn sẽ nghĩ nó phải là `[9332, 0, 0, 0, 0]`? Với người, điều đó có vẻ rất logic. Với compiler, nó được yêu cầu thêm phần tử 9332 vào một slice đã có sẵn 5 phần tử.
+Ở đây, giá trị hiển thị được sẽ là `[0, 0, 0, 0, 0, 9332]`. Có lẽ bạn sẽ nghĩ nó phải là `[9332, 0, 0, 0, 0]`? Với người, điều đó có vẻ rất logic. Với trình biên dịch, nó được yêu cầu thêm phần tử 9332 vào một slice đã có sẵn 5 phần tử.
 
 Cuối cùng, có bốn cách phổ biến để khởi tạo một slice:
 
@@ -867,7 +867,7 @@ func extractPowers(saiyans []*Saiyans) []int {
 }
 ```
 
-Slices được coi là phần mở rộng của arrays. Nhiều ngôn ngữ có khái niệm slicing một mảng. Cả JavaScript và Ruby đều có khái niệm mảng và phương thức `slice` cho mảng. Bạn có thể dùng slice trong Ruby bằng cách `[START..END]` hoặc trong Python thông qua `[START:END]`. Tuy nhiên, trong những ngôn ngữ này, một slice là một mảng mới hoàn toàn với các giá trị được sao chép từ mảng cũ. Với Ruby, output của các lệnh sau là gì?
+Slices được coi là phần mở rộng của arrays. Nhiều ngôn ngữ có khái niệm slicing một mảng. Cả JavaScript và Ruby đều có khái niệm mảng và phương thức `slice` cho mảng. Bạn có thể dùng slice trong Ruby bằng cách `[START..END]` hoặc trong Python thông qua `[START:END]`. Tuy nhiên, trong những ngôn ngữ này, một slice là một mảng mới hoàn toàn với các giá trị được sao chép từ mảng cũ. Với Ruby, kết quả của các lệnh sau là gì?
 
 ```go
 scores = [1,2,3,4,5]
@@ -976,7 +976,7 @@ total := len(lookup)
 delete(lookup, "goku")
 ```
 
-Maps tăng kích thước tự động. Tuy nhiên, chúng ta có thể cung cấp tham số thứ 2 cho hàm `make` để khởi tạo kích thước ban đầu cho maps:
+Maps tăng kích thước tự động. Tuy nhiên, chúng ta có thể cung cấp tham số thứ 2 cho hàm `make` để khởi tạo kích thước ban đầu cho map:
 
 ```go
 lookup := make(map[string]int, 100)
@@ -1117,7 +1117,7 @@ go run main/main.go
 
 ### Imports lồng nhau
 
-Khi bạn bắt đầu xây dựng một hệ thống phức tạp hơn, bạn có thể gặp tình trạng import lòng nhau (cyclical imports). Điều này xảy ra nếu gói A import gói B nhưng gói B lại import chính gói A ( một cách trực tiếp hoặc gián tiếp thông qua các gói khác). Trình biên dịch không cho phép điều này xảy ra.
+Khi bạn bắt đầu xây dựng một hệ thống phức tạp hơn, bạn có thể gặp tình trạng import lồng nhau (cyclical imports). Điều này xảy ra nếu gói A import gói B nhưng gói B lại import chính gói A ( một cách trực tiếp hoặc gián tiếp thông qua các gói khác). Trình biên dịch không cho phép điều này xảy ra.
 
 Hãy thay đổi cấu trúc của hệ thống shopping và khiến nó bị lỗi.
 
@@ -1194,6 +1194,7 @@ Bạn sẽ thường xuyên thấy sự chia sẻ các cấu trúc như thế n�
 ### Visibility
 
 (Người dịch: nên hiểu là khả năng một thành phần nào đó của gói có thể được truy cập từ gói khác, do tiếng Việt không có từ tương đương nên không dịch)
+
 Go sử dụng một luật đơn giản để xác định các kiểu dữ liệu hoặc các hàm có thể được truy cập từ ngoài gói chưa nó hay không. Nếu tên của kiểu hoặc hàm bắt đầu bằng kí tự in hoa, thì nó có thể truy cập được, ngược lại, nếu là kí tự thường thì không truy cập được từ các gói khác.
 
 Điều này cũng đúng với các trường trong một cấu trúc. Nếu tên của một trường trong một cấu trúc bắt đầu bằng một kí tự thường thì chỉ có các đoạn code trong cùng một gói với nó có thể truy cập được.
@@ -1311,3 +1312,241 @@ Tóm lại, bạn tạo cấu trúc mã nguồn của bạn thế nào trong wor
 Cách mà Go phân quyền truy cập các kiểu dữ liệu khá đơn giản và hiệu quả. Nó cũng khá thích hợp. Có một vài thứ chúng ta chưa xem qua ở đây, ví dụ như các hằng số, biến toàn cục nhưng cách xác định quyền truy cập của chúng hoàn toàn tương tự.
 
 Cuối cùng, nếu bạn mới biết tới interface, bạn cần thời gian để quen với nó.
+
+# Chapter 5 - Tidbits
+
+Trong chương này, chúng ta sẽ bàn về những tính năng đặc biệt của Go.
+
+## Xử lý lỗi
+
+Cách xử lý lõi trong Go là sử dụng giá trị trả về của hàm, mà không phải phát sinh ngoại lệ (exceptions). Xem hàm `strconv.Atoi` , nó nhận đối số đầu vào là một xâu và cố gắng chuyển nó thành một số nguyên:
+
+```go
+package main
+
+import (
+  "fmt"
+  "os"
+  "strconv"
+)
+
+func main() {
+  if len(os.Args) != 2 {
+    os.Exit(1)
+  }
+
+  n, err := strconv.Atoi(os.Args[1])
+  if err != nil {
+    fmt.Println("not a valid number")
+  } else {
+    fmt.Println(n)
+  }
+}
+```
+
+Bạn cũng có thể tạo ra một kiểu lỗi mới, yêu cầu duy nhất của loại dữ liệu này là phải tuân thủ đầy đủ mô tả interface `error`, một interface có sẵn của Go, đó là:
+
+```go
+type error interface {
+  Error() string
+}
+```
+
+Chúng ta có thể tự tạo ra một kiểu lỗi (error type) bằng cách import gói `errors` và sử dụng nó trong hàm `New`:
+
+```go
+import (
+  "errors"
+)
+
+
+func process(count int) error {
+  if count < 1 {
+    return errors.New("Invalid count")
+  }
+  ...
+  return nil
+}
+```
+
+Đó là một mẫu chung trong thư viện chuẩn của Go về cách sử dụng biến kiểu error. Ví dụ, gói `io` có biến `EOF` được định nghĩa là:
+
+```go
+var EOF = errors.New("EOF")
+```
+
+Đây là một biến của gói, nó được định nghĩa bên ngoài các hàm, có thể truy cập từ các gói khác (Kí tự đầu tiên là chữ in hoa). Rất nhiều hàm có thể trả về lỗi này, khi chúng ta đọc từ một file hoặc STDIN. Nếu trong một ngữ cảnh phù hợp, bạn nên dùng lỗi này. Là người dùng, chúng ta có thể sử dụng như sau:
+
+```go
+package main
+
+import (
+  "fmt"
+  "io"
+)
+
+func main() {
+  var input int
+  _, err := fmt.Scan(&input)
+  if err == io.EOF {
+    fmt.Println("no more input!")
+  }
+}
+```
+
+Lưu ý: Go có hàm `panic` và `recover`. `panic` tương đương với phát sinh một ngoại lệ (throw an exception) trong khi `recover` tương đương với `catch`; chúng gần như không được sử dụng.
+
+## Defer
+
+
+Mặc dù Go có một bộ gom rác tự động (GC), một số tài nguyên cần được giải phóng một cách tường minh. Ví dụ, chúng ta cần phải `Close()` tập tin sau khi hoàn thành công việc. Lệnh này phải sử dụng rất thận trọng. Với ví dụ này, chúng ta đang viết một hàm, và rất dễ quên `Close` đối tượng mà chúng ta đã khai báo ở 10 dòng trước đó. Trong trường hợp khác, một hàm có thể có nhiều điểm kết thúc. Giải pháp của Go là từ khóa `defer`:
+
+```go
+package main
+
+import (
+  "fmt"
+  "os"
+)
+
+func main() {
+  file, err := os.Open("a_file_to_read")
+  if err != nil {
+    fmt.Println(err)
+    return
+  }
+  defer file.Close()
+  // read the file
+}
+```
+
+Nếu bạn thử chạy đoạn mã trên, bạn sẽ nhận được một lỗi (file không tồn tại). Điểm nổi bật ở đây là cách mà `defer` hoạt động. Bất lệnh nào đi kèm với từ khóa `defer` sẽ được thực thi sau khi phương thứ kết thúc. Điều này giúp bạn giải phóng tài nguyên gần như ở bất cứ chỗ nào nó được sử dụng xong, và bạn sẽ không phải quan tâm quá nhiều nếu hàm có nhiều điểm kết thúc.
+
+## go fmt
+
+Hầu hết các chương trình được viết bằng Go đều theo một cách định dạng, đặt tên, tab được dùng để dóng hàng và dấu ngoặc được dùng trên một dòng như một biểu thức.
+
+Tôi biết, bạn có phong cách riêng và bạn muốn gắn bó với nó. Đó là điều mà tôi làm trong một thời gian dài, nhưng tôi rất vui vì cuối cùng thì tôi cũng bỏ được nó. Một vấn đề lớn là lệnh `go fmt`. Nó rất dễ sử dụng.
+
+Khi bạn làm việc trong một dự án, bạn có thể áp dụng cách định dạng với toàn bộ thư mục đó và các thư mục con của nó bằng cách:
+
+```
+go fmt ./...
+```
+
+Hãy thử nó. Nó không chỉ căn chỉnh mã nguồn giúp bạn. Nó cũng căn lại các khai báo trường và sắp xép thứ tự của các gói được thêm vào mã nguồn theo thứ tự alphabe.
+
+## Lệnh If có khởi tạo
+
+Gô hỗ trợ lệnh If với một thay đổi nhỏ, một giá trị có thể được khởi tạo trước khi nó được đem so sánh:
+
+```go
+if x := 10; count > x {
+  ...
+}
+```
+
+Đó là một ví dụ quá đơn giản. Trong thực tế, bạn có thể làm như sau:
+
+```go
+if err := process(); err != nil {
+  return err
+}
+```
+
+Điều thú vị là, giá trị này sẽ không tồn tại ở ngoài lệnh if, nó chỉ tồn tại bên trong lệnh `if`, `else if` hoặc `else`.
+
+## Interface rỗng và Chuyển đổi kiểu dữ liệu
+
+Trong hầu hết các ngôn ngữ hướng đối tượng, một lớp cơ bản được dựng sẵn, thường tên là `object`, nó là lớp cha của tất cả các lớp khác. Go, không có khái niệm kế thừa, tất nhiên là nó cũng chẳng có lớp cha nào cả. Go cho phép tồn tại một interface rỗng (empty interface), không chứa một phương thức nào: `interface{}`. Tất cả các loại dữ liệu khác đều có thể coi là một thể hiện (implementation) của empty interface, một cách không tường minh.
+
+ Nếu muốn, chúng ta có thể viết một hàm `add` có chữ kí như sau:
+
+```go
+func add(a interface{}, b interface{}) interface{} {
+  ...
+}
+```
+
+Để chuyển dổi một biến interface sang một kiểu tường minh, sử dụng `.(TYPE)`:
+
+```go
+return a.(int) + b.(int)
+```
+
+Lưu ý là nếu kiểu dữ liệu cần chuyển đôi không tương thích với kiểu `int`, lệnh trên sẽ phát sinh lỗi.
+
+Bạn cũng có thể sử dụng cách sau để kiểm tra kiểu của biến:
+
+```go
+switch a.(type) {
+  case int:
+    fmt.Printf("a is now an int and equals %d\n", a)
+  case bool, string:
+    // ...
+  default:
+    // ...
+}
+```
+
+Bạn có thể sử dụng interface bây giờ. Nhưng phải thừa nhận rằng, mã nguồn sẽ không dễ đọc. Chuyển đổi kiểu qua lại đôi khi khá nguy hiểm nhưng đó là cách duy nhất để làm việc này trong một ngôn ngữ tĩnh.
+
+## Xâu (String) và mảng byte (Byte Array)
+
+Xâu va mảng byte có liên hệ khá gần với nhau. Chúng ta có thể dễ dàng chuyển đổi loại này sang loại kia:
+
+```go
+stra := "the spice must flow"
+byts := []byte(stra)
+strb := string(byts)
+```
+
+Sự thật là, cách ép kiểu này là cách chuyển đổi kiểu dữ liệu thông dụng giữa nhiều kiểu dữ liệu với nhau. Một số hàm yêu cầu đầu vào rất tường minh:`int32` , `int64` hoặc một số không dấu. Bạn có thể làm điều tương tư như sau:
+
+```go
+int64(count)
+```
+
+Khi nói đến byte và xâu, nó có thể là thứ bạn sử dụng thường xuyên. Nhớ rằng khi bạn dùng `[]byte(X)` hoặc `string(X)`, bạn đang tạo ra một bản sao của dữ liệu gốc. Điều đó là cần thiết, vì các xâu thường không thay đổi được.
+
+Các xâu được tạo ta từ [`runes`](https://en.wikipedia.org/wiki/Runes) là các kí tự unicode. Bạn có thể không tính được đúng giá trị độ dài của xâu. Đoạn mã sau đây in số 3:
+
+    fmt.Println(len("椒"))
+
+Nếu bạn duyệt qua xâu bằng `range`, bạn sẽ nhận được từng kí tự, chứ không phải từng byte. Tất nhiên, khi bạn chuyển một xâu sang kiểu mảng byte, bạn sẽ lấy được dữ liệu đúng.
+
+## Kiểu dữ liệu hàm (Function Type)
+
+Hàm là một loại dữ liệu lớp đầu tiên:
+
+```go
+type Add func(a int, b int) int
+```
+
+Nó có thể được dùng ở bất cứ đâu, như một kiểu dữ liệu thông thường, một tham số hoặc một giá trị trả về.
+
+```go
+package main
+
+import (
+  "fmt"
+)
+
+type Add func(a int, b int) int
+
+func main() {
+  fmt.Println(process(func(a int, b int) int{
+      return a + b
+  }))
+}
+
+func process(adder Add) int {
+  return adder(1, 2)
+}
+```
+
+## Trước khi đọc tiếp
+
+Chúng ta đã nhìn vào nhiều khía cạnh khác nhau của một chương trình Go. Đáng chú ý nhất là chúng ta hiểu cách xử lý lỗi và làm thế nào để giải phóng tài nguyên, ví dụ như các kết nối hoặc các file đang mở. Nhiều người không thích cách tiếp cận của Go trong khi xử lý lỗi. Nó giống như một bước lùi. Trong một số trường hợp, tôi đồng ý với ý kiến đó. Tuy nhiên, tôi cũng thấy rằng cách làm của Go khiến cho mã nguồn rất dễ theo dõi. `defer` là một cách tiếp cận khác nhưng hiệu quả khi quản lý tài nguyên. Sự thật là nó không phải chỉ để dùng khi quản lý tài nguyên. Bạn có thể dùng `defer` cho bất cứ mục đích nào khác, ví dụ như ghi log khi kết thúc hàm.
+
+Chắc chắn là chúng ta không xem hết tất cả các tính năng đặc biệt của Go trong chương này. Nhưng bạn có thể thấy đủ với những ghì bạn đã được học.

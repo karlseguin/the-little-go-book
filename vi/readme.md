@@ -20,12 +20,12 @@ Sách có thể phân phối tự do theo giấy phép  [Attribution-NonCommerci
 ## Định dạng ##
 Sách được viết dưới dạng [Markdown](http://daringfireball.net/projects/markdown/) và được chuyển đổi sang PDF bằng [Pandoc](http://johnmacfarlane.net/pandoc/).
 
- TeX template để hiển thị [Lena Herrmann's JavaScript highlighter](http://lenaherrmann.net/2010/05/20/javascript-syntax-highlighting-in-the-latex-listings-package).
+ TeX template dùng [Lena Herrmann's JavaScript highlighter](http://lenaherrmann.net/2010/05/20/javascript-syntax-highlighting-in-the-latex-listings-package).
 
 Định dạng cho Kindle và ePub được cung cấp bởi [Pandoc](http://johnmacfarlane.net/pandoc/).
 
 ## Tạo sách ##
-Các gói dưới đây dành cho hệ điều hành Ubuntu. Nếu bạn sử dụng một hệ điều hành khác, tên của chúng có thể cũng giống nhau.
+Các gói dưới đây dành cho hệ điều hành Ubuntu. Nếu bạn sử dụng một hệ điều hành khác, có thể tìm các gói có tên tương tự.
 
 ### PDF
 
@@ -38,8 +38,8 @@ Tên gói:
 * `texlive-latex-extra`
 * `texlive-latex-recommended`
 
-Bạn nên có [một số font](https://github.com/karlseguin/the-little-redis-book/blob/master/common/pdf-template.tex#L11) trong hệ thống.
-Hoặc bạn cũng có thể thay đổi, tùy theo ý bạn. Một số nguyên nhân [lỗi](https://github.com/karlseguin/the-little-redis-book/issues/26) do fonts.
+Bạn nên có sẵn [một số font](https://github.com/karlseguin/the-little-redis-book/blob/master/common/pdf-template.tex#L11).
+Bạn có thể tùy chọn một loại font khác cho phù hợp. Một số nguyên nhân [lỗi](https://github.com/karlseguin/the-little-redis-book/issues/26) do fonts.
 
 #### Tạo sách
 
@@ -65,11 +65,11 @@ Tên gói:
 
 * `pandoc`
 
-Bạn nên có [KindleGen](http://www.amazon.com/gp/feature.html?ie=UTF8&docId=1000765211) trong hệ thống.
+Bạn nên cài sẵn [KindleGen](http://www.amazon.com/gp/feature.html?ie=UTF8&docId=1000765211).
 
 #### Tạo sách
 
 Chạy `make en/go.mobi`.
 
 ## Ảnh tiêu đề ##
-Có sẵn một file PSD chứa ảnh tiêu đề. Font được dùng là [Comfortaa](http://www.dafont.com/comfortaa.font).
+Một file PSD dùng font [Comfortaa](http://www.dafont.com/comfortaa.font) chứa ảnh tiêu đề.
