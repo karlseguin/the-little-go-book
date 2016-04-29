@@ -18,7 +18,7 @@ Phên bản mới nhất của sách có thể đọc tại đây:
 # Giới thiệu
 Tôi luôn quan tâm tới thích - không thích khi nói đến việc học ngôn ngữ mới. Một mặt, ngôn ngữ rất gần với những gì chúng ta làm, ngay cả những thay đổi nhỏ có thể có tác động nhìn thấy được. Một thay đổi nhỏ sẽ ảnh hưởng tới cách bạn lập trình và cách bạn suy nghĩ trong các ngôn ngữ khác. Ngôn ngữ mới được cài tiến. Học từ khoá mới, hệ thống kiểu, phong cách viết mã cũng như các thư viện mới, các cộng đồng và mô hình được xem là một công việc không nhỏ. So với tất cả mọi thứ khác chúng ta phải học, học ngôn ngữ mới thường được xem là một đầu tư tốn kém về mặt thời gian.
 
-Do đó, chúng ta *phải* cố gắng. Chúng ta *phải* sẵn sàng để thực hiện các bước thay đổi vì, một lần nữa, ngôn ngữ là nền tảng của những gì chúng ta làm. Mặc dù những thay đổi này thường tăng thêm. Chúng có xu hướng tác động tới phạm vi rộng và chúng ảnh hưởng đến năng suất, khả năng đọc, hiệu suất, khả năng kiểm thử, quản lý phụ thuộc, xử lý lỗi, tài liệu, hồ sơ, cộng đồng phát triển, thư viện chuẩn, ... Nói theo cách tích cực *death by a thousand cuts*?( Người dịch: Đây là tên của một cuốn sách) 
+Do đó, chúng ta *phải* cố gắng. Chúng ta *phải* sẵn sàng để thực hiện các bước thay đổi vì, một lần nữa, ngôn ngữ là nền tảng của những gì chúng ta làm. Mặc dù những thay đổi này thường tăng thêm. Chúng có xu hướng tác động tới phạm vi rộng và chúng ảnh hưởng đến năng suất, khả năng đọc, hiệu suất, khả năng kiểm thử, quản lý phụ thuộc, xử lý lỗi, tài liệu, hồ sơ, cộng đồng phát triển, thư viện chuẩn, ... Nói theo cách tích cực *death by a thousand cuts*?( Người dịch: Đây là tên của một cuốn sách).
 
 Chúng ta có một câu hỏi quan trọng: **Vì sao lại chọn Go?** Đối với tôi, có hai lý do hấp dẫn. Việc đầu tiên là nó là một ngôn ngữ khá đơn giản với một thư viện tiêu chuẩn. Cải tiến của Go là đơn giản hóa những thứ phức tạp được thêm vào ngôn ngữ lập trình trong vài thập kỷ gần đây. Lý do khác là đối với nhiều nhà phát triển, nó sẽ bổ sung cho kho công cụ hiện có.
 
@@ -1041,3 +1041,273 @@ Khi bạn thấy sự khác nhau là khi bạn sửa giá trị của một slic
 Arrays và maps trong Go hoạt động giống như các ngôn ngữ khác. Nếu bạn quen với các mảng dữ liệu động, thì sẽ có một chút thay đổi nhỏ, nhưng `append` sẽ giải quyết các vấn đề khó chịu này. Nếu chúng ta xem xét tới slice, ta sẽ thấy đó là sự mở rộng của mảng.
 
 Có một số khía cạnh mà chúng ta đã không đề cập đến nó, nhưng bạn cũng gần như không động đến chúng bao giờ. Và nếu bạn tiếp cận chúng, hy vọng rằng chúng ta sẽ mô tả nó ở đây để cho bạn biết điều gì đang xảy ra.
+
+# Chương 4 - Cách tổ chức mã nguồn và Interfaces
+
+Đã đến lúc tìm hiểu cách thức tổ chức mã nguồn trong Go.
+
+## Gói (Packages)
+
+Để có thể xây dựng được những thư viện phức tạp, chúng ta cần tìm hiểu về khái niệm gói (packages). Trong Go, mỗi gói được đặt tên theo cấu trúc của thử mục trong workspace. Nếu chúng ta xây dựng một hệ thống bán hàng, chúng ta thường bắt đầu bằng một gói có tên là "shopping" và đặt các file mã nguồn trong thư mục `$GOPATH/src/shopping/`.
+
+Chúng ta không muốn đặt tất cả mọi thứ bên trong thư mục này. Ví dụ, có thể chúng ta muốn đặt một vài thành phần thuộc về cơ sở dữ liệu vào một thư mục khác. Để đạt điều đó, chúng ta tạo một thử mục con `$GOPATH/src/shopping/db`. Tên của gói của các file trong thư mục con này, đơn giản là `db`, nhưng để truy cập  nó từ một gói khác, kể cả là gói `shopping` chúng ta cần sử dụng lệnh import `shopping/db`.
+
+Nói cách khác, khi bạn đặt tên một gói, thông qua từ khóa `package`, bạn cung cấp một giá trị đơn, không phải là một đường dẫn đầy đủ (ví dụ, "shopping" hoặc "db"). Khi bạn sử dụng một gói, bạn cần chỉ đường dẫn đẩy đủ đến gói đó.
+
+Trong thư mục `src` nằm bên trong workspace (thư mục chúng ta dùng để cài đặt ở phần đầu tiên của cuốn sách này), tạo một thư mục mới và đặt tên là `shopping` và một thư mục con bên trong nó, đặt tên là `db`.
+
+Trong thư mục `shopping/db`, tạo một file và đặt tên là `db.go` và chứa đoạn mã sau:
+
+```go
+package db
+
+type Item struct {
+  Price float64
+}
+
+func LoadItem(id int) *Item {
+  return &Item{
+    Price: 9.001,
+  }
+}
+```
+
+Chú ý rằng tên của gói phải trùng với tên của thư mục. Và cũng nhớ rằng, chúng ta vẫn chưa thực sự truy cập database, chúng ta chỉ dùng ví dụ này để mô tả cách tổ chức mã nguồn.
+
+Bây giờ, hãy tạo một file có tên là `pricecheck.go` bên trong thư mục chính `shopping`. Nội dung của nó là:
+
+```go
+package shopping
+
+import (
+  "shopping/db"
+)
+
+func PriceCheck(itemId int) (float64, bool) {
+  item := db.LoadItem(itemId)
+  if item == nil {
+    return 0, false
+  }
+  return item.Price, true
+}
+```
+
+Thật lạ vì bạn đang thêm gói `shopping/db` trong khi chúng ta đang đứng bên trong thư mục `shopping`. Thực tế, đường dẫn khi import một gói sẽ là `$GOPATH/src/shopping/db`, có nghĩa rằng bạn có thể dễ dàng thêm gói `test/db` nếu bạn có một gói được đặt tên là `db` bên trong thư mục `src/test`.
+
+Nếu bạn đang xây dựng một gói, bạn sẽ không cần làm thêm gì nữa, ngoài việc bố trí thư mục như trên. Để tạo một file thực thi bạn cần một gói có tên `main`. Cách tôi thường dùng để làm việc này là tạo một thư mục có tên `main` bên trong thư mục `shopping` cùng với một file đặt tene là `main.go` và có nội dung như sau:
+
+```go
+package main
+
+import (
+  "shopping"
+  "fmt"
+)
+
+func main() {
+  fmt.Println(shopping.PriceCheck(4343))
+}
+```
+
+Bây giờ bạn có thể chạy mã bằng cách chuyển tới thư mục của dự án `shopping` và gõ:
+
+```
+go run main/main.go
+```
+
+### Imports lồng nhau
+
+Khi bạn bắt đầu xây dựng một hệ thống phức tạp hơn, bạn có thể gặp tình trạng import lòng nhau (cyclical imports). Điều này xảy ra nếu gói A import gói B nhưng gói B lại import chính gói A ( một cách trực tiếp hoặc gián tiếp thông qua các gói khác). Trình biên dịch không cho phép điều này xảy ra.
+
+Hãy thay đổi cấu trúc của hệ thống shopping và khiến nó bị lỗi.
+
+Chuyển định nghĩa `Item` từ `shopping/db/db.go` sang `shopping/pricecheck.go`. File `pricecheck.go` của bạn sẽ trông thế này:
+
+```go
+package shopping
+
+import (
+  "shopping/db"
+)
+
+type Item struct {
+  Price float64
+}
+
+func PriceCheck(itemId int) (float64, bool) {
+  item := db.LoadItem(itemId)
+  if item == nil {
+    return 0, false
+  }
+  return item.Price, true
+}
+```
+
+Nếu bạn thử chạy đoạn mã trên, bạn sẽ gặp một loạt các lỗi từ `db/db.go` do `Item` chưa được định nghĩa. Điều đó là hiển nhiên. `Item` không còn nằm trong gói `db` nữa; nó đã được chuyển sang `shopping`. Chúng ta cần thay đổi một chút trong file `shopping/db/db.go` thành:
+
+```go
+package db
+
+import (
+  "shopping"
+)
+
+func LoadItem(id int) *shopping.Item {
+  return &shopping.Item{
+    Price: 9.001,
+  }
+}
+```
+
+Bây giờ khi bạn thử chạy mã, bạn sẽ nhận được thông báo lỗi *import cycle not allowed*. Chúng ta giải quyết vấn đề này bằng cách tạo ra một gói mới chứa các cấu trúc được chia sẻ giữa các gói với nhau. Cấu trúc thư mục sẽ là:
+
+```
+$GOPATH/src
+  - shopping
+    pricecheck.go
+    - db
+      db.go
+    - models
+      item.go
+    - main
+      main.go
+```
+
+`pricecheck.go` vẫn import `shopping/db`, nhưng `db.go` giờ sẽ import `shopping/models` thay vì `shopping`, do đó sẽ không bị lồng nhau. Vì chúng ta đâ chuyển cấu trúc `Item` sang file `shopping/models/item.go`, chúng ta cần thay đổiv `shopping/db/db.go` tham chiếu đến cấu trúc `Item` trong `models`:
+
+```go
+package db
+
+import (
+  "shopping/models"
+)
+
+func LoadItem(id int) *models.Item {
+  return &models.Item{
+    Price: 9.001,
+  }
+}
+```
+
+Bạn sẽ thường xuyên thấy sự chia sẻ các cấu trúc như thế này giống như gói `model`, do đó, bạn nên có một thư mục khác đặt tên là `utilities` hoặc thứ gì đó tương tự. Nguyên tắc quan trọng khi viết các gói chia sẻ này là chúng sẽ không import bất cứ một gói nào từ `shopping` hoặc các gói con của nó. Chúng ta sẽ xem xét cách interface được dùng để giảm thiểu các loại phụ thuộc này.
+
+### Visibility
+
+(Người dịch: nên hiểu là khả năng một thành phần nào đó của gói có thể được truy cập từ gói khác, do tiếng Việt không có từ tương đương nên không dịch)
+Go sử dụng một luật đơn giản để xác định các kiểu dữ liệu hoặc các hàm có thể được truy cập từ ngoài gói chưa nó hay không. Nếu tên của kiểu hoặc hàm bắt đầu bằng kí tự in hoa, thì nó có thể truy cập được, ngược lại, nếu là kí tự thường thì không truy cập được từ các gói khác.
+
+Điều này cũng đúng với các trường trong một cấu trúc. Nếu tên của một trường trong một cấu trúc bắt đầu bằng một kí tự thường thì chỉ có các đoạn code trong cùng một gói với nó có thể truy cập được.
+
+Ví dụ, nếu `items.go` có một hàm như thế này:
+
+```go
+func NewItem() *Item {
+  // ...
+}
+```
+
+hàm đó có thể được gọi từ bên ngoài bằng lời gọi hàm `models.NewItem()`. Nhưng nếu hàm đó được đặt tên là `newItem`, chúng ta sẽ không sử dụng được nó từ một gói khác.
+
+Bạn nãy thử thay đổi tên của các hàm, các trường trong mã nguồn của `shopping`. Ví dụ, nếu bạn đổi tên trường `Item's` `Price` thành `price`, bạn sẽ gặp lỗi biên dịch.
+
+### Quản lý các gói
+
+Lệnh `go` chúng ta hay dùng là `run` và `build`, có một lệnh khác là `get` được dùng để lấy các thư viện của bên ngoài (third-party libraries). `go get` hỗ trợ nhiều giao thức khác nhau nhưng trong ví dụ này, chúng ta sẽ thử lấy các thư viện trong Github, có nghĩa là, bạn nên cài đặt `git` trong hệ thống.
+
+Giả sử như bạn đã có git được cài trong hệ thống, từ shell/command prompt, nhập:
+
+```
+go get github.com/mattn/go-sqlite3
+```
+
+`go get` sẽ tải file từ internet về workspace của bạn. Kiểm tra thư mục `$GOPATH/src`. Ngoài ra, cùng cấp với thư mục của `shopping`, bạn sẽ thấy một thư mục tên là `github.com`. Bên trong nó, bạn sẽ thấy thư mục `mattn`, trong đó lại chứa `go-sqlite3`.
+
+Chúng ta vừa nói về cách để import các gói thư viên trong workspace. Để sử dụng gói `go-sqlite3` vừa mới tải về, chúng ta làm như sau:
+
+```go
+import (
+  "github.com/mattn/go-sqlite3"
+)
+```
+
+Tôi biết là nó trông giống hnw một URL, nhưng nó sẽ import gói `go-sqlite3` nếu nó được tìm thấy trong thư mục `$GOPATH/src/github.com/mattn/go-sqlite3`.
+
+### Quản lý các thành phần phụ thuộc
+
+`go get` có một vài lệnh đặc biệt khác. Nếu chúng ta dùng `go get` bên trong một dự án, nó sẽ quét tất cả các file, tìm kiếm các thư viện khác đang được import và tải chúng. Theo cách này, mã nguồn của chúng tớ trông giống như một `Gemfile` hoặc `package.json`.
+
+Nếu bạn gọi `go get -u` nó sẽ cập nhật các gói (hoặc bạn cũng có thể cập nhật một gói được chỉ định bằng cách `go get -u TÊN_ĐẦY_ĐỦ_CỦA_GÓI_CẦN_CẬP_NHẬT`).
+
+Cuối cùng, bạn có thể thấy `go get` vẫn chưa không hoàn chính. Ví dụ, không có cách nào để chỉ định một phiên bản (revision), nó luôn trỏ về master/head/trunk/default. Điều này sẽ là vấn đề lớn nếu bạn có hai dự án cần hai phiên bản khác nhau của cùng một thư viện.
+
+Để giải quyết vấn đề này, bạn có thể sử dụng công cụ quản lý phiên bản của các thư viện. Chúng còn khá mới [goop](https://github.com/nitrous-io/goop) và [godep](https://github.com/tools/godep). Danh sách các công cụ tương tự ở đây [go-wiki](https://code.google.com/p/go-wiki/wiki/PackageManagementTools).
+
+## Giao diện (Interfaces)
+
+Interfaces là kiểu dữ liệu chỉ chứa các mô tả hàm ở mức độ prototype. Đây là ví dụ:
+
+```go
+type Logger interface {
+  Log(message string)
+}
+```
+
+Implementation của một hàm là các đoạn mã bên trong của hàm đó. Có thể có nhiều hàm khác nhau với cách implementation khác nhau, nhưng lại cùng được mô tả bởi một prototype giống nhau.
+
+Bạn có thể tự hỏi mục đích của interface là gì. Interface giúp tách biệt phần mã implementation của hàm và phần gọi hàm ra các đối tượng riêng biệt. Ví dụ, bạn có thể gọi nhiều loại hàm ghi log khác nhau:
+
+```go
+type SqlLogger struct { ... }
+type ConsoleLogger struct { ... }
+type FileLogger struct { ... }
+```
+
+Trong một chương trình, bao giờ cũng tồn tại 2 thành phần: thành phần gọi hàm (hoặc còn gọi là sử dụng hàm) và implementation của hàm. Thành phần gọi hàm có thể không thay đổi nhiều, nhưng implementation của hàm có thể thay đổi rất nhiều.
+
+Bạn sử dụng chúng thé nào? Cũng giống như bất kỳ một kiểu dữ liệu nào khác, có thể coi nó là một trường trong một cấu trúc:
+
+```go
+type Server struct {
+  logger Logger
+}
+```
+
+hoặc một tham số của hàm  hoặc giá trị trả về:
+
+```go
+func process(logger Logger) {
+  logger.Log("hello!")
+}
+```
+
+Trong ngôn gữ C# hoặc Java, chúng ta có thể khai báo tường minh một lớp tuân theo một interface:
+
+```java
+public class ConsoleLogger : Logger {
+  public void Logger(message string) {
+    Console.WriteLine(message)
+  }
+}
+```
+
+Trong Go, điều đó là không tường minh. Nếu cấu trúc của bạn có một hàm tên là `Log` với tham số đầu vào là `string` và không có giá trị trả về, sau đó nó có thể được dùng như một `Logger`. Điều này làm cho việc sử dụng giao diện không rõ ràng:
+
+```go
+type ConsoleLogger struct {}
+func (l ConsoleLogger) Log(message string) {
+  fmt.Println(message)
+}
+```
+
+Nó hướng tới các interface nhỏ và cô đọng. Các thư viện chuẩn là những interface đầy đủ. Gói `io` có các interface như `io.Reader`, `io.Writer`, và `io.Closer`.
+Interface cũng có thể được dùng trong composition. Các interface cũng có thể được kết hợp từ nhiều interface khác. Ví dụ, `io.ReadCloser` là một interface được kết hợp từ `io.Reader` và `io.Closer` .
+
+Cuối cùng, interface được sử dụng để tránh tình trạng import lồng nhau. Vì interface không có implementation, chúng sẽ gần như không cần gói phụ thuộc.
+
+## Trước khi đọc tiếp
+
+Tóm lại, bạn tạo cấu trúc mã nguồn của bạn thế nào trong workspace cũng được, miễn là bạn cảm thấy thoải mái sau khi viết một vài project cỡ vừa. Điều quan trọng nhất cần nhớ là mối quan hệ chặt chẽ giữa tên của gói và cấu trúc thư mục của bạn (không chỉ trong một dự án, mà là trong toàn bộ workspace).
+
+Cách mà Go phân quyền truy cập các kiểu dữ liệu khá đơn giản và hiệu quả. Nó cũng khá thích hợp. Có một vài thứ chúng ta chưa xem qua ở đây, ví dụ như các hằng số, biến toàn cục nhưng cách xác định quyền truy cập của chúng hoàn toàn tương tự.
+
+Cuối cùng, nếu bạn mới biết tới interface, bạn cần thời gian để quen với nó.
