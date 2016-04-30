@@ -46,7 +46,7 @@ Cài đặt Go khá đơn giản. Bạn có thể cài đặt nó từ mã ngu�
 
 Trừ các mã đơn giản, Go được thiết kế để làm việc khi mã của bạn được đặt trong một workspace. Workspace là một thư mục gồm các thư mục con là `bin`, `pkg` và `src`. Bạn cũng có thể thiết lập workspace theo cách riêng của mình, nhưng cách này không được khuyến khích.
 
-Bình thường, tôi đặt các dự án của mình bên trọng thư mục `~/code`. Ví dụ, `~/code/blog` chứa blog của tôi. Với Go, workspace của tôi là `~/code/go` và blog viết bằng Go của tôi sẽ đặt tại `~/code/go/src/blog`. Vì phải gõ phím nhiều nên tôi sử dụng symbolic link để có thể truy xuất trực tiếp từ  `~/code/blog`:
+Bình thường, tôi đặt các dự án của mình bên trọng thư mục `~/code`. Ví dụ, `~/code/blog` chứa blog của tôi. Với Go, workspace của tôi là `~/code/go` và blog viết bằng Go của tôi sẽ đặt tại `~/code/go/src/blog`.Để ngắn gọn, tôi sử dụng symbolic link để có thể truy xuất trực tiếp từ  `~/code/blog`:
 
     ln -s ~/code/go/src/blog ~/code/blog
 
@@ -128,7 +128,7 @@ Ngoài ra, Go gần với C hơn so với C# hoặc Java - không chỉ về m�
 
 ## Garbage Collected (GC)
 
-Một số biến có thể xác định được quá trình tồn tại của nó ngay từ khi khai báo. Một biến cục bộ cho một hàm, ví dụ, sẽ bị thu hồi khi thoát ra khỏi hàm. Trong trường hợp khác, nó không phải là quá rõ ràng -- ít nhất là đối với một chương trình biên dịch. Ví dụ, thời gian sống của một biến được trả về bởi một hàm hoặc tham chiếu bởi các biến và các đối tượng khác có thể khó xác định. Nếu không có GC, lập trình viên phải tự giải phóng bộ nhớ các biến không cần thiết. Bằng cách nào? Trong C, bạn sẽ dùng `free(str);` .
+Một số biến có thể xác định được quá trình tồn tại của nó ngay từ khi khai báo. Ví dụ như một biến cục bộ cho một hàm sẽ bị thu hồi khi thoát ra khỏi hàm. Trong trường hợp khác, nó không phải là quá rõ ràng -- ít nhất là đối với một chương trình biên dịch. Ví dụ, thời gian sống của một biến được trả về bởi một hàm hoặc tham chiếu bởi các biến và các đối tượng khác có thể khó xác định. Nếu không có GC, lập trình viên phải tự giải phóng bộ nhớ các biến không cần thiết. Bằng cách nào? Trong C, bạn sẽ dùng `free(str);` .
 
 Ngôn ngữ có GC (ví dụ, Ruby, Python, Java, JavaScript, C #, Go) có thể theo dõi những điều này và giải phóng bộ nhớ khi chúng không còn được sử dụng. GC sẽ làm chương trình nặng hơn, nhưng nó cũng giúp loại bỏ một số lỗi nghiêm trọng.
 
@@ -178,7 +178,7 @@ Hi vọng rằng, đoạn mã vừa rồi dễ hiểu. Chúng ta đã tạo mộ
 
 Chúng ta sẽ nói thêm về các gói trong các chương kế tiếp. Bây giờ, khi chúng ta tập trung vào các phần cơ bản của Go, chúng ta sẽ viết mã trong gói `main`.
 
-Nếu bạn muốn, bạn có thể thay đổi mã và tên của gói. Khi chạy lệnh `go run` và bạn sẽ nhận được một thông báo lỗi. Sau đó, đổi tên gói trở lại thành `main` nhưng vẫn giữ nguyên tên hàm. Bạn sẽ nhận một thông báo lỗi khác. Thử các thay đổi trên nhưng sử dụng lệnh `go build`. Chú ý rằng khi mã nguồn được biên dịch, không có một entry point nào. Khi biên dịch các thư viện, điều này là cần thiết.
+Nếu bạn muốn, bạn có thể thay đổi mã và tên của gói. Khi chạy lệnh `go run` và bạn sẽ nhận được một thông báo lỗi. Sau đó, đổi tên gói trở lại thành `main` nhưng vẫn giữ nguyên tên hàm. Bạn sẽ nhận một thông báo lỗi khác. Thử các thay đổi trên nhưng sử dụng lệnh `go build`. Chú ý rằng khi mã nguồn được biên dịch, không có một entry point nào. Điều này rất cần thiết khi biên dịch các thư viện.
 
 ## Imports
 
@@ -356,7 +356,7 @@ Chúng ta sử dụng hàm cuối cùng như sau:
 ```go
 value, exists := power("goku")
 if exists == false {
-  // handle this error case
+  // xử lý trường hợp có lỗi
 }
 ```
 
@@ -365,7 +365,7 @@ Thi thoảng, bạn chỉ quan tâm đến một trong số các giá trị tr�
 ```go
 _, exists := power("goku")
 if exists == false {
-  // handle this error case
+  // xử lý trường hợp có lỗi
 }
 ```
 
@@ -393,7 +393,7 @@ Nếu bạn quen với một ngôn ngữ kiểu tĩnh, có lẽ bạn đang cả
 
 Go không phải là một ngôn ngữ hướng đói tượng (OO) giống như C++, java, Ruby hoặc C#. Go không có các đối tượng cũng như khả năng kế thừa (inheritance). Do đó, Go không có các lý thuyết thường được nhắc đến khi nói về OO như đa hình (polymorphism) hay ghi đè (overloading).
 
-Thứ mà Go có là các cấu trúc, có thể kết hợp với các phương thức. Go hỗ trợ một dạng đơn giản nhưng hiệu quả của composition. Nhìn chung, đó là sự kết hợp của những đoạn mã đơn giản, mà lại không cần đến một số tính năng mà OO cung cấp. (Điều đó cho thấy sự tối ưu của *composition* so với *inheritance* và Go là ngôn ngữ đầu tiên tôi sử dụng có một nền tảng vững chắc về vấn đề này.)
+Thứ mà Go có là các cấu trúc, có thể kết hợp với các phương thức. Go hỗ trợ một dạng đơn giản nhưng hiệu quả của tổ hợp (composition). Nhìn chung, đó là sự kết hợp của những đoạn mã đơn giản, mà lại không cần đến một số tính năng mà OO cung cấp. (Điều đó cho thấy sự tối ưu của *composition* so với *inheritance* và Go là ngôn ngữ đầu tiên tôi sử dụng có một nền tảng vững chắc về vấn đề này.)
 
 Mặc dù Go không giống như OO mà bạn quen dùng, bạn sẽ nhận thấy có rất nhiều điểm giống nhau giữa định nghĩa một cấu trúc (structure) và định nghĩa một lớp (class). Ví dụ đơn giản sau mô tả một cấu trúc:
 
@@ -471,7 +471,7 @@ func Super(s *Saiyan) {
 }
 ```
 
-Chúng ta thực hiện hai thay đổi. Bước thứ nhất là sử dụng toán tử `&` để lấy địa chỉ của biến (nó được gọi là toán tử địa chỉ). Sau đó, chúng ta thay đổi loại của tham số của hàm `Super`. Trước khi thay đổi, hàm nhận tham số là một giá trị có kiểu `Saiyan` nhưng giờ là địa chỉ của một biến có kiểu `*Saiyan`, với `*X` nghĩa là *con trỏ trỏ tới một giá trị kiểu X*. Dù có mối quan hệ giữa 2 kiểu dữ liệu `Saiyan` và `*Saiyan`, nhưng chúng vẫn là hai kiểu phân biệt với nhau.
+Chúng ta thực hiện hai thay đổi. Bước thứ nhất là sử dụng toán tử `&` để lấy địa chỉ của biến (nó được gọi là toán tử địa chỉ). Sau đó, chúng ta thay đổi loại của tham số của hàm `Super`. Trước khi thay đổi, hàm nhận tham số là một giá trị có kiểu `Saiyan` nhưng giờ là địa chỉ của một biến có kiểu `*Saiyan`, với `*X` nghĩa là *con trỏ trỏ tới một giá trị kiểu X*. Dù hai kiểu dữ liệu `Saiyan` và `*Saiyan` có liên hệ với nhau, nhưng chúng vẫn là hai kiểu phân biệt.
 
 Chú ý rằng chúng ta vẫn truyền bản sao của biến `s` vào hàm `Super`, nhưng nó trở thành địa chỉ của biến. Bản sao này có giá trị giống hệt như bản chính, đó là sự truy cập gián tiếp. Tưởng tượng rằng có một bản sao của đường đi tới quán ăn. Dù bạn có một bản sao, nhưng nó vẫn chỉ về cùng một quán ăn như bản gốc.
 
@@ -601,7 +601,7 @@ gohan := &Saiyan{
 
 ## Composition
 
-Go hỗ trợ composition, cho phép một cấu trúc có thể chứa một cấu trúc khác. Trong một số ngôn ngữ, nó được gọi là thuộc tính, hoặc kiểu hỗn hợp. Các ngôn ngữ không có composition tường minh có thể mô tả nó theo nhiều kiểu khác nhau. Trong Java:
+Go hỗ trợ tổ hợp hóa (composition), cho phép một cấu trúc có thể chứa một cấu trúc khác. Trong một số ngôn ngữ, nó được gọi là thuộc tính, hoặc kiểu hỗn hợp. Các ngôn ngữ không có composition tường minh có thể mô tả nó theo nhiều kiểu khác nhau. Trong Java:
 
 ```java
 public class Person {
@@ -660,7 +660,7 @@ fmt.Println(goku.Person.Name)
 
 Cả hai dòng lệnh trên đều in ra "Goku".
 
-Liệu kiểu tích hợp (composition) có tốt hơn kế thừa (inheritance) không? Nhiều người nghĩ rằng đây là một cách tiện lợi và nhanh chóng để chia sẻ mã nguồn. Khi sử dụng kế thừa, When using inheritance, lớp của bạn được gắn với lớp cha, và hình thành một cách phân chia theo kiểu phân cấp chứ không phải theo chức năng.
+Liệu kiểu tổ hợp (composition) có tốt hơn kế thừa (inheritance) không? Nhiều người nghĩ rằng đây là một cách tiện lợi và nhanh chóng để chia sẻ mã nguồn. Khi sử dụng kế thừa, When using inheritance, lớp của bạn được gắn với lớp cha, và hình thành một cách phân chia theo kiểu phân cấp chứ không phải theo chức năng.
 
 ### Overloading
 
@@ -674,7 +674,7 @@ func (s *Saiyan) Introduce() {
 }
 ```
 
-Cấu trúc mới có thể truy cập hàm như sau `s.Person.Introduce()`.
+Cấu trúc mới có thể truy cập hàm cũ như sau `s.Person.Introduce()`.
 
 ## Con trỏ và giá trị
 
@@ -1238,7 +1238,7 @@ Tôi biết là nó trông giống hnw một URL, nhưng nó sẽ import gói `g
 
 Nếu bạn gọi `go get -u` nó sẽ cập nhật các gói (hoặc bạn cũng có thể cập nhật một gói được chỉ định bằng cách `go get -u TÊN_ĐẦY_ĐỦ_CỦA_GÓI_CẦN_CẬP_NHẬT`).
 
-Cuối cùng, bạn có thể thấy `go get` vẫn chưa không hoàn chỉnh. Ví dụ, không có cách nào để chỉ định một phiên bản (revision), nó luôn trỏ về master/head/trunk/default. Điều này sẽ là vấn đề lớn nếu bạn có hai dự án cần hai phiên bản khác nhau của cùng một thư viện.
+Cuối cùng, bạn có thể thấy `go get` vẫn chưa hoàn chỉnh. Ví dụ, không có cách nào để chỉ định một phiên bản (revision), nó luôn trỏ về `master/head/trunk/default`. Điều này sẽ là vấn đề lớn nếu bạn có hai dự án cần hai phiên bản khác nhau của cùng một thư viện.
 
 Để giải quyết vấn đề này, bạn có thể sử dụng công cụ quản lý phiên bản thư viện. Chúng còn khá mới [goop](https://github.com/nitrous-io/goop) và [godep](https://github.com/tools/godep). Danh sách các công cụ tương tự ở đây [go-wiki](https://code.google.com/p/go-wiki/wiki/PackageManagementTools).
 
@@ -1419,7 +1419,7 @@ func main() {
 }
 ```
 
-Nếu bạn thử chạy đoạn mã trên, bạn sẽ nhận được một lỗi (file không tồn tại). Điểm nổi bật ở đây là cách mà `defer` hoạt động. Bất lệnh nào đi kèm với từ khóa `defer` sẽ được thực thi sau khi phương thứ kết thúc. Điều này giúp bạn giải phóng tài nguyên gần như ở bất cứ chỗ nào nó được sử dụng xong, và bạn sẽ không phải quan tâm quá nhiều nếu hàm có nhiều điểm kết thúc.
+Nếu bạn thử chạy đoạn mã trên, bạn sẽ nhận được một lỗi (file không tồn tại). Điểm nổi bật ở đây là cách mà `defer` hoạt động. Bất lệnh nào đi kèm với từ khóa `defer` sẽ được thực thi sau khi phương thức kết thúc. Điều này giúp bạn giải phóng tài nguyên gần như ở bất cứ chỗ nào nó được sử dụng xong, và bạn sẽ không phải quan tâm quá nhiều nếu hàm có nhiều điểm kết thúc.
 
 ## go fmt
 
@@ -1433,7 +1433,7 @@ Khi bạn làm việc trong một dự án, bạn có thể áp dụng cách đ�
 go fmt ./...
 ```
 
-Hãy thử nó. Nó không chỉ căn chỉnh mã nguồn giúp bạn. Nó cũng căn lại các khai báo trường và sắp xép thứ tự của các gói được thêm vào mã nguồn theo thứ tự alphabe.
+Hãy thử nó. Nó không chỉ căn chỉnh mã nguồn giúp bạn. Nó cũng căn lại các khai báo trường và sắp xép thứ tự của các gói được thêm vào mã nguồn theo thứ tự alphabet.
 
 ## Lệnh If có khởi tạo
 
@@ -1596,7 +1596,7 @@ Quay trở lại ví dụ trên, bạn sẽ thấy chúng ta có hàm `Sleep` tr
 
 ## Đồng bộ hóa
 
-Tạo một Goroutineroutine khá bình thường, chính vì chúng cần ít tài nguyên nên ta có thể tạo ra nhiều tiến trình như vậy, tuy nhiên các đoạn mã đồng thời cần liên lạc và có thể phối hợp với nhsau. Để giải quyết vấn đề này, Go cung cấp `channels`. Trước khi tiếp cận `channels`, tôi thấy hiểu một chút về lý thuyết lập trình đồng thời là rất quan trọng.
+Tạo một goroutine khá bình thường, chính vì chúng cần ít tài nguyên nên ta có thể tạo ra nhiều tiến trình như vậy, tuy nhiên các đoạn mã đồng thời cần liên lạc và có thể phối hợp với nhsau. Để giải quyết vấn đề này, Go cung cấp `channels`. Trước khi tiếp cận `channels`, tôi thấy hiểu một chút về lý thuyết lập trình đồng thời là rất quan trọng.
 
 Viết các đoạn mã đồng thời yêu cầu bạn quan tâm đén khi nào bạn đọc và khi nào ghi các giá trị. Theo cách khác, nó giống như lập trình mà không có bộ dọn rác. Nó yêu cầu bạn nghĩ về dữ liệu ở một góc độ mới, và luôn đề phòng những thao tác nguy hiểm. Ví dụ:
 
@@ -1625,7 +1625,7 @@ func incr() {
 
 Bạn nghĩ kết quả hiển thị là gì?
 
-Nếu bạn nói kết quả là `1, 2` bạn vừa đúng lại vừa sai. Có thể bạn chạy đoạn mã trên, kết quả hiển thị cũng tương tự như thế. Tuy nhienem sự thật là hoạt động của chương trình không thể biết trước được. Tại sao? Bởi vì có thể có nhiều Goroutineroutine (trường hợp này là hai) cùng ghi vào một biến `counter`, trong cùng một lúc. Hoặc, một Goroutine có thể đọc `counter` trong khi tiến trình còn lại đang ghi vào đó.
+Nếu bạn nói kết quả là `1, 2` bạn vừa đúng lại vừa sai. Có thể bạn chạy đoạn mã trên, kết quả hiển thị cũng tương tự như thế. Tuy nhienem sự thật là hoạt động của chương trình không thể biết trước được. Tại sao? Bởi vì có thể có nhiều Goroutine (trường hợp này là hai) cùng ghi vào một biến `counter`, trong cùng một lúc. Hoặc, một Goroutine có thể đọc `counter` trong khi tiến trình còn lại đang ghi vào đó.
 
 Điều đó có nguy hiểm không? Có, tất nhiên là rất nguy hiểm. `counter++` giống như là 1 dòng code, nhưng nếu chia nhỏ ra, thì nó là nhiều dòng hợp ngữ -- thứ chạy trực tiếp trên máy tính của bạn. Trong ví dụ này, hầu hết các trường hợp đều chạy được. Tuy nhiên, một trường hợp có thể xảy ra là nếu 2 luồng cùng đọc lúc `counter` bằng `0` và bạn sẽ nhận được kết quả `1, 1`. Có nhiều tình huống còn tồi tệ hơn, ví dụ như hệ thống bị lỗi hoặc truy cập vào một vùng nhớ bất kì và thay dổi nó!
 
@@ -1689,13 +1689,13 @@ func main() {
 
 Có nhiều cách để lập trình đồng thời hơn chúng ta vừa xem. Ví dụ, có một mutex khác được gọi là mutex đọc ghi (read-write mutex). Nó cho thấy có 2 chức năng có thể khóa: một để khóa trước khi đọc và một để khóa trước khi ghi. Sự phân biệt này cho phép nhiều tiến trình đọc đồng thời trong khi không cho phép bất cứ một tiến trình nào thực hiện ghi dữ liệu. Trong Go, `sync.RWMutex` là một khóa như vậy. Thêm vào đó, hàm  `Lock` và `Unlock` của `sync.Mutex`, cũng ch thấy có hai hàm `RLock` và `RUnlock` ; trong đó `R` có nghĩa là *Read*. Trong khi các mutex đọc ghi được sử dụng phổ biến, chúng à một gánh năng cho lập trình viên, : chúng ta phải quan tâm không chỉ là lúc nào thao tác với dữ liệu mà còn quan tâm tới phương thức truy cập là đọc hay ghi.
 
-Hơn nữa, một phần của lập trình đồng thời không phải là truy cập tuần tự vào phần hẹp nhất của đoạn mã, nó còn là cách phối hợp giữa nhiều tiến trình với nhau. Ví dụ, tạm dựng hoạt động 10 mili giây giây không phải là một giải pháp hợp lý. Chuyện gì sẽ xảy ra nếu một tiến trình cần nhiều hơn 10 mili giây? Nếu nó cần ít hơn 10 mili giây, thì chúng ta đang lãng phí thời gian? Ngoài ra, thay vì đợi cho luông xử lý khác kết thúc, tôi muốn hiển thị*này, Tôi có dữ liệu mới để xử lý đây!* thì phải làm thế nào?
+Hơn nữa, một phần của lập trình đồng thời không phải là truy cập tuần tự vào phần hẹp nhất của đoạn mã, nó còn là cách phối hợp giữa nhiều tiến trình với nhau. Ví dụ, tạm dựng hoạt động 10 mili giây giây không phải là một giải pháp hợp lý. Chuyện gì sẽ xảy ra nếu một tiến trình cần nhiều hơn 10 mili giây? Nếu nó cần ít hơn 10 mili giây, thì chúng ta đang lãng phí thời gian? Ngoài ra, thay vì đợi cho luông xử lý khác kết thúc, tôi muốn hiển thị *này, Tôi có dữ liệu mới để xử lý đây!* thì phải làm thế nào?
 
 Trên đây là tất cả các thứ có thể làm được mà không cần `channels`. Với trường hợp đơn giản, tôi nghĩ bạn **nên dùng** các thành phần cơ bản như `sync.Mutex` và `sync.RWMutex`, nhưng trong phần kế tiếp, `channels` sẽ làm cho lập trình đồng thời trong sáng hơn và ít lỗi.
 
 ## Channels
 
-Thách thức với lập trình đồng thời xuất phát từ chia sẻ dữ liệu. Nếu các goroutine không chia sẻ dữ liệu, bạn không cần phải lo lắng về việc đồng bộ hóa chúng. Đó không phải là một lựa chọn cho tất cả các hệ thống. Trong thực tế, nhiều hệ thống được xây dựng với mục tiêu ngay từ đầu là: chia sẻ dữ liệu qua nhiều yêu cầu. Một bộ nhớ cache hoặc một cơ sở dữ liệu, là những ví dụ tốt về điều này. Điều này đang trở thành một thực tế ngày càng phổ biến.
+Thách thức với lập trình đồng thời xuất phát từ chia sẻ dữ liệu. Nếu các goroutine không chia sẻ dữ liệu, bạn không cần phải lo lắng về việc đồng bộ hóa chúng. Đó không phải là một lựa chọn cho tất cả các hệ thống. Trong thực tế, nhiều hệ thống được xây dựng với mục tiêu ngay từ đầu là: có thể chia sẻ dữ liệu giữa các thành phần với nhau. Một bộ nhớ cache hoặc một cơ sở dữ liệu, là những ví dụ tốt về điều này. Điều này đang trở thành một thực tế ngày càng phổ biến.
 
 Channel (kênh) giúp cho lập trình đồng thời lập trình dễ hơn. Một channel là một pipe giao tiếp giữa các goroutine, và được sử dụng để truyền dữ liệu. Nói cách khác, một goroutine có dữ liệu chuyển dữ liệu cho một goroutine khác thông qua một channel. Kết quả là, tại bất kỳ thời điểm nào, chỉ có một goroutine có quyền truy cập vào dữ liệu.
 
@@ -1725,7 +1725,7 @@ VAR := <-CHANNEL
 
 Mũi tên chỉ hướng đi của dữ liệu. Khi gửi, dữ liệu được truyền vào channel. Khi nhận, dữ liệu được lấy ra khỏi channel.
 
-Điều cuối cùng cần biết trước khi chúng ta nhìn vào ví dụ đầu tiên là nhận và gửi từ một channel là một quá trình blocking. Đó là, khi chúng ta nhận từ một channel, goroutine sẽ không tiếp tục thực thi cho đến khi dữ liệu đã sẵn sàng. Tương tự như vậy, khi chúng ta gửi vào một channel, goroutine sẽ không tiếp tục chạy cho đến khi dữ liệu được nhận.
+Điều cuối cùng cần biết trước khi chúng ta nhìn vào ví dụ đầu tiên là nhận và gửi từ một channel là một quá trình chờ (blocking). Đó là, khi chúng ta nhận từ một channel, goroutine sẽ chờ cho đến khi dữ liệu đã sẵn sàng. Tương tự như vậy, khi chúng ta gửi vào một channel, goroutine sẽ chờ cho đến khi dữ liệu được nhận.
 
 Hãy xem xét một hệ thống xử lý dữ liệu đến mà chúng ta muốn xử lý trong các goroutine riêng biệt. Đây là một yêu cầu chung. Nếu chúng ta xử lý dữ liệu ngay trên goroutine mà chấp nhận kết nối đến, chúng ta sẽ có nguy cơ các client bị chờ quá lâu. Đầu tiên, chúng ta sẽ viết worker (có nghĩa là hàm xử lý dữ liệu nhận được -- người dịch) . Đây có thể là một hàm đơn giản, nhưng tôi sẽ làm cho nó một cấu trúc cho nó:
 

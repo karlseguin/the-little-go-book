@@ -15,7 +15,7 @@ Sách có thể phân phối tự do theo giấy phép  [Attribution-NonCommerci
 
 * [Spanish](https://github.com/raulexposito/the-little-go-book/tree/master/es) by Raúl Expósito
 * [Chinese](https://github.com/songleo/the-little-go-book_ZH_CN) by [songleo](https://github.com/songleo)
-* [Nội dunng tiếng Việt](https://github.com/quangnh89/the-little-go-book/blob/master/vi/go.md) do [Quang Nguyễn](https://github.com/quangnh89) biên dịch.
+* [Nội dung tiếng Việt](https://github.com/quangnh89/the-little-go-book/blob/master/vi/go.md) do [Quang Nguyễn](https://github.com/quangnh89) biên dịch.
 
 ## Định dạng ##
 Sách được viết dưới dạng [Markdown](http://daringfireball.net/projects/markdown/) và được chuyển đổi sang PDF bằng [Pandoc](http://johnmacfarlane.net/pandoc/).
