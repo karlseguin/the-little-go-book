@@ -15,6 +15,7 @@ The book is freely distributed under the  [Attribution-NonCommercial-ShareAlike 
 
 * [Spanish](https://github.com/raulexposito/the-little-go-book/tree/master/es) by Raúl Expósito
 * [Chinese](https://github.com/songleo/the-little-go-book_ZH_CN) by [songleo](https://github.com/songleo)
+* [Vietnamese](https://github.com/quangnh89/the-little-go-book/blob/master/vi/readme.md) by [Quang Nguyễn](https://github.com/quangnh89)
 
 ## Formats ##
 The book is written in [Markdown](http://daringfireball.net/projects/markdown/) and converted to PDF using [Pandoc](http://johnmacfarlane.net/pandoc/).
