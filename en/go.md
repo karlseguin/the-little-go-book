@@ -767,7 +767,7 @@ To better understand the interplay between length and capacity, let's look at so
 ```go
 func main() {
   scores := make([]int, 0, 10)
-  scores[5] = 9033
+  scores[7] = 9033
   fmt.Println(scores)
 }
 ```
