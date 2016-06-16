@@ -782,13 +782,13 @@ func main() {
 }
 ```
 
-But that changes the intent of our original code. Appending to a slice of length 0 will set the first element. For whatever reason, our crashing code wanted to set the element at index 5. To do this, we can re-slice our slice:
+But that changes the intent of our original code. Appending to a slice of length 0 will set the first element. For whatever reason, our crashing code wanted to set the element at index 7. To do this, we can re-slice our slice:
 
 ```go
 func main() {
   scores := make([]int, 0, 10)
-  scores = scores[0:6]
-  scores[5] = 9033
+  scores = scores[0:8]
+  scores[7] = 9033
   fmt.Println(scores)
 }
 ```
