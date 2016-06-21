@@ -1645,7 +1645,7 @@ var (
 )
 
 func main() {
-  for i := 0; i < 2; i++ {
+  for i := 0; i < 20; i++ {
     go incr()
   }
   time.Sleep(time.Millisecond * 10)
