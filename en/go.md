@@ -47,9 +47,7 @@ Installing Go is straightforward. You can install it from source, but I suggest 
 
 Except for simple examples, Go is designed to work when your code is inside a workspace. The workspace is a folder composed of `bin`, `pkg` and `src` subfolders. You might be tempted to force Go to follow your own style - don't.
 
-Normally, I put my projects inside of `~/code`. For example, `~/code/blog` contains my blog. For Go, my workspace is `~/code/go` and my Go-powered blog would be in `~/code/go/src/blog`. Since that's a lot to type, I use a symbolic link to make it accessible via `~/code/blog`:
-
-    ln -s ~/code/go/src/blog ~/code/blog
+Normally, I put my projects inside of `~/code`. For example, `~/code/blog` contains my blog. For Go, my workspace is `~/code/go` and my Go-powered blog would be in `~/code/go/src/blog`.
 
 In short, create a `go` folder with a `src` subfolder wherever you expect to put your projects.
 
