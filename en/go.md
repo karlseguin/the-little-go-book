@@ -8,12 +8,12 @@ You are free to copy, distribute, modify or display the book. However, I ask tha
 
 You can see the full text of the license at:
 
-<http://creativecommons.org/licenses/by-nc-sa/4.0/>
+<https://creativecommons.org/licenses/by-nc-sa/4.0/>
 
 ## Latest Version
 
 The latest source of this book is available at:
-<http://github.com/karlseguin/the-little-go-book>
+<https://github.com/karlseguin/the-little-go-book>
 
 # Introduction
 
@@ -41,7 +41,7 @@ As I think about the paragraphs and chapters that lay ahead, I know that I won't
 
 # Getting Started
 
-If you're looking to play a little with Go, you should check out the [Go Playground](http://play.golang.org/) which lets you run code online without having to install anything. This is also the most common way to share Go code when seeking help in [Go's discussion forum](https://groups.google.com/forum/#!forum/golang-nuts) and places like StackOverflow.
+If you're looking to play a little with Go, you should check out the [Go Playground](https://play.golang.org/) which lets you run code online without having to install anything. This is also the most common way to share Go code when seeking help in [Go's discussion forum](https://groups.google.com/forum/#!forum/golang-nuts) and places like StackOverflow.
 
 Installing Go is straightforward. You can install it from source, but I suggest you use one of the pre-compiled binaries. When you [go to the download page](https://golang.org/dl/), you'll see installers for various platforms. Let's avoid these and learn how to set up Go ourselves. As you'll see, it isn't hard.
 
@@ -226,7 +226,7 @@ func main() {
 
 You should get two errors about `fmt` and `os` being imported and not used. Can this get annoying? Absolutely. Over time, you'll get used to it (it'll still be annoying though). Go is strict about this because unused imports can slow compilation; admittedly a problem most of us don't have to this degree.
 
-Another thing to note is that Go's standard library is well documented. You can head over to <http://golang.org/pkg/fmt/#Println> to learn more about the `Println` function that we used. You can click on that section header and see the source code. Also, scroll to the top to learn more about Go's formatting capabilities.
+Another thing to note is that Go's standard library is well documented. You can head over to <https://golang.org/pkg/fmt/#Println> to learn more about the `Println` function that we used. You can click on that section header and see the source code. Also, scroll to the top to learn more about Go's formatting capabilities.
 
 If you're ever stuck without internet access, you can get the documentation running locally via:
 
