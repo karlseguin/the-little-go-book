@@ -1745,8 +1745,8 @@ To use this, the first thing we'd do is start some workers:
 
 ```go
 c := make(chan int)
-for i := 0; i < 4; i++ {
-  worker := Worker{id: i}
+for i := 0; i < 5; i++ {
+  worker := &Worker{id: i}
   go worker.process(c)
 }
 ```
