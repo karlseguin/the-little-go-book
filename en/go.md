@@ -814,7 +814,7 @@ func main() {
 }
 ```
 
-The initial capacity of `scores` is 5. In order to hold 20 values, it'll have to be expanded 3 times with a capacity of 10, 20 and finally 40.
+The initial capacity of `scores` is 5. In order to hold 25 values, it'll have to be expanded 3 times with a capacity of 10, 20 and finally 40.
 
 As a final example, consider:
 
