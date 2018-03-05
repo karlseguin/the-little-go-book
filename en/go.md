@@ -913,9 +913,10 @@ The above is the start of an efficient way to remove a value from an unsorted sl
 func main() {
   scores := []int{1, 2, 3, 4, 5}
   scores = removeAtIndex(scores, 2)
-  fmt.Println(scores)
+  fmt.Println(scores) // [1 2 5 4]
 }
 
+// won't preserve order
 func removeAtIndex(source []int, index int) []int {
   lastIndex := len(source) - 1
   //swap the last value and the value we want to remove
