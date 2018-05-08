@@ -1,34 +1,34 @@
-## About ##
-[The Little Go Book](http://openmymind.net/The-Little-Go-Book/) is a free book introducing Go.
+## За Книгата ##
+[The Little Go Book](http://openmymind.net/The-Little-Go-Book/) е свободно достъпна книга представяща Go.
 
-The book was written by [Karl Seguin](http://openmymind.net), author of:
+Книгата е написана от [Karl Seguin](http://openmymind.net), автор на:
 
 * [Scaling Viki](http://openmymind.net/scaling-viki/)
 * [The Little Redis Book](http://openmymind.net/2012/1/23/The-Little-Redis-Book/)
 * [The Little MongoDB Book](http://openmymind.net/2011/3/28/The-Little-MongoDB-Book/)
 * [Foundations of Programming](http://openmymind.net/FoundationsOfProgramming.pdf)
 
-## License ##
-The book is freely distributed under the  [Attribution-NonCommercial-ShareAlike 4.0 International](<http://creativecommons.org/licenses/by-nc-sa/4.0/>).
+## Лиценз ##
+Тази книга е свободно разпространявана под линценза на [Attribution-NonCommercial-ShareAlike 4.0 International](<http://creativecommons.org/licenses/by-nc-sa/4.0/>).
 
-## Translations ##
+## Преводи ##
 
-* [Spanish](https://github.com/raulexposito/the-little-go-book/tree/master/es) by Raúl Expósito
-* [Chinese](https://github.com/songleo/the-little-go-book_ZH_CN) by Songleo
-* [Traditional Chinese](https://github.com/kevingo/the-little-go-book) by KevinGo
-* [Vietnamese](https://github.com/quangnh89/the-little-go-book/blob/master/vi/readme.md) by Quang Nguyễn
-* [Italian](https://github.com/francescomalatesta/the-little-go-book-ita) by Francesco Malatesta
-* [Russian](https://github.com/sefus/the-little-go-book/blob/master/ru/go.md) by Roman Dolgopolov
+* [Испански](https://github.com/raulexposito/the-little-go-book/tree/master/es) направен от Raúl Expósito
+* [Китайски](https://github.com/songleo/the-little-go-book_ZH_CN) направен от Songleo
+* [Традиционен Китайски](https://github.com/kevingo/the-little-go-book) направен от KevinGo
+* [Виетнамски](https://github.com/quangnh89/the-little-go-book/blob/master/vi/readme.md) направен от Quang Nguyễn
+* [Италиански](https://github.com/francescomalatesta/the-little-go-book-ita) направен от Francesco Malatesta
+* [Руски](https://github.com/sefus/the-little-go-book/blob/master/ru/go.md) направен от Roman Dolgopolov
 
-## Formats ##
-The book is written in [Markdown](http://daringfireball.net/projects/markdown/) and converted to PDF using [Pandoc](http://johnmacfarlane.net/pandoc/).
+## Формати ##
+Книгата е написана с помоща на [Markdown](http://daringfireball.net/projects/markdown/) и конвертирана към PDF използвайки [Pandoc](http://johnmacfarlane.net/pandoc/).
 
 The TeX template makes use of [Lena Herrmann's JavaScript highlighter](http://lenaherrmann.net/2010/05/20/javascript-syntax-highlighting-in-the-latex-listings-package).
 
 Kindle and ePub format provided using [Pandoc](http://johnmacfarlane.net/pandoc/).
 
 ## Generating books ##
-Packages listed below are for Ubuntu. If you use another OS or distribution names would be similar.
+Пакетите показани по-доло са за Ubuntu. Ако ползвате друга Операционна Система или дистрибуция ще бъдат подобни.
 
 ### PDF
 
