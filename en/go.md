@@ -7,7 +7,7 @@
 Свободни сте да я копирате, разпостранявате, редактирате или да показвате книгата, моля ви да свързвате книгата с мен, Karl Seguin, и да не я използвате за комерсиални цели.
 
 
-Можете да намерите всички подробности на лиценза на следният линк:
+Можете да намерите всички подробности за лиценза на следният линк:
 
 <https://creativecommons.org/licenses/by-nc-sa/4.0/>
 
@@ -17,8 +17,7 @@
 <https://github.com/karlseguin/the-little-go-book>
 
 # Въведение
-
-I've always had a love-hate relationship when it comes to learning new languages. On the one hand, languages are so fundamental to what we do, that even small changes can have measurable impact. That *aha* moment when something clicks can have a lasting effect on how you program and can redefine your expectations of other languages. On the downside, language design is fairly incremental. Learning new keywords, type system, coding style as well as new libraries, communities and paradigms is a lot of work that seems hard to justify. Compared to everything else we have to learn, new languages often feel like a poor investment of our time.
+Винаги съм имал смесени чувства когато става въпрос за учене на нови езици. От една страна, езиците са толкова фондаментални към това което правим, че дори малка промяна може да има значителен ефект. "Аха" момента може да има еластичен ефект как програмираш и може да окаже влияние върху твойте очаквания към други езици. От друга страна, дизайнът на език е частичен. Учене на нови ключови думи, система на писане, стил, както и нови библиотеки и общности са доста неща които могат да бъдат определни. Всравнено с всичко останало, ние трябва да учим нови езици, често изглежда като незначително инвестиране на нашето време.
 
 That said, we *have* to move forward. We *have* to be willing to take incremental steps because, again, languages are the foundation of what we do. Though the changes are often incremental, they tend to have a wide scope and they impact productivity, readability, performance, testability, dependency management, error handling, documentation, profiling, communities, standard libraries, and so on. Is there a positive way to say *death by a thousand cuts*?
 
