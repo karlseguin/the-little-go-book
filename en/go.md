@@ -1,21 +1,22 @@
-# About This Book
+## За книгата 
 
-## License
+## Лиценз
 
-The Little Go Book is licensed under the Attribution-NonCommercial-ShareAlike 4.0 International license. You should not have paid for this book.
+Книгата Little Go Book е лицизирана под the Attribution-NonCommercial-ShareAlike 4.0 International license. Книгата не се заплаща.
 
-You are free to copy, distribute, modify or display the book. However, I ask that you always attribute the book to me, Karl Seguin, and do not use it for commercial purposes.
+Свободни сте да я копирате, разпостранявате, редактирате или да показвате книгата, моля ви да свързвате книгата с мен, Karl Seguin, и да не я използвате за комерсиални цели.
 
-You can see the full text of the license at:
+
+Можете да намерите всички подробности на лиценза на следният линк:
 
 <https://creativecommons.org/licenses/by-nc-sa/4.0/>
 
-## Latest Version
+## Последна версия
 
-The latest source of this book is available at:
+Последната версия на книгата можете да намерите на:
 <https://github.com/karlseguin/the-little-go-book>
 
-# Introduction
+# Въведение
 
 I've always had a love-hate relationship when it comes to learning new languages. On the one hand, languages are so fundamental to what we do, that even small changes can have measurable impact. That *aha* moment when something clicks can have a lasting effect on how you program and can redefine your expectations of other languages. On the downside, language design is fairly incremental. Learning new keywords, type system, coding style as well as new libraries, communities and paradigms is a lot of work that seems hard to justify. Compared to everything else we have to learn, new languages often feel like a poor investment of our time.
 
@@ -85,26 +86,26 @@ Environment variables can be set through the `Environment Variables` button on t
 Open a command prompt and type `go version`. You'll hopefully get an output that looks like `go version go1.3.3 windows/amd64`.
 
 # Chapter 1 - The Basics
+Go е компилиран, статичен език със синтаксис наподобяваш C и garbage collection ( система за почистване на паметта). Какво означава това?
 
-Go is a compiled, statically typed language with a C-like syntax and garbage collection. What does that mean?
 
-## Compilation
 
-Compilation is the process of translating the source code that you write into a lower level language -- either assembly (as is the case with Go), or some other intermediary language (as with Java and C#).
+## Компилация
+Компилация е процеса на превеждане на кода, който пишете на език на ниско ниво -- или assembly ( какво в случея с Go ) или на друг език на по високо ниво ( като Java and C# ).
 
-Compiled languages can be unpleasant to work with because compilation can be slow. It's hard to iterate quickly if you have to spend minutes or hours waiting for code to compile. Compilation speed is one of the major design goals of Go. This is good news for people working on large projects as well as those of us used to a quick feedback cycle offered by interpreted languages.
+Езиците които се компилират могат да бъдат неудобни за работа защото компилацията може да отнеме много време. Трудно се работи, когато трябва да чакаш минути или часове кодът да бъде компилиран. За това компилацията е една от освновните цели на езика Go. Това са добри новини за хората, които работят по големи проекти, както и за тези които ги използват за бързо обръщане към езици от по-високо ниво.
 
-Compiled languages tend to run faster and the executable can be run without additional dependencies (at least, that's true for languages like C, C++ and Go which compile directly to assembly).
+Езиците, които се компилират са по-бързи от останалите и изпълняването им не се нуждае от допълнителни пакте ( поне, със сигорност това е вярно за C, C++ и Go които се компилират директно до асемблер). 
 
-## Static Typing
+## Static Typing - предефинирани типове
 
-Being statically typed means that variables must be of a specific type (int, string, bool, []byte, etc.). This is either achieved by specifying the type when the variable is declared or, in many cases, letting the compiler infer the type (we'll look at examples shortly).
+Предефинирани типове означава променливите да бъдат от специфичен тип ( int, string, bool, []byte и други ). Това се постига чрез определяне на типа когато променливата се дефинира или както в много от случейте, компилаторът решава какъв тип да бъдат ( ще разгледаме примери по-късно ). 
 
-There's a lot more that can be said about static typing, but I believe it's something better understood by looking at code. If you're used to dynamically typed languages, you might find this cumbersome. You're not wrong, but there are advantages, especially when you pair static typing with compilation. The two are often conflated. It's true that when you have one, you normally have the other but it isn't a hard rule. With a rigid type system, a compiler is able to detect problems beyond mere syntactical mistakes as well as make further optimizations.
+Има много което може да бъде казано за предефинираните типове, но вярвам че ще бъде по-добре разбрано чрез изучаване на кода. Ако използвате динамични езици, може да намерите това за тромаво и трудно за употреба. Няма да сбъркате, но има много предимства в това, особено, когато се използва с компилация. Двете вървят често заедно. Когато имате едното, обикновено имате и другото, но това не е задължително. В неизменима система, компилаторът успява да хване проблеми не свързани само със синтактични грешки, но и със производителноста. 
 
 ## C-Like Syntax
 
-Saying that a language has a C-like syntax means that if you're used to any other C-like languages such as C, C++, Java, JavaScript and C#, then you're going to find Go familiar -- superficially, at least. For example, it means `&&` is used as a boolean AND, `==` is used to compare equality, `{` and `}` start and end a scope, and array indexes start at 0.
+Твърдението че език има подобен синтаксис на С, означава че, ако ползвате други езици подобни на С като С, C++, Java, JavaScript и C#, тогава ще намерите Go за подобен -- поне повърхностно. Като например `&&` се ипозлза като логическо "И" ("AND"), `==` се използва за всравние, `{` и `}` започват и завършват даден тип обхват, и масивните идекси започват от 0.
 
 C-like syntax also tends to mean semi-colon terminated lines and parentheses around conditions. Go does away with both of these, though parentheses are still used to control precedence. For example, an `if` statement looks like this:
 
@@ -122,13 +123,13 @@ if (name == "Goku" && power > 9000) || (name == "gohan" && power < 4000)  {
 }
 ```
 
-Beyond this, Go is much closer to C than C# or Java - not only in terms of syntax, but in terms of purpose. That's reflected in the terseness and simplicity of the language which will hopefully start to become obvious as you learn it.
+След всичко това, Go е много по близо до С от C# и Java - не само като синтаксис, но като цел на употреба. Това рефлектира върху проницителноста на езика и неговото приложение, което се надявам да стане очевидно докато го учите. 
 
-## Garbage Collected
+## Garbage Collected ( Система за почистване на паметта )
+Когато се създават, някой променличи имат лесен за определяне живот. Например променлива локална на фукция, се изтрива когато фунцкията приключи. В други случаи, не - поне за компилатора. Например, времето на живот на променлива, върната от фукнция или използвана от друга променлива и обект, може трудно да бъде определено. Без система за почистване на памета, работа на програмиста е, да освободи памета асоцирана с подобни променливи, когато знае че няма да бъде повече необходима. Как? На С се използва `free(str);`
 
-Some variables, when created, have an easy-to-define life. A variable local to a function, for example, disappears when the function exits. In other cases, it isn't so obvious -- at least to a compiler. For example, the lifetime of a variable returned by a function or referenced by other variables and objects can be tricky to determine. Without garbage collection, it's up to developers to free the memory associated with such variables at a point where the developer knows the variable isn't needed. How? In C, you'd literally `free(str);` the variable.
+Езици използващи система за почистване на памета ( като Ruby, Python, Java, JavaScript, C#, Go ) са способни да следят за такива променливи и да изчистват паметта, когато те вече не се използват. Подобна система предизвиква доста главоблъсканици, но елеминира голям брой бъгове.
 
-Languages with garbage collectors (e.g., Ruby, Python, Java, JavaScript, C#, Go) are able to keep track of these and free them when they're no longer used. Garbage collection adds overhead, but it also eliminates a number of devastating bugs.
 
 ## Running Go Code
 
