@@ -19,11 +19,12 @@
 # Въведение
 Винаги съм имал смесени чувства когато става въпрос за учене на нови езици. От една страна, езиците са толкова фондаментални към това което правим, че дори малка промяна може да има значителен ефект. "Аха" момента може да има еластичен ефект как програмираш и може да окаже влияние върху твойте очаквания към други езици. От друга страна, дизайнът на език е частичен. Учене на нови ключови думи, система на писане, стил, както и нови библиотеки и общности са доста неща които могат да бъдат определни. Всравнено с всичко останало, ние трябва да учим нови езици, често изглежда като незначително инвестиране на нашето време.
 
-That said, we *have* to move forward. We *have* to be willing to take incremental steps because, again, languages are the foundation of what we do. Though the changes are often incremental, they tend to have a wide scope and they impact productivity, readability, performance, testability, dependency management, error handling, documentation, profiling, communities, standard libraries, and so on. Is there a positive way to say *death by a thousand cuts*?
+Това означава, че трябва да продължим напред. Трябва да бъдем склонни да вземаме мерки, защото езиците са в основата на това което правим. Въпреки че промените са малки,те оказват влияние върху продуктивноста, стабилноста, скороста, testability, dependency management, error handling, документацията, профилирането, обществата, стандартните библиотеки и още много други. Is there a positive way to say *death by a thousand cuts*?
 
-That leaves us with an important question: **why Go?** For me, there are two compelling reasons. The first is that it's a relatively simple language with a relatively simple standard library. In a lot of ways, the incremental nature of Go is to simplify some of the complexity we've seen being added to languages over the last couple of decades. The other reason is that for many developers, it will complement your existing arsenal.
+Това ни поставя въпросът **Защо Go?** За мен има две основни причини. Първата, е че като цяло е лесен език с лесна библиотека. По много начини, целта на Go е да улесни някои от сложностите, които сме виждали в другите езици през последните няколко деситилетия. Другата причиниа е, че за много програмисти, Go ще допълни техният арсенал. 
 
-Go was built as a system language (e.g., operating systems, device drivers) and thus aimed at C and C++ developers. According to the Go team, and which is certainly true of me, application developers, not system developers, have become the primary Go users. Why? I can't speak authoritatively for system developers, but for those of us building websites, services, desktop applications and the like, it partially comes down to the emerging need for a class of systems that sit somewhere in between low-level system applications and higher-level applications.
+Go е направен за системен език (e.g., operating systems, device drivers) и насочен към C и C++ програмисти. Според Go team, и което е вярно за мен, application developers, not system developers са основните Go потребители. Защо ? Не мога да кажа от страна на системните програмисти, но за тези които изграждат уеб сайтове, съвриси, десктоп приложения и подобни, it partially comes down to the emerging need for a class of systems that sit somewhere in between low-level system applications and higher-level applications
+
 
 Maybe it's a messaging, caching, computational-heavy data analysis, command line interface, logging or monitoring. I don't know what label to give it, but over the course of my career, as systems continue to grow in complexity and as concurrency frequently measures in the tens of thousands, there's clearly been a growing need for custom infrastructure-type systems. You *can* build such systems with Ruby or Python or something else (and many people do), but these types of systems can benefit from a more rigid type system and greater performance. Similarly, you *can* use Go to build websites (and many people do), but I still prefer, by a wide margin, the expressiveness of Node or Ruby for such systems.
 
@@ -132,7 +133,8 @@ if (name == "Goku" && power > 9000) || (name == "gohan" && power < 4000)  {
 
 ## Running Go Code
 
-Let's start our journey by creating a simple program and learning how to compile and execute it. Open your favorite text editor and write the following code:
+Нека да започнем нашето предизвикателство с лесна програма и научим как да я компилираме и изпълняваме. Отворете вашият любим текстов редактор и напишете следният код:
+
 
 ```go
 package main
@@ -142,7 +144,8 @@ func main() {
 }
 ```
 
-Save the file as `main.go`. For now, you can save it anywhere you want; we don't need to live inside Go's workspace for trivial examples.
+Запишете го като `main.go`. Можете да го запишете, където пожелаете; не е нужно да бъде поставен в работната директория на Go.
+
 
 Next, open a shell/command prompt and change the directory to where you saved the file. For me, that means typing `cd ~/code`.
 
@@ -390,9 +393,11 @@ If you're coming from a statically typed language, you're probably feeling comfo
 
 # Chapter 2 - Structures
 
-Go isn't an object-oriented (OO) language like C++, Java, Ruby and C#. It doesn't have objects nor inheritance and thus, doesn't have the many concepts associated with OO such as polymorphism and overloading.
+Go не е обкентно-ориентиран език като C++, Java, Ruby and C#. Няма обекти, нито наследяване, също така няма много други неща характерни за обектно-ориентираното програмине като polymorphism and overloading.
 
-What Go does have are structures, which can be associated with methods. Go also supports a simple but effective form of composition. Overall, it results in simpler code, but there'll be occasions where you'll miss some of what OO has to offer. (It's worth pointing out that *composition over inheritance* is an old battle cry and Go is the first language I've used that takes a firm stand on the issue.)
+Това което Go използва са структори, които могат да бъдат асоцирани с методи. Go също поддържа и прости, но ефективно форми на композиции.
+
+																Overall, it results in simpler code, but there'll be occasions where you'll miss some of what OO has to offer. (It's worth pointing out that *composition over inheritance* is an old battle cry and Go is the first language I've used that takes a firm stand on the issue.)
 
 Although Go doesn't do OO like you may be used to, you'll notice a lot of similarities between the definition of a structure and that of a class. A simple example is the following `Saiyan` structure:
 
@@ -403,13 +408,13 @@ type Saiyan struct {
 }
 ```
 
-We'll soon see how to add a method to this structure, much like you'd have methods as part of a class. Before we do that, we have to dive back into declarations.
+Скоро ще разгледаме и как се добавя мотод към тази структора, както може да се иползват методи, които са част от Клас. Преди да направим това, обаче, ще се върнем да разгледаме декларациите. 
 
 ## Declarations and Initializations
 
-When we first looked at variables and declarations, we looked only at built-in types, like integers and strings. Now that we're talking about structures, we need to expand that conversation to include pointers.
+Когато за първи път разгледахме променливите и декларациите, ние се спряхме само на вградените типове, като integers и strings. Сега говорейки за структори, ще разшерим нашият поглед и ще включим pointers
 
-The simplest way to create a value of our structure is:
+Най-простият начин да зададем стойност на нашата структора е:
 
 ```go
 goku := Saiyan{
@@ -418,22 +423,22 @@ goku := Saiyan{
 }
 ```
 
-*Note:* The trailing `,` in the above structure is required. Without it, the compiler will give an error. You'll appreciate the required consistency, especially if you've used a language or format that enforces the opposite.
+*Забележка:* Добавянето на `,` към структурата показана по-горе е задължително, в противен случай компилаторът ще ни даде грешка. Това би било доста полезно, когато се изисква стилност, особено, ако често програмирате на езици, които не го изискват. 
 
-We don't have to set all or even any of the fields. Both of these are valid:
+Няма нужда да конфигурираме всички полета. И двата варианта са валидни:
 
 ```go
 goku := Saiyan{}
 
-// or
+// или
 
 goku := Saiyan{Name: "Goku"}
 goku.Power = 9000
 ```
 
-Just like unassigned variables have a zero value, so do fields.
+Както променливите могат да имат стойност "0", така и полетата.
 
-Furthermore, you can skip the field name and rely on the order of the field declarations (though for the sake of clarity, you should only do this for structures with few fields):
+Още повече, може името на поледо да бъде пропуснато и да се разчита на пореднотста на декларациите на полетата (though for the sake of clarity, you should only do this for structures with few fields):
 
 ```go
 goku := Saiyan{"Goku", 9000}
