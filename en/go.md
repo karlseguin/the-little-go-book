@@ -115,7 +115,7 @@ if name == "Leto" {
 }
 ```
 
-And in more complicated cases, parentheses are still useful:
+И в по сложните случаи, скобите са все още полезни:
 
 ```go
 if (name == "Goku" && power > 9000) || (name == "gohan" && power < 4000)  {
@@ -144,48 +144,49 @@ func main() {
 }
 ```
 
-Запишете го като `main.go`. Можете да го запишете, където пожелаете; не е нужно да бъде поставен в работната директория на Go.
+Записваме го като `main.go`. Можем и да го запишем, където пожелаем; не е нужно да бъде поставен в работната директория на Go.
 
 
-Next, open a shell/command prompt and change the directory to where you saved the file. For me, that means typing `cd ~/code`.
+Сега, отворете командния ред и променете директорията, където записахте файал.а За мен, това означава да напиша `cd ~/code`.
 
-Finally, run the program by entering:
+И накрая, стартираме програмата като напишете:
 
 ```
 go run main.go
 ```
 
-If everything worked, you should see *it's over 9000!*.
+Ако всичко сработи, трябва да видим *it's over 9000!*.
 
-But wait, what about the compilation step? `go run` is a handy command that compiles *and* runs your code. It uses a temporary directory to build the program, executes it and then cleans itself up. You can see the location of the temporary file by running:
+Но чакай, какво се случи с компилиращите стъпки?  `go run` е команда която компилира *и* стартира кода. Ползва временна директория да създаде програмата, изпълнява я и след това почиства след себе си. Можете да видите мястото на временният файл като използвате:
 
 ```
 go run --work main.go
 ```
 
-To explicitly compile code, use `go build`:
+За да компилираме кода, използваме `go build`:
 
 ```
 go build main.go
 ```
 
-This will generate an executable `main` which you can run. On Linux / OSX, don't forget that you need to prefix the executable with dot-slash, so you need to type `./main`.
+Това ще направи изпълняем файл  `main` който може да пуснете. На Linux / OSX, не забравяйте, че трябва да добавите точка-наклонена черта `./main`.
 
-While developing, you can use either `go run` or `go build`. When you deploy your code however, you'll want to deploy a binary via `go build` and execute that.
+Докато програмираме може да използваме `go run` или `go build`. Но когато искаме да качите нашият код някъде, по-добре да го компилираме до бинарен файл използвайки `go build` и да го изпълним.
+
 
 ### Main
 
-Hopefully, the code that we just executed is understandable. We've created a function and printed out a string with the built-in `println` function. Did `go run` know what to execute because there was only a single choice? No. In Go, the entry point to a program has to be a function called `main` within a package `main`.
+Да се надяваме, че кодът който изпълнихме е разбираем. Направихме фукнция и принтирахме низ с вградената функция `println`. Дали `go run` знае какво да изпълни, защото имаше само един избор? Не. В Go, входната точка към програмата трябва да бъде функция наречена `main` в пакета `main`.
 
-We'll talk more about packages in a later chapter. For now, while we focus on understanding the basics of Go, we'll always write our code within the `main` package.
+Ще говорим за този пакет, в по късна глава. За момента, докато се фокусираме да разберем основните на Go, винаги ще пишем нашият код в рамките на `main` пакета.
 
-If you want, you can alter the code and change the package name. Run the code via `go run` and you should get an error. Then, change the name back to `main` but use a different function name. You should see a different error message. Try making those same changes but use `go build` instead. Notice that the code compiles, there's just no entry point to run it. This is perfectly normal when you are, for example, building a library.
+Ако искаме,може да променим кода и да сменим името на пакета. Пускаме кода използваки `go run` и ще видим грешка. Тогава, нека да върнем обратно името на  `main`, но този път ще сменим името на фукнцията. Сега имаме другра грешка. Можете да опитате различни комбинации на промени, но вместо това е по добре да използвате  `go build`. Докато кодът се компилира, се забелязва, че просто няма начална точка от къде да се изпълни. Това е абсолютно нормално, когато например, изграждаме библиотека
+
 
 ## Imports
+Go има доста вградени фунцкии, като `println`, които могат да бъдат използвани без препратки. Няма да стигнем много далеч, без помоща на стандартните библиотеки и накрая използваме библиотеки от трети страни. В Go, ключовата дума `import`, се иползва за деклариране на пакетите, които се използват от кода в съответния файл. 
 
-Go has a number of built-in functions, such as `println`, which can be used without reference. We can't get very far though, without making use of Go's standard library and eventually using third-party libraries. In Go, the `import` keyword is used to declare the packages that are used by the code in the file.
-
-Let's change our program:
+Нека стартираме нашта програма:
 
 ```go
 package main
