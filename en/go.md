@@ -53,21 +53,21 @@ Normally, I put my projects inside of `~/code`. For example, `~/code/blog` conta
 In short, create a `go` folder with a `src` subfolder wherever you expect to put your projects.
 
 ## OSX / Linux
-Download the `tar.gz` for your platform. For OSX, you'll most likely be interested in `go#.#.#.darwin-amd64-osx10.8.tar.gz`, where `#.#.#` is the latest version of Go.
+Изтеглете файла с разширение `tar.gz` за вашета платформа. За OSX, най-вероятно ще трябва да използвате `go#.#.#.darwin-amd64-osx10.8.tar.gz`, където `#.#.#` е последната версия на Go. 
 
-Extract the file to `/usr/local` via `tar -C /usr/local -xzf go#.#.#.darwin-amd64-osx10.8.tar.gz`.
+Разархивирайте файлът в `/usr/local` чрез командата `tar -C /usr/local -xzf go#.#.#.darwin-amd64-osx10.8.tar.gz`.
 
-Set up two environment variables:
+Сега трябва да зададем две променливи
 
-  1. `GOPATH` points to your workspace, for me, that's `$HOME/code/go`.
-  2. We need to append Go's binary to our `PATH`.
+  1. `GOPATH` сочи към работното място, за мен например това е `$HOME/code/go`.
+  2. Сега трябва да зададем пътят на бинарния файл на Go към нашият `път`.
 
-You can set these up from a shell:
+Можем да направим това от командния ред:
 
     echo 'export GOPATH=$HOME/code/go' >> $HOME/.profile
     echo 'export PATH=$PATH:/usr/local/go/bin' >> $HOME/.profile
 
-You'll want to activate these variables. You can close and reopen your shell, or you can run `source $HOME/.profile`.
+Ще трябва да активираме тези промениливи. Нека да затворим и да отворим отново командния ред, или просто да напишем `source $HOME/.profile`.
 
 Type `go version` and you'll hopefully get an output that looks like `go version go1.3.3 darwin/amd64`.
 
