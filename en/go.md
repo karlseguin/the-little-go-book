@@ -25,32 +25,32 @@
 
 Go е направен за системен език (e.g., operating systems, device drivers) и насочен към C и C++ програмисти. Според Go team, и което е вярно за мен, application developers, not system developers са основните Go потребители. Защо ? Не мога да кажа от страна на системните програмисти, но за тези които изграждат уеб сайтове, съвриси, десктоп приложения и подобни, it partially comes down to the emerging need for a class of systems that sit somewhere in between low-level system applications and higher-level applications
 
+Може това са събощения, кеш, тежко изчисление и анализ на данни, команден интерфейс, събиране на данни или наблюдение. Не знам какъв етитет да му поставя, но по време на курса на моята кариера, докато сложноста на системите продълажаваше да се разраства и успоредноста често се измерва в десетки от хиляди, имаше все по голяма нужда от персонализирана инфраструкторна система. Такава система *може* да бъде изградена с Ruby или Python или нещо друго (и много хора го правят), но тези системи могат да се възползват от система която е по способна и с по добра скорост. Подобно, Go *може* да се използваза играждане на уеб сайтове (и много хора го правят), но аз все още предпочитам да използвам Node или Ruby за такива системи.
 
-Maybe it's a messaging, caching, computational-heavy data analysis, command line interface, logging or monitoring. I don't know what label to give it, but over the course of my career, as systems continue to grow in complexity and as concurrency frequently measures in the tens of thousands, there's clearly been a growing need for custom infrastructure-type systems. You *can* build such systems with Ruby or Python or something else (and many people do), but these types of systems can benefit from a more rigid type system and greater performance. Similarly, you *can* use Go to build websites (and many people do), but I still prefer, by a wide margin, the expressiveness of Node or Ruby for such systems.
+Go има много други места, в които превъзходства. Например, няма зависимости на пакети, когато се стартира компилирана Go програма. Няма да се притесняваме за ако нашите клиенти имат Ruby или JVM инсталирани, и какви версии имат. Поради тази причина Go става все по-популярен като ези за програми използващи командния ред или други програми, които трябва да се разпостраняват (например софтуер за събиране на логове).
 
-There are other areas where Go excels. For example, there are no dependencies when running a compiled Go program. You don't have to worry if your users have Ruby or the JVM installed, and if so, what version. For this reason, Go is becoming increasingly popular as a language for command-line interface programs and other types of utility programs you need to distribute (e.g., a log collector).
+Казано по ясно, ученето на Go е добре уползотворено време. Няма да прекарате дълги часове в учене на Go, докато дойде момента в който ще започнете да виждате практически ползи. 
 
-Put plainly, learning Go is an efficient use of your time. You won't have to spend long hours learning or even mastering Go, and you'll end up with something practical from your effort.
+## Бележка от Автора
 
-## A Note from the Author
+Докато писах тази книга се чувствах доста дискомфортно поради няколко причини. Първата е че Go имат собствена документазия, по конкретно [Effective Go](https://golang.org/doc/effective_go.html), е доста силна.
 
-I've hesitated writing this book for a couple reasons. The first is that Go's own documentation, in particular [Effective Go](https://golang.org/doc/effective_go.html), is solid.
+Другата причина е, дискомфорта ми от писане на книга за език. Когато написах The Little MongoDB Book, можех да предположа, че повечето читатели имат основни познания по релационни бази и модели. С книгата The liitle Redis Book, можеше да се предположи, че читателят е запоснат с  key value store and take it from there.
 
-The other is my discomfort at writing a book about a language. When I wrote The Little MongoDB Book, it was safe to assume most readers understood the basics of relational database and modeling. With The Little Redis Book, you could assume a familiarity with a key value store and take it from there.
-
-As I think about the paragraphs and chapters that lay ahead, I know that I won't be able to make those same assumptions. How much time do you spend talking about interfaces knowing that for some, the concept will be new, while others won't need much more than *Go has interfaces*? Ultimately, I take comfort in knowing that you'll let me know if some parts are too shallow or others too detailed. Consider that the price of this book.
+Докато мислех как да изградя параграфите и главите, чрез които да поставя основите, знаех, че тези предположения няма да са възможни. Колко време прекарваш в говорене за интерфейсите, знаейки, че за някого, тази концепция е изцяло нова, докато за други няма да има нужда повече от *Go има интерфейси*? Ще се чувствам по добре, знаеки, че ще ме уведомите ако някои части са по повърхностни, а други по детайлни.
+Нека имаме впредвид цената на тази книга. 
 
 # Getting Started
 
-If you're looking to play a little with Go, you should check out the [Go Playground](https://play.golang.org/) which lets you run code online without having to install anything. This is also the most common way to share Go code when seeking help in [Go's discussion forum](https://groups.google.com/forum/#!forum/golang-nuts) and places like StackOverflow.
+Ако искате да си поиграете с Go, трябва да проверите [Go Playground](https://play.golang.org/), което ви позволява да изпълните вашият код онлайн, без да инсталирате каквото и да е било. Също така, това е много често използвам метод за споделяне на вашият код, когато се нуждаете от помощ например в [Go форумът](https://groups.google.com/forum/#!forum/golang-nuts) и места като StackOverflow.
 
-Installing Go is straightforward. You can install it from source, but I suggest you use one of the pre-compiled binaries. When you [go to the download page](https://golang.org/dl/), you'll see installers for various platforms. Let's avoid these and learn how to set up Go ourselves. As you'll see, it isn't hard.
+Инсталирането на Go e доста лестно. Може да го инсталите чрез неговият код, но аз ви предлагам по-лесният вариант като използвате вече компилираните файлове. Кога отидете на [go страница за сваляне](https://golang.org/dl/), ще видите инсталатори, за различните платформи. Нека да избегнем това и да научим как да настройм Go сами. Както ще забележете, не е трудно.
 
-Except for simple examples, Go is designed to work when your code is inside a workspace. The workspace is a folder composed of `bin`, `pkg` and `src` subfolders. You might be tempted to force Go to follow your own style - don't.
+Освен за лесни примери, Go е структориран да работи, когато вашият код е в работна среда. Работна среда е папката, в която се съдържат подпапките `bin`, `pkg` and `src`. Може да бъдете изкушени да накарате Go да следва вашият стил на работа - недейте.
 
-Normally, I put my projects inside of `~/code`. For example, `~/code/blog` contains my blog. For Go, my workspace is `~/code/go` and my Go-powered blog would be in `~/code/go/src/blog`.
+Обикновено, аз поставям моят проект в `~/code`. Например, `~/code/blog` съдържа моят блог. За Go, моята работна среда е `~/code/go` и моят блог базиран на Go ще бъде в `~/code/go/src/blog`.
 
-In short, create a `go` folder with a `src` subfolder wherever you expect to put your projects.
+Накратко, направете папка `go` с `src` подпапка, където ще поставяте вашите проекти.
 
 ## OSX / Linux
 Изтеглете файла с разширение `tar.gz` за вашета платформа. За OSX, най-вероятно ще трябва да използвате `go#.#.#.darwin-amd64-osx10.8.tar.gz`, където `#.#.#` е последната версия на Go. 
@@ -69,21 +69,21 @@ In short, create a `go` folder with a `src` subfolder wherever you expect to put
 
 Ще трябва да активираме тези промениливи. Нека да затворим и да отворим отново командния ред, или просто да напишем `source $HOME/.profile`.
 
-Type `go version` and you'll hopefully get an output that looks like `go version go1.3.3 darwin/amd64`.
+Напишете `go version` и трябва да получите резултат приличащ на `go version go1.3.3 darwin/amd64`. 
 
 ## Windows
-Download the latest zip file. If you're on an x64 system, you'll want `go#.#.#.windows-amd64.zip`, where `#.#.#` is the latest version of Go.
+Изтеглете последният файл с разширение zip. Ако работите на x64 система, ще ви трябва `go#.#.#.windows-amd64.zip`, където `#.#.#` е последната версия на Go.
 
-Unzip it at a location of your choosing. `c:\Go` is a good choice.
+Разархивирайте фалът където пожелаете.`c:\Go` е добър избов. 
 
-Set up two environment variables:
+Нека да зададем променливите на средите:
 
-  1. `GOPATH` points to your workspace. That might be something like `c:\users\goku\work\go`.
-  2. Add `c:\Go\bin` to your `PATH` environment variable.
+  1. `GOPATH` трябва да бъде насочено към работната среда. Това може да изглежда по следният начин `c:\users\goku\work\go`.
+  2. Добавете `c:\Go\bin` към вашият `PATH`.
 
-Environment variables can be set through the `Environment Variables` button on the `Advanced` tab of the `System` control panel. Some versions of Windows provide this control panel through the `Advanced System Settings` option inside the `System` control panel.
+Променливите на средите могат да бъдат настроени чрез `Environment Variables` бутона на `Advanced` прозорец на `System` контролен панел. Някой версии на Windows предлагат контролния панел чрез `Advanced System Settings` опция, позиционирана в `System` контролен панел.
 
-Open a command prompt and type `go version`. You'll hopefully get an output that looks like `go version go1.3.3 windows/amd64`.
+Отворете командният ред и напишете `go version`. Трябва да получите резултат приличащ на този `go version go1.3.3 windows/amd64`.
 
 # Chapter 1 - The Basics
 Go е компилиран, статичен език със синтаксис наподобяваш C и garbage collection ( система за почистване на паметта). Какво означава това?
