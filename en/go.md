@@ -298,10 +298,9 @@ func main() {
 }
 ```
 
-The compiler will complain with *no new variables on left side of :=*. This means that when we first declare a variable, we use `:=` but on subsequent assignment, we use the assignment operator `=`. This makes a lot of sense, but it can be tricky for your muscle memory to remember when to switch between the two.
+Компилаторът ще се оплачи със следната грешка *no new variables on left side of :=*.. Това означава, че когато за първи път декларираме променлива, използваме `:=`, но на последващо предаване на стойност, използваме оператора  `=`. В това има много смисъл, но може да бъде трудно за човешката памет, кога трябва да се използват двата оператора. 
 
-If you read the error message closely, you'll notice that *variables* is plural. That's because Go lets you assign multiple variables (using either `=` or `:=`):
-
+Ако се вгледате в грешката, ще забележете че *variables* е в многожествено число. Това е така, защото Go ви позволява да предавате стойност на няколко променливи ( използваки `=` или `:=`):
 
 ```go
 func main() {
@@ -310,7 +309,7 @@ func main() {
 }
 ```
 
-As long as one of the variables is new, `:=` can be used. Consider:
+Докато има поне една променлива, която е нова, операторът `:=` може да бъде използван. Например:
 
 ```go
 func main() {
@@ -322,9 +321,9 @@ func main() {
 }
 ```
 
-Although `power` is being used twice with `:=`, the compiler won't complain the second time we use it, it'll see that the other variable, `name`, is a new variable and allow `:=`. However, you can't change the type of `power`. It was declared (implicitly) as an integer and thus, can only be assigned integers.
+Докато `power` се използва два пъти с оператора `:=`, компилаторът няма да се оплаква за втория път, когато го използваме, защото ще види, че другата променлива `name` е нова за него и ще позволи `:=`. Въпреки това, смяната на типа на променливата `power` е невъзможно. По рано тя беше декларирана ( изрично ) като integer и за това, могат да пъдат предавани числа като стойност. 
 
-For now, the last thing to know is that, like imports, Go won't let you have unused variables. For example,
+За сега, последното нещо, което трябва да знаем, е че както импортването на пакети, така и Go няма да позволи да има променливи, които не се използват. Като например:
 
 ```go
 func main() {
@@ -332,10 +331,9 @@ func main() {
   fmt.Printf("default power is %d\n", power)
 }
 ```
+няма да се компилира, защото променливата `name` е декларирана, но не е използвана. Така както неиползваните пакети ще предизвикат проблеми, но като цяло мисля, че това доста помага да държим кода чист и читлив.
 
-won't compile because `name` is declared but not used. Like unused imports it'll cause some frustration, but overall I think it helps with code cleanliness and readability.
-
-There's more to learn about declaration and assignments. For now, remember that you'll use `var NAME TYPE` when declaring a variable to its zero value, `NAME := VALUE` when declaring and assigning a value, and `NAME = VALUE` when assigning to a previously declared variable.
+Има още доста неща, които да научим за декларирането и предаването на стойности. За сега, запомнете, че ще използваме `var NAME TYPE`, когато деклрарираме променливи с празна стойност, `NAME := VALUE`, когато декларираме и предаваме стойност, и `NAME = VALUE`, когато предаваме стойност на предишно декларирана променлива. 
 
 ## Function Declarations
 
