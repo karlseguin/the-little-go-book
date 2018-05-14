@@ -952,10 +952,9 @@ func main() {
 Take some time and play with the above code. Try variations. See what happens if you change copy to something like `copy(worst[2:4], scores[:5])`, or what if you try to copy more or less than `5` values into `worst`?
 
 ## Maps
+Maps в Go са каквото в другите езици се нарича хеш таблици или речници. Те работят, както може да предположите: дефинира се ключ и стойност, и може да се върне, постави или изтрие стойност от него. 
 
-Maps in Go are what other languages call hashtables or dictionaries. They work as you expect: you define a key and value, and can get, set and delete values from it.
-
-Maps, like slices, are created with the `make` function. Let's look at an example:
+Maps, както slices, се създават с `make` функция. Нека да разгледаме следният пример:
 
 ```go
 func main() {
@@ -968,8 +967,7 @@ func main() {
   fmt.Println(power, exists)
 }
 ```
-
-To get the number of keys, we use `len`. To remove a value based on its key, we use `delete`:
+За да се вземе номерът на ключовете, използваме `len`. За да премахнете стойност базинара на ключ, използваме delete`:
 
 ```go
 // returns 1
@@ -979,15 +977,15 @@ total := len(lookup)
 delete(lookup, "goku")
 ```
 
-Maps grow dynamically. However, we can supply a second argument to `make` to set an initial size:
+Maps се разрастрават динамично. Въпреки това, може да използваме втори аргумент към `make` за да сложим първоначален размер:
 
 ```go
 lookup := make(map[string]int, 100)
 ```
 
-If you have some idea of how many keys your map will have, defining an initial size can help with performance.
+Ако имате представа колко ключове ще има вашият map, дефинирането на първоначалният размер ще подобри производителноста. 
 
-When you need a map as a field of a structure, you define it as:
+Ако се нуждаете от map като поле от структора, може да бъде дефинирана по следният начин:
 
 ```go
 type Saiyan struct {
@@ -996,7 +994,7 @@ type Saiyan struct {
 }
 ```
 
-One way to initialize the above is via:
+Единят от вариантите да се инциализира горният пример е:
 
 ```go
 goku := &Saiyan{
@@ -1006,7 +1004,7 @@ goku := &Saiyan{
 goku.Friends["krillin"] = ... //todo load or create Krillin
 ```
 
-There's yet another way to declare and initialize values in Go. Like `make`, this approach is specific to maps and arrays. We can declare as a composite literal:
+Има и друг вариант да се декларира и инициализира стойности в Go. Както `make`, този метод е специфичен за maps и масиви. Може да бъде декларирано и по следният начин:
 
 ```go
 lookup := map[string]int{
@@ -1015,7 +1013,7 @@ lookup := map[string]int{
 }
 ```
 
-We can iterate over a map using a `for` loop combined with the `range` keyword:
+Можем да обходим map използвайки цикълът `for` комбиниран с ключовата дума `range`:
 
 ```go
 for key, value := range lookup {
@@ -1023,7 +1021,7 @@ for key, value := range lookup {
 }
 ```
 
-Iteration over maps isn't ordered. Each iteration over a lookup will return the key value pair in a random order.
+Обходжането на maps не е последователно. Всяко обхождане ще върне ключа и неговата стойност в разбъркан ред.
 
 ## Pointers versus Values
 
