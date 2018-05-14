@@ -204,17 +204,17 @@ func main() {
 }
 ```
 
-Which you can run via:
+Което може да бъде стартирано чрез командата:
 
 ```
 go run main.go 9000
 ```
 
-We're now using two of Go's standard packages: `fmt` and `os`. We've also introduced another built-in function `len`. `len` returns the size of a string, or the number of values in a dictionary, or, as we see here, the number of elements in an array. If you're wondering why we expect 2 arguments, it's because the first argument -- at index 0 -- is always the path of the currently running executable. (Change the program to print it out and see for yourself.)
+Сега ние използваме две от стандартните библиотеки на Go: `fmt` и `os`. Също така представихме една от вградените функции `len`. `len` връща размера на стринг, или броят на стойности в директория, или както видяхме, броят на елементите в масив. Ако се чудите, защо очакваме 2 аргумента, това е защото първият аргумент -- в индекс 0 -- е винаги пътя на текущата вървяща програма. ( Сменете пгромата да покаже 1-вият аргумент и ще видите. )
 
-You've probably noticed we prefix the function name with the package, e.g., `fmt.Println`. This is different from many other languages. We'll learn more about packages in later chapters. For now, knowing how to import and use a package is a good start.
+Вероятно сте забелязали, че добавихме името на функцията към пакета, например `fmt.Println`. Това е различно от много други езици. Ще разгледаме по-подробно пакетите в по късните глави. За сега, ни е необходимо само да знем как да вмъкваме пакети и да ги използваме.
 
-Go is strict about importing packages. It will not compile if you import a package but don't use it. Try to run the following:
+Go е стриктен, когато става въпрос за вмъкването на пакети. Програмата няма да бъде компилирана, ако вмъкнете проект и не го изпозлвате. Пробвайте да стартирате този код:
 
 ```go
 package main
@@ -228,25 +228,25 @@ func main() {
 }
 ```
 
-You should get two errors about `fmt` and `os` being imported and not used. Can this get annoying? Absolutely. Over time, you'll get used to it (it'll still be annoying though). Go is strict about this because unused imports can slow compilation; admittedly a problem most of us don't have to this degree.
+Ще получите две грешки за това, че fmt` и `os` са вмъкнати и не са използвани. Може ли това да бъде досадно? Абсолютно. Разбира се, с времето ще свикнете ( но все още ще бъде досадно). Go е стриктен в това отношение, защотот вмъкнатите пакети, които не се иползват, могат да забавят компилацията, несъмнено проблемът е в нас. 
 
-Another thing to note is that Go's standard library is well documented. You can head over to <https://golang.org/pkg/fmt/#Println> to learn more about the `Println` function that we used. You can click on that section header and see the source code. Also, scroll to the top to learn more about Go's formatting capabilities.
+Друго нещо, което трябва да отблежем е, че стандартната библиотека на Go е доста добр документирана. Може да разгледате на <https://golang.org/pkg/fmt/#Println> за да се запознаете повече с функцията `Println`, която използвахме. Може да натиснете на главата на секцията и ще видите кодът. Също, придвижете се най-отгоре за да научите повече за форматиращите способности на Go. 
 
-If you're ever stuck without internet access, you can get the documentation running locally via:
-
+Ако пък случайно, имате проблеми с интернета, можете да получите документацията като изпълните следната команда:
 ```
 godoc -http=:6060
 ```
 
-and pointing your browser to `http://localhost:6060`
+и насочите вашият браузър към `http://localhost:6060`
 
-## Variables and Declarations
+## Променливи и декларации
 
-It'd be nice to begin and end our look at variables by saying *you declare and assign to a variable by doing x = 4.* Unfortunately, things are more complicated in Go. We'll begin our conversation by looking at simple examples. Then, in the next chapter, we'll expand this when we look at creating and using structures. Still, it'll probably take some time before you truly feel comfortable with it.
+Щеше да бъде приятно, ако можете да започнем и да приключим изучаването на променливите като кажем *стойност на променлива се предава като напраим x = 4.*
+За съжаление, нещата са по сложни в Go. Ще започнем нашият разговор като разгледаме по-лесни примери. След това, в следващата глава, ще разширим нещата, когато разглеждаме изграждането и иползването на структори. Въпреки това, вороятно ще отнеме известно време, докато започнете да се чувствате удобно. 
 
-You might be thinking *Woah! What can be so complicated about this?* Let's start looking at some examples.
+Може да си кажете *Уау! Какво толкова може да бъде сложно?* Нека да погледнем няколко примера.
 
-The most explicit way to deal with variable declaration and assignment in Go is also the most verbose:
+Най-точният начин да декларираме променлива и да и придадем стойност в Go е също и най многословният:
 
 ```go
 package main
@@ -262,19 +262,17 @@ func main() {
 }
 ```
 
-Here, we declare a variable `power` of type `int`. By default, Go assigns a zero value to variables. Integers are assigned `0`, booleans `false`, strings `""` and so on. Next, we assign `9000` to our `power` variable. We can merge the first two lines:
+В примера, ние деклрираме променливата `power` от тип `int`. По подразбиране, Go придава празна стойност на променливите. На променливите от тип  Integer се придава `0`, booleans `false`, стрингове `""` и така нататък. Следващата стъпка е, да предадем стойност `9000` към променливата `power`. Можем да обединим първите два реда по следният начин:
 
 ```go
 var power int = 9000
 ```
-
-Still, that's a lot of typing. Go has a handy short variable declaration operator, `:=`, which can infer the type:
+Но все още, това е много писане. Go има съкратен вариант за деклариране на променливи и това е чрез оператора `:=`, който може да открие типа:
 
 ```go
 power := 9000
 ```
-
-This is handy, and it works just as well with functions:
+Това е доста полезно, и също работи с фукнции:
 
 ```go
 func main() {
@@ -286,7 +284,7 @@ func getPower() int {
 }
 ```
 
-It's important that you remember that `:=` is used to declare the variable as well as assign a value to it. Why? Because a variable can't be declared twice (not in the same scope anyway). If you try to run the following, you'll get an error.
+Важно е да се запомни че `:=` се използва за деклариране на променлива, докато се придава стойност. Защо? Защото променлива не може да бъде декларирана два път ( поне не и по същият начин ). Ако се опитате да изпълните следното, ще получите грешка:
 
 ```go
 func main() {
