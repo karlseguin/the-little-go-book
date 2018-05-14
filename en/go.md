@@ -228,7 +228,7 @@ func main() {
 }
 ```
 
-Ще получите две грешки за това, че fmt` и `os` са вмъкнати и не са използвани. Може ли това да бъде досадно? Абсолютно. Разбира се, с времето ще свикнете ( но все още ще бъде досадно). Go е стриктен в това отношение, защотот вмъкнатите пакети, които не се иползват, могат да забавят компилацията, несъмнено проблемът е в нас. 
+Ще получите две грешки за това, че `fmt` и `os` са вмъкнати и не са използвани. Може ли това да бъде досадно? Абсолютно. Разбира се, с времето ще свикнете ( но все още ще бъде досадно). Go е стриктен в това отношение, защотот вмъкнатите пакети, които не се иползват, могат да забавят компилацията, несъмнено проблемът е в нас. 
 
 Друго нещо, което трябва да отблежем е, че стандартната библиотека на Go е доста добр документирана. Може да разгледате на <https://golang.org/pkg/fmt/#Println> за да се запознаете повече с функцията `Println`, която използвахме. Може да натиснете на главата на секцията и ще видите кодът. Също, придвижете се най-отгоре за да научите повече за форматиращите способности на Go. 
 
@@ -337,7 +337,7 @@ func main() {
 
 ## Function Declarations
 
-This is a good time to point out that functions can return multiple values. Let's look at three functions: one with no return value, one with one return value, and one with two return values.
+Това е добър момент да ви покажа, че фунцкиитемогат да върнат няколко стойности. Нека разгледаме три функции: една, която не връща стойност, една която връща една стойност, и една която връща две стойности.
 
 ```go
 func log(message string) {
@@ -350,16 +350,14 @@ func power(name string) (int, bool) {
 }
 ```
 
-We'd use the last one like so:
-
+Ще използваме последния като:
 ```go
 value, exists := power("goku")
 if exists == false {
   // handle this error case
 }
 ```
-
-Sometimes, you only care about one of the return values. In these cases, you assign the other values to `_`:
+Понякога, ни трябва само една от върнатите стойност. В тези сутиации, предаваме стойност на другата променлива към `_`:
 
 ```go
 _, exists := power("goku")
@@ -368,9 +366,9 @@ if exists == false {
 }
 ```
 
-This is more than a convention. `_`, the blank identifier, is special in that the return value isn't actually assigned. This lets you use `_` over and over again regardless of the returned type.
+Това е повече от условие.  `_`, празният идентификатор, е специален това че върнатата стойност, всъщност не е записана. Това ви позволява да иползвате `_` отново и отново независимо от върнатия тип.
 
-Finally, there's something else that you're likely to run into with function declarations. If parameters share the same type, we can use a shorter syntax:
+Накрая, има още нещо, което ще искате да използвате докато изграждате деклариране с фунцкии. Ако параметрите споделят същият тип, можем да иползваме по кратък синтаксис, като например: 
 
 ```go
 func add(a, b int) int {
@@ -378,15 +376,15 @@ func add(a, b int) int {
 }
 ```
 
-Being able to return multiple values is something you'll use often. You'll also frequently use `_` to discard a value. Named return values and the slightly less verbose parameter declaration aren't that common. Still, you'll run into all of these sooner than later so it's important to know about them.
+Възможноста да се връщат няколко променливи, е нещо което ще използвате често. Другото нещо, което ще използвате често е  `_`, за да изоставите стойност. Найменованите върнати стойности и по-малко подоробните декларирани параметри не са толкова чести. Въпреки това, ще ги използвате рано или късно, за това е важно да сте запознати с тях.
 
 ## Before You Continue
 
-We looked at a number of small individual pieces and it probably feels disjointed at this point. We'll slowly build larger examples and hopefully, the pieces will start to come together.
+Разгледахме някои от малките индивидуални части и най-вероятно се чувствате объркан в този момент. Бавно ще продължим да изграждаме по-големи примери и се надявам, частите да започнат да се нарвъзват.
 
-If you're coming from a dynamic language, the complexity around types and declarations might seem like a step backwards. I don't disagree with you. For some systems, dynamic languages are categorically more productive.
+Ако идвате от динамичен език, сложноста около типовете и деклараците, може да ви се струва като стъпка назад. Няма да да отрека. За някои системи, динамичните езици са катерогично по добре. 
 
-If you're coming from a statically typed language, you're probably feeling comfortable with Go. Inferred types and multiple return values are nice (though certainly not exclusive to Go). Hopefully as we learn more, you'll appreciate the clean and terse syntax.
+Ако идвате от статитчен език, вероятно ще се чувствате добре с Go. Предполагаемите типове и множеството върнати стойности са приятни ( въпреки че не са екслузивни за Go ). Надявам се докато учим все почече, ще започнете да оценявате чистия и сбит синтаксис. 
 
 # Chapter 2 - Structures
 
