@@ -418,7 +418,7 @@ goku := Saiyan{
 }
 ```
 
-*Забележка:* Добавянето на `,` към структурата показана по-горе е задължително, в противен случай компилаторът ще ни даде грешка. Това би било доста полезно, когато се изисква стилност, особено, ако често програмирате на езици, които не го изискват. 
+*Забележка:* Добавянето на `,` към структурата, показана, по-горе е задължително, в противен случай компилаторът ще ни даде грешка. Това би било доста полезно, когато се изисква стилност, особено, ако често програмирате на езици, които не го изискват. 
 
 Няма нужда да конфигурираме всички полета. И двата варианта са валидни:
 
@@ -433,17 +433,17 @@ goku.Power = 9000
 
 Както променливите могат да имат стойност "0", така и полетата.
 
-Още повече, може името на поледо да бъде пропуснато и да се разчита на пореднотста на декларациите на полетата (though for the sake of clarity, you should only do this for structures with few fields):
+Още повече, може името на полето да бъде пропуснато и да се разчита на пореднотста на декларациите на полетата (though for the sake of clarity, you should only do this for structures with few fields):
 
 ```go
 goku := Saiyan{"Goku", 9000}
 ```
 
-What all of the above examples do is declare a variable `goku` and assign a value to it.
+Това, което всички от по горните примери правят, е да декларират променлива `goku` и да придадат стойност към нея.
 
-Many times though, we don't want a variable that is directly associated with our value but rather a variable that has a pointer to our value. A pointer is a memory address; it's the location of where to find the actual value. It's a level of indirection. Loosely, it's the difference between being at a house and having directions to the house.
+Много от пътите, ние не искаме променливата да е директно асоцирана със стойност, вместо това използваме променлива която има pointer към стойност.  pointer е адрес от паметта; това е мястото където се намира същинската стойност. Това е извъртане на нещата. Представете си го, като слаба връзка между разликата от това да сте в къща и да имате опътване как да стигнете до къщата.
 
-Why do we want a pointer to the value, rather than the actual value? It comes down to the way Go passes arguments to a function: as copies. Knowing this, what does the following print?
+Защо бихме искали pointer към стойност, вместо да имаме истинската стойност? Това идва от начина по който Go предава аргументите към фунцкия: като копия. Знаейки това, какво би ни извадил като резултат следният пример?
 
 ```go
 func main() {
@@ -457,7 +457,7 @@ func Super(s Saiyan) {
 }
 ```
 
-The answer is 9000, not 19000. Why? Because `Super` made changes to a copy of our original `goku` value and thus, changes made in `Super` weren't reflected in the caller. To make this work as you probably expect, we need to pass a pointer to our value:
+Отговорът е 9000, не 19000. Защо? Защото `Super` направи промени по копието на нашата оригинална `goku` стойност и за това, промените направени в `Super` не бяха отразени. За да направим това да работи, вероятно предполагате, че трябва да предадем pointer към стойноста:
 
 ```go
 func main() {
@@ -471,11 +471,11 @@ func Super(s *Saiyan) {
 }
 ```
 
-We made two changes. The first is the use of the `&` operator to get the address of our value (it's called the *address of* operator). Next, we changed the type of parameter `Super` expects. It used to expect a value of type `Saiyan` but now expects an address of type `*Saiyan`, where `*X` means *pointer to value of type X*. There's obviously some relation between the types `Saiyan` and `*Saiyan`, but they are two distinct types.
+Направихме две промени. Първата е използването на оператора `&` за да получим адреса на стойноста ( наричаме го *address of* оператор). След това променихме типа на параметъра `Super`, който очаква. Преди очакваше стойност от тип `Saiyan`, но сега очаква адреса на типа `*Saiyan`, където `*X` означава *pointer към стойност от тип X*. Очевидно има някаква връзка между типовете `Saiyan` и `*Saiyan`, но те са два различни типа.
 
-Note that we're still passing a copy of `goku's` value to `Super` it just so happens that `goku's` value has become an address. That copy is the same address as the original, which is what that indirection buys us. Think of it as copying the directions to a restaurant. What you have is a copy, but it still points to the same restaurant as the original.
+Отблежете това, че ние все още предаваме копие от `goku's` към стойността `Super`, просто се случва, че стойността `goku's` става адрес. Копието е в същият адрес като оригинала, което е това от което се възползваме. Представете си го че е копие от пътя към ресторат. Това което имате е копие, но в същият момент ви указва същият ресторант като оригинала.
 
-We can prove that it's a copy by trying to change where it points to (not something you'd likely want to actually do):
+Можем да докачем, че е копие, като се опитаме да сменим към това което ни указва ( не е нещо което обикновено искате да направите):
 
 ```go
 func main() {
@@ -489,11 +489,11 @@ func Super(s *Saiyan) {
 }
 ```
 
-The above, once again, prints 9000. This is how many languages behave, including Ruby, Python, Java and C#. Go, and to some degree C#, simply make the fact visible.
+Горният пример, отново ни показва 9000 като резултат. По този начин много от езиците се държат, включително Ruby, Python, Java и C#. Go, и до някаква степен C#, просто го правят видимо.
 
-It should also be obvious that copying a pointer is going to be cheaper than copying a complex structure. On a 64-bit machine, a pointer is 64 bits large. If we have a structure with many fields, creating copies can be expensive. The real value of pointers though is that they let you share values. Do we want `Super` to alter a copy of `goku` or alter the shared `goku` value itself?
+Също така, би трябва да е очевидно, че копирането на адрес ще бъде по удобно, от копирането на сложна структура. На 64 битова машина, адресът е 64 бита дълъг. Ако имаме структора с много полета, създаването на копия, може да ни струва скъпо. Истинската ценност на pointers е това, че те могат да споделят стойност. Бихме ли искали `Super` да промени копие на  `goku` или да сподели редактирана `goku` стойност?
 
-All this isn't to say that you'll always want a pointer. At the end of this chapter, after we've seen a bit more of what we can do with structures, we'll re-examine the pointer-versus-value question.
+Всички неща, които разгледахме по горе, не означава че всеки път ще искате да ползвате pointer. Към края на тази глава, когато разгледаме малко повече, какво можем да правим със структорите, ще се върнем към въпросът pointer-versus-value. 
 
 ## Functions on Structures
 
