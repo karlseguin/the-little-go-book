@@ -744,21 +744,21 @@ for index, value := range scores {
 scores := []int{1,4,293,4,9}
 ```
 
-Unlike the array declaration, our slice isn't declared with a length within the square brackets. To understand how the two are different, let's see another way to create a slice, using `make`:
+Различно от декларирането на масив, нашият slice не е деклариран с дължина в квадратни скоби. За да разберем как те се различават, нека да разгледаме друг начин как се създават slice, използвайки `make`: 
 
 ```go
 scores := make([]int, 10)
 ```
 
-We use `make` instead of `new` because there's more to creating a slice than just allocating the memory (which is what `new` does). Specifically, we have to allocate the memory for the underlying array and also initialize the slice.  In the above, we initialize a slice with a length of 10 and a capacity of 10. The length is the size of the slice, the capacity is the size of the underlying array. Using `make` we can specify the two separately:
+Използваме `make` вместо `new` защото са необходими повече неща за създаване на slice от просто резервиране на памет ( което всъщност `new` прави ). Ирзично, трябва да заделим памет за основен масив и да инициализираме slice. В горният пример, инициализирахме slice с дължина от 10 и капацитет от 10. Дължината е размерър на slice, капацитетът е размерът на основният масив. Използвайки `make` ние можем да ги посочим отделно:
 
 ```go
 scores := make([]int, 0, 10)
 ```
 
-This creates a slice with a length of 0 but with a capacity of 10. (If you're paying attention, you'll note that `make` and `len` *are* overloaded. Go is a language that, to the frustration of some, makes use of features which aren't exposed for developers to use.)
+Това създава slice с дължина от 0, но с капацитет от 10. ( Ако внимавате, ще забележите че `make` и `len` *са* претоварени. Go е език, който, за разочоравние на някои, използва функции, които не са предоставени на програмистите за използване.)
 
-To better understand the interplay between length and capacity, let's look at some examples:
+За да разберете взаимодействието межу дължина и капацитет, нека да разгледаме няколко примера:
 
 ```go
 func main() {
@@ -768,7 +768,7 @@ func main() {
 }
 ```
 
-Our first example crashes. Why? Because our slice has a length of 0. Yes, the underlying array has 10 elements, but we need to explicitly expand our slice in order to access those elements. One way to expand a slice is via `append`:
+Първият ни пример няма да тръгне. Защо“ Защото нашият slice има дължина 0. Да, основният масив има 10 елемента, но трябва изрично да разширими нашият slice за да достъпим тези елементи. Един от вариантите да го разширим, е използвайки `append`:
 
 ```go
 func main() {
@@ -778,7 +778,7 @@ func main() {
 }
 ```
 
-But that changes the intent of our original code. Appending to a slice of length 0 will set the first element. For whatever reason, our crashing code wanted to set the element at index 7. To do this, we can re-slice our slice:
+Но това променя смисълт на нашият първоначален код. Добавянето на slice с дължина 0 ще постави първият елемент. За каквато и да е причина, нашият код, който не работеше, искаше да постави елемент на индекс 7. За да постигнем това, ние можем да re-slice нашият slice:
 
 ```go
 func main() {
@@ -789,9 +789,9 @@ func main() {
 }
 ```
 
-How large can we resize a slice? Up to its capacity which, in this case, is 10. You might be thinking *this doesn't actually solve the fixed-length issue of arrays.* It turns out that `append` is pretty special. If the underlying array is full, it will create a new larger array and copy the values over (this is exactly how dynamic arrays work in PHP, Python, Ruby, JavaScript, ...). This is why, in the example above that used `append`, we had to re-assign the value returned by `append` to our `scores` variable: `append` might have created a new value if the original had no more space.
+Колко голям може да направим нашият slice? Зависи от капацитета, който в нашият случай е 10. Може да си мислите *това всъщност не решеава проблемът с фиксираната дължина на масивите*. Оказва се че `append` е доста специален. Ако основният масив е пълен, той ще създаде нов по-голям масив и ще копира стойностите ( това е точно както динамичните масиви работят в PHP, Python, Ruby, JavaScript, ...). Това е така, защото в горният пример използвахме `append`, ние презаписахме стойноста върната от `append` къ нашата `scores` променлива: `append` може да създава нова стойност, ако оригиналната няма повече място. 
 
-If I told you that Go grew arrays with a 2x algorithm, can you guess what the following will output?
+Ако ви кажа, че Go разширява масивът с 2х алгоритъм, можете ли да познаете, какво ще изкара следният пример?
 
 ```go
 func main() {
@@ -812,9 +812,9 @@ func main() {
 }
 ```
 
-The initial capacity of `scores` is 5. In order to hold 25 values, it'll have to be expanded 3 times with a capacity of 10, 20 and finally 40.
+Първоначалният капацитет на `scores` е 5. За да може да държи 25 стойности, ще трябва да се разшири 3 пъти с капацитет от 10, 20 и накрая 40.
 
-As a final example, consider:
+Като краен пример, считайте:
 
 ```go
 func main() {
