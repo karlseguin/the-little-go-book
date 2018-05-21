@@ -497,7 +497,7 @@ func Super(s *Saiyan) {
 
 ## Functions on Structures
 
-We can associate a method with a structure:
+Може да асоцираме методи със структори:
 
 ```go
 type Saiyan struct {
@@ -510,7 +510,7 @@ func (s *Saiyan) Super() {
 }
 ```
 
-In the above code, we say that the type `*Saiyan` is the **receiver** of the `Super` method. We call `Super` like so:
+В кода отгоре, ние казваме, че типа `*Saiyan` е **receiver** на метода `Super`. Извикваме `Super` като:
 
 ```go
 goku := &Saiyan{"Goku", 9001}
@@ -520,7 +520,7 @@ fmt.Println(goku.Power) // will print 19001
 
 ## Constructors
 
-Structures don't have constructors. Instead, you create a function that returns an instance of the desired type (like a factory):
+Структорите нямат конструктори. Вместо това, създаваме фунция, която връща отделен случай на исканият тип ( like a factory):
 
 ```go
 func NewSaiyan(name string, power int) *Saiyan {
@@ -531,9 +531,9 @@ func NewSaiyan(name string, power int) *Saiyan {
 }
 ```
 
-This pattern rubs a lot of developers the wrong way. On the one hand, it's a pretty slight syntactical change; on the other, it does feel a little less compartmentalized.
+Този метод, подвежда много от програмистите да тръгнат по грешен път. От една страна, е много лека синтактична промяна, от друга, по-малко разделенеа. 
 
-Our factory doesn't have to return a pointer; this is absolutely valid:
+Нашата factory няма нужда да върне указател; това е напълно валидно:
 
 ```go
 func NewSaiyan(name string, power int) Saiyan {
@@ -546,7 +546,8 @@ func NewSaiyan(name string, power int) Saiyan {
 
 ## New
 
-Despite the lack of constructors, Go does have a built-in `new` function which is used to allocate the memory required by a type. The result of `new(X)` is the same as `&X{}`:
+Въпреки липсата на на конструктори, Go има вградена `new` фунцкия, която се използва да отдели памет, която е необходима от типа. Резултата от `new(X)` е същият като `&X{}`:
+
 
 ```go
 goku := new(Saiyan)
@@ -554,28 +555,28 @@ goku := new(Saiyan)
 goku := &Saiyan{}
 ```
 
-Which you use is up to you, but you'll find that most people prefer the latter whenever they have fields to initialize, since it tends to be easier to read:
+Която и да ползвате, зависи от вас, но ще откриете, че повечето хора предпочитат да ползват втората, когато е необходими да инициализират полета, поради това, че е по лесно за четене:
 
 ```go
 goku := new(Saiyan)
 goku.name = "goku"
 goku.power = 9001
 
-//vs
+//срещу
 
 goku := &Saiyan {
   name: "goku",
   power: 9000,
 }
 ```
+Независимо от подхода, който избирате, ако следвате модела на фабрика по-горе, можете да защитите останалата част от кода си от това, че сте знаели и сте се притеснявали за подробности за разпределението.
 
-Whichever approach you choose, if you follow the factory pattern above, you can shield the rest of your code from knowing and worrying about any of the allocation details.
 
 ## Fields of a Structure
 
-In the example that we've seen so far, `Saiyan` has two fields `Name` and `Power` of types `string` and `int`, respectively. Fields can be of any type -- including other structures and types that we haven't explored yet such as arrays, maps, interfaces and functions.
+В примерите, които видяхме до сега, `Saiyan` има две полета `Name` и `Power` от тип `string` и `int`, респективно. Полетата могат да пъдат от всеки тип -- включително и други структори и типове, които все още не сме разгледали, като масиви, maps, интерфейси и фунции.
 
-For example, we could expand our definition of `Saiyan`:
+Например, можем да разширим нашата дефиниция на `Saiyan`:
 
 ```go
 type Saiyan struct {
@@ -585,7 +586,7 @@ type Saiyan struct {
 }
 ```
 
-which we'd initialize via:
+който, го инициализираме като:
 
 ```go
 gohan := &Saiyan{
@@ -600,8 +601,7 @@ gohan := &Saiyan{
 ```
 
 ## Composition
-
-Go supports composition, which is the act of including one structure into another. In some languages, this is called a trait or a mixin. Languages that don't have an explicit composition mechanism can always do it the long way. In Java, there's the possibility to extend structures with *inheritance* but, in a scenario where this is not an option, a mixin would be written like this:
+Go поддържа компиции, което действа като включва една структора в друга. В някои езици, това е наречено характерна черта или смесване. Ецизи, които нямат специален механизъм за композиция, винаги могат да го постигнат по дългият начин. В Джава, има възможност структорите да се разширият чрез *наследяване*, но в ситуация където, това не е възможно, mixin ще бъде написан по следният начин:
 
 ```java
 public class Person {
@@ -624,7 +624,7 @@ public class Saiyan {
 }
 ```
 
-This can get pretty tedious. Every method of `Person` needs to be duplicated in `Saiyan`. Go avoids this tediousness:
+Това може да бъде доста досадно. Всеки метод от `Person` трябва да бъде повторен в `Saiyan`. Go избягва това по следният начин:
 
 ```go
 type Person struct {
@@ -648,7 +648,7 @@ goku := &Saiyan{
 goku.Introduce()
 ```
 
-The `Saiyan` structure has a field of type `*Person`. Because we didn't give it an explicit field name, we can implicitly access the fields and functions of the composed type. However, the Go compiler *did* give it a field name, consider the perfectly valid:
+`Saiyan` структората има поле от тип `*Person`. Защотото ние не дадахме изрично име на полето, можем безусловно да достъпип полетата и фунциите от съставеният тип. Въпреки това, Go компилатора *му даде* име на полето, считайте следното за валидно:
 
 ```go
 goku := &Saiyan{
@@ -658,15 +658,15 @@ fmt.Println(goku.Name)
 fmt.Println(goku.Person.Name)
 ```
 
-Both of the above will print "Goku".
+Двете от горният пример ще ни покажат "Goku".
 
-Is composition better than inheritance? Many people think that it's a more robust way to share code. When using inheritance, your class is tightly coupled to your superclass and you end up focusing on hierarchy rather than behavior.
+Дали композицията е по добра от наследяването? Много хора мислят че е по ясен начин за споделяне на код. Когато използваме наследяване, вашият клас е тясно свързан с вашият superclass и в крайна сметка се фокусирате върху йеархията, а не върху поведението.
 
 ### Overloading
 
-While overloading isn't specific to structures, it's worth addressing. Simply, Go doesn't support overloading. For this reason, you'll see (and write) a lot of functions that look like `Load`, `LoadById`, `LoadByName` and so on.
+Докато претоварването не е специфично за структорите, си струва адресирането. Просто, Go не поддържа претоварване. Заради тази причина, ще видите ( и напишете ) много структори които приличат на `Load`, `LoadById`, `LoadByName` и т.н.
 
-However, because implicit composition is really just a compiler trick, we can "overwrite" the functions of a composed type. For example, our `Saiyan` structure can have its own `Introduce` function:
+Въпреки това, защото имплицитният композит е наистина само компилатор, ние можем да "презапишем" функциите на съставен тип. Например, нашата `Saiyan` структура може да има своя собствена функция `Въвеждане`:
 
 ```go
 func (s *Saiyan) Introduce() {
@@ -674,11 +674,11 @@ func (s *Saiyan) Introduce() {
 }
 ```
 
-The composed version is always available via `s.Person.Introduce()`.
+Представената версия е винаги достъпна чрез `s.Person.Introduce()`.
 
 ## Pointers versus Values
 
-As you write Go code, it's natural to ask yourself *should this be a value, or a pointer to a value?* There are two pieces of good news. First, the answer is the same regardless of which of the following we're talking about:
+Докато пишете Go код, напълно нормално е да попитате себе си *трябва ли това да бъде стойнст, или указател към стойност?* Има две добри новини и отговорът е същия взависимост от кое за следните неща говори:
 
 * A local variable assignment
 * Field in a structure
@@ -686,11 +686,11 @@ As you write Go code, it's natural to ask yourself *should this be a value, or a
 * Parameters to a function
 * The receiver of a method
 
-Secondly, if you aren't sure, use a pointer.
+И второ, ако не сте сигурен, използвайте указател.
 
-As we already saw, passing values is a great way to make data immutable (changes that a function makes to it won't be reflected in the calling code). Sometimes, this is the behavior that you'll want but more often, it won't be.
+Както вече видяхме, подаването на стойности е страхотен начин да запазим съдържанието неизменео ( промените, които фунцкия ще направи, няма да окажат влияние на извикващия се код). Понякога, това е поведение, което ще искате, но по-често няма да е. 
 
-Even if you don't intend to change the data, consider the cost of creating a copy of large structures. Conversely, you might have small structures, say:
+Дори когато невъзнамерявате да смените информацията, обмислете какво ще ви струва създаването на копие на голяма структора. От друга страна, може да имате малки структори, като например:
 
 ```go
 type Point struct {
@@ -699,9 +699,7 @@ type Point struct {
 }
 ```
 
-In such cases, the cost of copying the structure is probably offset by being able to access `X` and `Y` directly, without any indirection.
-
-Again, these are all pretty subtle cases. Unless you're iterating over thousands or possibly tens of thousands of such points, you wouldn't notice a difference.
+Отново, всички те са доста редки случаи. Освен ако не iterating над хиляди или евентуално десетки хиляди такива указатели, няма да забележите разлика.
 
 ## Before You Continue
 
