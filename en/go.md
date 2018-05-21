@@ -703,30 +703,30 @@ type Point struct {
 
 ## Before You Continue
 
-From a practical point of view, this chapter introduced structures, how to make an instance of a structure a receiver of a function, and added pointers to our existing knowledge of Go's type system. The following chapters will build on what we know about structures as well as the inner workings that we've explored.
+От практична гледна точка, тази глава представи структори, how to make an instance of a structure a receiver of a function, и добавихме указатели към досегашните ни познания на Go. Следващите глави ще се основават на това, което знаем за структурите, както и на вътрешните работи, които сме изследвали.
 
 # Chapter 3 - Maps, Arrays and Slices
 
-So far we've seen a number of simple types and structures. It's now time to look at arrays, slices and maps.
+До сега разгледахме няколко прости типа и структори. Сега е време да разгледаме масиви, slices and maps.
 
 ## Arrays
 
-If you come from Python, Ruby, Perl, JavaScript or PHP (and more), you're probably used to programming with *dynamic arrays*. These are arrays that resize themselves as data is added to them. In Go, like many other languages, arrays are fixed. Declaring an array requires that we specify the size, and once the size is specified, it cannot grow:
+Ако идвате от Python, Ruby, Perl, JavaScript or PHP (и други), вероятно се ползвали до сега *динамични масиви*. Това са масиви, които се разширяват самостоятелно, когато се добавя нова информация към тях. В Go, както в много други езици, масивитеса непроменими. Създаването на масиви изисква да се укаже размерът на масива, и веднъж указан, той не може да се променя:
 
 ```go
 var scores [10]int
 scores[0] = 339
 ```
 
-The above array can hold up to 10 scores using indexes `scores[0]` through `scores[9]`. Attempts to access an out of range index in the array will result in a compiler or runtime error.
+Горният масив не може да използва повече от 10 индекса `scores[0]` до `scores[9]`. Опит да бъде направено това, ще предизвика грешка при компилирането на кода.
 
-We can initialize the array with values:
+Можем да предадем стойности на масива:
 
 ```go
 scores := [4]int{9001, 9333, 212, 33}
 ```
 
-We can use `len` to get the length of the array. `range` can be used to iterate over it:
+Можем да използваме `len` за да вземем дължината на масива. `range` може да се иползва за да обходим масива:
 
 ```go
 for index, value := range scores {
@@ -734,11 +734,11 @@ for index, value := range scores {
 }
 ```
 
-Arrays are efficient but rigid. We often don't know the number of elements we'll be dealing with upfront. For this, we turn to slices.
+Масивите са ефикасни, но . Често не знаем броят на елементите с които ще работим предварително. За това, се обръщаме към slices
 
 ## Slices
 
-In Go, you rarely, if ever, use arrays directly. Instead, you use slices. A slice is a lightweight structure that wraps and represents a portion of an array. There are a few ways to create a slice, and we'll go over when to use which later on. The first is a slight variation on how we created an array:
+В Go, рядко, ако изобщо, се използват директно масиви. Вместо това, се иползват slices. slices е лека структора, която опакова и предсавлява порция от масив. Има няколко начина за да създадем slice, и ние ще разгледаме кога, кой от тях да използваме. Първият е лек вариант за това как се създава масив:
 
 ```go
 scores := []int{1,4,293,4,9}
