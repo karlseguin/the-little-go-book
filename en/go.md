@@ -824,9 +824,9 @@ func main() {
 }
 ```
 
-Here, the output is going to be `[0, 0, 0, 0, 0, 9332]`. Maybe you thought it would be `[9332, 0, 0, 0, 0]`? To a human, that might seem logical. To a compiler, you're telling it to append a value to a slice that already holds 5 values.
+Тук, резултата, който ще видим е `[0, 0, 0, 0, 0, 9332]`. Може би си помислихте че ще бъде `[9332, 0, 0, 0, 0]`? За човек, това би било логично. За компилатор, вие му казвате да прикрепи стойност към slice, който вече държи 5 стойности.
 
-Ultimately, there are four common ways to initialize a slice:
+За съжаление, има 4 начина за инициализиране на slice:
 
 ```go
 names := []string{"leto", "jessica", "paul"}
@@ -835,9 +835,9 @@ var names []string
 scores := make([]int, 0, 20)
 ```
 
-When do you use which? The first one shouldn't need much of an explanation. You use this when you know the values that you want in the array ahead of time.
+Кога, кой използвате? Първият не се нуждае от много обяснение. Използвате го, когато знаете стойностите които искате в масива.
 
-The second one is useful when you'll be writing into specific indexes of a slice. For example:
+Вторият е полезен, когато ще пишете в определени индекси от slice. Например:
 
 ```go
 func extractPowers(saiyans []*Saiyans) []int {
@@ -849,11 +849,11 @@ func extractPowers(saiyans []*Saiyans) []int {
 }
 ```
 
-The third version is a nil slice and is used in conjunction with `append`, when the number of elements is unknown.
+Третата опция е празен slice и го използвате в съчетание с `append`, когато броят на елементите е неизвестен. 
 
-The last version lets us specify an initial capacity; useful if we have a general idea of how many elements we'll need.
+Последният вариант ни позволява да определим първоначален капацитет; полезно е ако имаме основна идея колко елементи ще са ни нужни.
 
-Even when you know the size, `append` can be used. It's largely a matter of preference:
+Дори и когато знаем размерът, `append` може да бъде използвано. Въпрос на предпочитание:
 
 ```go
 func extractPowers(saiyans []*Saiyans) []int {
@@ -865,7 +865,7 @@ func extractPowers(saiyans []*Saiyans) []int {
 }
 ```
 
-Slices as wrappers to arrays is a powerful concept. Many languages have the concept of slicing an array. Both JavaScript and Ruby arrays have a `slice` method. You can also get a slice in Ruby by using `[START..END]` or in Python via `[START:END]`. However, in these languages, a slice is actually a new array with the values of the original copied over. If we take Ruby, what's the output of the following?
+Slices като обвивка на масив е силно понятие. Много езици използват идеята за slicing на масив. JavaScript and Ruby масиви имат `slice` метод. Също може да вземете slice в Ruby като използвате `[START..END]` или в Python чрез `[START:END]`. Въпреки всичко, в тези езици, slice всъщност представлява нов масив със стойности копирани от оригиналният. Ако вземем например Ruby, какъв би бил резултата от следното:
 
 ```go
 scores = [1,2,3,4,5]
@@ -874,7 +874,7 @@ slice[0] = 999
 puts scores
 ```
 
-The answer is `[1, 2, 3, 4, 5]`. That's because `slice` is a completely new array with copies of values. Now, consider the Go equivalent:
+Отговорът е `[1, 2, 3, 4, 5]`. Това е защото `slice`  е напълно нов масив с копирани стойности. Сега, помислете за Go:
 
 ```go
 scores := []int{1,2,3,4,5}
@@ -883,29 +883,30 @@ slice[0] = 999
 fmt.Println(scores)
 ```
 
-The output is `[1, 2, 999, 4, 5]`.
+Отговорът е `[1, 2, 999, 4, 5]`.
 
-This changes how you code. For example, a number of functions take a position parameter. In JavaScript, if we want to find the first space in a string (yes, slices work on strings too!) after the first five characters, we'd write:
+Това променя начина, по който програмирате. Например, редица функции вземат параметър за позиция. В JavaScript, ако искаме да намерим първото място в низ (да, slices работят и върху низовете!) след първите пет знака, ще пишем:
 
 ```go
 haystack = "the spice must flow";
 console.log(haystack.indexOf(" ", 5));
 ```
 
-In Go, we leverage slices:
+В Go, ние използваме slices:
 
 ```go
 strings.Index(haystack[5:], " ")
 ```
 
-We can see from the above example, that `[X:]` is shorthand for *from X to the end* while `[:X]` is shorthand for *from the start to X*. Unlike other languages, Go doesn't support negative values. If we want all of the values of a slice except the last, we do:
+Можем да видим от горният пример, че `[X:]` е пряк път за *от X до края*, докато `[:X]` е пряк път за *от началото до Х*. За разлика от други езици, Go не поддържа отрицателни стойности. Ако искаме всички стойности на slice, освен последният, ще направим следното:
+
 
 ```go
 scores := []int{1, 2, 3, 4, 5}
 scores = scores[:len(scores)-1]
 ```
 
-The above is the start of an efficient way to remove a value from an unsorted slice:
+Горното, е начало на ефикасен начин да премахнем стойност от несортиран slice:
 
 ```go
 func main() {
@@ -923,7 +924,7 @@ func removeAtIndex(source []int, index int) []int {
 }
 ```
 
-Finally, now that we know about slices, we can look at another commonly used built-in function: `copy`. `copy` is one of those functions that highlights how slices change the way we code. Normally, a method that copies values from one array to another has 5 parameters: `source`, `sourceStart`, `count`, `destination` and `destinationStart`. With slices, we only need two:
+Накрая, след като вече знаем какво е slices, можем да разгледаме към друга често употребявана вградена фунцкия `copy`. `copy` е една от тези функции, които акцентира върху как slices променят начина ни на програмиране. Обикновенно, метод, който копира стойности от един масив към друг има 5 параметъра: `source`, `sourceStart`, `count`, `destination` and `destinationStart`. Използвайки slices, имаме само два:
 
 ```go
 import (
@@ -945,6 +946,7 @@ func main() {
 }
 ```
 
+Вземете горният пример и си поиграйте малко с кодът. Опитайте различни варианти. Вижте какво се случва ако промените копирането към нещо като `copy(worst[2:4], scores[:5])`, или ако се опитате да копирате повече или по малко от `5` стойности в `worst`?
 Take some time and play with the above code. Try variations. See what happens if you change copy to something like `copy(worst[2:4], scores[:5])`, or what if you try to copy more or less than `5` values into `worst`?
 
 ## Maps
