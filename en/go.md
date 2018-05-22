@@ -1023,7 +1023,7 @@ for key, value := range lookup {
 
 ## Pointers versus Values
 
-We finished Chapter 2 by looking at whether you should assign and pass pointers or values. We'll now have this same conversation with respect to array and map values. Which of these should you use?
+Приключихме с Глава 2 разглеждайки кога трябва да се присвоят или подадат указатели или стойности. Сега ще проведем същият разговор с уважение към масивите и map стойности. Кое от тези да използвам?
 
 ```go
 a := make([]Saiyan, 10)
@@ -1031,15 +1031,15 @@ a := make([]Saiyan, 10)
 b := make([]*Saiyan, 10)
 ```
 
-Many developers think that passing `b` to, or returning it from, a function is going to be more efficient. However, what's being passed/returned is a copy of the slice, which itself is a reference. So with respect to passing/returning the slice itself, there's no difference.
+Много програмисти, че подаването към `b`, или връщането от него, фунция би била по ефективна. Въпреки това, това което ще бъде подадено/върнато е копие на  slice, което само по себе си е препратка.За това с уважение към подаването/връщането на slice сам по себе си, няма разлика. 
 
-Where you will see a difference is when you modify the values of a slice or map. At this point, the same logic that we saw in Chapter 2 applies. So the decision on whether to define an array of pointers versus an array of values comes down to how you use the individual values, not how you use the array or map itself.
+Ще видите разлика когато редактирате стойностите на slice или map. В същотот време, същата логика която видяхме в Глава 2 е валидна. За това дискутирането кога трябва да се определи масив от указатели срещу масив от стойности, идва от това как се използват индивидуалните стойности, не как използвате масив или map по себе си. 
 
 ## Before You Continue
 
-Arrays and maps in Go work much like they do in other languages. If you're used to dynamic arrays, there might be a small adjustment, but `append` should solve most of your discomfort. If we peek beyond the superficial syntax of arrays, we find slices. Slices are powerful and they have a surprisingly large impact on the clarity of your code.
+Масивите и maps в Go работят по почти същият начин по който и в другите езици. Ако използвате динамични масиви, може да има малко приспособяване, но `append` трябва да реши повечето ви проблеми. Ако погледнем отвъд повърхностния синтаксис на масиви, ще намерим slices. Slices са силни и имат изненадващо голямо влияние върху яснотата на кода ви.
 
-There are edge cases that we haven't covered, but you're not likely to run into them. And, if you do, hopefully the foundation we've built here will let you understand what's going on.
+Има случаи, които не са обхванати, но вероятността е малка да се сблъскате с тях. И ако го направите, надяваме се, че основите, които сме построили тук, ще ви позволи да разберете какво се случва.
 
 # Chapter 4 - Code Organization and Interfaces
 
