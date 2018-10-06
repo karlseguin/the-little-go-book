@@ -1823,7 +1823,7 @@ c := make(chan int, 100)
 
 You can make this change, but you'll notice that the processing is still choppy. Buffered channels don't add more capacity; they merely provide a queue for pending work and a good way to deal with a sudden spike. In our example, we're continuously pushing more data than our workers can handle.
 
-Nevertheless, we can get a sense that the buffered channel is, in fact, buffering by looking at the channel's `len`:
+Nevertheless, we can get a sense what the buffered channel is, in fact, buffering by looking at the channel's `len`:
 
 ```go
 for {
