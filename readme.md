@@ -19,6 +19,7 @@ The book is freely distributed under the  [Attribution-NonCommercial-ShareAlike 
 * [Vietnamese](https://github.com/quangnh89/the-little-go-book/blob/master/vi/readme.md) by Quang Nguyễn
 * [Italian](https://github.com/francescomalatesta/the-little-go-book-ita) by Francesco Malatesta
 * [Russian](https://github.com/sefus/the-little-go-book/blob/master/ru/go.md) by Roman Dolgopolov
+* [German](https://github.com/Aaronmacaron/the-little-go-book-de/blob/master/de/go.md) (15% done) by Aaron
 
 ## Formats ##
 The book is written in [Markdown](http://daringfireball.net/projects/markdown/) and converted to PDF using [Pandoc](http://johnmacfarlane.net/pandoc/).
