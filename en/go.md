@@ -842,7 +842,7 @@ When do you use which? The first one shouldn't need much of an explanation. You 
 The second one is useful when you'll be writing into specific indexes of a slice. For example:
 
 ```go
-func extractPowers(saiyans []*Saiyans) []int {
+func extractPowers(saiyans []*Saiyan) []int {
   powers := make([]int, len(saiyans))
   for index, saiyan := range saiyans {
     powers[index] = saiyan.Power
@@ -858,7 +858,7 @@ The last version lets us specify an initial capacity; useful if we have a genera
 Even when you know the size, `append` can be used. It's largely a matter of preference:
 
 ```go
-func extractPowers(saiyans []*Saiyans) []int {
+func extractPowers(saiyans []*Saiyan) []int {
   powers := make([]int, 0, len(saiyans))
   for _, saiyan := range saiyans {
     powers = append(powers, saiyan.Power)
