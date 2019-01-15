@@ -869,7 +869,7 @@ func extractPowers(saiyans []*Saiyan) []int {
 
 Slices as wrappers to arrays is a powerful concept. Many languages have the concept of slicing an array. Both JavaScript and Ruby arrays have a `slice` method. You can also get a slice in Ruby by using `[START..END]` or in Python via `[START:END]`. However, in these languages, a slice is actually a new array with the values of the original copied over. If we take Ruby, what's the output of the following?
 
-```go
+```ruby
 scores = [1,2,3,4,5]
 slice = scores[2..4]
 slice[0] = 999
@@ -889,7 +889,7 @@ The output is `[1, 2, 999, 4, 5]`.
 
 This changes how you code. For example, a number of functions take a position parameter. In JavaScript, if we want to find the first space in a string (yes, slices work on strings too!) after the first five characters, we'd write:
 
-```go
+```javascript
 haystack = "the spice must flow";
 console.log(haystack.indexOf(" ", 5));
 ```
