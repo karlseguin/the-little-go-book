@@ -21,6 +21,7 @@ The book is freely distributed under the  [Attribution-NonCommercial-ShareAlike 
 * [Russian](https://github.com/sefus/the-little-go-book/blob/master/ru/go.md) by Roman Dolgopolov
 * [German](https://github.com/Aaronmacaron/the-little-go-book-de/blob/master/de/go.md) (15% done) by Aaron
 * [Amharic](https://github.com/codeethiopia/the-little-go-book-amharic) by codeethiopia
+* [Korean](https://github.com/shoebillk/the-little-go-book/blob/master/ko/go.md) by Byounghoon Kim
 
 ## Formats ##
 The book is written in [Markdown](http://daringfireball.net/projects/markdown/) and converted to PDF using [Pandoc](http://johnmacfarlane.net/pandoc/).
