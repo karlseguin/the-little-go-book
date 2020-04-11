@@ -3,7 +3,7 @@ BOOK_FILE_NAME = go
 
 PDF_BUILDER = pandoc
 PDF_BUILDER_FLAGS = \
-	--latex-engine xelatex \
+	--pdf-engine xelatex \
 	--template ../common/pdf-template.tex \
 	--listings
 
