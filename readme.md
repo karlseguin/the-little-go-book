@@ -23,6 +23,8 @@ The book is freely distributed under the  [Attribution-NonCommercial-ShareAlike 
 * [Amharic](https://github.com/codeethiopia/the-little-go-book-amharic) by codeethiopia
 * [Korean](https://github.com/shoebillk/the-little-go-book/blob/master/ko/go.md) by Byounghoon Kim
 * [Burmese](https://github.com/nainglinaung/the-little-go-book/blob/master/mm/go.md) By Naing Lin Aung
+* [Turkish](https://github.com/umutphp/the-little-go-book) By Umut Işık
+
 ## Formats ##
 The book is written in [Markdown](http://daringfireball.net/projects/markdown/) and converted to PDF using [Pandoc](http://johnmacfarlane.net/pandoc/).
 
