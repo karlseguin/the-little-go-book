@@ -1732,7 +1732,7 @@ type Worker struct {
   id int
 }
 
-func (w Worker) process(c chan int) {
+func (w *Worker) process(c chan int) {
   for {
     data := <-c
     fmt.Printf("worker %d got %d\n", w.id, data)
