@@ -28,7 +28,7 @@ The book is freely distributed under the  [Attribution-NonCommercial-ShareAlike 
 ## Formats ##
 The book is written in [Markdown](http://daringfireball.net/projects/markdown/) and converted to PDF using [Pandoc](http://johnmacfarlane.net/pandoc/).
 
-The TeX template makes use of [Lena Herrmann's JavaScript highlighter](http://lenaherrmann.net/2010/05/20/javascript-syntax-highlighting-in-the-latex-listings-package).
+The TeX template makes use of Lena Herrmann's JavaScript highlighter.
 
 Kindle and ePub format provided using [Pandoc](http://johnmacfarlane.net/pandoc/).
 
