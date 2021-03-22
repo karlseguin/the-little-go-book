@@ -1,4 +1,5 @@
 \documentclass{book}
+\usepackage{titlesec}
 
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
@@ -120,6 +121,9 @@
 
 %% Disable section numbers
 \setcounter{secnumdepth}{0}
+
+\titleformat{\chapter}[display]
+  {\normalfont\bfseries}{}{0pt}{\Large}
 
 
 \begin{document}
