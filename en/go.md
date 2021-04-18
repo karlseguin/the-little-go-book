@@ -885,7 +885,7 @@ slice[0] = 999
 fmt.Println(scores)
 ```
 
-The output is `[1, 2, 999, 4, 5]`.
+The `[X:Y]` syntax creates a slice of `scores`, starting from index 2 up until (but not including) index 4. However, unlike the Ruby example above, the Go code will produce an output of `[1, 2, 999, 4, 5]`. This is because our `slice` is really just a window into `scores`.
 
 This changes how you code. For example, a number of functions take a position parameter. In JavaScript, if we want to find the first space in a string (yes, slices work on strings too!) after the first five characters, we'd write:
 
@@ -900,7 +900,7 @@ In Go, we leverage slices:
 strings.Index(haystack[5:], " ")
 ```
 
-We can see from the above example, that `[X:]` is shorthand for *from X to the end* while `[:X]` is shorthand for *from the start to X*. Unlike other languages, Go doesn't support negative values. If we want all of the values of a slice except the last, we do:
+We can see from the above example, that `[X:]` is shorthand for *from X to the end* while `[:X]` is shorthand for *from the start up until X*. Unlike other languages, Go doesn't support negative values. If we want all of the values of a slice except the last, we do:
 
 ```go
 scores := []int{1, 2, 3, 4, 5}
