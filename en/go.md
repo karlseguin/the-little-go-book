@@ -558,14 +558,14 @@ Which you use is up to you, but you'll find that most people prefer the latter w
 
 ```go
 goku := new(Saiyan)
-goku.name = "goku"
-goku.power = 9001
+goku.Name = "goku"
+goku.Power = 9001
 
 //vs
 
 goku := &Saiyan {
-  name: "goku",
-  power: 9000,
+  Name: "goku",
+  Power: 9000,
 }
 ```
 
