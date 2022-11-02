@@ -1,12 +1,12 @@
 ## About ##
-[The Little Go Book](http://openmymind.net/The-Little-Go-Book/) is a free book introducing Go.
+[The Little Go Book](https://openmymind.net/The-Little-Go-Book/) is a free book introducing Go.
 
 The book was written by [Karl Seguin](http://openmymind.net), author of:
 
-* [Scaling Viki](http://openmymind.net/scaling-viki/)
-* [The Little Redis Book](http://openmymind.net/2012/1/23/The-Little-Redis-Book/)
-* [The Little MongoDB Book](http://openmymind.net/2011/3/28/The-Little-MongoDB-Book/)
-* [Foundations of Programming](http://openmymind.net/FoundationsOfProgramming.pdf)
+* [Scaling Viki](https://openmymind.net/scaling-viki/)
+* [The Little Redis Book](https://openmymind.net/2012/1/23/The-Little-Redis-Book/)
+* [The Little MongoDB Book](https://openmymind.net/2011/3/28/The-Little-MongoDB-Book/)
+* [Foundations of Programming](https://openmymind.net/FoundationsOfProgramming.pdf)
 
 ## License ##
 The book is freely distributed under the  [Attribution-NonCommercial-ShareAlike 4.0 International](<http://creativecommons.org/licenses/by-nc-sa/4.0/>).
