@@ -1,0 +1,2 @@
+% The Little Go Book
+% Karl Seguin

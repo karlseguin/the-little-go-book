@@ -13,6 +13,7 @@ The book is freely distributed under the  [Attribution-NonCommercial-ShareAlike 
 
 ## Translations ##
 
+* [Portuguese](https://github.com/fabricio/the-little-go-book/tree/master/pt-br) (20% done) by Fabrício Soares
 * [Spanish](https://github.com/raulexposito/the-little-go-book/tree/master/es) by Raúl Expósito
 * [Chinese](https://github.com/songleo/the-little-go-book_ZH_CN) by Songleo
 * [Traditional Chinese](https://github.com/kevingo/the-little-go-book) by KevinGo
