@@ -86,15 +86,15 @@ Abra um prompt de comando e digite `go version`. Espero que você obtenha uma sa
 
 # Capítulo 1 - O Básico
 
-Go é uma linguagem compilada e estaticamente tipada com uma sintaxe semelhante a C e garbage colector. O que isso significa?
+Go é uma linguagem compilada e estaticamente tipada com uma sintaxe semelhante à C e com garbage colector. O que isso significa?
 
-## Compilation
+## Compilação
 
-Compilation is the process of translating the source code that you write into a lower level language -- either assembly (as is the case with Go), or some other intermediary language (as with Java and C#).
+Compilação é o processo de traduzir o código-fonte escrito em uma linguagem de baixo nível que o computador entenda - pode ser assembly (como é o caso de Go), assim como pode ser alguma outra linguagem intermediária (como é o caso de Java e C#).
 
-Compiled languages can be unpleasant to work with because compilation can be slow. It's hard to iterate quickly if you have to spend minutes or hours waiting for code to compile. Compilation speed is one of the major design goals of Go. This is good news for people working on large projects as well as those of us used to a quick feedback cycle offered by interpreted languages.
+Em alguns casos, a compilação pode ser lenta, o que torna desprazeroso trabalhar com linguagens compiladas. Pode ser difícil ser produtivo se você precisa esperar minutos ou horas pela compilação do código. A velocidade de compilação é um dos maiores objetivos de design de Go. E essa é uma excelente notícia para as pessoas que trabalham em projetos grandes, assim como para as pessoas que querem ter um ciclo de resposta rápido no processo de desenvolvimento, como o oferecido por linguagens interpretadas.
 
-Compiled languages tend to run faster and the executable can be run without additional dependencies (at least, that's true for languages like C, C++ and Go which compile directly to assembly).
+Linguagens compiladas tendem a ser mais rápidas e o executável pode rodar sem nenhuma dependência adicional (pelo menos, isso é uma verdade para linguagens como C, C++ e Go, que compilam diretamente para assembly).
 
 ## Static Typing
 
