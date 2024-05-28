@@ -339,9 +339,9 @@ Não compilará porque `name` é declarada, mas não é usada. Como importaçõe
 
 Há mais para se aprender sobre declaração e atribuição. Por agora, lembre-se que você usará `var NAME TYPE` quando declarar uma variável com o seu valor zero, `NAME := VALUE` quando declarar e atribuir um valor e `NAME = VALUE` quando atribuir um valor a uma variável previamente declarada.
 
-## Function Declarations
+## Declaração de Funções
 
-This is a good time to point out that functions can return multiple values. Let's look at three functions: one with no return value, one with one return value, and one with two return values.
+Este é um bom momento para mostrar que funções podem ter múltiplos valores de retorno. Vamos olhar para três funções: uma sem valor de retorno, uma com um retorno e outra com dois valores de retorno.
 
 ```go
 func log(message string) {
@@ -354,7 +354,7 @@ func power(name string) (int, bool) {
 }
 ```
 
-We'd use the last one like so:
+Nós usaríamos a última da seguinte forma:
 
 ```go
 value, exists := power("goku")
@@ -363,7 +363,7 @@ if exists == false {
 }
 ```
 
-Sometimes, you only care about one of the return values. In these cases, you assign the other values to `_`:
+Às vezes, você só se importa com um dos valores de retorno. Nestes casos, você pode atribuir os outros valores ao identificador em branco (blank identifier) `_`:
 
 ```go
 _, exists := power("goku")
@@ -372,9 +372,9 @@ if exists == false {
 }
 ```
 
-This is more than a convention. `_`, the blank identifier, is special in that the return value isn't actually assigned. This lets you use `_` over and over again regardless of the returned type.
+Isto é mais do que uma convenção. `_`, o identificaor em branco, é especial porque o valor de retorno não é realmente atribuído. Isto deixa você usar `_` repetidamente, independente do tipo retornado.
 
-Finally, there's something else that you're likely to run into with function declarations. If parameters share the same type, we can use a shorter syntax:
+Finalmente, há algo mais que você pode gostar de usar ao declarar funções. Se os parâmetros compartilharem o mesmo tipo, nós podemos usar uma sintaxe reduzida:
 
 ```go
 func add(a, b int) int {
@@ -382,7 +382,7 @@ func add(a, b int) int {
 }
 ```
 
-Being able to return multiple values is something you'll use often. You'll also frequently use `_` to discard a value. Named return values and the slightly less verbose parameter declaration aren't that common. Still, you'll run into all of these sooner than later so it's important to know about them.
+Ser capaz de retornar múltiplos valores é algo que você usará frequentemente. Você também usará `_` frequentemente para descartar um valor. Valores de retorno nomeados e a declaração de parâmetros menos verbosa não são tão comuns. Cedo ou tarde você encontrará essas coisas por aí. Então, é importante que você saiba sobre elas. 
 
 ## Before You Continue
 
