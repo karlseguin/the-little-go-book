@@ -384,13 +384,13 @@ func add(a, b int) int {
 
 Ser capaz de retornar múltiplos valores é algo que você usará frequentemente. Você também usará `_` frequentemente para descartar um valor. Valores de retorno nomeados e a declaração de parâmetros menos verbosa não são tão comuns. Cedo ou tarde você encontrará essas coisas por aí. Então, é importante que você saiba sobre elas. 
 
-## Before You Continue
+## Antes de Continuar
 
-We looked at a number of small individual pieces and it probably feels disjointed at this point. We'll slowly build larger examples and hopefully, the pieces will start to come together.
+Nós olhamos para uma série de pequenos pedaços de códigos separados, que podem parecer desconectadas a essa altura. Contudo, nós vamos pouco a pouco construir exemplos mais robustos que, idealmente, farão os pedaços se conectarem e tudo fazer sentido.
 
-If you're coming from a dynamic language, the complexity around types and declarations might seem like a step backwards. I don't disagree with you. For some systems, dynamic languages are categorically more productive.
+Se você está vindo de uma linguagem dinâmica, a complexidade ao redor dos tipos e declarações podem parecer um passo para trás. Eu não concordo com você. Para alguns sistemas, linguagens dinâmicas são categoricamente mais produtivas.
 
-If you're coming from a statically typed language, you're probably feeling comfortable with Go. Inferred types and multiple return values are nice (though certainly not exclusive to Go). Hopefully as we learn more, you'll appreciate the clean and terse syntax.
+Se você está vindo de uma linguagem estaticamente tipada, você provavelmente está se sentindo confortável com Go. Inferir tipos e múltiplos valores de retorno são legais (apesar de certamente não serem exclusivas para Go). Esperançosamente, à medida que aprendermos mais, você apreciará a clareza e concisão sintática.
 
 # Chapter 2 - Structures
 
