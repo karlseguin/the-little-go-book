@@ -102,11 +102,11 @@ Ser uma linguagem estaticamente tipada significa que as variáveis devem ser de 
 
 Há muito mais que pode ser discutido sobre tipagem estática, mas eu acredito que às vezes é melhor entender olhando para o código. Se você é acostumado a usar linguagens dinamicamente tipadas, você pode achar complicado. Você não está errado, mas há vantagens, especialmente quando você combina tipagem estática com compilação. As duas são frequentemente confudidas. É verdade que quando você tem um, geralmente você tem o outro, mas essa não é uma regra escrita em pedra. Com um sistema rígido de tipagem, um compilador é capaz de detectar problemas além de meros erros sintáticos, assim como fazer otimizações adicionais.
 
-## C-Like Syntax
+## Sintaxe C-Like
 
-Saying that a language has a C-like syntax means that if you're used to any other C-like languages such as C, C++, Java, JavaScript and C#, then you're going to find Go familiar -- superficially, at least. For example, it means `&&` is used as a boolean AND, `==` is used to compare equality, `{` and `}` start and end a scope, and array indexes start at 0.
+Dizer que uma linguagem tem um sintaxe C-like significa que se você já usou qualquer outra linguagem C-like, como C, C++, Java, JavaScript e C#, você achará Go familiar -- pelo menos, superficialmente. Por exemplo, isso significa que `&&` é usado como um booleano E (AND), `==` é usado para comparar igualdade, `{` e `}` começam e finalizam um escopo e índices de arrays começam em 0.
 
-C-like syntax also tends to mean semi-colon terminated lines and parentheses around conditions. Go does away with both of these, though parentheses are still used to control precedence. For example, an `if` statement looks like this:
+Sintaxe C-like também tende a significar que ponto e vírgula demarcam o fim de uma linha e que parentêses circundam condições. Go faz diferente em ambos desses cenários, entretanto, parentêses ainda são usados para controlar precedência. Por exemplo, uma declaração `if` (se) se parece com:
 
 ```go
 if name == "Leto" {
@@ -114,15 +114,15 @@ if name == "Leto" {
 }
 ```
 
-And in more complicated cases, parentheses are still useful:
+E, para casos mais complicados, parênteses ainda são úteis:
 
 ```go
-if (name == "Goku" && power > 9000) || (name == "gohan" && power < 4000)  {
-  print("super Saiyan")
+if (name == "Goku" && power > 9000) || (name == "Gohan" && power < 4000)  {
+  print("Super Saiyan")
 }
 ```
 
-Beyond this, Go is much closer to C than C# or Java - not only in terms of syntax, but in terms of purpose. That's reflected in the terseness and simplicity of the language which will hopefully start to become obvious as you learn it.
+No mais, Go é muito mais próximo de C do que C# ou Java - não somente em termos de sintaxe, mas também em termos de propósito. Isso é refletido na concisão e na simplicidade da linguagem, que esperançosamente se tornará óbvio à medida que a linguagem for apresentada.
 
 ## Garbage Collected
 
