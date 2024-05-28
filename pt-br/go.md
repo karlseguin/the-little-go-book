@@ -96,11 +96,11 @@ Em alguns casos, a compilação pode ser lenta, o que torna desprazeroso trabalh
 
 Linguagens compiladas tendem a ser mais rápidas e o executável pode rodar sem nenhuma dependência adicional (pelo menos, isso é uma verdade para linguagens como C, C++ e Go, que compilam diretamente para assembly).
 
-## Static Typing
+## Tipagem Estática
 
-Being statically typed means that variables must be of a specific type (int, string, bool, []byte, etc.). This is either achieved by specifying the type when the variable is declared or, in many cases, letting the compiler infer the type (we'll look at examples shortly).
+Ser uma linguagem estaticamente tipada significa que as variáveis devem ser de um tipo específico (int, string, bool, []byte etc). Isso pode ser atingido especificando o tipo quando a variável é declarada ou, em muitos casos, deixando o compilador inferir o tipo (serão dados alguns exemplos em breve)
 
-There's a lot more that can be said about static typing, but I believe it's something better understood by looking at code. If you're used to dynamically typed languages, you might find this cumbersome. You're not wrong, but there are advantages, especially when you pair static typing with compilation. The two are often conflated. It's true that when you have one, you normally have the other but it isn't a hard rule. With a rigid type system, a compiler is able to detect problems beyond mere syntactical mistakes as well as make further optimizations.
+Há muito mais que pode ser discutido sobre tipagem estática, mas eu acredito que às vezes é melhor entender olhando para o código. Se você é acostumado a usar linguagens dinamicamente tipadas, você pode achar complicado. Você não está errado, mas há vantagens, especialmente quando você combina tipagem estática com compilação. As duas são frequentemente confudidas. É verdade que quando você tem um, geralmente você tem o outro, mas essa não é uma regra escrita em pedra. Com um sistema rígido de tipagem, um compilador é capaz de detectar problemas além de meros erros sintáticos, assim como fazer otimizações adicionais.
 
 ## C-Like Syntax
 
