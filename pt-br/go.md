@@ -239,13 +239,13 @@ godoc -http=:6060
 
 E apontar o seu navegador para `http://localhost:6060`
 
-## Variables and Declarations
+## Variáveis e Declarações
 
-It'd be nice to begin and end our look at variables by saying *you declare and assign to a variable by doing x = 4.* Unfortunately, things are more complicated in Go. We'll begin our conversation by looking at simple examples. Then, in the next chapter, we'll expand this when we look at creating and using structures. Still, it'll probably take some time before you truly feel comfortable with it.
+Seria legal começar e terminar nossa discussão sobre variáveis dizendo: "você declara e atribui a uma variável fazendo x = 4". Infelizmente, as coisas são mais complicadas em Go. Nós começaremos a nossa conversa olhando para exemplos simples. Então, no próximo capítulo, nós vamos expandir isso quando nós olharmos para a criação e uso de estruturas (struct). Ainda, provavelmente levará algum tempo antes de você verdadeiramente se sentir confortável com isso.
 
-You might be thinking *Woah! What can be so complicated about this?* Let's start looking at some examples.
+Você pode estar pensando: "Uou! O que pode ser tão complicado sobre isto?" Vamos começar olhando para alguns exemplos.
 
-The most explicit way to deal with variable declaration and assignment in Go is also the most verbose:
+A maneira mais explicíta de lidar com declaração e atribuição de variável em Go é também a mais verbosa:
 
 ```go
 package main
@@ -261,19 +261,19 @@ func main() {
 }
 ```
 
-Here, we declare a variable `power` of type `int`. By default, Go assigns a zero value to variables. Integers are assigned `0`, booleans `false`, strings `""` and so on. Next, we assign `9000` to our `power` variable. We can merge the first two lines:
+Aqui, nós declaramos uma variável `power` do tipo `int`. Por padrão, Go atribui um **valor zero** às variáveis. Para os inteiros é atribuído `0`; booleanos: `false`; strings: `""` e alguns outros valores para outros tipos que serão discutidos em breve. Em seguida, nós atribuímos `9000` à variável `power`. Nós podemos unir as duas primeiras linhas:
 
 ```go
 var power int = 9000
 ```
 
-Still, that's a lot of typing. Go has a handy short variable declaration operator, `:=`, which can infer the type:
+Ainda, é muito para se digitar. Go tem um atalho para declaração curta de variável, `:=`, que pode inferir o tipo:
 
 ```go
 power := 9000
 ```
 
-This is handy, and it works just as well with functions:
+Essa sintaxe é bem útil e funciona bem com funções:
 
 ```go
 func main() {
@@ -285,7 +285,8 @@ func getPower() int {
 }
 ```
 
-It's important that you remember that `:=` is used to declare the variable as well as assign a value to it. Why? Because a variable can't be declared twice (not in the same scope anyway). If you try to run the following, you'll get an error.
+É importante ressaltar que `:=` é usado para declarar a variável já atribuindo um valor para ela. Por quê? Porque uma variável não pode ser declarada duas vezes (não no mesmo escopo). Se você tentar rodar o código a seguir, você obterá um erro.
+
 
 ```go
 func main() {
@@ -299,9 +300,9 @@ func main() {
 }
 ```
 
-The compiler will complain with *no new variables on left side of :=*. This means that when we first declare a variable, we use `:=` but on subsequent assignment, we use the assignment operator `=`. This makes a lot of sense, but it can be tricky for your muscle memory to remember when to switch between the two.
+O compilador irá reclamar, informando que *não há uma variável nova sendo declarada no lado esquerdo de :=*. Isto significa que quando nós declaramos a primeira variável, nós usamos `:=`, mas na atribuição subsequente, nós usamos o operador `=`. Isto faz muito sentido, mas pode ser complicado para a sua memória muscular lembrar quando trocar entre os dois.
 
-If you read the error message closely, you'll notice that *variables* is plural. That's because Go lets you assign multiple variables (using either `=` or `:=`):
+Se você ler a messagem de erro atentamente, você irá notar que *variáveis* no plurar. Isso ocorre porque Go permite você atribuir múltipas variáveis (usando `=` ou `:=`):
 
 
 ```go
@@ -311,7 +312,7 @@ func main() {
 }
 ```
 
-As long as one of the variables is new, `:=` can be used. Consider:
+Contando que uma das variáveis seja nova, `:=` pode ser usado:
 
 ```go
 func main() {
@@ -323,9 +324,9 @@ func main() {
 }
 ```
 
-Although `power` is being used twice with `:=`, the compiler won't complain the second time we use it, it'll see that the other variable, `name`, is a new variable and allow `:=`. However, you can't change the type of `power`. It was declared (implicitly) as an integer and thus, can only be assigned integers.
+Embora `power` esteja sendo usado duas vezes com `:=`, o compilador não vai reclamar do segundo uso, porque ele verá que a outra variável, `name`, é uma nova variável e permite `:=`. No entanto, você não pode mudar o tipo de `power`. Ela foi declarada (implicitamente) como um inteiro e, portanto, só inteiros podem ser atribuídos.
 
-For now, the last thing to know is that, like imports, Go won't let you have unused variables. For example,
+Por agora, a última coisa a saber é que, como importações, Go não vai deixar você ter variáveis sem uso. Por exemplo:
 
 ```go
 func main() {
@@ -334,9 +335,9 @@ func main() {
 }
 ```
 
-won't compile because `name` is declared but not used. Like unused imports it'll cause some frustration, but overall I think it helps with code cleanliness and readability.
+Não compilará porque `name` é declarada, mas não é usada. Como importações, isso poderá causar algumas frustrações, mas olhando de forma geral, eu acho que ajudará com a clareza e legibilidade do código.
 
-There's more to learn about declaration and assignments. For now, remember that you'll use `var NAME TYPE` when declaring a variable to its zero value, `NAME := VALUE` when declaring and assigning a value, and `NAME = VALUE` when assigning to a previously declared variable.
+Há mais para se aprender sobre declaração e atribuição. Por agora, lembre-se que você usará `var NAME TYPE` quando declarar uma variável com o seu valor zero, `NAME := VALUE` quando declarar e atribuir um valor e `NAME = VALUE` quando atribuir um valor a uma variável previamente declarada.
 
 ## Function Declarations
 
