@@ -124,11 +124,11 @@ if (name == "Goku" && power > 9000) || (name == "Gohan" && power < 4000)  {
 
 No mais, Go é muito mais próximo de C do que C# ou Java - não somente em termos de sintaxe, mas também em termos de propósito. Isso é refletido na concisão e na simplicidade da linguagem, que esperançosamente se tornará óbvio à medida que a linguagem for apresentada.
 
-## Garbage Collected
+## Coletor de Lixo (Garbage Collector)
 
-Some variables, when created, have an easy-to-define life. A variable local to a function, for example, disappears when the function exits. In other cases, it isn't so obvious -- at least to a compiler. For example, the lifetime of a variable returned by a function or referenced by other variables and objects can be tricky to determine. Without garbage collection, it's up to developers to free the memory associated with such variables at a point where the developer knows the variable isn't needed. How? In C, you'd literally `free(str);` the variable.
+Algumas variáveis, quando criadas, têm um tempo de vida bem definido. Uma variável local em uma função, por exemplo, desaparece quando a função encerra. Em outros casos, isso não é tão óbvio -- não para um compilador. Por exemplo, o tempo de vida de vida de uma variável retornada por uma função ou referenciada por outras variáveis e objetos pode ser bem difícil de determinar. Sem coleção de lixo (garbage collection), fica a cargo do desenvolvedor liberar a memória associada com algumas variáveis em um ponto na qual ele saiba que a variável não é mais necessária. Como? Em C, você usaria o seguinte comando: `free(str);` para liberar a variável.
 
-Languages with garbage collectors (e.g., Ruby, Python, Java, JavaScript, C#, Go) are able to keep track of these and free them when they're no longer used. Garbage collection adds overhead, but it also eliminates a number of devastating bugs.
+Linguagens com coletor de lixo (ex.: Ruby, Python, Java, JavaScript, C#, Go) são capazes de acompanhar as variáveis e liberá-las da memória quando não são usadas. Coleção de lixo (garbage collection) adiciona sobrecarga na linguagem, mas também elimina uma enorme quantidade de bugs.
 
 ## Running Go Code
 
