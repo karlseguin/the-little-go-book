@@ -130,59 +130,62 @@ Algumas variáveis, quando criadas, têm um tempo de vida bem definido. Uma vari
 
 Linguagens com coletor de lixo (ex.: Ruby, Python, Java, JavaScript, C#, Go) são capazes de acompanhar as variáveis e liberá-las da memória quando não são usadas. Coleção de lixo (garbage collection) adiciona sobrecarga na linguagem, mas também elimina uma enorme quantidade de bugs.
 
-## Running Go Code
+## Executando Código em Go
 
-Let's start our journey by creating a simple program and learning how to compile and execute it. Open your favorite text editor and write the following code:
+Vamos começar a nossa jornada criando um simples programa e aprendendo como compilá-lo e executá-lo. Abra o seu editor de texto favorito escreva o seguinte código:
 
 ```go
 package main
 
 func main() {
-  println("it's over 9000!")
+  println("é mais de 9000!")
 }
 ```
 
-Save the file as `main.go`. For now, you can save it anywhere you want; we don't need to live inside Go's workspace for trivial examples.
+Salve o arquivo como `main.go`. Por enquanto, você pode salvá-lo em qualquer lugar que você queira. 
 
-Next, open a shell/command prompt and change the directory to where you saved the file. For me, that means typing `cd ~/code`.
+Save the file as `main.go`. For now, you can save it anywhere you want. Para exemplos triviais, não é necessário fazer um espaço de trabalho.
 
-Finally, run the program by entering:
+A seguir, abra o *prompt* de comando e mude para o diretório em que o arquivo foi salvo. Para o meu exemplo, salvei no diretório `code`: `cd ~/code`
+
+Finalmente, execute o programa digitando:
 
 ```
 go run main.go
 ```
 
-If everything worked, you should see *it's over 9000!*.
+Se tudo funcionou corretamente, você deve ver: *é mais de 9000!*.
 
-But wait, what about the compilation step? `go run` is a handy command that compiles *and* runs your code. It uses a temporary directory to build the program, executes it and then cleans itself up. You can see the location of the temporary file by running:
+Mas espere, mas e o passo de compilação? `go run` é um atalho que compila *e* executa o seu código. Ele usa um diretório temporário para construir o programa, executá-lo e, então, limpá-lo. Você pode ver a localização do arquivo temporário executando:
 
 ```
 go run --work main.go
 ```
 
-To explicitly compile code, use `go build`:
+Para explicitamente compilar o código, use `go build`:
 
 ```
 go build main.go
 ```
 
-This will generate an executable `main` which you can run. On Linux / OSX, don't forget that you need to prefix the executable with dot-slash, so you need to type `./main`.
+Isso gerará um executável `main`, que você poderá rodar. Em sistemas operacionais Linux / OSX, não se esqueça que você precisa adicionar o prefixo **./**: `./main`.
 
-While developing, you can use either `go run` or `go build`. When you deploy your code however, you'll want to deploy a binary via `go build` and execute that.
+Enquanto desenvolvendo, você pode usar ambos: `go run` ou `go build`. Quando você fizer o deploy do seu código, no entanto, você fará o deploy de um binário via `go build` para executá-lo.
 
 ### Main
 
-Hopefully, the code that we just executed is understandable. We've created a function and printed out a string with the built-in `println` function. Did `go run` know what to execute because there was only a single choice? No. In Go, the entry point to a program has to be a function called `main` within a package `main`.
+Esperançosamente, o código que nós executamos é entendível. Nós criamos uma função e printamos uma string com a função nativa `println`. O comando `go run` sabia o que executar por que só tinha uma única escolha? Não. Em Go, o ponto de entrada (entry point) de um programa precisa ser uma função chamada `main` dentro de um pacote chamado `main`.
 
-We'll talk more about packages in a later chapter. For now, while we focus on understanding the basics of Go, we'll always write our code within the `main` package.
+Nós falaremos mais sobre pacotes em um capítulo mais avançado. Por enquanto, enquanto focamos nosso entendimento nos fundamentos básicos de Go, nós vamos sempre escrever nosso código dentro do pacote `main`
 
-If you want, you can alter the code and change the package name. Run the code via `go run` and you should get an error. Then, change the name back to `main` but use a different function name. You should see a different error message. Try making those same changes but use `go build` instead. Notice that the code compiles, there's just no entry point to run it. This is perfectly normal when you are, for example, building a library.
+Se você quiser, você pode alterar o código e mudar o nome do pacote.
+Ao rodar o código via `go run`, você receberá um erro. Uma outra tentativa é mudar o nome de volta para `main`, mas usar uma função com nome diferente. Agora, você receberá uma mensagem de erro diferente. Tente fazer essas mesmas mudanças com o comando `go build`. Note que o código compila, mas não tem um ponto de entrada (entry point). Isto é completamente normal quando você está, por exemplo, construindo uma biblioteca.
 
-## Imports
+## Importações
 
-Go has a number of built-in functions, such as `println`, which can be used without reference. We can't get very far though, without making use of Go's standard library and eventually using third-party libraries. In Go, the `import` keyword is used to declare the packages that are used by the code in the file.
+Go tem várias funções nativas, como `println`, que pode ser usada sem referência. Entretanto, nós não podemos fazer muita coisa sem fazer uso das bibliotecas padrão de Go e, eventualmente, usar bibliotecas de terceiros. Em Go, a palavra-chave `import` é usada para declarar pacotes que são usados pelo código no arquivo.
 
-Let's change our program:
+Vamos alterar o nosso programa:
 
 ```go
 package main
@@ -200,17 +203,17 @@ func main() {
 }
 ```
 
-Which you can run via:
+Que você pode rodar via:
 
 ```
 go run main.go 9000
 ```
 
-We're now using two of Go's standard packages: `fmt` and `os`. We've also introduced another built-in function `len`. `len` returns the size of a string, or the number of values in a dictionary, or, as we see here, the number of elements in an array. If you're wondering why we expect 2 arguments, it's because the first argument -- at index 0 -- is always the path of the currently running executable. (Change the program to print it out and see for yourself.)
+Agora, nós estamos usado dois dos pacotes padrão de Go: `fmt` e `os`. Nós também introduzimos outras funções nativas `len`. `len` retorna o tamanho de uma string ou o número de valores em um dicionário ou, como nós ainda veremos, o número de elementos em um array. Se você está se perguntando por que nós esperamos 2 argumentos, é porque o primeiro argumento, no índice 0, é sempre o caminho do executável atualmente em execução. (Mude o programa para printar isso e veja por você mesmo)
 
-You've probably noticed we prefix the function name with the package, e.g., `fmt.Println`. This is different from many other languages. We'll learn more about packages in later chapters. For now, knowing how to import and use a package is a good start.
+Você provavelmente, notou que nós prefixamos o nome da função com pacote, ex.: `fmt.Println`. Isto é diferente de muitas outras linguagens. Nós vamos aprender mais sobre pacotes em capítulos futuros. Por agora, saber como importar um pacote e como usá-lo é um bom começo.
 
-Go is strict about importing packages. It will not compile if you import a package but don't use it. Try to run the following:
+Go é rigoroso sobre importar pacotes. Ele não compilará se você não usar um pacote que você importou. Tente rodar o seguinte código:
 
 ```go
 package main
@@ -224,17 +227,17 @@ func main() {
 }
 ```
 
-You should get two errors about `fmt` and `os` being imported and not used. Can this get annoying? Absolutely. Over time, you'll get used to it (it'll still be annoying though). Go is strict about this because unused imports can slow compilation; admittedly a problem most of us don't have to this degree.
+Você deverá obter dois erros sobre `fmt` e `os` estarem sendo importados, mas não usados. Isso pode ser irritante? Absolutamente. Com o passar do tempo, você ficará acostumado com isso (existem plugins que podem ser adicionados ao editor de texto para eliminar pacotes que não estão sendo usados ao salvar o arquivo). Go é rigoroso sobre isto porque importações não usadas podem causar lentidão na compilação. Certamente, um problema que a maioria de nós não tem neste grau.
 
-Another thing to note is that Go's standard library is well documented. You can head over to <https://golang.org/pkg/fmt/#Println> to learn more about the `Println` function that we used. You can click on that section header and see the source code. Also, scroll to the top to learn more about Go's formatting capabilities.
+Outra coisa a se mencionar é que a biblioteca padrão de Go é bem documentada. Você pode ir até <https://pkg.go.dev/fmt#Println> para aprender mais sobre a função `Println` que nós usamos. Você também pode clicar no cabeçalho da seção e ver o código-fonte. Também é possível rolar para o topo para aprender mais sobre as capacidades de formatação de Go.
 
-If you're ever stuck without internet access, you can get the documentation running locally via:
+Se você ficar sem acesso à internet, você pode pegar a documentação localmente via:
 
 ```
 godoc -http=:6060
 ```
 
-and pointing your browser to `http://localhost:6060`
+E apontar o seu navegador para `http://localhost:6060`
 
 ## Variables and Declarations
 
