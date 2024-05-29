@@ -86,27 +86,27 @@ Abra um prompt de comando e digite `go version`. Espero que você obtenha uma sa
 
 # Capítulo 1 - O Básico
 
-Go é uma linguagem compilada e estaticamente tipada com uma sintaxe semelhante a C e garbage colector. O que isso significa?
+Go é uma linguagem compilada e estaticamente tipada com uma sintaxe semelhante à C e com garbage colector. O que isso significa?
 
-## Compilation
+## Compilação
 
-Compilation is the process of translating the source code that you write into a lower level language -- either assembly (as is the case with Go), or some other intermediary language (as with Java and C#).
+Compilação é o processo de traduzir o código-fonte escrito em uma linguagem de baixo nível que o computador entenda - pode ser assembly (como é o caso de Go), assim como pode ser alguma outra linguagem intermediária (como é o caso de Java e C#).
 
-Compiled languages can be unpleasant to work with because compilation can be slow. It's hard to iterate quickly if you have to spend minutes or hours waiting for code to compile. Compilation speed is one of the major design goals of Go. This is good news for people working on large projects as well as those of us used to a quick feedback cycle offered by interpreted languages.
+Em alguns casos, a compilação pode ser lenta, o que torna desprazeroso trabalhar com linguagens compiladas. Pode ser difícil ser produtivo se você precisa esperar minutos ou horas pela compilação do código. A velocidade de compilação é um dos maiores objetivos de design de Go. E essa é uma excelente notícia para as pessoas que trabalham em projetos grandes, assim como para as pessoas que querem ter um ciclo de resposta rápido no processo de desenvolvimento, como o oferecido por linguagens interpretadas.
 
-Compiled languages tend to run faster and the executable can be run without additional dependencies (at least, that's true for languages like C, C++ and Go which compile directly to assembly).
+Linguagens compiladas tendem a ser mais rápidas e o executável pode rodar sem nenhuma dependência adicional (pelo menos, isso é uma verdade para linguagens como C, C++ e Go, que compilam diretamente para assembly).
 
-## Static Typing
+## Tipagem Estática
 
-Being statically typed means that variables must be of a specific type (int, string, bool, []byte, etc.). This is either achieved by specifying the type when the variable is declared or, in many cases, letting the compiler infer the type (we'll look at examples shortly).
+Ser uma linguagem estaticamente tipada significa que as variáveis devem ser de um tipo específico (int, string, bool, []byte etc). Isso pode ser atingido especificando o tipo quando a variável é declarada ou, em muitos casos, deixando o compilador inferir o tipo (serão dados alguns exemplos em breve)
 
-There's a lot more that can be said about static typing, but I believe it's something better understood by looking at code. If you're used to dynamically typed languages, you might find this cumbersome. You're not wrong, but there are advantages, especially when you pair static typing with compilation. The two are often conflated. It's true that when you have one, you normally have the other but it isn't a hard rule. With a rigid type system, a compiler is able to detect problems beyond mere syntactical mistakes as well as make further optimizations.
+Há muito mais que pode ser discutido sobre tipagem estática, mas eu acredito que às vezes é melhor entender olhando para o código. Se você é acostumado a usar linguagens dinamicamente tipadas, você pode achar complicado. Você não está errado, mas há vantagens, especialmente quando você combina tipagem estática com compilação. As duas são frequentemente confudidas. É verdade que quando você tem um, geralmente você tem o outro, mas essa não é uma regra escrita em pedra. Com um sistema rígido de tipagem, um compilador é capaz de detectar problemas além de meros erros sintáticos, assim como fazer otimizações adicionais.
 
-## C-Like Syntax
+## Sintaxe C-Like
 
-Saying that a language has a C-like syntax means that if you're used to any other C-like languages such as C, C++, Java, JavaScript and C#, then you're going to find Go familiar -- superficially, at least. For example, it means `&&` is used as a boolean AND, `==` is used to compare equality, `{` and `}` start and end a scope, and array indexes start at 0.
+Dizer que uma linguagem tem um sintaxe C-like significa que se você já usou qualquer outra linguagem C-like, como C, C++, Java, JavaScript e C#, você achará Go familiar -- pelo menos, superficialmente. Por exemplo, isso significa que `&&` é usado como um booleano E (AND), `==` é usado para comparar igualdade, `{` e `}` começam e finalizam um escopo e índices de arrays começam em 0.
 
-C-like syntax also tends to mean semi-colon terminated lines and parentheses around conditions. Go does away with both of these, though parentheses are still used to control precedence. For example, an `if` statement looks like this:
+Sintaxe C-like também tende a significar que ponto e vírgula demarcam o fim de uma linha e que parentêses circundam condições. Go faz diferente em ambos desses cenários, entretanto, parentêses ainda são usados para controlar precedência. Por exemplo, uma declaração `if` (se) se parece com:
 
 ```go
 if name == "Leto" {
@@ -114,75 +114,78 @@ if name == "Leto" {
 }
 ```
 
-And in more complicated cases, parentheses are still useful:
+E, para casos mais complicados, parênteses ainda são úteis:
 
 ```go
-if (name == "Goku" && power > 9000) || (name == "gohan" && power < 4000)  {
-  print("super Saiyan")
+if (name == "Goku" && power > 9000) || (name == "Gohan" && power < 4000)  {
+  print("Super Saiyan")
 }
 ```
 
-Beyond this, Go is much closer to C than C# or Java - not only in terms of syntax, but in terms of purpose. That's reflected in the terseness and simplicity of the language which will hopefully start to become obvious as you learn it.
+No mais, Go é muito mais próximo de C do que C# ou Java - não somente em termos de sintaxe, mas também em termos de propósito. Isso é refletido na concisão e na simplicidade da linguagem, que esperançosamente se tornará óbvio à medida que a linguagem for apresentada.
 
-## Garbage Collected
+## Coletor de Lixo (Garbage Collector)
 
-Some variables, when created, have an easy-to-define life. A variable local to a function, for example, disappears when the function exits. In other cases, it isn't so obvious -- at least to a compiler. For example, the lifetime of a variable returned by a function or referenced by other variables and objects can be tricky to determine. Without garbage collection, it's up to developers to free the memory associated with such variables at a point where the developer knows the variable isn't needed. How? In C, you'd literally `free(str);` the variable.
+Algumas variáveis, quando criadas, têm um tempo de vida bem definido. Uma variável local em uma função, por exemplo, desaparece quando a função encerra. Em outros casos, isso não é tão óbvio -- não para um compilador. Por exemplo, o tempo de vida de vida de uma variável retornada por uma função ou referenciada por outras variáveis e objetos pode ser bem difícil de determinar. Sem coleção de lixo (garbage collection), fica a cargo do desenvolvedor liberar a memória associada com algumas variáveis em um ponto na qual ele saiba que a variável não é mais necessária. Como? Em C, você usaria o seguinte comando: `free(str);` para liberar a variável.
 
-Languages with garbage collectors (e.g., Ruby, Python, Java, JavaScript, C#, Go) are able to keep track of these and free them when they're no longer used. Garbage collection adds overhead, but it also eliminates a number of devastating bugs.
+Linguagens com coletor de lixo (ex.: Ruby, Python, Java, JavaScript, C#, Go) são capazes de acompanhar as variáveis e liberá-las da memória quando não são usadas. Coleção de lixo (garbage collection) adiciona sobrecarga na linguagem, mas também elimina uma enorme quantidade de bugs.
 
-## Running Go Code
+## Executando Código em Go
 
-Let's start our journey by creating a simple program and learning how to compile and execute it. Open your favorite text editor and write the following code:
+Vamos começar a nossa jornada criando um simples programa e aprendendo como compilá-lo e executá-lo. Abra o seu editor de texto favorito escreva o seguinte código:
 
 ```go
 package main
 
 func main() {
-  println("it's over 9000!")
+  println("é mais de 9000!")
 }
 ```
 
-Save the file as `main.go`. For now, you can save it anywhere you want; we don't need to live inside Go's workspace for trivial examples.
+Salve o arquivo como `main.go`. Por enquanto, você pode salvá-lo em qualquer lugar que você queira. 
 
-Next, open a shell/command prompt and change the directory to where you saved the file. For me, that means typing `cd ~/code`.
+Save the file as `main.go`. For now, you can save it anywhere you want. Para exemplos triviais, não é necessário fazer um espaço de trabalho.
 
-Finally, run the program by entering:
+A seguir, abra o *prompt* de comando e mude para o diretório em que o arquivo foi salvo. Para o meu exemplo, salvei no diretório `code`: `cd ~/code`
+
+Finalmente, execute o programa digitando:
 
 ```
 go run main.go
 ```
 
-If everything worked, you should see *it's over 9000!*.
+Se tudo funcionou corretamente, você deve ver: *é mais de 9000!*.
 
-But wait, what about the compilation step? `go run` is a handy command that compiles *and* runs your code. It uses a temporary directory to build the program, executes it and then cleans itself up. You can see the location of the temporary file by running:
+Mas espere, mas e o passo de compilação? `go run` é um atalho que compila *e* executa o seu código. Ele usa um diretório temporário para construir o programa, executá-lo e, então, limpá-lo. Você pode ver a localização do arquivo temporário executando:
 
 ```
 go run --work main.go
 ```
 
-To explicitly compile code, use `go build`:
+Para explicitamente compilar o código, use `go build`:
 
 ```
 go build main.go
 ```
 
-This will generate an executable `main` which you can run. On Linux / OSX, don't forget that you need to prefix the executable with dot-slash, so you need to type `./main`.
+Isso gerará um executável `main`, que você poderá rodar. Em sistemas operacionais Linux / OSX, não se esqueça que você precisa adicionar o prefixo **./**: `./main`.
 
-While developing, you can use either `go run` or `go build`. When you deploy your code however, you'll want to deploy a binary via `go build` and execute that.
+Enquanto desenvolvendo, você pode usar ambos: `go run` ou `go build`. Quando você fizer o deploy do seu código, no entanto, você fará o deploy de um binário via `go build` para executá-lo.
 
 ### Main
 
-Hopefully, the code that we just executed is understandable. We've created a function and printed out a string with the built-in `println` function. Did `go run` know what to execute because there was only a single choice? No. In Go, the entry point to a program has to be a function called `main` within a package `main`.
+Esperançosamente, o código que nós executamos é entendível. Nós criamos uma função e printamos uma string com a função nativa `println`. O comando `go run` sabia o que executar por que só tinha uma única escolha? Não. Em Go, o ponto de entrada (entry point) de um programa precisa ser uma função chamada `main` dentro de um pacote chamado `main`.
 
-We'll talk more about packages in a later chapter. For now, while we focus on understanding the basics of Go, we'll always write our code within the `main` package.
+Nós falaremos mais sobre pacotes em um capítulo mais avançado. Por enquanto, enquanto focamos nosso entendimento nos fundamentos básicos de Go, nós vamos sempre escrever nosso código dentro do pacote `main`
 
-If you want, you can alter the code and change the package name. Run the code via `go run` and you should get an error. Then, change the name back to `main` but use a different function name. You should see a different error message. Try making those same changes but use `go build` instead. Notice that the code compiles, there's just no entry point to run it. This is perfectly normal when you are, for example, building a library.
+Se você quiser, você pode alterar o código e mudar o nome do pacote.
+Ao rodar o código via `go run`, você receberá um erro. Uma outra tentativa é mudar o nome de volta para `main`, mas usar uma função com nome diferente. Agora, você receberá uma mensagem de erro diferente. Tente fazer essas mesmas mudanças com o comando `go build`. Note que o código compila, mas não tem um ponto de entrada (entry point). Isto é completamente normal quando você está, por exemplo, construindo uma biblioteca.
 
-## Imports
+## Importações
 
-Go has a number of built-in functions, such as `println`, which can be used without reference. We can't get very far though, without making use of Go's standard library and eventually using third-party libraries. In Go, the `import` keyword is used to declare the packages that are used by the code in the file.
+Go tem várias funções nativas, como `println`, que pode ser usada sem referência. Entretanto, nós não podemos fazer muita coisa sem fazer uso das bibliotecas padrão de Go e, eventualmente, usar bibliotecas de terceiros. Em Go, a palavra-chave `import` é usada para declarar pacotes que são usados pelo código no arquivo.
 
-Let's change our program:
+Vamos alterar o nosso programa:
 
 ```go
 package main
@@ -200,17 +203,17 @@ func main() {
 }
 ```
 
-Which you can run via:
+Que você pode rodar via:
 
 ```
 go run main.go 9000
 ```
 
-We're now using two of Go's standard packages: `fmt` and `os`. We've also introduced another built-in function `len`. `len` returns the size of a string, or the number of values in a dictionary, or, as we see here, the number of elements in an array. If you're wondering why we expect 2 arguments, it's because the first argument -- at index 0 -- is always the path of the currently running executable. (Change the program to print it out and see for yourself.)
+Agora, nós estamos usado dois dos pacotes padrão de Go: `fmt` e `os`. Nós também introduzimos outras funções nativas `len`. `len` retorna o tamanho de uma string ou o número de valores em um dicionário ou, como nós ainda veremos, o número de elementos em um array. Se você está se perguntando por que nós esperamos 2 argumentos, é porque o primeiro argumento, no índice 0, é sempre o caminho do executável atualmente em execução. (Mude o programa para printar isso e veja por você mesmo)
 
-You've probably noticed we prefix the function name with the package, e.g., `fmt.Println`. This is different from many other languages. We'll learn more about packages in later chapters. For now, knowing how to import and use a package is a good start.
+Você provavelmente, notou que nós prefixamos o nome da função com pacote, ex.: `fmt.Println`. Isto é diferente de muitas outras linguagens. Nós vamos aprender mais sobre pacotes em capítulos futuros. Por agora, saber como importar um pacote e como usá-lo é um bom começo.
 
-Go is strict about importing packages. It will not compile if you import a package but don't use it. Try to run the following:
+Go é rigoroso sobre importar pacotes. Ele não compilará se você não usar um pacote que você importou. Tente rodar o seguinte código:
 
 ```go
 package main
@@ -224,25 +227,25 @@ func main() {
 }
 ```
 
-You should get two errors about `fmt` and `os` being imported and not used. Can this get annoying? Absolutely. Over time, you'll get used to it (it'll still be annoying though). Go is strict about this because unused imports can slow compilation; admittedly a problem most of us don't have to this degree.
+Você deverá obter dois erros sobre `fmt` e `os` estarem sendo importados, mas não usados. Isso pode ser irritante? Absolutamente. Com o passar do tempo, você ficará acostumado com isso (existem plugins que podem ser adicionados ao editor de texto para eliminar pacotes que não estão sendo usados ao salvar o arquivo). Go é rigoroso sobre isto porque importações não usadas podem causar lentidão na compilação. Certamente, um problema que a maioria de nós não tem neste grau.
 
-Another thing to note is that Go's standard library is well documented. You can head over to <https://golang.org/pkg/fmt/#Println> to learn more about the `Println` function that we used. You can click on that section header and see the source code. Also, scroll to the top to learn more about Go's formatting capabilities.
+Outra coisa a se mencionar é que a biblioteca padrão de Go é bem documentada. Você pode ir até <https://pkg.go.dev/fmt#Println> para aprender mais sobre a função `Println` que nós usamos. Você também pode clicar no cabeçalho da seção e ver o código-fonte. Também é possível rolar para o topo para aprender mais sobre as capacidades de formatação de Go.
 
-If you're ever stuck without internet access, you can get the documentation running locally via:
+Se você ficar sem acesso à internet, você pode pegar a documentação localmente via:
 
 ```
 godoc -http=:6060
 ```
 
-and pointing your browser to `http://localhost:6060`
+E apontar o seu navegador para `http://localhost:6060`
 
-## Variables and Declarations
+## Variáveis e Declarações
 
-It'd be nice to begin and end our look at variables by saying *you declare and assign to a variable by doing x = 4.* Unfortunately, things are more complicated in Go. We'll begin our conversation by looking at simple examples. Then, in the next chapter, we'll expand this when we look at creating and using structures. Still, it'll probably take some time before you truly feel comfortable with it.
+Seria legal começar e terminar nossa discussão sobre variáveis dizendo: "você declara e atribui a uma variável fazendo x = 4". Infelizmente, as coisas são mais complicadas em Go. Nós começaremos a nossa conversa olhando para exemplos simples. Então, no próximo capítulo, nós vamos expandir isso quando nós olharmos para a criação e uso de estruturas (struct). Ainda, provavelmente levará algum tempo antes de você verdadeiramente se sentir confortável com isso.
 
-You might be thinking *Woah! What can be so complicated about this?* Let's start looking at some examples.
+Você pode estar pensando: "Uou! O que pode ser tão complicado sobre isto?" Vamos começar olhando para alguns exemplos.
 
-The most explicit way to deal with variable declaration and assignment in Go is also the most verbose:
+A maneira mais explicíta de lidar com declaração e atribuição de variável em Go é também a mais verbosa:
 
 ```go
 package main
@@ -258,19 +261,19 @@ func main() {
 }
 ```
 
-Here, we declare a variable `power` of type `int`. By default, Go assigns a zero value to variables. Integers are assigned `0`, booleans `false`, strings `""` and so on. Next, we assign `9000` to our `power` variable. We can merge the first two lines:
+Aqui, nós declaramos uma variável `power` do tipo `int`. Por padrão, Go atribui um **valor zero** às variáveis. Para os inteiros é atribuído `0`; booleanos: `false`; strings: `""` e alguns outros valores para outros tipos que serão discutidos em breve. Em seguida, nós atribuímos `9000` à variável `power`. Nós podemos unir as duas primeiras linhas:
 
 ```go
 var power int = 9000
 ```
 
-Still, that's a lot of typing. Go has a handy short variable declaration operator, `:=`, which can infer the type:
+Ainda, é muito para se digitar. Go tem um atalho para declaração curta de variável, `:=`, que pode inferir o tipo:
 
 ```go
 power := 9000
 ```
 
-This is handy, and it works just as well with functions:
+Essa sintaxe é bem útil e funciona bem com funções:
 
 ```go
 func main() {
@@ -282,7 +285,8 @@ func getPower() int {
 }
 ```
 
-It's important that you remember that `:=` is used to declare the variable as well as assign a value to it. Why? Because a variable can't be declared twice (not in the same scope anyway). If you try to run the following, you'll get an error.
+É importante ressaltar que `:=` é usado para declarar a variável já atribuindo um valor para ela. Por quê? Porque uma variável não pode ser declarada duas vezes (não no mesmo escopo). Se você tentar rodar o código a seguir, você obterá um erro.
+
 
 ```go
 func main() {
@@ -296,9 +300,9 @@ func main() {
 }
 ```
 
-The compiler will complain with *no new variables on left side of :=*. This means that when we first declare a variable, we use `:=` but on subsequent assignment, we use the assignment operator `=`. This makes a lot of sense, but it can be tricky for your muscle memory to remember when to switch between the two.
+O compilador irá reclamar, informando que *não há uma variável nova sendo declarada no lado esquerdo de :=*. Isto significa que quando nós declaramos a primeira variável, nós usamos `:=`, mas na atribuição subsequente, nós usamos o operador `=`. Isto faz muito sentido, mas pode ser complicado para a sua memória muscular lembrar quando trocar entre os dois.
 
-If you read the error message closely, you'll notice that *variables* is plural. That's because Go lets you assign multiple variables (using either `=` or `:=`):
+Se você ler a messagem de erro atentamente, você irá notar que *variáveis* no plurar. Isso ocorre porque Go permite você atribuir múltipas variáveis (usando `=` ou `:=`):
 
 
 ```go
@@ -308,7 +312,7 @@ func main() {
 }
 ```
 
-As long as one of the variables is new, `:=` can be used. Consider:
+Contando que uma das variáveis seja nova, `:=` pode ser usado:
 
 ```go
 func main() {
@@ -320,9 +324,9 @@ func main() {
 }
 ```
 
-Although `power` is being used twice with `:=`, the compiler won't complain the second time we use it, it'll see that the other variable, `name`, is a new variable and allow `:=`. However, you can't change the type of `power`. It was declared (implicitly) as an integer and thus, can only be assigned integers.
+Embora `power` esteja sendo usado duas vezes com `:=`, o compilador não vai reclamar do segundo uso, porque ele verá que a outra variável, `name`, é uma nova variável e permite `:=`. No entanto, você não pode mudar o tipo de `power`. Ela foi declarada (implicitamente) como um inteiro e, portanto, só inteiros podem ser atribuídos.
 
-For now, the last thing to know is that, like imports, Go won't let you have unused variables. For example,
+Por agora, a última coisa a saber é que, como importações, Go não vai deixar você ter variáveis sem uso. Por exemplo:
 
 ```go
 func main() {
@@ -331,13 +335,13 @@ func main() {
 }
 ```
 
-won't compile because `name` is declared but not used. Like unused imports it'll cause some frustration, but overall I think it helps with code cleanliness and readability.
+Não compilará porque `name` é declarada, mas não é usada. Como importações, isso poderá causar algumas frustrações, mas olhando de forma geral, eu acho que ajudará com a clareza e legibilidade do código.
 
-There's more to learn about declaration and assignments. For now, remember that you'll use `var NAME TYPE` when declaring a variable to its zero value, `NAME := VALUE` when declaring and assigning a value, and `NAME = VALUE` when assigning to a previously declared variable.
+Há mais para se aprender sobre declaração e atribuição. Por agora, lembre-se que você usará `var NAME TYPE` quando declarar uma variável com o seu valor zero, `NAME := VALUE` quando declarar e atribuir um valor e `NAME = VALUE` quando atribuir um valor a uma variável previamente declarada.
 
-## Function Declarations
+## Declaração de Funções
 
-This is a good time to point out that functions can return multiple values. Let's look at three functions: one with no return value, one with one return value, and one with two return values.
+Este é um bom momento para mostrar que funções podem ter múltiplos valores de retorno. Vamos olhar para três funções: uma sem valor de retorno, uma com um retorno e outra com dois valores de retorno.
 
 ```go
 func log(message string) {
@@ -350,7 +354,7 @@ func power(name string) (int, bool) {
 }
 ```
 
-We'd use the last one like so:
+Nós usaríamos a última da seguinte forma:
 
 ```go
 value, exists := power("goku")
@@ -359,7 +363,7 @@ if exists == false {
 }
 ```
 
-Sometimes, you only care about one of the return values. In these cases, you assign the other values to `_`:
+Às vezes, você só se importa com um dos valores de retorno. Nestes casos, você pode atribuir os outros valores ao identificador em branco (blank identifier) `_`:
 
 ```go
 _, exists := power("goku")
@@ -368,9 +372,9 @@ if exists == false {
 }
 ```
 
-This is more than a convention. `_`, the blank identifier, is special in that the return value isn't actually assigned. This lets you use `_` over and over again regardless of the returned type.
+Isto é mais do que uma convenção. `_`, o identificaor em branco, é especial porque o valor de retorno não é realmente atribuído. Isto deixa você usar `_` repetidamente, independente do tipo retornado.
 
-Finally, there's something else that you're likely to run into with function declarations. If parameters share the same type, we can use a shorter syntax:
+Finalmente, há algo mais que você pode gostar de usar ao declarar funções. Se os parâmetros compartilharem o mesmo tipo, nós podemos usar uma sintaxe reduzida:
 
 ```go
 func add(a, b int) int {
@@ -378,15 +382,15 @@ func add(a, b int) int {
 }
 ```
 
-Being able to return multiple values is something you'll use often. You'll also frequently use `_` to discard a value. Named return values and the slightly less verbose parameter declaration aren't that common. Still, you'll run into all of these sooner than later so it's important to know about them.
+Ser capaz de retornar múltiplos valores é algo que você usará frequentemente. Você também usará `_` frequentemente para descartar um valor. Valores de retorno nomeados e a declaração de parâmetros menos verbosa não são tão comuns. Cedo ou tarde você encontrará essas coisas por aí. Então, é importante que você saiba sobre elas. 
 
-## Before You Continue
+## Antes de Continuar
 
-We looked at a number of small individual pieces and it probably feels disjointed at this point. We'll slowly build larger examples and hopefully, the pieces will start to come together.
+Nós olhamos para uma série de pequenos pedaços de códigos separados, que podem parecer desconectadas a essa altura. Contudo, nós vamos pouco a pouco construir exemplos mais robustos que, idealmente, farão os pedaços se conectarem e tudo fazer sentido.
 
-If you're coming from a dynamic language, the complexity around types and declarations might seem like a step backwards. I don't disagree with you. For some systems, dynamic languages are categorically more productive.
+Se você está vindo de uma linguagem dinâmica, a complexidade ao redor dos tipos e declarações podem parecer um passo para trás. Eu não concordo com você. Para alguns sistemas, linguagens dinâmicas são categoricamente mais produtivas.
 
-If you're coming from a statically typed language, you're probably feeling comfortable with Go. Inferred types and multiple return values are nice (though certainly not exclusive to Go). Hopefully as we learn more, you'll appreciate the clean and terse syntax.
+Se você está vindo de uma linguagem estaticamente tipada, você provavelmente está se sentindo confortável com Go. Inferir tipos e múltiplos valores de retorno são legais (apesar de certamente não serem exclusivas para Go). Esperançosamente, à medida que aprendermos mais, você apreciará a clareza e concisão sintática.
 
 # Chapter 2 - Structures
 
