@@ -392,13 +392,13 @@ Se você está vindo de uma linguagem dinâmica, a complexidade ao redor dos tip
 
 Se você está vindo de uma linguagem estaticamente tipada, você provavelmente está se sentindo confortável com Go. Inferir tipos e múltiplos valores de retorno são legais (apesar de certamente não serem exclusivas para Go). Esperançosamente, à medida que aprendermos mais, você apreciará a clareza e concisão sintática.
 
-# Chapter 2 - Structures
+# Capítulo 2 - Estruturas
 
-Go isn't an object-oriented (OO) language like C++, Java, Ruby and C#. It doesn't have objects nor inheritance and thus, doesn't have the many concepts associated with OO such as polymorphism and overloading.
+Go não é um linguagem orientada a objetos, como C++, Java, Ruby e C#. Ela não tem objetos ou herança e, portanto, não tem muitos conceitos associados com programação orientada a objetos (POO), como polimorfismo e sobrecarga.
 
-What Go does have are structures, which can be associated with methods. Go also supports a simple but effective form of composition. Overall, it results in simpler code, but there'll be occasions where you'll miss some of what OO has to offer. (It's worth pointing out that *composition over inheritance* is an old battle cry and Go is the first language I've used that takes a firm stand on the issue.)
+O que Go tem são estruturas, que podem ser associadas com métodos. Go também suporta uma simples, mas efetiva forma de composição. No geral, isso resulta em código mais simples, mas terão ocasiões em que você sentirá falta de alguns conceitos que POO tem a oferecer. (É importante ressaltar que *composição sobre herança* é um velho grito de guerra e Go é a primeira linguagem que eu usei que assume uma posição firme sobre o assunto).
 
-Although Go doesn't do OO like you may be used to, you'll notice a lot of similarities between the definition of a structure and that of a class. A simple example is the following `Saiyan` structure:
+Apesar de Go não usar POO do jeito que talvez você esteja habituado, você notará que existem muitas similaridades entre as definições de uma estrutura e a de uma classe. Um exemplo simples é a estrutura `Saiyan` a seguir:
 
 ```go
 type Saiyan struct {
@@ -407,7 +407,7 @@ type Saiyan struct {
 }
 ```
 
-We'll soon see how to add a method to this structure, much like you'd have methods as part of a class. Before we do that, we have to dive back into declarations.
+Em breve nós veremos como adicionar uma método nesta estrutura, sendo bem parecido em como métodos são parte de uma classe. Antes de fazermos isso, precisamos mergulhar de volta nas declarações.
 
 ## Declarations and Initializations
 
