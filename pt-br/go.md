@@ -512,7 +512,7 @@ func (s *Saiyan) Super() {
 }
 ```
 
-No código acima, nós dizemos que o tipo `*Saiyan` é o **recebedor** do método `Super`. Nós podemos chamar `Super` da seguinte forma:
+No código acima, nós dizemos que o tipo `*Saiyan` é o **receptor** do método `Super`. Nós podemos chamar `Super` da seguinte forma:
 
 ```go
 goku := &Saiyan{"Goku", 9001}
@@ -686,7 +686,7 @@ Ao escrever código em Go, é natural você se questionar: "isto deveria ser um 
 * O campo de uma estrutura
 * O valor de retorno de uma função
 * Os parâmetros de uma função
-* O recebedor de um método
+* O receptor de um método
 
 Segundo, se você não tem certeza, use um ponteiro.
 
@@ -705,7 +705,9 @@ Nestes casos, o custo de copiar a estrutura é provavelmente compensado por ser 
 
 Novamente, estes são todos casos bem sutilmente pequenos. A menos que você esteja lidando com milhares desses pontos (ou outras magnitudes ainda maiores), você não notaria diferenças significativas.
 
-## Before You Continue
+## Antes de Continuar
+
+De um ponto de vista prático, este capítulo introduziu estruturas, como transformar uma instância de uma estrutura em um receptor e adicionou ponteiros ao nosso conhecimento existente sobre o sistema de tipos de Go. Os capítulos seguintes vão ser construídos com base no que nós sabemos sobre estruturas, assim como no funcionamento interno que exploramos.
 
 From a practical point of view, this chapter introduced structures, how to make an instance of a structure a receiver of a function, and added pointers to our existing knowledge of Go's type system. The following chapters will build on what we know about structures as well as the inner workings that we've explored.
 
