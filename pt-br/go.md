@@ -573,11 +573,11 @@ goku := &Saiyan {
 
 Qualquer que seja a abordagem escolhida, se você seguir o *factory pattern* acima, você poderá proteger o resto do seu código de saber e se preocupar com os detalhes da alocação.
 
-## Fields of a Structure
+## Campos de uma Estrutura
 
-In the example that we've seen so far, `Saiyan` has two fields `Name` and `Power` of types `string` and `int`, respectively. Fields can be of any type -- including other structures and types that we haven't explored yet such as arrays, maps, interfaces and functions.
+No exemplo que até agora, `Saiyan` tem dois campos `Name` e `Power` dos tipos `string` e `int`, respectivamnte. Campos podem ser de qualquer tipo -- incluindo outras estruturas e tipos que nós ainda não exploramos, como arrays, maps, interfaces e funções.
 
-For example, we could expand our definition of `Saiyan`:
+Por exemplo, nós poderíamos expandir a nossa definição de `Sayian`:
 
 ```go
 type Saiyan struct {
@@ -587,7 +587,7 @@ type Saiyan struct {
 }
 ```
 
-which we'd initialize via:
+que inicializaríamos via:
 
 ```go
 gohan := &Saiyan{
