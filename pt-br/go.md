@@ -601,9 +601,9 @@ gohan := &Saiyan{
 }
 ```
 
-## Composition
+## Composição
 
-Go supports composition, which is the act of including one structure into another. In some languages, this is called a trait or a mixin. Languages that don't have an explicit composition mechanism can always do it the long way. In Java, there's the possibility to extend structures with *inheritance* but, in a scenario where this is not an option, a mixin would be written like this:
+Go suporta composição, que é o ato de incluir uma estrutura dentro de outra. Em algumas linguagens, isto é chamado de *trait* (traço) ou de *mixin* (mixar). Linguagens que não têm um mecanismo explícito de composição podem sempre fazer pelo caminho mais longo. Em Java, existe a possibilidade de extender estruturas com herança, mas em um cenário que não é uma opção, um *mixin* poderia ser escrito da seguinte maneira:
 
 ```java
 public class Person {
@@ -626,7 +626,7 @@ public class Saiyan {
 }
 ```
 
-This can get pretty tedious. Every method of `Person` needs to be duplicated in `Saiyan`. Go avoids this tediousness:
+Isso pode ser muito tediante. Cada método de `Person` precisa ser duplicado em `Saiyan`. Go evita essa tediosidade:
 
 ```go
 type Person struct {
@@ -642,7 +642,7 @@ type Saiyan struct {
   Power int
 }
 
-// and to use it:
+// e para usar:
 goku := &Saiyan{
   Person: &Person{"Goku"},
   Power: 9001,
@@ -650,7 +650,7 @@ goku := &Saiyan{
 goku.Introduce()
 ```
 
-The `Saiyan` structure has a field of type `*Person`. Because we didn't give it an explicit field name, we can implicitly access the fields and functions of the composed type. However, the Go compiler *did* give it a field name, consider the perfectly valid:
+A estrutura `Saiyan` tem um campo do tipo `*Person`. Por não termos dado um nome explícito ao campo, nós podemos implicitamente acessar os campos e a função de um tipo composto. No entanto, o compilador Go *deu* um nome para o campo. Considere perfeitamente válido:
 
 ```go
 goku := &Saiyan{
@@ -660,15 +660,15 @@ fmt.Println(goku.Name)
 fmt.Println(goku.Person.Name)
 ```
 
-Both of the above will print "Goku".
+Ambos acima vão printar "Goku".
 
-Is composition better than inheritance? Many people think that it's a more robust way to share code. When using inheritance, your class is tightly coupled to your superclass and you end up focusing on hierarchy rather than behavior.
+Composição é melhor do que herança? Muitas pessoas pensam que é uma maneira mais robusta de compartilhar código. Quando usando herança, a sua classe fica fortemente acoplada à sua superclasse e você acaba focando mais na hierarquia do que no comportamento.
 
-### Overloading
+### Sobrecarga
 
-While overloading isn't specific to structures, it's worth addressing. Simply, Go doesn't support overloading. For this reason, you'll see (and write) a lot of functions that look like `Load`, `LoadById`, `LoadByName` and so on.
+Apesar da sobrecarrega não ser específica às estruturas, é válido comentar sobre ela. Simplesmente, Go não suporta sobrecarga. Por contadisso, você verá (e escreverá) muitos funções que se parecem com `Load`, `LoadById`, `LoadByName` etc.
 
-However, because implicit composition is really just a compiler trick, we can "overwrite" the functions of a composed type. For example, our `Saiyan` structure can have its own `Introduce` function:
+No entanto, devido à composição implícita ser realmente apenas um truque do compilador, nós podemos "sobrescrever" as funções de um tipo composto. Por exemplo, a nossa estrutura `Saiyan` pode ter a sua própria função `Introduce`:
 
 ```go
 func (s *Saiyan) Introduce() {
@@ -676,7 +676,7 @@ func (s *Saiyan) Introduce() {
 }
 ```
 
-The composed version is always available via `s.Person.Introduce()`.
+A versão composta está sempre acessível via `s.Person.Introduce()`.
 
 ## Pointers versus Values
 
