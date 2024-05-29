@@ -409,11 +409,11 @@ type Saiyan struct {
 
 Em breve nós veremos como adicionar uma método nesta estrutura, sendo bem parecido em como métodos são parte de uma classe. Antes de fazermos isso, precisamos mergulhar de volta nas declarações.
 
-## Declarations and Initializations
+## Declarações e Inicializações
 
-When we first looked at variables and declarations, we looked only at built-in types, like integers and strings. Now that we're talking about structures, we need to expand that conversation to include pointers.
+Quando nós olhamos pela primeira vez para as variáveis e declarações, nós olhamos apenas para os tipos nativos, como os inteiros e strings. Agora que nós estamos falando sobre estruturas, nós precisamos expandir essa conversa para incluir ponteiros.
 
-The simplest way to create a value of our structure is:
+A maneira mais simples de criar uma valor para a nossa estrutura é:
 
 ```go
 goku := Saiyan{
@@ -421,33 +421,32 @@ goku := Saiyan{
   Power: 9000,
 }
 ```
+*Nota:* finalizar com `,` na estrutura acima é necessário. Sem usá-la, o compilador lançará um erro. Você vai aprender a gostar da consistência requerida, especialmente se você usou uma linguagem ou formato que impõe o oposto.
 
-*Note:* The trailing `,` in the above structure is required. Without it, the compiler will give an error. You'll appreciate the required consistency, especially if you've used a language or format that enforces the opposite.
-
-We don't have to set all or even any of the fields. Both of these are valid:
+Nós não temos que definir todos os campos. Inclusive, podemos deixar eles completamente sem nenhum valor. Ambos dos exemplos abaixo são válidos:
 
 ```go
 goku := Saiyan{}
 
-// or
+// ou
 
 goku := Saiyan{Name: "Goku"}
 goku.Power = 9000
 ```
 
-Just like unassigned variables have a zero value, so do fields.
+Assim como variáveis não atribuídas possum um valor zero, o mesmo vale para os campos.
 
-Furthermore, you can skip the field name and rely on the order of the field declarations (though for the sake of clarity, you should only do this for structures with few fields):
+Além disso, você pode deixar os nomes dos campos ocultos e se basear somente na ordem dos campos declarados (apesar dessa prática ser recomendada apenas para estruturas com pouquíssimos campos, para o bem da legibilidade):
 
 ```go
 goku := Saiyan{"Goku", 9000}
 ```
 
-What all of the above examples do is declare a variable `goku` and assign a value to it.
+O que todos os exmplos acima fazem é declarar uma variável `goku` e atribuir um valor para ela.
 
-Many times though, we don't want a variable that is directly associated with our value but rather a variable that has a pointer to our value. A pointer is a memory address; it's the location of where to find the actual value. It's a level of indirection. Loosely, it's the difference between being at a house and having directions to the house.
+Muitas vezes, no entanto, nós não queremos uma variável que é diretamente associada com o nosso valor, mas, ao invés disso, queremos uma variável que tem um ponteiro para o nosso valor. Um ponteiro é um endereço de memória; é a localização de onde encontrar o valor atual. É um nível de orientação indireta. Vagamente, é a diferença entre estar em uma casa e ter as direções para a casa.
 
-Why do we want a pointer to the value, rather than the actual value? It comes down to the way Go passes arguments to a function: as copies. Knowing this, what does the following print?
+Por que nós queremos um ponteiro para um valor ao invés do valor em si? Muito por conta da forma na qual Go passa argumentos para uma função: como cópias. Sabendo disso, o que é printado a seguir?
 
 ```go
 func main() {
@@ -461,7 +460,7 @@ func Super(s Saiyan) {
 }
 ```
 
-The answer is 9000, not 19000. Why? Because `Super` made changes to a copy of our original `goku` value and thus, changes made in `Super` weren't reflected in the caller. To make this work as you probably expect, we need to pass a pointer to our value:
+A resposta é 9000, não 19000. Por quê? Porque `Super` fez mudanças para uma cópia do nosso valor original `goku` e, então, as mudanças feitas em `Super` não foram refletidas no chamador. Para fazer isso funcionar como esperado, nós precisamos passar um ponteiro para o nosso valor:
 
 ```go
 func main() {
@@ -474,12 +473,11 @@ func Super(s *Saiyan) {
   s.Power += 10000
 }
 ```
+Nós fizemos duas mudanças. A primeira é o uso do operador `&` para pegar o endereço do nosso valor (é chamado de operador *endereço de*). Em seguida, nós mudamos o tipo do parâmetro `Super` esperado. Antes da mudança esperava um valor do tipo `Saiyan`, mas agora espera um endereço do tipo `*Saiyan`, em que `*X` significa *aponta para o valor de tipo X*. Claro que há algumas relações entre os tipos `Saiyan` e `*Saiyan`, mas eles são dois tipos distintos.
 
-We made two changes. The first is the use of the `&` operator to get the address of our value (it's called the *address of* operator). Next, we changed the type of parameter `Super` expects. It used to expect a value of type `Saiyan` but now expects an address of type `*Saiyan`, where `*X` means *pointer to value of type X*. There's obviously some relation between the types `Saiyan` and `*Saiyan`, but they are two distinct types.
+Note que nós ainda estamos passando uma cópia do valor de `goku` para `Super`. A mudança é que agora o valor de `goku` virou um endereço. Essa cópia é o mesmo endereço da original, que é o que essa referência indireta nos entrega. Enxergue isso como uma cópia das direções para um restaurante. O que você tem é uma cópia, mas que ainda aponta para o mesmo restaurante, como o endereço original.
 
-Note that we're still passing a copy of `goku's` value to `Super` it just so happens that `goku's` value has become an address. That copy is the same address as the original, which is what that indirection buys us. Think of it as copying the directions to a restaurant. What you have is a copy, but it still points to the same restaurant as the original.
-
-We can prove that it's a copy by trying to change where it points to (not something you'd likely want to actually do):
+Nós podemos provar que é uma cópia tentando mudar para onde esse endereço aponta (não é algo que você deveria querer fazer na verdade):
 
 ```go
 func main() {
@@ -493,11 +491,11 @@ func Super(s *Saiyan) {
 }
 ```
 
-The above, once again, prints 9000. This is how many languages behave, including Ruby, Python, Java and C#. Go, and to some degree C#, simply make the fact visible.
+O código acima, mais uma vez, printa 9000. Isto é como muitas linguagens se comportam, incluindo Ruby, Python, Java e C#. Go e, em algum nível, C# simplesmente torna isso visível.
 
-It should also be obvious that copying a pointer is going to be cheaper than copying a complex structure. On a 64-bit machine, a pointer is 64 bits large. If we have a structure with many fields, creating copies can be expensive. The real value of pointers though is that they let you share values. Do we want `Super` to alter a copy of `goku` or alter the shared `goku` value itself?
+Também deveria ser óbvio que copiar um ponteiro vai ser mais barato do que copiar uma estrutura complexa. Em uma máquina de 64 bits, um ponteiro tem a magnitude de 64 bits. Se nós temos uma estrutura com muitos campos, criar cópias pode ser caro. O real valor de ponteiros, no entanto, é que eles deixam você compartilhar valores. Nós queremos que `Super` altere uma cópia de `goku` ou queremos alterar o próprio valor de `goku` compartilhado?
 
-All this isn't to say that you'll always want a pointer. At the end of this chapter, after we've seen a bit more of what we can do with structures, we'll re-examine the pointer-versus-value question.
+Tudo isso não quer dizer que você sempre vai querer um ponteiro. No final deste capítulo, depois de vermos um pouco mais sobre o que nós podemos fazer com as estruturas (struct), nós faremos uma nova discussão sobre a questão ponteiro x valor.
 
 ## Functions on Structures
 
