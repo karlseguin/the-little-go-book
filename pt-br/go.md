@@ -678,21 +678,21 @@ func (s *Saiyan) Introduce() {
 
 A versão composta está sempre acessível via `s.Person.Introduce()`.
 
-## Pointers versus Values
+## Ponteiros x Valores
 
-As you write Go code, it's natural to ask yourself *should this be a value, or a pointer to a value?* There are two pieces of good news. First, the answer is the same regardless of which of the following we're talking about:
+Ao escrever código em Go, é natural você se questionar: "isto deveria ser um valor ou um ponteiro para um valor?". Há duas boas notícias. Primeira, a resposta é a mesma independentemente de qual dos itens a seguir estamos falando:
 
-* A local variable assignment
-* Field in a structure
-* Return value from a function
-* Parameters to a function
-* The receiver of a method
+* Uma atribuição de variável local
+* O campo de uma estrutura
+* O valor de retorno de uma função
+* Os parâmetros de uma função
+* O recebedor de um método
 
-Secondly, if you aren't sure, use a pointer.
+Segundo, se você não tem certeza, use um ponteiro.
 
-As we already saw, passing values is a great way to make data immutable (changes that a function makes to it won't be reflected in the calling code). Sometimes, this is the behavior that you'll want but more often, it won't be.
+Como nós já vimos, passar valores é uma excelente maneira de tornar os dados imutáveis (as mudanças que uma função faz não serão refletidas no código de chamada). Às vezes, este o comportamento que você quer, mas frequentemente não será.
 
-Even if you don't intend to change the data, consider the cost of creating a copy of large structures. Conversely, you might have small structures, say:
+Mesmo se você não tem a intenção de mudar o dado, deve considerar o custo de criar uma cópia de estruturas grandes. Por outro lado, você pode ter estruturas pequenas, como:
 
 ```go
 type Point struct {
@@ -701,9 +701,9 @@ type Point struct {
 }
 ```
 
-In such cases, the cost of copying the structure is probably offset by being able to access `X` and `Y` directly, without any indirection.
+Nestes casos, o custo de copiar a estrutura é provavelmente compensado por ser capaz de acessar `X` e `Y` diretamente, sem a necessidade de referenciação indireta.
 
-Again, these are all pretty subtle cases. Unless you're iterating over thousands or possibly tens of thousands of such points, you wouldn't notice a difference.
+Novamente, estes são todos casos bem sutilmente pequenos. A menos que você esteja lidando com milhares desses pontos (ou outras magnitudes ainda maiores), você não notaria diferenças significativas.
 
 ## Before You Continue
 
