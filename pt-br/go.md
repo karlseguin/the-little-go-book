@@ -497,9 +497,9 @@ Também deveria ser óbvio que copiar um ponteiro vai ser mais barato do que cop
 
 Tudo isso não quer dizer que você sempre vai querer um ponteiro. No final deste capítulo, depois de vermos um pouco mais sobre o que nós podemos fazer com as estruturas (struct), nós faremos uma nova discussão sobre a questão ponteiro x valor.
 
-## Functions on Structures
+## Funções nas Estruturas
 
-We can associate a method with a structure:
+Nós podemos associar um método a uma estrutura (struct):
 
 ```go
 type Saiyan struct {
@@ -512,12 +512,12 @@ func (s *Saiyan) Super() {
 }
 ```
 
-In the above code, we say that the type `*Saiyan` is the **receiver** of the `Super` method. We call `Super` like so:
+No código acima, nós dizemos que o tipo `*Saiyan` é o **recebedor** do método `Super`. Nós podemos chamar `Super` da seguinte forma:
 
 ```go
 goku := &Saiyan{"Goku", 9001}
 goku.Super()
-fmt.Println(goku.Power) // will print 19001
+fmt.Println(goku.Power) // vai printar 19001
 ```
 
 ## Constructors
