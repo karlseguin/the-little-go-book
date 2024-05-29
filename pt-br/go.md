@@ -548,15 +548,15 @@ func NewSaiyan(name string, power int) Saiyan {
 
 ## New
 
-Despite the lack of constructors, Go does have a built-in `new` function which is used to allocate the memory required by a type. The result of `new(X)` is the same as `&X{}`:
+Apesar da falta de construtores, Go tem uma função nativa chamada `new`, que é usada para alocar a memória requerida por um tipo. O resultado de `new(X)` é o mesmo que `&X{}`:
 
 ```go
 goku := new(Saiyan)
-// same as
+// é o mesmo que
 goku := &Saiyan{}
 ```
 
-Which you use is up to you, but you'll find that most people prefer the latter whenever they have fields to initialize, since it tends to be easier to read:
+Qual você usa é uma escolha pessoal, mas você verá que a maioria das pessoas preferem a última forma sempre que tem campos a serem inicializados, uma vez que tende a ser mais fácil de ler:
 
 ```go
 goku := new(Saiyan)
@@ -571,7 +571,7 @@ goku := &Saiyan {
 }
 ```
 
-Whichever approach you choose, if you follow the factory pattern above, you can shield the rest of your code from knowing and worrying about any of the allocation details.
+Qualquer que seja a abordagem escolhida, se você seguir o *factory pattern* acima, você poderá proteger o resto do seu código de saber e se preocupar com os detalhes da alocação.
 
 ## Fields of a Structure
 
