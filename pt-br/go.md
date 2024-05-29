@@ -520,9 +520,9 @@ goku.Super()
 fmt.Println(goku.Power) // vai printar 19001
 ```
 
-## Constructors
+## Construtores
 
-Structures don't have constructors. Instead, you create a function that returns an instance of the desired type (like a factory):
+Estruturas não têm construtores. Ao invés disso, você cria uma função que retorna uma instância do tipo desejado (como uma [factory](https://refactoring.guru/design-patterns/factory-method))
 
 ```go
 func NewSaiyan(name string, power int) *Saiyan {
@@ -533,9 +533,9 @@ func NewSaiyan(name string, power int) *Saiyan {
 }
 ```
 
-This pattern rubs a lot of developers the wrong way. On the one hand, it's a pretty slight syntactical change; on the other, it does feel a little less compartmentalized.
+Esse padrão incomoda muitos desenvolvedores. Por um lado, é uma mudança sintática bastante sutil; por outro, parece um pouco menos fragmentado.
 
-Our factory doesn't have to return a pointer; this is absolutely valid:
+Nossa factory não precisa retornar um ponteiro. O código abaixo também é válido:
 
 ```go
 func NewSaiyan(name string, power int) Saiyan {
