@@ -709,30 +709,28 @@ Novamente, estes são todos casos bem sutilmente pequenos. A menos que você est
 
 De um ponto de vista prático, este capítulo introduziu estruturas, como transformar uma instância de uma estrutura em um receptor e adicionou ponteiros ao nosso conhecimento existente sobre o sistema de tipos de Go. Os capítulos seguintes vão ser construídos com base no que nós sabemos sobre estruturas, assim como no funcionamento interno que exploramos.
 
-From a practical point of view, this chapter introduced structures, how to make an instance of a structure a receiver of a function, and added pointers to our existing knowledge of Go's type system. The following chapters will build on what we know about structures as well as the inner workings that we've explored.
+# Capítulo 3 - Maps, Arrays e Slices
 
-# Chapter 3 - Maps, Arrays and Slices
-
-So far we've seen a number of simple types and structures. It's now time to look at arrays, slices and maps.
+Até agora, nós vimos alguns tipos simples e estruturas (struct). Agora, é hora de olharmos para arrays, slices e maps.
 
 ## Arrays
 
-If you come from Python, Ruby, Perl, JavaScript or PHP (and more), you're probably used to programming with *dynamic arrays*. These are arrays that resize themselves as data is added to them. In Go, like many other languages, arrays are fixed. Declaring an array requires that we specify the size, and once the size is specified, it cannot grow:
+Se você veio do Python, Ruby, Perl, JavaScript ou PHP (entre outras), você provavelmente se habituou a usar *arrays dinâmicos*, que são arrays que se redimensionam sozinhas à medida que os dados são adicionados. Em Go, como em muitas outras linguagens, arrays são fixos. Declarar um array requer que nós especifiquemos o tamanho e, uma vez que o tamanho esteja especificado, não pode crescer:
 
 ```go
 var scores [10]int
 scores[0] = 339
 ```
 
-The above array can hold up to 10 scores using indexes `scores[0]` through `scores[9]`. Attempts to access an out of range index in the array will result in a compiler or runtime error.
+O array acima pode armazenar até 10 scores (pontuações) usando os índices `scores[0]` até `scores[9]`. Tentativas de acessar um índice fora do intervalo do array resultará em um erro na compilação ou no tempo de execução.
 
-We can initialize the array with values:
+Nós podemos inicializar o array com valores:
 
 ```go
 scores := [4]int{9001, 9333, 212, 33}
 ```
 
-We can use `len` to get the length of the array. `range` can be used to iterate over it:
+Nós podemos usar `len` para obter o comprimento do array. `range` pode ser usado para iterar sobre o array:
 
 ```go
 for index, value := range scores {
@@ -740,7 +738,8 @@ for index, value := range scores {
 }
 ```
 
-Arrays are efficient but rigid. We often don't know the number of elements we'll be dealing with upfront. For this, we turn to slices.
+Arrays são eficientes, mas rígidos. Frequentemente, nós não sabemos o número de elementos com a qual nós estaremos lidando. Por conta desse cenário, nós podemos direcionar a nossa atenção aos slices.
+
 
 ## Slices
 
