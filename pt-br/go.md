@@ -1026,9 +1026,9 @@ for key, value := range lookup {
 
 Iteração sobre mapas não é ordenada. Cada interação sobre uma pesquisa retornará o par chave, valor em uma ordem aleatória.
 
-## Pointers versus Values
+## Ponteiros x Valores
 
-We finished Chapter 2 by looking at whether you should assign and pass pointers or values. We'll now have this same conversation with respect to array and map values. Which of these should you use?
+Nós terminamos o capítulo 2 discutindo sobre quando você deveria atribuir e passar ponteiros ou valores. Nós agora temos esta mesma conversa a respeito de valores de arrays e maps. Qual desses você deveria usar?
 
 ```go
 a := make([]Saiyan, 10)
@@ -1036,9 +1036,9 @@ a := make([]Saiyan, 10)
 b := make([]*Saiyan, 10)
 ```
 
-Many developers think that passing `b` to, or returning it from, a function is going to be more efficient. However, what's being passed/returned is a copy of the slice, which itself is a reference. So with respect to passing/returning the slice itself, there's no difference.
+Muitos desenvolvedores pensam que passar `b` ou retorná-lo de uma função será mais eficiente. No entanto, o que está sendo passado/retornardo é uma cópia da slice, que é uma referência em si. Então, com respeito a passar/retornar a slice em si, não tem diferença.
 
-Where you will see a difference is when you modify the values of a slice or map. At this point, the same logic that we saw in Chapter 2 applies. So the decision on whether to define an array of pointers versus an array of values comes down to how you use the individual values, not how you use the array or map itself.
+Onde você verá uma diferença é quando você modificar os valores de uma slice ou map. Até aqui, a mesma lógica que nós vimos no capítulo 2 se aplica. Então, a decisão de definr um array de ponteiros ou um array de valores dependerá de como você usa os valores individuais, não em como você usa o array ou mapa em si.
 
 ## Before You Continue
 
