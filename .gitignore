@@ -1,3 +1,4 @@
 *.pdf
 *.epub
 *.mobi
+.DS_Store
