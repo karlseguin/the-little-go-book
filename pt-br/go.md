@@ -954,9 +954,9 @@ Separe algum tempo e brinque com o código acima. Tente variações. O que acont
 
 ## Maps
 
-Maps in Go are what other languages call hashtables or dictionaries. They work as you expect: you define a key and value, and can get, set and delete values from it.
+Maps em Go são o que outras linguagens chamamam de hashtables ou dicionários. Eles trabalham como você espera: você define uma chave e valor e pode obter, definir e deletar valores deles.
 
-Maps, like slices, are created with the `make` function. Let's look at an example:
+Maps, como slices, são criados com a função `make`. Vamos olhar um exemplo:
 
 ```go
 func main() {
@@ -964,31 +964,31 @@ func main() {
   lookup["goku"] = 9001
   power, exists := lookup["vegeta"]
 
-  // prints 0, false
-  // 0 is the default value for an integer
+  // imprime 0, false
+  // 0 é o valor padrão para um inteiro
   fmt.Println(power, exists)
 }
 ```
 
-To get the number of keys, we use `len`. To remove a value based on its key, we use `delete`:
+Para obter o número de chaves, nós usamos `len`. Para remover um valor baseado na sua chave, nós usamos `delete`
 
 ```go
-// returns 1
+// retorna 1
 total := len(lookup)
 
-// has no return, can be called on a non-existing key
+// não tem retorno
 delete(lookup, "goku")
 ```
 
-Maps grow dynamically. However, we can supply a second argument to `make` to set an initial size:
+Maps crescem dinamicamente. No entanto, nós podemos fornecer um segundo argumento em `make` para definir um tamanho inicial:
 
 ```go
 lookup := make(map[string]int, 100)
 ```
 
-If you have some idea of how many keys your map will have, defining an initial size can help with performance.
+Se você tem alguma ideia de quantas chaves o seu mapa terá, definir um tamanho inicial pode ajudar com o desempenho.
 
-When you need a map as a field of a structure, you define it as:
+Quando você precisa de um mapa como um campo de uma estrutura, você define como:
 
 ```go
 type Saiyan struct {
@@ -997,17 +997,17 @@ type Saiyan struct {
 }
 ```
 
-One way to initialize the above is via:
+Uma maneira de incializar a estrutura acima é:
 
 ```go
 goku := &Saiyan{
   Name: "Goku",
   Friends: make(map[string]*Saiyan),
 }
-goku.Friends["krillin"] = ... //todo load or create Krillin
+goku.Friends["krillin"] = ... 
 ```
 
-There's yet another way to declare and initialize values in Go. Like `make`, this approach is specific to maps and arrays. We can declare as a composite literal:
+Tem uma outra maneira de declarar e inicializar valores em Go. Como `make`, esta abordagem é específica para mapas e arrays. Nós podemos declarar como um literal composto:
 
 ```go
 lookup := map[string]int{
@@ -1016,7 +1016,7 @@ lookup := map[string]int{
 }
 ```
 
-We can iterate over a map using a `for` loop combined with the `range` keyword:
+Nós podemos iterar sobre um mapa usando um loop `for` combinado com a palavra-chave `range`:
 
 ```go
 for key, value := range lookup {
@@ -1024,7 +1024,7 @@ for key, value := range lookup {
 }
 ```
 
-Iteration over maps isn't ordered. Each iteration over a lookup will return the key value pair in a random order.
+Iteração sobre mapas não é ordenada. Cada interação sobre uma pesquisa retornará o par chave, valor em uma ordem aleatória.
 
 ## Pointers versus Values
 
