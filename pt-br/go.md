@@ -1040,11 +1040,12 @@ Muitos desenvolvedores pensam que passar `b` ou retorná-lo de uma função ser�
 
 Onde você verá uma diferença é quando você modificar os valores de uma slice ou map. Até aqui, a mesma lógica que nós vimos no capítulo 2 se aplica. Então, a decisão de definr um array de ponteiros ou um array de valores dependerá de como você usa os valores individuais, não em como você usa o array ou mapa em si.
 
-## Before You Continue
+## Antes de Você Continuar
 
-Arrays and maps in Go work much like they do in other languages. If you're used to dynamic arrays, there might be a small adjustment, but `append` should solve most of your discomfort. If we peek beyond the superficial syntax of arrays, we find slices. Slices are powerful and they have a surprisingly large impact on the clarity of your code.
+Arrays e maps em Go funcionam de forma bem parecida com outras linguagens. Se você é acostumado a usar arrays dinâmicos, pode ter uma pequena diferença, mas `append` deve resolver a maioria do seu desconforto. Se nós observarmos além da sintaxe superficial dos arrays, nós encontraremos slices. Slices são poderosas e elas têm um grande impacto na clareza do seu código.
 
-There are edge cases that we haven't covered, but you're not likely to run into them. And, if you do, hopefully the foundation we've built here will let you understand what's going on.
+Há casos extremos (edge cases) que não foram cobertos, mas que, provalvemente, você não passará por eles. E, caso passe, felizmente a base que nós estamos construindo aqui permitirá você entender o que está acontecendo.
+
 
 # Chapter 4 - Code Organization and Interfaces
 
