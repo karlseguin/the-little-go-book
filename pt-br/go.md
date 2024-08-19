@@ -1047,21 +1047,21 @@ Arrays e maps em Go funcionam de forma bem parecida com outras linguagens. Se vo
 Há casos extremos (edge cases) que não foram cobertos, mas que, provalvemente, você não passará por eles. E, caso passe, felizmente a base que nós estamos construindo aqui permitirá você entender o que está acontecendo.
 
 
-# Chapter 4 - Code Organization and Interfaces
+# Capítulo 4 - Organização de Código e Interfaces
 
-It's now time to look at how to organize our code.
+Agora é o momento de olhar como organizar o seu código
 
-## Packages
+## Pacotes
 
-To keep more complicated libraries and systems organized, we need to learn about packages. In Go, package names follow the directory structure of your Go workspace. If we were building a shopping system, we'd probably start with a package name "shopping" and put our source files in `$GOPATH/src/shopping/`.
+Para manter bibliotecas e sistemas mais complicados organizados, nós precisamos aprender sobre pacotes. Em Go, os nomes dos pacotes seguem a estrutura de diretório do seu espaço de trabalho (workspace) Go. Se nós estamos construindo um sistema de compras, provavelmente nós começaríamos com um pacote "shopping" e colocaríamos os nossos arquivos fontes em `$GOPATH/src/shopping/`.
 
-We don't want to put everything inside this folder though. For example, maybe we want to isolate some database logic inside its own folder. To achieve this, we create a subfolder at `$GOPATH/src/shopping/db`. The package name of the files within this subfolder is simply `db`, but to access it from another package, including the `shopping` package, we need to import `shopping/db`.
+No entanto, nós não queremos colocar tudo dentro dessa pasta. Por exemplo, talvez nós queremos isolar alguma lógica de banco de dados dentro da sua própria pasta. Para atingir isto, nós criamos uma subpasta em `$GOPATH/src/shopping/db`. O nome do pacote dos arquivos dentro da sua subpasta é simplesmente `db`, mas para acessá-lo a partir de outro pacote, incluindo o pacote `shopping`, nós precisamos importar como `shopping/db`.
 
-In other words, when you name a package, via the `package` keyword, you provide a single value, not a complete hierarchy (e.g., "shopping" or "db"). When you import a package, you specify the complete path.
+Em outras palavras, quando você nomeia um pacote usando a palavra-chave `package`, você provê um único valor, não um hierarquia completa (ex., "shopping" ou "db"). Quando você importa um pacote, você específica o caminho completo.
 
-Let's try it. Inside your Go workspace's `src` folder (which we set up in Getting Started of the Introduction), create a new folder called `shopping` and a subfolder within it called `db`.
+Vamos testar. Dentro da `src` do seu espaço de trabalho (workspace) Go (que foi configurado no início deste livro), crie uma nova pasta chamada `shoppping` e uma subpasta chamada `db`.
 
-Inside of `shopping/db`, create a file called `db.go` and add the following code:
+Dentro de `shopping/db`, crie um arquivo chamado `db.go` e adicione o seguinte código:
 
 ```go
 package db
@@ -1077,9 +1077,9 @@ func LoadItem(id int) *Item {
 }
 ```
 
-Notice that the name of the package is the same as the name of the folder. Also, obviously, we aren't actually accessing the database. We're just using this as an example to show how to organize code.
+Note que o nome do pacote é o mesmo que o nome da pasta. Também, obviamente, nós não estamos acessando a base de dados. Nós estamos apenas usando isto como um exemplo para mostrar como organizar o código
 
-Now, create a file called `pricecheck.go` inside of the main `shopping` folder. Its content is:
+Agora, crie um arquivo chamado `pricecheck.go` dentro da pasta principal `shopping`. Seu conteúdo é:
 
 ```go
 package shopping
@@ -1097,9 +1097,9 @@ func PriceCheck(itemId int) (float64, bool) {
 }
 ```
 
-It's tempting to think that importing `shopping/db` is somehow special because we're inside the `shopping` package/folder already. In reality, you're importing `$GOPATH/src/shopping/db`, which means you could just as easily import `test/db` so long as you had a package named `db` inside of your workspace's `src/test` folder.
+É tentador pensar que importar `shopping/db` é especial de alguma forma, porque nós já estamos dentro do pacote/pasta `shopping`. Na verdade, você está importando `$GOPATH/src/shopping/db`, o que significa que você poderia facilmente importar `test/db` se existisse um pacote chamado `db` dentro da pasta `src/test` do seu espaço de trabalho.
 
-If you're building a package, you don't need anything more than what we've seen. To build an executable, you still need a `main`. The way I prefer to do this is to create a subfolder called `main` inside of `shopping` with a file called `main.go` and the following content:
+Se você está construindo um pacote, você não precisa de nada mais do que nós vimos. Para construir um executável, você ainda precisa de um `main`. A maneira que eu prefiro fazer isso é criar uma subpasta chamada `main` dentro de `shopping` com um arquivo chamado `main.go` e o seguinte conteúdo:
 
 ```go
 package main
@@ -1114,7 +1114,7 @@ func main() {
 }
 ```
 
-You can now run your code by going into your `shopping` project and typing:
+Agora você pode rodar o seu código entrando no projeto `shopping` e digitando:
 
 ```
 go run main/main.go
