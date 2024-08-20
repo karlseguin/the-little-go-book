@@ -1120,13 +1120,13 @@ Agora você pode rodar o seu código entrando no projeto `shopping` e digitando:
 go run main/main.go
 ```
 
-### Cyclical Imports
+### Importações Cíclicas
 
-As you start writing more complex systems, you're bound to run into cyclical imports. This happens when package A imports package B but package B imports package A (either directly or indirectly through another package). This is something the compiler won't allow.
+Assim que você começar a escrever sistemas mais complexos, você certamente cairá em cenários de importações cíclicas. Isto acontece quando o pacote A importa o pacote B, mas o pacote B importa o pacote A (seja direta ou indiretamente por meio de outro pacote). Isso é algo que o compilador não permitirá. 
 
-Let's change our shopping structure to cause the error.
+Vamos mudar a estrutura do nosso shopping para causar esse erro.
 
-Move the `Item` definition from `shopping/db/db.go` into `shopping/pricecheck.go`. Your `pricecheck.go` file should now look like:
+Mova a definição de `Item` de `shopping/db/db.go` para `shopping/pricecheck.go`. O seu arquivo `pricecheck.go` deve se parecer com:
 
 ```go
 package shopping
@@ -1148,7 +1148,7 @@ func PriceCheck(itemId int) (float64, bool) {
 }
 ```
 
-If you try to run the code, you'll get a couple of errors from `db/db.go` about `Item` being undefined. This makes sense. `Item` no longer exists in the `db` package; it's been moved to the shopping package. We need to change `shopping/db/db.go` to:
+Se você tentar rodar o código, você obterá alguns erros de `db/db.go` sobre `Item` ser indefinido. Isso faz sentido. `Item` não existe mais no pacote `db`, porque ele foi movido para o pacote `shopping`. Nós precisamos mudar `shopping/db/db.go` para:
 
 ```go
 package db
@@ -1164,7 +1164,7 @@ func LoadItem(id int) *shopping.Item {
 }
 ```
 
-Now when you try to run the code, you'll get a dreaded *import cycle not allowed* error. We solve this by introducing another package which contains shared structures. Your directory structure should look like:
+Agora, quando você tentar rodar o código, você obterá o temido erro *import cycle not allowed* (importação cíclica não permitida). Nós vamos resolver isso introduzindo um outro pacote que contém estruturas compartilhadas. A estrutura do seu diretório deverá se parecer com:
 
 ```
 $GOPATH/src
@@ -1178,7 +1178,7 @@ $GOPATH/src
       main.go
 ```
 
-`pricecheck.go` will still import `shopping/db`, but `db.go` will now import `shopping/models` instead of `shopping`, thus breaking the cycle. Since we moved the shared `Item` structure to `shopping/models/item.go`, we need to change `shopping/db/db.go` to reference the `Item` structure from `models` package:
+`pricecheck.go` ainda vai importar `shopping/db`, mas `db.go` agora vai importar `shopping/models` ao invés de `shopping`, qubrando o ciclo. Uma vez que movemos a estrutura `Item` compartilhada para `shopping/models/item.go`, nós precisamos mudar `shopping/db/db.go` para referenciar a estrutura `Item` do pacote `models`:
 
 ```go
 package db
@@ -1194,7 +1194,7 @@ func LoadItem(id int) *models.Item {
 }
 ```
 
-You'll often need to share more than just `models`, so you might have other similar folder named `utilities` and such. The important rule about these shared packages is that they shouldn't import anything from the `shopping` package or any sub-packages. In a few sections, we'll look at interfaces which can help us untangle these types of dependencies.
+Você frequentemente precisará compartilhar mais do que apenas `models`, então você pode ter outra pasta similar chamada `utilities` ou algo do tipo. A regra importante sobre estes pacotes compartilhados é que eles não devem importar nada do pacote `shopping` ou qualquer sub-pacote. Em breve, nós vamos olhar como interfaces podem nos ajudar a desembaraçar esses tipos de dependências.
 
 ### Visibility
 
