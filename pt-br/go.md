@@ -1196,13 +1196,13 @@ func LoadItem(id int) *models.Item {
 
 Você frequentemente precisará compartilhar mais do que apenas `models`, então você pode ter outra pasta similar chamada `utilities` ou algo do tipo. A regra importante sobre estes pacotes compartilhados é que eles não devem importar nada do pacote `shopping` ou qualquer sub-pacote. Em breve, nós vamos olhar como interfaces podem nos ajudar a desembaraçar esses tipos de dependências.
 
-### Visibility
+### Visibilidade
 
-Go uses a simple rule to define what types and functions are visible outside of a package. If the name of the type or function starts with an uppercase letter, it's visible. If it starts with a lowercase letter, it isn't.
+Go usa uma regra simples para definir quais tipos e funções são visíveis fora de um pacote. Se o nome do tipo ou função começa com uma letra maiúscula, está visível. Se começa com uma letra minúscula, não está.
 
-This also applies to structure fields. If a structure field name starts with a lowercase letter, only code within the same package will be able to access them.
+Isso também se aplica aos campos das estruturas (struct). Se o nome do campo de uma estrutura começa com uma letra minúscula, somente código com o mesmo pacote será capaz de acessá-lo.
 
-For example, if our `items.go` file had a function that looked like:
+Por exemplo, se o nosso arquivo `items.go` tivesse uma função parecida com:
 
 ```go
 func NewItem() *Item {
@@ -1210,9 +1210,9 @@ func NewItem() *Item {
 }
 ```
 
-it could be called via `models.NewItem()`. But if the function was named `newItem`, we wouldn't be able to access it from a different package.
+Ela poderia ser chamada via `models.NewItem()`. Mas se a função fosse nomeada `newItem`, nós não seríamos capazes de acessá-la a partir de um pacote diferente
 
-Go ahead and change the name of the various functions, types and fields from the `shopping` code. For example, if you rename the `Item's` `Price` field to `price`, you should get an error.
+Vá em frente e mude o nome de várias funções, tipos e campos do código `shopping`. Por exemplo, se você renomear o campo `Price` de `Item` para preço, você deverá obter um erro.
 
 ### Package Management
 
