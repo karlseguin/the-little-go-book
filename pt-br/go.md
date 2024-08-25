@@ -1214,19 +1214,19 @@ Ela poderia ser chamada via `models.NewItem()`. Mas se a função fosse nomeada 
 
 Vá em frente e mude o nome de várias funções, tipos e campos do código `shopping`. Por exemplo, se você renomear o campo `Price` de `Item` para preço, você deverá obter um erro.
 
-### Package Management
+### Gerenciamento de Pacotes
 
-The `go` command we've been using to `run` and `build` has a `get` subcommand which is used to fetch third-party libraries. `go get` supports various protocols but for this example, we'll be getting a library from Github, meaning, you'll need `git` installed on your computer.
+O comando `go` que nós estamos usando para `rodar` e `buildar` tem um subcomando `get` que é usado para buscar bibliotecas terceiras. `go get` suporta vários protocolos, mas para este exemplo, nós vamos pegar uma biblioteca do Github, o que significa que você precisará ter `git` instalado no seu computador.
 
-Assuming you already have git installed, from a shell/command prompt, enter:
+Assumindo que você já tenha `git` instalado, a partir de um prompt de comando / shell, digite:
 
 ```
 go get github.com/mattn/go-sqlite3
 ```
 
-`go get` fetches the remote files and stores them in your workspace. Go ahead and check your `$GOPATH/src`. In addition to the `shopping` project that we created, you'll now see a `github.com` folder. Within, you'll see a `mattn` folder which contains a `go-sqlite3` folder.
+`go get` busca os arquivos remotos e os armazena no seu espaço de trabalho. Vá em frente e cheque o seu `$GOPATH/src`. Em adição ao projeto `shopping` que nós criamos, você agora verá uma pasta `github.com`. Dentro, você verá uma pasta `mattn` que contém uma pasta `go-sqlite3`.
 
-We just talked about how to import packages that live in our workspace. To use our newly gotten `go-sqlite3` package, we'd import it like so:
+Nós conversamos sobre como importar pacotes que vivem no nosso espaço de trabalho. Para usar o nosso pacote `go-sqlite3` recém-obtido, nós o importaríamos como:
 
 ```go
 import (
@@ -1234,7 +1234,7 @@ import (
 )
 ```
 
-I know this looks like a URL but in reality, it'll simply import the `go-sqlite3` package which it expects to find in `$GOPATH/src/github.com/mattn/go-sqlite3`.
+Eu sei que isto se parece como uma URL, mas, na verdade, isso simplesmente irá importar o pacote `go-sqlite3` que é esperado ser econtrado em `$GOPATH/src/github.com/mattn/go-sqlite3`.
 
 ### Dependency Management
 
