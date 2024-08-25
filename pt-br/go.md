@@ -1236,15 +1236,15 @@ import (
 
 Eu sei que isto se parece como uma URL, mas, na verdade, isso simplesmente irá importar o pacote `go-sqlite3` que é esperado ser econtrado em `$GOPATH/src/github.com/mattn/go-sqlite3`.
 
-### Dependency Management
+### Gerenciamento de Dependências
 
-`go get` has a couple of other tricks up its sleeve. If we `go get` within a project, it'll scan all the files, looking for `imports` to third-party libraries and will download them. In a way, our own source code becomes a `Gemfile` or `package.json`.
+`go get` tem muitos outros truques debaixo da manga. Se a gente rodar `go get` dentro de um projeto, ele vai escanear todos os arquivos, procurando por `imports` para bibliotecas terceiras e vai baixá-las. De certo modo, o nosso código-fonte se transforma em um `Gemfile` ou `package.json`.
 
-If you call `go get -u` it'll update the packages (or you can update a specific package via `go get -u FULL_PACKAGE_NAME`).
+Se você chamar `go get -u`, os pacotes serão atualizados (ou você pode atualizar um pacote específico via `go get -u FULL_PACKAGE_NAME`).
 
-Eventually, you might find `go get` inadequate. For one thing, there's no way to specify a revision, it always points to the master/head/trunk/default. This is an even larger problem if you have two projects needing different versions of the same library.
+Eventualmente, você pode achar `go get` inadequado. Por um lado, não tem jeito de especificar uma revisão, ele sempre apontará para master/head/trunk/default. Isto é um problema ainda maior se você tem dois projetos precisando de diferentes versões da mesma biblioteca.
 
-To solve this, you can use a third-party dependency management tool. They are still young, but two promising ones are [goop](https://github.com/nitrous-io/goop) and [godep](https://github.com/tools/godep). A more complete list is available at the [go-wiki](https://code.google.com/p/go-wiki/wiki/PackageManagementTools).
+Para resolver, você pode usar uma ferramenta terceira de gerenciamento de pacotes. Elas ainda são recentes, mas duas promissoras são [goop](https://github.com/nitrous-io/goop) e [godep](https://github.com/tools/godep). Uma lista mais completa está disponível em [go-wiki](https://code.google.com/p/go-wiki/wiki/PackageManagementTools).
 
 ## Interfaces
 
