@@ -1248,7 +1248,7 @@ Para resolver, você pode usar uma ferramenta terceira de gerenciamento de pacot
 
 ## Interfaces
 
-Interfaces are types that define a contract but not an implementation. Here's an example:
+Interfaces são tipos que definem um contrato, mas não uma implementação. Aqui está um exemplo:
 
 ```go
 type Logger interface {
@@ -1256,7 +1256,7 @@ type Logger interface {
 }
 ```
 
-You might be wondering what purpose this could possibly serve. Interfaces help decouple your code from specific implementations. For example, we might have various types of loggers:
+Você pode estar se perguntando para qual propósito isso seria útil. Interfaces ajudam a desaclopar o seu código de implementações específicas. Por exemplo, você pode ter vários tipos de loggers:
 
 ```go
 type SqlLogger struct { ... }
@@ -1264,9 +1264,9 @@ type ConsoleLogger struct { ... }
 type FileLogger struct { ... }
 ```
 
-Yet by programming against the interface, rather than these concrete implementations, we can easily change (and test) which we use without any impact to our code.
+Ainda, trabalhando orientado a interfaces ao invés das implementações concretas, nós podemos facilmente mudar (e testar) o que nós estamos usando sem nenhum impacto no nosso código
 
-How would you use one? Just like any other type, it could be a structure's field:
+Como você poderia usar uma? Assim como qualquer outro tipo, poderia ser um campo de uma estrutura (struct):
 
 ```go
 type Server struct {
@@ -1274,7 +1274,7 @@ type Server struct {
 }
 ```
 
-or a function parameter (or return value):
+Ou um parâmetro de uma função (ou um valor de retorno):
 
 ```go
 func process(logger Logger) {
@@ -1282,7 +1282,7 @@ func process(logger Logger) {
 }
 ```
 
-In a language like C# or Java, we have to be explicit when a class implements an interface:
+Em uma linguagem como C# ou Java, nós precisaríamos ser explícitos quando uma classe implementa uma interface:
 
 ```go
 public class ConsoleLogger : Logger {
@@ -1292,7 +1292,7 @@ public class ConsoleLogger : Logger {
 }
 ```
 
-In Go, this happens implicitly. If your structure has a function name `Log` with a `string` parameter and no return value, then it can be used as a `Logger`. This cuts down on the verboseness of using interfaces:
+Em Go, isso acontece implicitamente. Se a sua estrutura (struct) tem uma função chamada `log` com um parâmetro do tipo `string` e nenhum valor de retorno, então isso pode ser usado como um `Logger`. Isso corta toda a verbosidade de usar interfaces:
 
 ```go
 type ConsoleLogger struct {}
@@ -1301,11 +1301,11 @@ func (l ConsoleLogger) Log(message string) {
 }
 ```
 
-It also tends to promote small and focused interfaces. The standard library is full of interfaces. The `io` package has a handful of popular ones such as `io.Reader`, `io.Writer`, and `io.Closer`. If you write a function that expects a parameter that you'll only be calling `Close()` on, you absolutely should accept an `io.Closer` rather than whatever concrete type you're using.
+Isso também tende a promover interfaces pequenas e específicas. A biblioteca padrão é cheia de interfaces. O pacote `io` tem várias populares, como `io.Reader`, `io.Writer` e `io.Closer`. Se você escrever uma função que espera um parâmetro que você chamará apenas por `Close()`, você definitivamente deveria aceitar um `io.Closer` ao invés de qualquer tipo concreto que você esteja usando.
 
-Interfaces can also participate in composition. And, interfaces themselves can be composed of other interfaces. For example, `io.ReadCloser` is an interface composed of the `io.Reader` interface as well as the `io.Closer` interface.
+Interfaces também podem participar em composição. Além disso, interfaces podem ser compostas de outras interfaces. Por exemplo, `io.ReadCloser` é uma interface composta da interface `io.Reader`, assim como da interface `io.Closer`.
 
-Finally, interfaces are commonly used to avoid cyclical imports. Since they don't have implementations, they'll have limited dependencies.
+Finalmente, interfaces são comumente usadas para evitar importações cíclicas. Uma vez que elas não tenham implementações, elas terão dependências limitadas.
 
 ## Before You Continue
 
