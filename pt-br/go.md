@@ -1307,13 +1307,13 @@ Interfaces também podem participar em composição. Além disso, interfaces pod
 
 Finalmente, interfaces são comumente usadas para evitar importações cíclicas. Uma vez que elas não tenham implementações, elas terão dependências limitadas.
 
-## Before You Continue
+## Antes de Você Continuar
 
-Ultimately, how you structure your code around Go's workspace is something that you'll only feel comfortable with after you've written a couple of non-trivial projects. What's most important for you to remember is the tight relationship between package names and your directory structure (not just within a project, but within the entire workspace).
+Por último, como você estrutura o seu código ao redor do seu espaço de trabalho Go é algo que você só se sentirá confortável depois de escrever alguns projetos não triviais. O que é mais importante você se lembrar é do relacionamento estrito entre nomes de pacotes e a estrutura do seu diretório (não apenas dentro de um projeto, mas dentro de todo o espaço de trabalho).
 
-The way Go handles visibility of types is straightforward and effective. It's also consistent. There are a few things we haven't looked at, such as constants and global variables but rest assured, their visibility is determined by the same naming rule.
+A maneira que Go lida com a visibilidade dos tipos é direta e efetiva. Também é consistente. Há algumas coisas que nós ainda não olhamos, como constantes e variáveis globais, mas o que pode ser é assegurado é que a visibilidade delas são determinadas pela mesma regra de nome.
 
-Finally, if you're new to interfaces, it might take some time before you get a feel for them. However, the first time you see a function that expects something like `io.Reader`, you'll find yourself thanking the author for not demanding more than he or she needed.
+Finalmente, se você é novo em interfaces, pode levar algum tempo até que você se sinta confortável. No entanto, a primeira vez que você ver uma função que espera algo como `io.Reader`, você ficará grato com o autor por não demandar mais do que ele ou ela precisava.
 
 # Chapter 5 - Tidbits
 
