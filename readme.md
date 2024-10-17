@@ -2,7 +2,8 @@
 [The Little Go Book](https://www.openmymind.net/The-Little-Go-Book/) is a free book introducing Go.
 
 The book was written by [Karl Seguin](https://openmymind.net), author of:
-
+* [Learning Zig](https://www.openmymind.net/learning_zig/)
+* [Elixir, A Little Beyond The Basics](https://www.openmymind.net/Elixir-A-Little-Beyond-The-Basics/)
 * [Scaling Viki](https://openmymind.net/scaling-viki/)
 * [The Little Redis Book](https://openmymind.net/2012/1/23/The-Little-Redis-Book/)
 * [The Little MongoDB Book](https://openmymind.net/2011/3/28/The-Little-MongoDB-Book/)
@@ -14,7 +15,7 @@ The book is freely distributed under the  [Attribution-NonCommercial-ShareAlike 
 ## Translations ##
 
 * [Portuguese](https://github.com/igorverse/the-little-go-book/tree/master/pt-br) (in progress) by Fabrício Soares and Igor
-* [Spanish](https://github.com/raulexposito/the-little-go-book/tree/master/es) by Raúl Expósito
+* [Spanish](https://raulexposito.com/the-little-go-book-en-castellano.html) by Raúl Expósito
 * [Chinese](https://github.com/songleo/the-little-go-book_ZH_CN) by Songleo
 * [Traditional Chinese](https://github.com/kevingo/the-little-go-book) by KevinGo
 * [Vietnamese](https://github.com/quangnh89/the-little-go-book/blob/master/vi/readme.md) by Quang Nguyễn
