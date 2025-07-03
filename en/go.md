@@ -688,7 +688,7 @@ As you write Go code, it's natural to ask yourself *should this be a value, or a
 
 Secondly, if you aren't sure, use a pointer.
 
-As we already saw, passing values is a great way to make data immutable (changes that a function makes to it won't be reflected in the calling code). Sometimes, this is the behavior that you'll want but more often, it won't be.
+As we already saw, passing values is a great way to make data immutable (changes that a function makes to it won't be reflected in the calling code). Sometimes, this is the behavior that you'll want but sometimes not.
 
 Even if you don't intend to change the data, consider the cost of creating a copy of large structures. Conversely, you might have small structures, say:
 
