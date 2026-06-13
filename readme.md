@@ -14,6 +14,7 @@ The book is freely distributed under the  [Attribution-NonCommercial-ShareAlike 
 
 ## Translations ##
 
+* [Persian](https://github.com/mehdisayyadnahed/the-little-go-book/tree/master/pe) by Mehdi Sayyadnahed
 * [Portuguese](https://github.com/igorverse/the-little-go-book/tree/master/pt-br) (in progress) by Fabrício Soares and Igor
 * [Spanish](https://raulexposito.com/the-little-go-book-en-castellano.html) by Raúl Expósito
 * [Chinese](https://github.com/songleo/the-little-go-book_ZH_CN) by Songleo
