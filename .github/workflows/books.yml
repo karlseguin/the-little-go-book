@@ -2,6 +2,7 @@ name: Build and publish books
 
 on:
   push:
+    branches: [master]
   pull_request:
   workflow_dispatch:
 
@@ -62,17 +63,18 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          tag="build-${GITHUB_SHA::12}"
+          tag="latest"
           notes="Automatically built from commit ${GITHUB_SHA}."
 
           if gh release view "$tag" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
-            gh release upload "$tag" dist/* \
-              --clobber \
-              --repo "$GITHUB_REPOSITORY"
+            gh api "repos/${GITHUB_REPOSITORY}/git/refs/tags/${tag}" \
+              -X PATCH -f sha="$GITHUB_SHA" -F force=true
+            gh release edit "$tag" --notes "$notes" --repo "$GITHUB_REPOSITORY"
+            gh release upload "$tag" dist/* --clobber --repo "$GITHUB_REPOSITORY"
           else
             gh release create "$tag" dist/* \
               --target "$GITHUB_SHA" \
-              --title "Book build ${GITHUB_SHA::7}" \
+              --title "Latest book build" \
               --notes "$notes" \
               --repo "$GITHUB_REPOSITORY"
           fi
