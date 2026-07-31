@@ -1,0 +1,80 @@
+name: Build and publish books
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: read
+
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Install build dependencies
+        run: |
+          echo "msttcorefonts msttcorefonts/accepted-mscorefonts-eula select true" |
+            sudo debconf-set-selections
+          sudo apt-get update
+          sudo DEBIAN_FRONTEND=noninteractive apt-get install -y \
+            pandoc \
+            texlive-xetex \
+            texlive-latex-extra \
+            texlive-latex-recommended \
+            ttf-mscorefonts-installer
+
+      - name: Build PDF and EPUB
+        run: make en/go.pdf en/go.epub
+
+      - name: Verify outputs
+        run: |
+          test -s en/go.pdf
+          test -s en/go.epub
+
+      - uses: actions/upload-artifact@v6
+        with:
+          name: english-books
+          path: |
+            en/go.pdf
+            en/go.epub
+          if-no-files-found: error
+
+  release:
+    if: >-
+      github.repository == 'karlseguin/the-little-go-book' &&
+      github.event_name == 'push' &&
+      github.ref == 'refs/heads/master'
+    needs: build
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/download-artifact@v7
+        with:
+          name: english-books
+          path: dist
+
+      - name: Publish GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          tag="latest"
+          notes="Automatically built from commit ${GITHUB_SHA}."
+
+          if gh release view "$tag" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+            gh api "repos/${GITHUB_REPOSITORY}/git/refs/tags/${tag}" \
+              -X PATCH -f sha="$GITHUB_SHA" -F force=true
+            gh release edit "$tag" --notes "$notes" --repo "$GITHUB_REPOSITORY"
+            gh release upload "$tag" dist/* --clobber --repo "$GITHUB_REPOSITORY"
+          else
+            gh release create "$tag" dist/* \
+              --target "$GITHUB_SHA" \
+              --title "Latest book build" \
+              --notes "$notes" \
+              --repo "$GITHUB_REPOSITORY"
+          fi
